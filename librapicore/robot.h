@@ -19,10 +19,10 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
-#ifndef ROBOT_H
-#define ROBOT_H
+#ifndef RAPIROBOT_H
+#define RAPIROBOT_H
 
-#include "robotctrl.h"
+#include "robotctrlinterface.h"
 #include "rangefinder.h"
 #include "drivetrain2dof.h"
 #include "powerpack.h"
@@ -57,7 +57,7 @@ class ARobot
      * step.
      * @param ctrl to be registered
      */
-    void registerRobotController ( ARobotCtrl* ctrl );
+    void registerRobotController ( ARobotCtrlInterface* ctrl );
     /**
      * Gets a device with a given device index
      * @param devName name of device
@@ -79,7 +79,7 @@ class ARobot
      */
     void updateControllers();
     /** Robot controller list */
-    std::list<ARobotCtrl*> mRobotCtrlList;
+    std::list<ARobotCtrlInterface*> mRobotCtrlList;
     /** Update interval [s] */
     double mUpdateInterval;
 

@@ -21,7 +21,9 @@ SET( HEADERS
   printerror.h
   dataupdateobserver.h
   rapierror.h
+  robotctrl.h
   rapitypes.h
+  robotctrlinterface.h
   conversions.h
 )
 
@@ -42,6 +44,7 @@ SET( SOURCES
   velocity2d.cpp
   printerror.c
   rapierror.cpp
+  robotctrl.cpp
 )
 
 # build a shared library

@@ -27,6 +27,7 @@ namespace Rapi
 /**
  * Defintion of a 2d velocity
  * @author Jens Wawerla <jwawerla@sfu.ca>
+ * @version 0.1
  */
 class CVelocity2d
 {

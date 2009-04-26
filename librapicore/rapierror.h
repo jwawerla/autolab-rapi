@@ -118,15 +118,15 @@ class CRapiError
 };
 
 /** Global instance of the error class */
-static CRapiError* error = CRapiError::getInstance();
+static CRapiError* rapiError = CRapiError::getInstance();
 
 /** Convenience functions for setting errors */
-#define ERROR0( msg) error->set( __FILE__, __LINE__,msg);
-#define ERROR1( msg, a) error->set( __FILE__, __LINE__,msg, a);
-#define ERROR2( msg, a, b) error->set( __FILE__, __LINE__,msg, a, b);
-#define ERROR3( msg, a, b, c) error->set( __FILE__, __LINE__,msg, a, b);
-#define ERROR4( msg, a, b, c, d) error->set( __FILE__, __LINE__,msg, a, b);
-#define ERROR5( msg, a, b, c, d, e) error->set( __FILE__, __LINE__,msg, a, b);
+#define ERROR0( msg) rapiError->set( __FILE__, __LINE__,msg);
+#define ERROR1( msg, a) rapiError->set( __FILE__, __LINE__,msg, a);
+#define ERROR2( msg, a, b) rapiError->set( __FILE__, __LINE__,msg, a, b);
+#define ERROR3( msg, a, b, c) rapiError->set( __FILE__, __LINE__,msg, a, b);
+#define ERROR4( msg, a, b, c, d) rapiError->set( __FILE__, __LINE__,msg, a, b);
+#define ERROR5( msg, a, b, c, d, e) rapiError->set( __FILE__, __LINE__,msg, a, b);
 }
 
 #endif

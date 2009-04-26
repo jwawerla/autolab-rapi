@@ -48,6 +48,7 @@ SET( HEADERS
   stagefiducialfinder.h
   stagelights.h
   stagetextdisplay.h
+  RapiStage
 )
 
 SET( SOURCES

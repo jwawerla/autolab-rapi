@@ -22,6 +22,8 @@
 #ifndef RAPIROBOTCTRL_H
 #define RAPIROBOTCTRL_H
 
+#include "robot.h"
+
 namespace Rapi
 {
 
@@ -30,7 +32,7 @@ namespace Rapi
  * to register with the framework
  * @author Jens Wawerla <jwawerla@sfu.ca>
  */
-class ARobotCtrl
+class ARobotCtrl : public ARobotCtrlInterface
 {
   public:
     /** Default desctructor */
@@ -43,8 +45,13 @@ class ARobotCtrl
 
   protected:
 
-    /** Default constructor */
-    ARobotCtrl();
+    /**
+     * Default constructor
+     * @param robot this controller controls
+     */
+    ARobotCtrl( ARobot* robot );
+    /** Robot controlled by this controller */
+    ARobot* mRobot;
 };
 
 }

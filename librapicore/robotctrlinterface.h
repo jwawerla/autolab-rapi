@@ -18,21 +18,34 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
- 
-#include "robotctrl.h"
 
-namespace Rapi {
+#ifndef RAPIROBOTCTRLINTERFACE_H
+#define RAPIROBOTCTRLINTERFACE_H
 
-//-----------------------------------------------------------------------------
-ARobotCtrl::ARobotCtrl( ARobot* robot ) : ARobotCtrlInterface()
+namespace Rapi
 {
-  mRobot = robot;
-  mRobot->registerRobotController( this );
-}
-//-----------------------------------------------------------------------------
-ARobotCtrl::~ARobotCtrl()
-{
-}
-//-----------------------------------------------------------------------------
 
+/**
+* Interface for robots to get a hold of their controllers. This class allows
+* controllers to register with their robot and thus be updated etc.
+* @author Jens Wawerla <jwawerla@sfu.ca>
+*/
+class ARobotCtrlInterface
+{
+  public:
+    /** Default destructor */
+    virtual ~ARobotCtrlInterface() {};
+    /**
+     * Update controller for the current time step
+     * @param dt time since last upate [s]
+     */
+    virtual void update ( float dt ) = 0;
+
+  protected:
+    /** Default constructor */
+    ARobotCtrlInterface() {};
+};
 } // namespace
+
+#endif
+

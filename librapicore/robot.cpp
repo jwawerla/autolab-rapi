@@ -33,18 +33,18 @@ ARobot::~ARobot()
 {
 }
 //-----------------------------------------------------------------------------
-void ARobot::registerRobotController(ARobotCtrl* ctrl)
+void ARobot::registerRobotController(ARobotCtrlInterface* ctrl)
 {
   mRobotCtrlList.push_back( ctrl );
 }
 //-----------------------------------------------------------------------------
 void ARobot::updateControllers()
 {
-  ARobotCtrl* ctrl;
-  std::list<ARobotCtrl*>::iterator it;
+  ARobotCtrlInterface* ctrl;
+  std::list<ARobotCtrlInterface*>::iterator it;
 
   for (it = mRobotCtrlList.begin(); it != mRobotCtrlList.end(); it++) {
-    ctrl = (ARobotCtrl*)*it;
+    ctrl = (ARobotCtrlInterface*)*it;
     ctrl->update( mUpdateInterval );
   }
 }

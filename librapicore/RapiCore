@@ -34,3 +34,5 @@
 #include "fiducialfinder.h"
 #include "lights.h"
 #include "conversions.h"
+#include "robotctrlinterface.h"
+#include "robotctrl.h"

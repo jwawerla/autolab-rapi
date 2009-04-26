@@ -25,6 +25,10 @@
 #include <sys/time.h>
 #include <math.h>
 #include <limits>
+#include <stdlib.h>
+
+namespace Rapi
+{
 
 #ifndef INFINITY
   #define INFINITY infinity()
@@ -184,5 +188,23 @@ inline double timeStamp()
   return tv.tv_sec + tv.tv_usec * 1e-6;
 }
 
+/**
+ * Generates a uniform random number in the interval
+ * [minimum, maximum]
+ * @param minimum
+ * @param maximum
+ * @return random number
+ */
+inline double randNo ( double minimum, double maximum )
+{
+  double r;
+
+  r = drand48();  // r = [0,1]
+
+  return minimum + r * ( maximum - minimum );
+}
+//-----------------------------------------------------------------------------
+
+} // namespace 
 #endif
 
