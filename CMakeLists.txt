@@ -15,6 +15,14 @@ ADD_SUBDIRECTORY(librapichatterbox)
 #ADD_SUBDIRECTORY(test_stage)
 
 # Create and install the pkgconfig file from the .in template
-SET( PKGFILE ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.pc )
+SET( PKGFILE ${CMAKE_CURRENT_SOURCE_DIR}/autolab-rapi.pc )
+CONFIGURE_FILE( ${PKGFILE}.in ${PKGFILE} @ONLY)
+INSTALL( FILES ${PKGFILE} DESTINATION lib/pkgconfig/)
+
+SET( PKGFILE ${CMAKE_CURRENT_SOURCE_DIR}/autolab-rapi-stage.pc )
+CONFIGURE_FILE( ${PKGFILE}.in ${PKGFILE} @ONLY)
+INSTALL( FILES ${PKGFILE} DESTINATION lib/pkgconfig/)
+
+SET( PKGFILE ${CMAKE_CURRENT_SOURCE_DIR}/autolab-rapi-chatterbox.pc )
 CONFIGURE_FILE( ${PKGFILE}.in ${PKGFILE} @ONLY)
 INSTALL( FILES ${PKGFILE} DESTINATION lib/pkgconfig/)

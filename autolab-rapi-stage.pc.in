@@ -1,0 +1,8 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+
+Name: autolab-rapi-stage
+Description: Robot Application Programming Interface
+Version: @VERSION@
+Requires: 
+Libs: -L${prefix}/lib -lautolab-rapi-stage -lautolab-rapi
+Cflags: -I${prefix}/include/autolab-rapi-stage-@APIVERSION@ -I${prefix}/include/autolab-rapi-@APIVERSION@
