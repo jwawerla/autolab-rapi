@@ -60,12 +60,12 @@ class CLooseStageRobot : public CStageRobot
      * @return device
      * @return 1 if successfull, 0 otherwise
      */
-    virtual int findDevice ( ARangeFinder* &device, std::string devName );
-    virtual int findDevice ( ADrivetrain2dof* &device, std::string devName );
-    virtual int findDevice ( APowerPack* &device, std::string devName );
-    virtual int findDevice ( AFiducialFinder* &device, std::string devName );
-    virtual int findDevice ( ALights* &device, std::string devName );
-    virtual int findDevice ( ATextDisplay* &device, std::string devName );
+    int findDevice ( ARangeFinder* &device, std::string devName );
+    int findDevice ( ADrivetrain2dof* &device, std::string devName );
+    int findDevice ( APowerPack* &device, std::string devName );
+    int findDevice ( AFiducialFinder* &device, std::string devName );
+    int findDevice ( ALights* &device, std::string devName );
+    int findDevice ( ATextDisplay* &device, std::string devName );
     /**
      * Gets a device with a given device index, using the LOOSE standard
      * @param devName name of device
