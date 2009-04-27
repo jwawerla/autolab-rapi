@@ -19,11 +19,11 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
-#ifndef RAPISTAGELASER_H
-#define RAPISTAGELASER_H
+#ifndef RAPILOOSESTAGELASER_H
+#define RAPILOOSESTAGELASER_H
 
 #include <stage.hh>
-#include "rangefinder.h"
+#include "stagelaser.h"
 
 namespace Rapi
 {
@@ -32,7 +32,7 @@ namespace Rapi
  * Wrapper class for a stage laser model to make it work with ND
  * @author Jens Wawerla (jwawerla@sfu.ca)
  */
-class CStageLaser : public ARangeFinder
+class CLooseStageLaser : public CStageLaser
 {
   public:
     /**
@@ -40,30 +40,14 @@ class CStageLaser : public ARangeFinder
      * @param stgLaser stage model of laser
      * @param devName name of device
      */
-    CStageLaser ( Stg::ModelLaser* stgLaser, std::string devName );
+    CLooseStageLaser ( Stg::ModelLaser* stgLaser, std::string devName );
     /** Default destructor */
-    virtual ~CStageLaser();
+    virtual ~CLooseStageLaser();
     /**
-      * Initializes the device
-      * @param return 1 if success 0 otherwise
-      */
-    virtual int init();
-    /**
-     * Enables or disables the device
-     * @param enable = true to enable, false to disable
+     * Gets the underlying stage model
+     * @return stage model
      */
-    virtual void setEnabled ( bool enable );
-
-  protected:
-    /**
-     * This method gets called by the framework every step to update
-     * the sensor data
-     */
-    virtual void updateData();
-    /** Friend function of stage model updates */
-    friend int laserUpdate ( Stg::ModelLaser* mod, CStageLaser* laser );
-    /** Stage laser model */
-    Stg::ModelLaser* mStgLaser;
+    Stg::ModelLaser* getStageModel ();
 };
 
 } // namespace

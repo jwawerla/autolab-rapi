@@ -19,51 +19,35 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
-#ifndef RAPISTAGELASER_H
-#define RAPISTAGELASER_H
+#ifndef RAPILOOSESTAGEDRIVETRAIN2DOF_H
+#define RAPILOOSESTAGEDRIVETRAIN2DOF_H
 
-#include <stage.hh>
-#include "rangefinder.h"
+#include "stagedrivetrain2dof.h"
+#include "stage.hh"
 
 namespace Rapi
 {
 
 /**
- * Wrapper class for a stage laser model to make it work with ND
- * @author Jens Wawerla (jwawerla@sfu.ca)
+ * Stage drivetrain with 2 dof
+ * @author Jens Wawerla <jwawerla@sfu.ca>
  */
-class CStageLaser : public ARangeFinder
+class CLooseStageDrivetrain2dof : public CStageDrivetrain2dof
 {
   public:
     /**
      * Default constructor
-     * @param stgLaser stage model of laser
+     * @param stgModel stage position model
      * @param devName name of device
      */
-    CStageLaser ( Stg::ModelLaser* stgLaser, std::string devName );
+    CLooseStageDrivetrain2dof ( Stg::ModelPosition* stgModel, std::string devName );
     /** Default destructor */
-    virtual ~CStageLaser();
+    ~CLooseStageDrivetrain2dof();
     /**
-      * Initializes the device
-      * @param return 1 if success 0 otherwise
-      */
-    virtual int init();
-    /**
-     * Enables or disables the device
-     * @param enable = true to enable, false to disable
+     * Gets the underlying stage model
+     * @return stage model
      */
-    virtual void setEnabled ( bool enable );
-
-  protected:
-    /**
-     * This method gets called by the framework every step to update
-     * the sensor data
-     */
-    virtual void updateData();
-    /** Friend function of stage model updates */
-    friend int laserUpdate ( Stg::ModelLaser* mod, CStageLaser* laser );
-    /** Stage laser model */
-    Stg::ModelLaser* mStgLaser;
+    Stg::ModelPosition* getStageModel ();
 };
 
 } // namespace

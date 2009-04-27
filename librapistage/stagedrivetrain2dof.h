@@ -70,7 +70,6 @@ class CStageDrivetrain2dof : public ADrivetrain2dof
     /** Friend function of stage model updates */
     friend int positionUpdate ( Stg::ModelPosition* pos,
                                 CStageDrivetrain2dof* drivetrain );
-  private:
     /** Stage model */
     Stg::ModelPosition* mStgPosition;
 };

@@ -18,52 +18,36 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#ifndef RAPILOOSESTAGELIGHTS_H
+#define RAPILOOSESTAGELIGHTS_H
 
-#ifndef RAPISTAGELASER_H
-#define RAPISTAGELASER_H
-
-#include <stage.hh>
-#include "rangefinder.h"
+#include "stagelights.h"
+#include "stage.hh"
 
 namespace Rapi
 {
 
 /**
- * Wrapper class for a stage laser model to make it work with ND
- * @author Jens Wawerla (jwawerla@sfu.ca)
+ * Stage implementation for lights controller
+ * @author Jens Wawerla <jwawerla@sfu.ca>
  */
-class CStageLaser : public ARangeFinder
+class CLooseStageLights : public CStageLights
 {
   public:
     /**
      * Default constructor
-     * @param stgLaser stage model of laser
+     * @param stgModel stage model for blinking lights
      * @param devName name of device
      */
-    CStageLaser ( Stg::ModelLaser* stgLaser, std::string devName );
+    CLooseStageLights ( Stg::ModelBlinkenlight* stgModel, std::string devName );
     /** Default destructor */
-    virtual ~CStageLaser();
+    ~CLooseStageLights();
     /**
-      * Initializes the device
-      * @param return 1 if success 0 otherwise
-      */
-    virtual int init();
-    /**
-     * Enables or disables the device
-     * @param enable = true to enable, false to disable
+     * Gets the underlying stage model
+     * @return stage model
      */
-    virtual void setEnabled ( bool enable );
+    Stg::ModelBlinkenlight* getStageModel ();
 
-  protected:
-    /**
-     * This method gets called by the framework every step to update
-     * the sensor data
-     */
-    virtual void updateData();
-    /** Friend function of stage model updates */
-    friend int laserUpdate ( Stg::ModelLaser* mod, CStageLaser* laser );
-    /** Stage laser model */
-    Stg::ModelLaser* mStgLaser;
 };
 
 } // namespace

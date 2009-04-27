@@ -48,7 +48,16 @@ SET( HEADERS
   stagefiducialfinder.h
   stagelights.h
   stagetextdisplay.h
+  loosestagerobot.h
+  loosestagelaser.h
+  loosestagelights.h
+  loosestagedrivetrain2dof.h
+  loosestagepowerpack.h
+  loosestagefiducialfinder.h
+  loosestagetextdisplay.h
+  loosestagesonar.h
   RapiStage
+  RapiLooseStage
 )
 
 SET( SOURCES
@@ -61,6 +70,14 @@ SET( SOURCES
   stagefiducialfinder.cpp
   stagelights.cpp
   stagetextdisplay.cpp
+  loosestagerobot.cpp
+  loosestagelaser.cpp
+  loosestagelights.cpp
+  loosestagedrivetrain2dof.cpp
+  loosestagepowerpack.cpp
+  loosestagefiducialfinder.cpp
+  loosestagetextdisplay.cpp
+  loosestagesonar.cpp
 )
 
 # build a shared library

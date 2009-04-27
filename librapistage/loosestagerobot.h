@@ -18,61 +18,67 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#ifndef RAPISTAGETEXTDISPLAY_H
-#define RAPISTAGETEXTDISPLAY_H
 
-#include "textdisplay.h"
+#ifndef RAPILOOSESTAGEROBOT_H
+#define RAPILOOSESTAGEROBOT_H
+
+#include "stagerobot.h"
 #include "stage.hh"
+#include "loosestagelaser.h"
+#include "loosestagesonar.h"
+#include "loosestagedrivetrain2dof.h"
+#include "loosestagepowerpack.h"
+#include "loosestagefiducialfinder.h"
+#include "loosestagetextdisplay.h"
+#include "loosestagelights.h"
 
 namespace Rapi
 {
 
 /**
- * Stage implementation of a text display
+ * This robot gets devices for a robot simulated in Stage
  * @author Jens Wawerla <jwawerla@sfu.ca>
  */
-class CStageTextDisplay : public ATextDisplay
+class CLooseStageRobot : public CStageRobot
 {
   public:
-    /**
-     * Default constructor
-     * @param stgModel stage position model
-     * @param devName name of device
-     */
-    CStageTextDisplay ( Stg::ModelPosition* stgModel, std::string devName );
+    /** Default constructor */
+    CLooseStageRobot ( Stg::Model* mod );
     /** Default destructor */
-    ~CStageTextDisplay();
+    ~CLooseStageRobot();
     /**
-      * Initializes the device
-      * @param return 1 if success 0 otherwise
-      */
-    virtual int init();
-
-    /**
-     * Enables or disables the device
-     * @param enable = true to enable, false to disable
-     */
-    virtual void setEnabled ( bool enable );
-    /**
-     * Sets the text to be displayed
-     * @param text to be displayed
+     * Ininitializes the robot
      * @return 1 if successfull, 0 otherwise
      */
-    virtual int setText(std::string text);
+    virtual int init();
     /**
-     * Gets the number of characters the display can show
-     * @return number characters
+     * Gets a device with a given device index
+     * @param devName name of device
+     * @return device
+     * @return 1 if successfull, 0 otherwise
      */
-    virtual int getSize();
+    virtual int findDevice ( CLooseStageLaser* &device, std::string devName );
+    virtual int findDevice ( CLooseStageSonar* &device, std::string devName );
+    virtual int findDevice ( CLooseStageDrivetrain2dof* &device, std::string devName );
+    virtual int findDevice ( CLooseStagePowerPack* &device, std::string devName );
+    virtual int findDevice ( CLooseStageFiducialFinder* &device, std::string devName );
+    virtual int findDevice ( CLooseStageLights* &device, std::string devName );
+    virtual int findDevice ( CLooseStageTextDisplay* &device, std::string devName );
 
   protected:
     /**
-     * This method gets called by the framework every step to update
-     * the sensor data
+     * Searches the list of previously found devices and returns a match or
+     * NULL if no device was filed under the given device name
+     * @param devName to search
+     * @return device or NULL
      */
-    virtual void updateData();
-    /** Stage model */
-    Stg::ModelPosition* mStgPosition;
+    ADevice* findDeviceByName ( std::string devName );
+
+  private:
+    /** Main Stage model */
+    Stg::Model*mStageModel;
+    /** List of all devices generated */
+    std::list<ADevice*> mDeviceList;
 };
 
 } // namespace

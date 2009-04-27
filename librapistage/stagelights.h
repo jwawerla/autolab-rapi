@@ -61,8 +61,6 @@ class CStageLights : public ALights
     virtual void updateData();
     /** Friend function of stage model updates */
     friend int lightUpdate ( Stg::ModelBlinkenlight* mod, CStageLights* lights );
-
-  private:
     /** Stage laser model */
     Stg::ModelBlinkenlight* mStgLights;
 };

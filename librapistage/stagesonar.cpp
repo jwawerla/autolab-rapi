@@ -76,7 +76,7 @@ int CStageSonar::init()
   return 1; // success
 }
 //---------------------------------------------------------------------------
-void CStageSonar::setEnable( bool enable )
+void CStageSonar::setEnabled( bool enable )
 {
   if ( mFgEnabled == enable )
     return;  // we are really have the correct status

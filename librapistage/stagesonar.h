@@ -53,7 +53,7 @@ class CStageSonar : public ARangeFinder
      * Enables or disables the device
      * @param enable = true to enable, false to disable
      */
-    virtual void setEnable ( bool enable );
+    virtual void setEnabled ( bool enable );
     /**
      * Prints the devices main information
      */
@@ -67,8 +67,6 @@ class CStageSonar : public ARangeFinder
     virtual void updateData();
     /** Friend function of stage model updates */
     friend int sonarUpdate ( Stg::ModelRanger* ranger, CStageSonar* sonar );
-
-  private:
     /** Stage model */
     Stg::ModelRanger* mStgRanger;
 };

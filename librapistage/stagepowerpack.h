@@ -66,8 +66,6 @@ class CStagePowerPack : public APowerPack
     virtual void updateData();
     /** Friend function of stage model updates */
     friend int powerUpdate ( Stg::ModelPosition* mod, CStagePowerPack* power );
-
-  private:
     /** Stage model */
     Stg::PowerPack* mStgPowerPack;
     /** Update interval [s] */

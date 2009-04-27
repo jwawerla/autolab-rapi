@@ -18,54 +18,26 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-
-#ifndef RAPISTAGELASER_H
-#define RAPISTAGELASER_H
-
-#include <stage.hh>
-#include "rangefinder.h"
+#include "loosestagefiducialfinder.h"
 
 namespace Rapi
 {
 
-/**
- * Wrapper class for a stage laser model to make it work with ND
- * @author Jens Wawerla (jwawerla@sfu.ca)
- */
-class CStageLaser : public ARangeFinder
+//-----------------------------------------------------------------------------
+CLooseStageFiducialFinder::CLooseStageFiducialFinder ( Stg::ModelFiducial* stgMod,
+    std::string devName )
+    : CStageFiducialFinder (stgMod, devName )
 {
-  public:
-    /**
-     * Default constructor
-     * @param stgLaser stage model of laser
-     * @param devName name of device
-     */
-    CStageLaser ( Stg::ModelLaser* stgLaser, std::string devName );
-    /** Default destructor */
-    virtual ~CStageLaser();
-    /**
-      * Initializes the device
-      * @param return 1 if success 0 otherwise
-      */
-    virtual int init();
-    /**
-     * Enables or disables the device
-     * @param enable = true to enable, false to disable
-     */
-    virtual void setEnabled ( bool enable );
-
-  protected:
-    /**
-     * This method gets called by the framework every step to update
-     * the sensor data
-     */
-    virtual void updateData();
-    /** Friend function of stage model updates */
-    friend int laserUpdate ( Stg::ModelLaser* mod, CStageLaser* laser );
-    /** Stage laser model */
-    Stg::ModelLaser* mStgLaser;
-};
+}
+//-----------------------------------------------------------------------------
+CLooseStageFiducialFinder::~CLooseStageFiducialFinder()
+{
+}
+//-----------------------------------------------------------------------------
+Stg::ModelFiducial*  CLooseStageFiducialFinder::getStageModel ()
+{
+  return mStgFiducial;
+}
+//-----------------------------------------------------------------------------
 
 } // namespace
-
-#endif

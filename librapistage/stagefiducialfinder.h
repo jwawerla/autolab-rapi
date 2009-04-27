@@ -62,8 +62,6 @@ class CStageFiducialFinder : public AFiducialFinder
     /** Friend function of stage model updates */
     friend int fiducialUpdate ( Stg::ModelFiducial* mod,
                                 CStageFiducialFinder* fiducial );
-
-  private:
     /** Stage laser model */
     Stg::ModelFiducial* mStgFiducial;
 };
