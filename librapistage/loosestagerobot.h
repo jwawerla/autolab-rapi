@@ -36,7 +36,10 @@ namespace Rapi
 {
 
 /**
- * This robot gets devices for a robot simulated in Stage
+ * This robot gets devices for a robot simulated in Stage. The driver
+ * classes are of a LOOSE standard, meaning they are not 100% compatible
+ * with other RAPI drivers. Code writting using these drivers might
+ * not be portable to a different robot.
  * @author Jens Wawerla <jwawerla@sfu.ca>
  */
 class CLooseStageRobot : public CStageRobot
@@ -53,6 +56,18 @@ class CLooseStageRobot : public CStageRobot
     virtual int init();
     /**
      * Gets a device with a given device index
+     * @param devName name of device
+     * @return device
+     * @return 1 if successfull, 0 otherwise
+     */
+    virtual int findDevice ( ARangeFinder* &device, std::string devName );
+    virtual int findDevice ( ADrivetrain2dof* &device, std::string devName );
+    virtual int findDevice ( APowerPack* &device, std::string devName );
+    virtual int findDevice ( AFiducialFinder* &device, std::string devName );
+    virtual int findDevice ( ALights* &device, std::string devName );
+    virtual int findDevice ( ATextDisplay* &device, std::string devName );
+    /**
+     * Gets a device with a given device index, using the LOOSE standard
      * @param devName name of device
      * @return device
      * @return 1 if successfull, 0 otherwise
