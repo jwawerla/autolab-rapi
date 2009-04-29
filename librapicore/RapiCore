@@ -36,3 +36,5 @@
 #include "conversions.h"
 #include "robotctrlinterface.h"
 #include "robotctrl.h"
+#include "waypoint2d.h"
+#include "rgbcolor.h"

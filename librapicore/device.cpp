@@ -27,7 +27,6 @@ namespace Rapi
 //-----------------------------------------------------------------------------
 ADevice::ADevice ( std::string devName )
 {
-
   mDeviceName = devName;
   mFgEnabled = false;
 }

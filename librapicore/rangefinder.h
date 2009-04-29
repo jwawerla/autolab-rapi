@@ -58,15 +58,13 @@ class ARangeFinder : public ADevice
     /** Range data of a beam, range [m], reflectance [0,1] */
     tRangeData* mRangeData;
     /** Number of samples in one scan */
-    unsigned int mNumSamples;
+    unsigned int getNumSamples();
     /**
      * Gets the angle of the beam cone, for this like lases the
      * angle is practically 0
      * @return angle [rad]
      */
-    float getBeamConeAngle() {
-      return mBeamConeAngle;
-    };
+    float getBeamConeAngle();
     /**
      * Calculates the response for a point in the sensors local coordinate
      * system from the inverse range sensor model
@@ -105,9 +103,7 @@ class ARangeFinder : public ADevice
      * Gets the field of view
      * @return [rad]
      */
-    float getFov() {
-      return mFov;
-    };
+    float getFov();
 
   protected:
     /**
@@ -115,6 +111,8 @@ class ARangeFinder : public ADevice
      * @param devName name of device
      */
     ARangeFinder( std::string devName );
+    /** Number sample readings */
+    unsigned int mNumSamples;
     /** Maximum range [m] */
     float mMaxRange;
     /** Minimum range [m] */

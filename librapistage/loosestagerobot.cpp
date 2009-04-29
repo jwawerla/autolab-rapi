@@ -35,25 +35,6 @@ CLooseStageRobot::~CLooseStageRobot()
 {
 }
 //-----------------------------------------------------------------------------
-int CLooseStageRobot::init()
-{
-  return 1; // success
-}
-//-----------------------------------------------------------------------------
-ADevice* CLooseStageRobot::findDeviceByName ( std::string devName )
-{
-  ADevice* device;
-  std::list<ADevice*>::iterator it;
-
-  for ( it = mDeviceList.begin(); it != mDeviceList.end(); it++ ) {
-    device = *it;
-    if ( device->getName() == devName )
-      return device;
-  }
-
-  return NULL;
-}
-//-----------------------------------------------------------------------------
 int CLooseStageRobot::findDevice ( CLooseStageLaser* &device,
                                    std::string devName )
 {
@@ -66,19 +47,27 @@ int CLooseStageRobot::findDevice ( CLooseStageLaser* &device,
   }
 
   // no device created yet, so do it now
-  modLaser = ( Stg::ModelLaser* ) mStageModel->GetUnusedModelOfType (
-               Stg::MODEL_TYPE_LASER );
+  modLaser = ( Stg::ModelLaser* ) mStageModel->GetModel ( devName.c_str() );
+  if ( modLaser == NULL ) {
+    ERROR2 ( "Stage model %s has no device named %s",
+             mStageModel->Token(), devName.c_str() );
+    return 0; // error
+  }
 
   device = new CLooseStageLaser ( modLaser, devName );
+  assert ( device );
+  // add device to the list
   mDeviceList.push_back ( device );
 
   // now initialize the device
   if ( device->init() != 1 ) {
     ERROR1 ( "Failed to initialize device %s", devName.c_str() );
-    return 0;
+    return 0; // failure
   }
   device->setEnabled ( true );
-  return 1;
+  // enforce one update step, to fill the data structures with valid data
+  device->updateData();
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 int CLooseStageRobot::findDevice ( CLooseStageSonar* &device,
@@ -93,19 +82,26 @@ int CLooseStageRobot::findDevice ( CLooseStageSonar* &device,
   }
 
   // no device created yet, so do it now
-  modRanger = ( Stg::ModelRanger* ) mStageModel->GetUnusedModelOfType (
-                Stg::MODEL_TYPE_LASER );
-
+  modRanger = ( Stg::ModelRanger* ) mStageModel->GetModel (devName.c_str() );
+  if (modRanger == NULL )  {
+    ERROR2 ( "Stage model %s has no device named %s",
+             mStageModel->Token(), devName.c_str() );
+    return 0; // error
+  }
   device = new CLooseStageSonar ( modRanger, devName );
+  assert ( device );
+  // add device to the list
   mDeviceList.push_back ( device );
 
   // now initialize the device
   if ( device->init() != 1 ) {
     ERROR1 ( "Failed to initialize device %s", devName.c_str() );
-    return 0;
+    return 0; // failure
   }
   device->setEnabled ( true );
-  return 1;
+  // enforce one update step, to fill the data structures with valid data
+  device->updateData();
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 int CLooseStageRobot::findDevice ( CLooseStageDrivetrain2dof* &device,
@@ -121,18 +117,20 @@ int CLooseStageRobot::findDevice ( CLooseStageDrivetrain2dof* &device,
 
   // no device created yet, so do it now
   modPosition = ( Stg::ModelPosition* ) mStageModel;
-
-  device = ( CLooseStageDrivetrain2dof* ) new CLooseStageDrivetrain2dof (
-             modPosition, devName );
-  mDeviceList.push_back ( device );
+  device = new CLooseStageDrivetrain2dof ( modPosition, devName );
+  assert ( device );
+  // add device to the list
+  mDeviceList.push_back ( ( ADevice* ) device );
 
   // now initialize the device
   if ( device->init() != 1 ) {
     ERROR1 ( "Failed to initialize device %s", devName.c_str() );
-    return 0;
+    return 0; // failure
   }
   device->setEnabled ( true );
-  return 1;
+  // enforce one update step, to fill the data structures with valid data
+  device->updateData();
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 int CLooseStageRobot::findDevice ( CLooseStagePowerPack* &device,
@@ -148,18 +146,20 @@ int CLooseStageRobot::findDevice ( CLooseStagePowerPack* &device,
 
   // no device created yet, so do it now
   modPosition = ( Stg::ModelPosition* ) mStageModel;
-
-  device = ( CLooseStagePowerPack* ) new CLooseStagePowerPack (
-             modPosition, devName );
-  mDeviceList.push_back ( device );
+  device = new CLooseStagePowerPack ( modPosition, devName );
+  assert ( device );
+  // add device to the list
+  mDeviceList.push_back ( ( ADevice* ) device );
 
   // now initialize the device
   if ( device->init() != 1 ) {
     ERROR1 ( "Failed to initialize device %s", devName.c_str() );
-    return 0;
+    return 0; // failure
   }
   device->setEnabled ( true );
-  return 1;
+  // enforce one update step, to fill the data structures with valid data
+  device->updateData();
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 int CLooseStageRobot::findDevice ( CLooseStageFiducialFinder* &device,
@@ -174,19 +174,26 @@ int CLooseStageRobot::findDevice ( CLooseStageFiducialFinder* &device,
   }
 
   // no device created yet, so do it now
-  modFiducial = ( Stg::ModelFiducial* ) mStageModel->GetUnusedModelOfType (
-                  Stg::MODEL_TYPE_FIDUCIAL );
-
+  modFiducial = ( Stg::ModelFiducial* ) mStageModel->GetModel( devName.c_str() );
+  if (modFiducial == NULL) {
+    ERROR2 ( "Stage model %s has no device named %s",
+             mStageModel->Token(), devName.c_str() );
+    return 0; // error
+  }
   device = new CLooseStageFiducialFinder ( modFiducial, devName );
-  mDeviceList.push_back ( device );
+  assert ( device );
+  // add device to the list
+  mDeviceList.push_back ( ( ADevice* ) device );
 
   // now initialize the device
   if ( device->init() != 1 ) {
     ERROR1 ( "Failed to initialize device %s", devName.c_str() );
-    return 0;
+    return 0; // failure
   }
   device->setEnabled ( true );
-  return 1;
+  // enforce one update step, to fill the data structures with valid data
+  device->updateData();
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 int CLooseStageRobot::findDevice ( CLooseStageLights* &device,
@@ -194,7 +201,7 @@ int CLooseStageRobot::findDevice ( CLooseStageLights* &device,
 {
   device = NULL;
   ERROR0 ( "Device not implementated for stage" );
-  return 0;
+  return 0; // failure
 }
 //-----------------------------------------------------------------------------
 int CLooseStageRobot::findDevice ( CLooseStageTextDisplay* &device,
@@ -210,17 +217,20 @@ int CLooseStageRobot::findDevice ( CLooseStageTextDisplay* &device,
 
   // no device created yet, so do it now
   modPosition = ( Stg::ModelPosition* ) mStageModel;
-
   device =  new CLooseStageTextDisplay ( modPosition, devName );
-  mDeviceList.push_back ( device );
+  assert ( device );
+  // add device to the list
+  mDeviceList.push_back ( ( ADevice* ) device );
 
   // now initialize the device
   if ( device->init() != 1 ) {
     ERROR1 ( "Failed to initialize device %s", devName.c_str() );
-    return 0;
+    return 0; // failure
   }
   device->setEnabled ( true );
-  return 1;
+  // enforce one update step, to fill the data structures with valid data
+  device->updateData();
+  return 1;  // success
 }
 //-----------------------------------------------------------------------------
 

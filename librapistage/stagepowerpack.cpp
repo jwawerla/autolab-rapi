@@ -37,6 +37,9 @@ CStagePowerPack::CStagePowerPack ( Stg::ModelPosition* stgModel,
                                    std::string devName )
     : APowerPack ( devName )
 {
+  assert( stgModel );
+  mStgModel = stgModel;
+  mFgEnabled = false;
   mStgPowerPack = stgModel->FindPowerPack();
   mSimInterval = stgModel->GetWorld()->GetSimInterval() / 1e6;
 
@@ -49,9 +52,11 @@ CStagePowerPack::CStagePowerPack ( Stg::ModelPosition* stgModel,
   }
 
   // Stage does not provide all data fiels, so we just make something up
-  mVoltage = 12.0;
-  mBatteryTemperature = 25.0;
-  mMaxCurrent = 5.0;
+  mVoltage = 12.0;  // [V]
+  mBatteryTemperature = 25.0; // [C]
+  mMaxCurrent = 15.0; // [A]
+
+  setEnabled( true );
 }
 //-----------------------------------------------------------------------------
 CStagePowerPack::~CStagePowerPack()
@@ -62,34 +67,37 @@ int CStagePowerPack::init()
 {
   return 1; // success
 }
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool CStagePowerPack::isCharging()
+{
+  return mStgPowerPack->GetCharging();
+}
+//-----------------------------------------------------------------------------
 void CStagePowerPack::setEnabled ( bool enable )
 {
   mFgEnabled = enable;
 }
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void CStagePowerPack::updateData()
 {
   double prevBatteryCapacity;
 
   if ( ( mFgEnabled ) && ( mStgPowerPack ) ) {
-
     prevBatteryCapacity = mBatteryCapacity;
-    mBatteryCapacity =  JOULES_TO_AMPHOURS ( mStgPowerPack->GetStored(),
-                        mVoltage );
-    mMaxBatteryCapacity = JOULES_TO_AMPHOURS ( mStgPowerPack->GetCapacity(),
-                          mVoltage );
+    mBatteryCapacity =  JOULES_TO_WATTHOURS ( mStgPowerPack->GetStored() );
+    mMaxBatteryCapacity = JOULES_TO_WATTHOURS ( mStgPowerPack->GetCapacity() );
     mTotalEnergyDissipated = JOULES_TO_WATTHOURS (
                                mStgPowerPack->GetDissipated() );
 
     // take the change in battery capacity (in Ah)
     // devide by simulution step duration (converted to hours)
     mCurrent = ( prevBatteryCapacity - mBatteryCapacity ) /
-               SECONDS_TO_HOURS ( mSimInterval );
+               SECONDS_TO_HOURS ( mSimInterval ) / mVoltage;
+    mTimeStamp = mStgModel->GetWorld()->SimTimeNow() / 1e6;
     notifyDataUpdateObservers();
   }
 }
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 tChargeState CStagePowerPack::getChargingState()
 {
   if ( mStgPowerPack->GetCharging() == true ) {
@@ -98,6 +106,6 @@ tChargeState CStagePowerPack::getChargingState()
 
   return NOT_CHARGING;
 }
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 } // namespace
 

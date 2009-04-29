@@ -70,12 +70,12 @@ class AFiducialFinder : public ADevice
      * Gets the number of current fiducial readings
      */
     unsigned int getNumReadings();
-    /** Fiducial data */
-    tFiducialData* mFiducialData;
     /**
      * Prints the devices main information
      */
     virtual void print();
+    /** Fiducial data */
+    tFiducialData* mFiducialData;
 
   protected:
     /**

@@ -25,6 +25,8 @@ SET( HEADERS
   rapitypes.h
   robotctrlinterface.h
   conversions.h
+  waypoint2d.h
+  rgbcolor.h
 )
 
 SET( SOURCES
@@ -43,8 +45,11 @@ SET( SOURCES
   point2d.cpp
   velocity2d.cpp
   printerror.c
+  utilities.cpp
   rapierror.cpp
   robotctrl.cpp
+  waypoint2d.cpp
+  rgbcolor.cpp
 )
 
 # build a shared library

@@ -35,6 +35,9 @@ namespace Rapi
 
 class CLooseStageSonar : public CStageSonar
 {
+  // we are now friends with our robot
+  friend class CLooseStageRobot;
+
   public:
     /**
      * Default constructor

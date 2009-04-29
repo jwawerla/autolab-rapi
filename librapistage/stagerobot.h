@@ -28,12 +28,16 @@
 namespace Rapi
 {
 
+const std::string RANGER_MODEL_NAME = "ranger";
+const std::string LASER_MODEL_NAME = "laser";
+
 /**
  * This robot gets devices for a robot simulated in Stage
  * @author Jens Wawerla <jwawerla@sfu.ca>
  */
 class CStageRobot : public ARobot
 {
+
   public:
     /** Default constructor */
     CStageRobot ( Stg::Model* mod );
@@ -44,6 +48,12 @@ class CStageRobot : public ARobot
      * @return 1 if successfull, 0 otherwise
      */
     virtual int init();
+    /**
+     * Gets the current time of the robot, this maybe simulated time, real time,
+     * elapsed time since start of robot etc.
+     * @return [s]
+     */
+    virtual double getCurrentTime();
     /**
      * Gets a device with a given device index
      * @param devName name of device
@@ -58,6 +68,9 @@ class CStageRobot : public ARobot
     virtual int findDevice ( ATextDisplay* &device, std::string devName );
 
   protected:
+    /** Friend function of stage model updates */
+    friend int ctrlUpdate ( Stg::ModelLaser* mod, CStageRobot* controller );
+
     /**
      * Searches the list of previously found devices and returns a match or
      * NULL if no device was filed under the given device name
@@ -65,8 +78,6 @@ class CStageRobot : public ARobot
      * @return device or NULL
      */
     ADevice* findDeviceByName ( std::string devName );
-
-  private:
     /** Main Stage model */
     Stg::Model*mStageModel;
     /** List of all devices generated */

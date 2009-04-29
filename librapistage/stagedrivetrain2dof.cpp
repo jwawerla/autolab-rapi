@@ -37,12 +37,16 @@ CStageDrivetrain2dof::CStageDrivetrain2dof ( Stg::ModelPosition* stgModel,
     std::string devName )
     : ADrivetrain2dof ( devName )
 {
+  assert( stgModel );
   mStgPosition = stgModel;
+  mFgEnabled = false;
   mStgPosition->AddUpdateCallback ( ( Stg::stg_model_callback_t )
                                     positionUpdate,
                                     this );
-
   mOdometry = new CStageOdometry ( mStgPosition, devName + ":odometry" );
+  assert(mOdometry);
+
+  setEnabled(true);
 }
 //-----------------------------------------------------------------------------
 CStageDrivetrain2dof::~CStageDrivetrain2dof()
@@ -89,7 +93,8 @@ void CStageDrivetrain2dof::updateData()
     // update odometry
     ( ( CStageOdometry* ) mOdometry )->updateData();
 
-    mTimeStamp = mStgPosition->GetWorld()->SimTimeNow();
+    mTimeStamp = mStgPosition->GetWorld()->SimTimeNow() / 1e6;
+    mFgStuck = mStgPosition->Stalled();
     notifyDataUpdateObservers();
   }
 }

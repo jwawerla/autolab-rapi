@@ -33,6 +33,9 @@ namespace Rapi
  */
 class CStageTextDisplay : public ATextDisplay
 {
+  // we are now friends with our robot
+  friend class CStageRobot;
+
   public:
     /**
      * Default constructor

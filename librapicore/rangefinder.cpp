@@ -129,6 +129,21 @@ float ARangeFinder::localInverseRangeSensorModel ( float x, float y,
   return mLFree;
 }
 //---------------------------------------------------------------------------
+float ARangeFinder::getBeamConeAngle()
+{
+  return mBeamConeAngle;
+}
+//---------------------------------------------------------------------------
+unsigned int ARangeFinder::getNumSamples()
+{
+  return mNumSamples;
+}
+//---------------------------------------------------------------------------
+float ARangeFinder::getFov()
+{
+  return mFov;
+}
+//---------------------------------------------------------------------------
 float ARangeFinder::getMinRange()
 {
   return mMinRange;

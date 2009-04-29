@@ -32,9 +32,13 @@ class CPoint2d
 {
   public:
     /** Default constructor */
-    CPoint2d( double x = 0.0, double y = 0.0 );
+    CPoint2d ( double x = 0.0, double y = 0.0 );
     /** Default destructor */
     ~CPoint2d();
+    /**
+     * Prints the points data to std out
+     */
+    void print();
     /** X coordinate */
     double mX;
     /** Y coordinate */

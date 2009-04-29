@@ -25,8 +25,8 @@ namespace Rapi
 {
 
 //-----------------------------------------------------------------------------
-CCBPowerPack::CCBPowerPack(CCBDriver* cbDriver, std::string devName)
- : APowerPack(devName)
+CCBPowerPack::CCBPowerPack ( CCBDriver* cbDriver, std::string devName )
+    : APowerPack ( devName )
 {
   mCBDriver = cbDriver;
 
@@ -35,14 +35,14 @@ CCBPowerPack::CCBPowerPack(CCBDriver* cbDriver, std::string devName)
   mCurrent = 0.0;
   mMaxCurrent = 4.0;  // TODO: set this to the corret value 4 is just a guess
   mVoltage = 0.0;
-  setEnabled(true);
+  setEnabled ( true );
 }
 //-----------------------------------------------------------------------------
 CCBPowerPack::~CCBPowerPack()
 {
 }
 //-----------------------------------------------------------------------------
-void CCBPowerPack::setEnabled(bool enable)
+void CCBPowerPack::setEnabled ( bool enable )
 {
   mFgEnabled = enable;
 }
@@ -52,37 +52,46 @@ int CCBPowerPack::init()
   return 1; // nothing to do !
 }
 //-----------------------------------------------------------------------------
+bool CCBPowerPack::isCharging()
+{
+  if ( getChargingSource() != NO_CHARGER )
+    return true;
+
+  return false;
+}
+//-----------------------------------------------------------------------------
 void CCBPowerPack::updateData()
 {
-  if (mFgEnabled == true) {
+  if ( mFgEnabled == true ) {
     // convert from [mAh] to [Ah]
-    mMaxBatteryCapacity = (float)(mCBDriver->mCreateSensorPackage.batMaxCapacity)
-                                  /1000.0;
+    mMaxBatteryCapacity = ( float ) ( mCBDriver->mCreateSensorPackage.batMaxCapacity )
+                          /1000.0;
     // convert from [mAh] to [Ah]
-    mBatteryCapacity = (float)(mCBDriver->mCreateSensorPackage.batCapacity)
-                                  /1000.0;
+    mBatteryCapacity = ( float ) ( mCBDriver->mCreateSensorPackage.batCapacity )
+                       /1000.0;
     // convert from [mA] to [A]
-    mCurrent = (float)(mCBDriver->mCreateSensorPackage.current) / 1000.0;
+    mCurrent = ( float ) ( mCBDriver->mCreateSensorPackage.current ) / 1000.0;
     // convert from [mV] to [V]
-    mVoltage = (float)(mCBDriver->mCreateSensorPackage.voltage) / 1000.0;
+    mVoltage = ( float ) ( mCBDriver->mCreateSensorPackage.voltage ) / 1000.0;
     // comes in [C]
-    mBatteryTemperature = (float)(mCBDriver->mCreateSensorPackage.batTemp);
+    mBatteryTemperature = ( float ) ( mCBDriver->mCreateSensorPackage.batTemp );
   }
 }
 //-----------------------------------------------------------------------------
 int CCBPowerPack::getChargingSource()
 {
-  switch (mCBDriver->mCreateSensorPackage.chargingSource) {
+  switch ( mCBDriver->mCreateSensorPackage.chargingSource ) {
     case 0x01: return INTEGRAL_CHARGER;
     case 0x02: return HOMEBASE;
-  }; // switch
+  }
+  ; // switch
 
   return NO_CHARGER;
 }
 //-----------------------------------------------------------------------------
 tChargeState CCBPowerPack::getChargingState()
 {
-   switch(mCBDriver->mCreateSensorPackage.chargingState) {
+  switch ( mCBDriver->mCreateSensorPackage.chargingState ) {
     case 0x00: return NOT_CHARGING;
     case 0x01: return RECONDITIONING;
     case 0x02: return FULL_CHARGING;
@@ -99,40 +108,40 @@ void CCBPowerPack::print()
   tChargeState state;
 
   state = getChargingState();
-  printf("Power: %02.2fV, %02.3fA, bat %02.3fAh,  maxBat %02.3fAh, %02.1f ",
+  printf ( "Power: %02.2fV, %02.3fA, bat %02.3fAh,  maxBat %02.3fAh, %02.1f ",
            mVoltage, mCurrent,
-          mBatteryCapacity, mMaxBatteryCapacity,
-          mBatteryTemperature);
+           mBatteryCapacity, mMaxBatteryCapacity,
+           mBatteryTemperature );
 
-  switch (state) {
+  switch ( state ) {
     case NOT_CHARGING:
-      printf("not charging ");
+      printf ( "not charging " );
       break;
     case RECONDITIONING:
-      printf("reconditioning ");
+      printf ( "reconditioning " );
       break;
     case FULL_CHARGING:
-      printf("full charging ");
+      printf ( "full charging " );
       break;
     case TRICKLE_CHARGING:
-      printf("trickel charging ");
+      printf ( "trickel charging " );
       break;
     case WAITING:
-      printf("waiting ");
+      printf ( "waiting " );
       break;
     case CHARGING_FAULT:
-      printf("charging fault ");
+      printf ( "charging fault " );
       break;
   };
 
-  if (getChargingSource() == 0)
-    printf("No Charger\n");
+  if ( getChargingSource() == 0 )
+    printf ( "No Charger\n" );
 
-  if (getChargingSource() == 1)
-    printf("Internal Charger\n");
+  if ( getChargingSource() == 1 )
+    printf ( "Internal Charger\n" );
 
-  if (getChargingSource() == 2)
-    printf("Home Base\n");
+  if ( getChargingSource() == 2 )
+    printf ( "Home Base\n" );
 }
 //-----------------------------------------------------------------------------
 } // namespace

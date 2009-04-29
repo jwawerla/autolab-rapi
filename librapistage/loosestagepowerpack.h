@@ -33,6 +33,9 @@ namespace Rapi
  */
 class CLooseStagePowerPack : public CStagePowerPack
 {
+  // we are now friends with our robot
+  friend class CLooseStageRobot;
+
   public:
     /**
      * Default constructor

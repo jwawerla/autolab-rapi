@@ -21,7 +21,6 @@
 
 #include "stagelaser.h"
 #include "utilities.h"
-//#include "printerror.h"
 #include "rapierror.h"
 #include "pose2d.h"
 
@@ -40,12 +39,13 @@ int laserUpdate ( Stg::ModelLaser* mod, CStageLaser* laser )
 CStageLaser::CStageLaser ( Stg::ModelLaser* stgLaser, std::string devName )
     : ARangeFinder ( devName )
 {
+  assert(stgLaser);
   mStgLaser = stgLaser;
   mFgEnabled = false;
   mStgLaser->AddUpdateCallback ( ( Stg::stg_model_callback_t )
                                  laserUpdate,
                                  this );
-
+  setEnabled( true );
 }
 //-----------------------------------------------------------------------------
 CStageLaser::~CStageLaser()
@@ -89,12 +89,12 @@ int CStageLaser::init()
 
   mBeamConeAngle = 0; // set to zero to indicate it is a laser
 
-  beamBearing = -mFov / 2.0;
+  beamBearing = -mFov / 2.0f;
   beamIncrement = mFov / float ( mNumSamples - 1 );
 
   for ( unsigned int i = 0; i < mNumSamples; i++ ) {
-    mRelativeBeamPose[i].mX = 0;
-    mRelativeBeamPose[i].mY = 0;
+    mRelativeBeamPose[i].mX = 0.0;
+    mRelativeBeamPose[i].mY = 0.0;
     mRelativeBeamPose[i].mYaw =  beamBearing;
     beamBearing += beamIncrement;
   }
@@ -107,7 +107,7 @@ void CStageLaser::updateData()
   uint32_t sampleCount;
   if ( mFgEnabled ) {
     mRangeData = ( tRangeData* ) mStgLaser->GetSamples ( &sampleCount );
-    mTimeStamp = mStgLaser->GetWorld()->SimTimeNow();
+    mTimeStamp = mStgLaser->GetWorld()->SimTimeNow() / 1e6;
     notifyDataUpdateObservers();
 
     if ( sampleCount != mNumSamples )

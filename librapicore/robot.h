@@ -59,6 +59,17 @@ class ARobot
      */
     void registerRobotController ( ARobotCtrlInterface* ctrl );
     /**
+     * Gets the name of the robot
+     * @return robot name
+     */
+    std::string getName();
+    /**
+     * Gets the current time of the robot, this maybe simulated time, real time,
+     * elapsed time since start of robot etc.
+     * @return [s]
+     */
+    virtual double getCurrentTime() = 0;
+    /**
      * Gets a device with a given device index
      * @param devName name of device
      * @return device
@@ -82,6 +93,8 @@ class ARobot
     std::list<ARobotCtrlInterface*> mRobotCtrlList;
     /** Update interval [s] */
     double mUpdateInterval;
+    /** Name of robot */
+    std::string mName;
 
 };
 

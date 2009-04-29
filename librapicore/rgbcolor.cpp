@@ -1,8 +1,9 @@
 /***************************************************************************
- * Project: RAPI                                                           *
+ * Project: autolab-wp                                                     *
  * Author:  Jens Wawerla (jwawerla@sfu.ca)                                 *
- * $Id: $
+ * $Id: ccolor.cpp,v 1.1.1.1 2009-03-15 03:52:03 jwawerla Exp $
  ***************************************************************************
+ *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; either version 2 of the License, or     *
@@ -17,42 +18,43 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- **************************************************************************/
-
-#ifndef RAPILOOSESTAGELASER_H
-#define RAPILOOSESTAGELASER_H
-
-#include <stage.hh>
-#include "stagelaser.h"
+ ***************************************************************************
+ * $Log: $
+ *
+ *
+ ***************************************************************************/
+#include "rgbcolor.h"
+#include "utilities.h"
 
 namespace Rapi
 {
 
-/**
- * Wrapper class for a stage laser model to make it work with ND
- * @author Jens Wawerla (jwawerla@sfu.ca)
- */
-class CLooseStageLaser : public CStageLaser
+//---------------------------------------------------------------------------
+CRgbColor::CRgbColor(int r, int g, int b )
 {
-  // we are now friends with our robot
-  friend class CLooseStageRobot;
-
-  public:
-    /**
-     * Default constructor
-     * @param stgLaser stage model of laser
-     * @param devName name of device
-     */
-    CLooseStageLaser ( Stg::ModelLaser* stgLaser, std::string devName );
-    /** Default destructor */
-    virtual ~CLooseStageLaser();
-    /**
-     * Gets the underlying stage model
-     * @return stage model
-     */
-    Stg::ModelLaser* getStageModel ();
-};
+  mRed = MIN(MAX(r, 0), 255);
+  mGreen = MIN(MAX(g, 0), 255);
+  mBlue = MIN(MAX(b, 0), 255);
+}
+//---------------------------------------------------------------------------
+CRgbColor::CRgbColor(CRgbColor const &color)
+{
+  mRed = color.mRed;
+  mGreen = color.mGreen;
+  mBlue = color.mBlue;
+}
+//---------------------------------------------------------------------------
+CRgbColor::~CRgbColor()
+{
+}
+//---------------------------------------------------------------------------
+void CRgbColor::operator = (CRgbColor const &color)
+{
+  mRed = color.mRed;
+  mGreen = color.mGreen;
+  mBlue = color.mBlue;
+}
+//---------------------------------------------------------------------------
 
 } // namespace
 
-#endif

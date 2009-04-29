@@ -78,6 +78,11 @@ class CCBPowerPack : public APowerPack
      * Prints the devices main information
      */
     virtual void print();
+    /**
+     * Checks if the robot is charging or not
+     * @return true if charging, false otherwise
+     */
+    virtual bool isCharging();
 
   protected:
     /**

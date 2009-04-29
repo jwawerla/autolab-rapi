@@ -25,16 +25,45 @@
 #include "stagepowerpack.h"
 #include "stagefiducialfinder.h"
 #include "stagetextdisplay.h"
+#include "stagesonar.h"
 #include "rapierror.h"
 
 namespace Rapi
 {
 
+// Callback for stage, stage calls this function if the corresponding model
+// is updated
+int ctrlUpdate ( Stg::ModelLaser* mod, CStageRobot* controller )
+{
+  controller->updateControllers();
+  return 0; // ok
+}
+
 //-----------------------------------------------------------------------------
 CStageRobot::CStageRobot ( Stg::Model* mod )
     : ARobot()
 {
+  Stg::Model* m;
+  assert ( mod );
   mStageModel = mod;
+  mName = mStageModel->Token();
+  // update interval [s]
+  mUpdateInterval = mStageModel->GetWorld()->GetSimInterval() * 1e-6;
+
+  // HACK: we should be attached to the callback of the model, but we attach
+  //       ourself to the laser of this model. Otherwise we get updated before
+  //       the laser does and we get one timestep old laser data
+  m = mStageModel->GetUnusedModelOfType( Stg::MODEL_TYPE_LASER );
+  assert(m);
+  m->AddUpdateCallback ( ( Stg::stg_model_callback_t )
+                                   ctrlUpdate,
+                                   this );
+
+/*
+  mStageModel->AddUpdateCallback ( ( Stg::stg_model_callback_t )
+                                   ctrlUpdate,
+                                   this );
+*/
 }
 //-----------------------------------------------------------------------------
 CStageRobot::~CStageRobot()
@@ -44,6 +73,11 @@ CStageRobot::~CStageRobot()
 int CStageRobot::init()
 {
   return 1; // success
+}
+//-----------------------------------------------------------------------------
+double CStageRobot::getCurrentTime()
+{
+  return mStageModel->GetWorld()->SimTimeNow() * 1e-6;
 }
 //-----------------------------------------------------------------------------
 ADevice* CStageRobot::findDeviceByName ( std::string devName )
@@ -62,7 +96,10 @@ ADevice* CStageRobot::findDeviceByName ( std::string devName )
 //-----------------------------------------------------------------------------
 int CStageRobot::findDevice ( ARangeFinder* &device, std::string devName )
 {
+  CStageLaser* laser = NULL;
+  CStageSonar* sonar = NULL;
   Stg::ModelLaser* modLaser;
+  Stg::ModelRanger* modRanger;
 
   // check if we already created such a device
   device = ( ARangeFinder* ) findDeviceByName ( devName );
@@ -70,23 +107,66 @@ int CStageRobot::findDevice ( ARangeFinder* &device, std::string devName )
     return 1; // success
   }
 
-  // no device created yet, so do it now
-  modLaser = ( Stg::ModelLaser* ) mStageModel->GetUnusedModelOfType ( Stg::MODEL_TYPE_LASER );
+  //***************************
+  // Handle Stage's Laser Models
+  if ( devName.find ( LASER_MODEL_NAME ) != std::string::npos ) {
+    // no device created yet, so do it now
+    modLaser = ( Stg::ModelLaser* ) mStageModel->GetModel ( devName.c_str() );
+    if ( modLaser == NULL ) {
+      ERROR2 ( "Stage model %s has no device named %s",
+               mStageModel->Token(), devName.c_str() );
+      return 0; // error
+    }
+    laser = new CStageLaser ( modLaser, devName );
+    device = laser;
+    // add device to the list
+    mDeviceList.push_back ( device );
 
-  device = new CStageLaser ( modLaser, devName );
-  mDeviceList.push_back ( device );
-
-  // now initialize the device
-  if ( device->init() != 1 ) {
-    ERROR1 ( "Failed to initialize device %s", devName.c_str() );
-    return 0;
+    // now initialize the device
+    if ( device->init() != 1 ) {
+      ERROR1 ( "Failed to initialize device %s", devName.c_str() );
+      return 0; // error
+    }
+    device->setEnabled ( true );
+    // enforce one update step, to fill the data structures with valid data
+    laser->updateData();
+    return 1; // success
   }
-  device->setEnabled ( true );
-  return 1;
+
+  //***************************
+  // Handle Stage's Ranger Models
+  if ( devName.find ( RANGER_MODEL_NAME ) != std::string::npos ) {
+    // no device created yet, so do it now
+    modRanger = ( Stg::ModelRanger* ) mStageModel->GetModel ( devName.c_str() );
+    if ( modRanger == NULL ) {
+      ERROR2 ( "Stage model %s has no device named %s",
+               mStageModel->Token(), devName.c_str() );
+      return 0; // error
+    }
+    sonar = new CStageSonar ( modRanger, devName );
+    device = sonar;
+
+    // add device to the list
+    mDeviceList.push_back ( device );
+    // now initialize the device
+    if ( device->init() != 1 ) {
+      ERROR1 ( "Failed to initialize device %s", devName.c_str() );
+      return 0; // error
+    }
+    device->setEnabled ( true );
+    // enforce one update step, to fill the data structures with valid data
+    sonar->updateData();
+    return 1; // success
+  }
+
+  ERROR2 ( "Stage model %s has no device named %s",
+           mStageModel->Token(), devName.c_str() );
+  return 0; // error
 }
 //-----------------------------------------------------------------------------
 int CStageRobot::findDevice ( ADrivetrain2dof* &device, std::string devName )
 {
+  CStageDrivetrain2dof* drivetrain2of;
   Stg::ModelPosition* modPosition;
 
   // check if we already created such a device
@@ -98,20 +178,25 @@ int CStageRobot::findDevice ( ADrivetrain2dof* &device, std::string devName )
   // no device created yet, so do it now
   modPosition = ( Stg::ModelPosition* ) mStageModel;
 
-  device = ( ADrivetrain2dof* ) new CStageDrivetrain2dof ( modPosition, devName );
+  drivetrain2of = new CStageDrivetrain2dof ( modPosition, devName );
+  device = ( ADrivetrain2dof* ) drivetrain2of;
+  // add device to the list
   mDeviceList.push_back ( device );
 
   // now initialize the device
   if ( device->init() != 1 ) {
     ERROR1 ( "Failed to initialize device %s", devName.c_str() );
-    return 0;
+    return 0; // error
   }
   device->setEnabled ( true );
-  return 1;
+  // enforce one update step, to fill the data structures with valid data
+  drivetrain2of->updateData();
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 int CStageRobot::findDevice ( APowerPack* &device, std::string devName )
 {
+  CStagePowerPack* powerPack;
   Stg::ModelPosition* modPosition;
 
   // check if we already created such a device
@@ -122,21 +207,26 @@ int CStageRobot::findDevice ( APowerPack* &device, std::string devName )
 
   // no device created yet, so do it now
   modPosition = ( Stg::ModelPosition* ) mStageModel;
-
-  device = ( APowerPack* ) new CStagePowerPack ( modPosition, devName );
+  powerPack = new CStagePowerPack ( modPosition, devName );
+  device = ( APowerPack* ) powerPack;
+  // add device to the list
   mDeviceList.push_back ( device );
 
   // now initialize the device
   if ( device->init() != 1 ) {
     ERROR1 ( "Failed to initialize device %s", devName.c_str() );
-    return 0;
+    return 0; // error
   }
   device->setEnabled ( true );
-  return 1;
+  // enforce one update step, to fill the data structures with valid data
+  powerPack->updateData();
+
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 int CStageRobot::findDevice ( AFiducialFinder* &device, std::string devName )
 {
+  CStageFiducialFinder* fiducialFinder;
   Stg::ModelFiducial* modFiducial;
 
   // check if we already created such a device
@@ -146,30 +236,40 @@ int CStageRobot::findDevice ( AFiducialFinder* &device, std::string devName )
   }
 
   // no device created yet, so do it now
-  modFiducial = ( Stg::ModelFiducial* ) mStageModel->GetUnusedModelOfType (
-                  Stg::MODEL_TYPE_FIDUCIAL );
+  modFiducial = ( Stg::ModelFiducial* ) mStageModel->GetModel ( devName.c_str() );
+  if ( modFiducial == NULL ) {
+    ERROR2 ( "Stage model %s has no device named %s",
+             mStageModel->Token(), devName.c_str() );
+    return 0; // error
+  }
 
-  device = new CStageFiducialFinder ( modFiducial, devName );
+  fiducialFinder = new CStageFiducialFinder ( modFiducial, devName );
+  device = fiducialFinder;
+  // add device to the list
   mDeviceList.push_back ( device );
 
   // now initialize the device
   if ( device->init() != 1 ) {
     ERROR1 ( "Failed to initialize device %s", devName.c_str() );
-    return 0;
+    return 0; // error
   }
   device->setEnabled ( true );
-  return 1;
+  // enforce one update step, to fill the data structures with valid data
+  fiducialFinder->updateData();
+
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
-int CStageRobot::findDevice(ALights* &device, std::string devName )
+int CStageRobot::findDevice ( ALights* &device, std::string devName )
 {
   device = NULL;
-  ERROR0("Device not implementated for stage");
+  ERROR0 ( "Device not implementated for stage" );
   return 0;
 }
 //-----------------------------------------------------------------------------
 int CStageRobot::findDevice ( ATextDisplay* &device, std::string devName )
 {
+  CStageTextDisplay* textDisplay;
   Stg::ModelPosition* modPosition;
 
   // check if we already created such a device
@@ -181,16 +281,22 @@ int CStageRobot::findDevice ( ATextDisplay* &device, std::string devName )
   // no device created yet, so do it now
   modPosition = ( Stg::ModelPosition* ) mStageModel;
 
-  device = ( ATextDisplay* ) new CStageTextDisplay ( modPosition, devName );
+  textDisplay = new CStageTextDisplay ( modPosition, devName );
+  device = ( ATextDisplay* ) textDisplay;
+
+  // add device to the list
   mDeviceList.push_back ( device );
 
   // now initialize the device
   if ( device->init() != 1 ) {
     ERROR1 ( "Failed to initialize device %s", devName.c_str() );
-    return 0;
+    return 0; // error
   }
   device->setEnabled ( true );
-  return 1;
+  // enforce one update step, to fill the data structures with valid data
+  textDisplay->updateData();
+
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 

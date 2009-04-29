@@ -30,6 +30,9 @@ CStageTextDisplay::CStageTextDisplay ( Stg::ModelPosition* stgModel,
     : ATextDisplay ( devName )
 {
   mStgPosition = stgModel;
+  mFgEnabled = false;
+
+  setEnabled( true );
 }
 //-----------------------------------------------------------------------------
 CStageTextDisplay::~CStageTextDisplay()
@@ -48,6 +51,7 @@ void CStageTextDisplay::setEnabled ( bool enable )
 //-----------------------------------------------------------------------------
 void CStageTextDisplay::updateData()
 {
+  mTimeStamp = mStgPosition->GetWorld()->SimTimeNow() / 1e6;
 }
 //-----------------------------------------------------------------------------
 int CStageTextDisplay::setText ( std::string text )

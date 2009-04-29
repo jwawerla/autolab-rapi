@@ -35,7 +35,9 @@ CStageLights::CStageLights ( Stg::ModelBlinkenlight* stgModel,
                              std::string devName )
     : ALights ( devName )
 {
+  assert(stgModel );
   mStgLights = stgModel;
+  setEnabled( true );
 }
 //-----------------------------------------------------------------------------
 CStageLights::~CStageLights()
@@ -53,6 +55,7 @@ void CStageLights::setEnabled ( bool enable )
 //-----------------------------------------------------------------------------
 void CStageLights::updateData()
 {
+  mTimeStamp = mStgLights->GetWorld()->SimTimeNow() / 1e6;
 }
 //-----------------------------------------------------------------------------
 

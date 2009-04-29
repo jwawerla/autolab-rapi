@@ -33,11 +33,6 @@ CPose2d::CPose2d( double x, double y, double yaw )
   mYaw = NORMALIZE_ANGLE( yaw );
 }
 //-----------------------------------------------------------------------------
-CPose2d::~CPose2d()
-{
-  // nothing to do
-}
-//-----------------------------------------------------------------------------
 CPose2d::CPose2d( CPose2d const& pose )
 {
   mX = pose.mX;
@@ -45,9 +40,27 @@ CPose2d::CPose2d( CPose2d const& pose )
   mYaw = NORMALIZE_ANGLE( pose.mYaw );
 }
 //-----------------------------------------------------------------------------
+CPose2d::CPose2d ( CPoint2d const& point )
+{
+  mX = point.mX;
+  mY = point.mY;
+  mYaw = 0.0;
+}
+//-----------------------------------------------------------------------------
+CPose2d::~CPose2d()
+{
+  // nothing to do
+}
+//-----------------------------------------------------------------------------
 void CPose2d::print()
 {
   printf("CPose2d: x=%f y=%f yaw=%f\n", mX, mY, R2D(mYaw));
+}
+//-----------------------------------------------------------------------------
+void CPose2d::operator= ( const CPoint2d point )
+{
+  mX = point.mX;
+  mY = point.mY;
 }
 //-----------------------------------------------------------------------------
 void CPose2d::operator= ( const CPose2d pose )

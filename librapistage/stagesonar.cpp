@@ -36,10 +36,14 @@ int sonarUpdate ( Stg::ModelRanger* ranger, CStageSonar* sonar )
 CStageSonar::CStageSonar( Stg::ModelRanger* stgModel, std::string devName )
     : ARangeFinder( devName )
 {
+  assert( stgModel );
   mStgRanger = stgModel;
+  mFgEnabled = false;
   mStgRanger->AddUpdateCallback ( ( Stg::stg_model_callback_t )
                                  sonarUpdate,
                                  this );
+
+  setEnabled( true );
 }
 //---------------------------------------------------------------------------
 CStageSonar::~CStageSonar()
@@ -94,7 +98,7 @@ void CStageSonar::updateData()
   if ( mFgEnabled ) {
     for ( unsigned int i = 0; i < mNumSamples; i++ )
       mRangeData[i].range = mStgRanger->samples[i];
-    mTimeStamp = mStgRanger->GetWorld()->SimTimeNow();
+    mTimeStamp = mStgRanger->GetWorld()->SimTimeNow() / 1e6;
     notifyDataUpdateObservers();
   }
 }

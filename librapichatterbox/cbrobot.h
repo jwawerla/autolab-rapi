@@ -55,6 +55,12 @@ class CCBRobot : public ARobot
      */
     virtual int init();
     /**
+     * Gets the current time of the robot, this maybe simulated time, real time,
+     * elapsed time since start of robot etc.
+     * @return [s]
+     */
+    virtual double getCurrentTime();
+    /**
      * This is the main of the thread
      */
     void run();

@@ -52,13 +52,13 @@ class APowerPack : public ADevice
      */
     double getCurrent();
     /**
-     * Gets the actual battery capacity
-     * @return [Ah]
+     * Gets the actual momentary battery capacity
+     * @return [Wh]
      */
     double getBatteryCapacity();
     /**
      * Gets the maximal battery capacity
-     * @return [Ah]
+     * @return [Wh]
      */
     double getMaxBatteryCapacity();
     /**
@@ -76,6 +76,16 @@ class APowerPack : public ADevice
      * @return [Wh]
      */
     double getTotalEnergyDissipated();
+    /**
+     * Gets the level of remaining energy in the battery
+     * @return [0,1]
+     */
+    double getBatteryLevel();
+    /**
+     * Checks if the robot is charging or not
+     * @return true if charging, false otherwise
+     */
+    virtual bool isCharging() = 0;
     /**
      * Gets the source id from which we are charging. By default this method
      * returns 0 since most robot have only one charging option. But some
@@ -99,9 +109,9 @@ class APowerPack : public ADevice
      * @param devName name of device
      */
     APowerPack ( std::string devName );
-    /** Maximal battery capacity [Ah] */
+    /** Maximal battery capacity [Wh] */
     double mMaxBatteryCapacity;
-    /** Actual battery capacity [Ah] */
+    /** Actual battery capacity [Wh] */
     double mBatteryCapacity;
     /**
      * Current drawn from the battery (negative) or added to battery

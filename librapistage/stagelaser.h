@@ -29,11 +29,14 @@ namespace Rapi
 {
 
 /**
- * Wrapper class for a stage laser model to make it work with ND
+ * Implementation of a stage laser model
  * @author Jens Wawerla (jwawerla@sfu.ca)
  */
 class CStageLaser : public ARangeFinder
 {
+  // we are now friends with our robot
+  friend class CStageRobot;
+
   public:
     /**
      * Default constructor

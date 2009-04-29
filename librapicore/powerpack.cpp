@@ -69,6 +69,11 @@ int APowerPack::getChargingSource()
   return 0; // default charging source
 }
 //-----------------------------------------------------------------------------
+double APowerPack::getBatteryLevel()
+{
+  return mBatteryCapacity/ mMaxBatteryCapacity;
+}
+//-----------------------------------------------------------------------------
 double APowerPack::getTotalEnergyDissipated()
 {
   return mTotalEnergyDissipated;
@@ -76,8 +81,8 @@ double APowerPack::getTotalEnergyDissipated()
 //-----------------------------------------------------------------------------
 void APowerPack::print()
 {
-  printf ( "APowerPack: voltage %02.2fV, current %02.3fA, cap. %02.3fAh, "\
-           "max cap. %02.3fAh, %02.1f C\n",
+  printf ( "APowerPack: voltage %02.2fV, current %02.3fA, cap. %02.3fWh, "\
+           "max cap. %02.3fWh, %02.1f C\n",
            mVoltage, mCurrent, mBatteryCapacity,
            mMaxBatteryCapacity, mBatteryTemperature );
 }

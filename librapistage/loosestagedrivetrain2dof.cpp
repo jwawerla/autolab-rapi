@@ -28,13 +28,10 @@ CLooseStageDrivetrain2dof::CLooseStageDrivetrain2dof ( Stg::ModelPosition* stgMo
     std::string devName )
     : CStageDrivetrain2dof (stgModel, devName )
 {
-
 }
 //-----------------------------------------------------------------------------
 CLooseStageDrivetrain2dof::~CLooseStageDrivetrain2dof()
 {
-  if ( mOdometry )
-    delete mOdometry;
 }
 //-----------------------------------------------------------------------------
 Stg::ModelPosition* CLooseStageDrivetrain2dof::getStageModel ()

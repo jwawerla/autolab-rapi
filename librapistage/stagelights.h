@@ -33,6 +33,9 @@ namespace Rapi
  */
 class CStageLights : public ALights
 {
+  // we are now friends with our robot
+  friend class CStageRobot;
+
   public:
     /**
      * Default constructor

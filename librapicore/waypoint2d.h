@@ -19,53 +19,45 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
-#ifndef POSE2D_H
-#define POSE2D_H
+#ifndef RAPIWAYPOINT2D_H
+#define RAPIWAYPOINT2D_H
 
-#include "point2d.h"
+#include "pose2d.h"
+#include "rgbcolor.h"
+#include <string>
+
+#define DEFAULT_WP_COLOR CRgbColor(255,0,0)
 
 namespace Rapi
 {
 
 /**
- * Defines a pose in 2 dimenstions. Angle is normalized to [-pi, pi]
- * @author Jens Wawerla <jwawerla@sfu.ca>
+ * This class defines a waypoint in 2D
+ * @author Jens Wawerla
  */
-
-class CPose2d
+class CWaypoint2d
 {
   public:
     /**
-    * Default constructor
-    * @param x
-    * @param y
-    * @param yaw
-    */
-    CPose2d ( double x = 0.0, double y = 0.0, double yaw = 0.0 );
+     * Default constructor
+     * @param x
+     * @param y
+     * @param yaw
+     * @param label
+    * @param color
+     */
+    CWaypoint2d ( double x = 0.0, double y = 0.0, double yaw = 0.0,
+                  std::string label="", CRgbColor color=DEFAULT_WP_COLOR );
     /**
-    * Constructor
-    * @param pose to copy pose from
-    */
-    CPose2d ( CPose2d const& pose );
-
-    /**
-    * Constructor
-    * @param point to copy x and y from, sets yaw to 0
-    */
-    CPose2d ( CPoint2d const& point );
+     * Default constructor
+     * @param pose
+     * @param label
+     * @param color
+     */
+    CWaypoint2d ( CPose2d pose, std::string label="",
+                  CRgbColor color=DEFAULT_WP_COLOR );
     /** Default destructor */
-    ~CPose2d();
-    /**
-     * Gets the euclidian distance to a given pose
-     * @param pose to get distance to
-     * @return distance [m]
-     */
-    double distance ( const CPose2d pose );
-    /**
-     * Gets the angular difference between this pose and the given pose
-     * @return [rad]
-     */
-    double angleDifference ( const CPose2d pose );
+    ~CWaypoint2d();
     /**
      * Prints the pose data to std out
      */
@@ -73,20 +65,53 @@ class CPose2d
     /** Overloaded = operator */
     void operator= ( const CPose2d pose );
     /** Overloaded = operator */
-    void operator= ( const CPoint2d point );
-    /** Overloaded + operator */
-    CPose2d operator+ ( const CPose2d pose );
-    /** Overloaded - operator */
-    CPose2d operator- ( const CPose2d pose );
-    /** Overloaded != operator */
-    bool operator!= ( const CPose2d pose );
-    /** x position [m] */
-    double mX;
-    /** y position [m] */
-    double mY;
-    /** yaw angle [rad] */
-    double mYaw;
+    void operator= ( const CWaypoint2d wp );
+    /**
+     * Gets the pose of the waypoint
+     * @return pose
+     */
+    CPose2d getPose();
+    /**
+     * Set pose of waypoint
+     * @param pose
+     */
+    void setPose(CPose2d pose);
+    /**
+     * Sets the pose of a waypoint
+     * @param point
+     * @param heading [rad]
+     */
+    void setPose(CPoint2d point, double heading = 0.0);
+    /**
+     * Gets the label of the waypoint
+     * @return label
+     */
+    std::string getLabel();
+    /**
+     * Sets the label
+     * @param label
+     */
+    void setLabel ( std::string label );
+    /**
+     * Gets the color of the waypoint
+     * @return color
+     */
+    CRgbColor getColor();
+    /**
+     * Sets the color of the waypoint
+     * @param color
+     */
+    void setColor(CRgbColor color);
+
+  protected:
+    /** Pose of waypoint */
+    CPose2d mPose;
+    /** Label */
+    std::string mLabel;
+    /** Color of waypoint */
+    CRgbColor mColor;
 };
 
 } // namespace
+
 #endif

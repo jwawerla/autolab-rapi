@@ -27,12 +27,17 @@
 namespace Rapi
 {
 
+class CLooseStageRobot;
+
 /**
  * Stage implementation of a text display
  * @author Jens Wawerla <jwawerla@sfu.ca>
  */
 class CLooseStageTextDisplay : public CStageTextDisplay
 {
+  // we are now friends with our robot
+  friend class CLooseStageRobot;
+
   public:
     /**
      * Default constructor

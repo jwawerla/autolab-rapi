@@ -1,7 +1,7 @@
 /***************************************************************************
- * Project: RAPI                                                           *
+ * Project: autolab-wp                                                     *
  * Author:  Jens Wawerla (jwawerla@sfu.ca)                                 *
- * $Id: $
+ * $Id: ccolor.h,v 1.1.1.1 2009-03-15 03:52:02 jwawerla Exp $
  ***************************************************************************
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,61 +17,50 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- **************************************************************************/
+ ***************************************************************************
+ * $Log: $
+ *
+ *
+ ***************************************************************************/
+#ifndef RAPIRGBCOLOR_H
+#define RAPIRGBCOLOR_H
 
-#ifndef RAPISTAGESONAR_H
-#define RAPISTAGESONAR_H
-
-#include "stage.hh"
-#include "rangefinder.h"
 
 namespace Rapi
 {
 
 /**
- * This class provides a sonar simulated by stage
- *  @author Jens Wawerla <jwawerla@sfu.ca>
+ * Defines a rgb color
+ * @author Jens Wawerla <jwawerla@sfu.ca>
+ * @version 0.1 - 12/2007
  */
-
-class CStageSonar : public ARangeFinder
+class CRgbColor
 {
-  // we are now friends with our robot
-  friend class CStageRobot;
-
   public:
     /**
      * Default constructor
-     * @param stgModel stage model of sonar
-     * @param devName name of device
+     * @param r red
+     * @param g green
+     * @param b blue
      */
-    CStageSonar ( Stg::ModelRanger* stgModel, std::string devName );
+    CRgbColor( int r=0, int g=0, int b=0 );
+    /**
+     * Copy constructor 
+     */
+    CRgbColor(CRgbColor const &color);
     /** Default destructor */
-    ~CStageSonar();
+    ~CRgbColor();
     /**
-     * Initializes the robot
-     * @param return 1 if success -1 otherwise
+     * Assignment operator
      */
-    virtual int init();
-    /**
-     * Enables or disables the device
-     * @param enable = true to enable, false to disable
-     */
-    virtual void setEnabled ( bool enable );
-    /**
-     * Prints the devices main information
-     */
-    virtual void print();
+    void operator = (CRgbColor const &color);
+    /** Red value */
+    int mRed;
+    /** Green value */
+    int mGreen;
+    /** Blue value */
+    int mBlue;
 
-  protected:
-    /**
-     * This method gets called by the framework every step to refresh
-     * the sensor data
-     */
-    virtual void updateData();
-    /** Friend function of stage model updates */
-    friend int sonarUpdate ( Stg::ModelRanger* ranger, CStageSonar* sonar );
-    /** Stage model */
-    Stg::ModelRanger* mStgRanger;
 };
 
 } // namespace

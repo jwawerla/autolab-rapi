@@ -34,6 +34,9 @@ namespace Rapi
  */
 class CLooseStageDrivetrain2dof : public CStageDrivetrain2dof
 {
+  // we are now friends with our robot
+  friend class CLooseStageRobot;
+
   public:
     /**
      * Default constructor

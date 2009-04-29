@@ -19,10 +19,12 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
-#ifndef _UTILITIES_H_
-#define _UTILITIES_H_
+#ifndef RAPIUTILITIES_H
+#define RAPIUTILITIES_H
 
 #include <sys/time.h>
+#include <unistd.h>
+#include <time.h>
 #include <math.h>
 #include <limits>
 #include <stdlib.h>
@@ -200,11 +202,18 @@ inline double randNo ( double minimum, double maximum )
   double r;
 
   r = drand48();  // r = [0,1]
-
   return minimum + r * ( maximum - minimum );
 }
+
+/**
+ * \fn void initRandomNumberGenerator()
+ * Initializes the random number generator
+ */
+void initRandomNumberGenerator();
+
+
 //-----------------------------------------------------------------------------
 
-} // namespace 
+} // namespace
 #endif
 

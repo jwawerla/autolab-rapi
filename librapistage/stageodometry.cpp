@@ -20,6 +20,7 @@
  **************************************************************************/
 
 #include "stageodometry.h"
+#include "utilities.h"
 
 namespace Rapi
 {
@@ -29,6 +30,7 @@ CStageOdometry::CStageOdometry ( Stg::ModelPosition* stgModel,
                                  std::string devName )
     : COdometry ( devName )
 {
+  assert(stgModel);
   mStgPosition = stgModel;
 }
 //-----------------------------------------------------------------------------
@@ -41,9 +43,11 @@ void CStageOdometry::updateData()
   Stg::Pose pose;
 
   pose = mStgPosition->GetPose();
-  mPose.mX =  pose.x;
-  mPose.mY =  pose.y;
-  mPose.mYaw =  pose.a;
+  mPose.mX = pose.x;
+  mPose.mY = pose.y;
+  mPose.mYaw = pose.a;
+
+  mTimeStamp = mStgPosition->GetWorld()->SimTimeNow() / 1e6;
 }
 //-----------------------------------------------------------------------------
 

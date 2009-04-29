@@ -33,6 +33,9 @@ namespace Rapi
  */
 class CStageFiducialFinder : public AFiducialFinder
 {
+  // we are now friends with our robot
+  friend class CStageRobot;
+
   public:
     /**
      * Default constructor

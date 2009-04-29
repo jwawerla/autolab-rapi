@@ -20,6 +20,7 @@
  **************************************************************************/
 #include "fiducialfinder.h"
 #include "utilities.h"
+#include "rapierror.h"
 #include <stdio.h>
 
 namespace Rapi

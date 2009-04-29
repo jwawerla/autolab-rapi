@@ -33,6 +33,9 @@ namespace Rapi
  */
 class CStagePowerPack : public APowerPack
 {
+  // we are now friends with our robot
+  friend class CStageRobot;
+
   public:
     /**
      * Default constructor
@@ -57,6 +60,11 @@ class CStagePowerPack : public APowerPack
      * @return state
      */
     virtual tChargeState getChargingState();
+    /**
+     * Checks if the robot is charging or not
+     * @return true if charging, false otherwise
+     */
+    virtual bool isCharging();
 
   protected:
     /**
@@ -66,8 +74,10 @@ class CStagePowerPack : public APowerPack
     virtual void updateData();
     /** Friend function of stage model updates */
     friend int powerUpdate ( Stg::ModelPosition* mod, CStagePowerPack* power );
-    /** Stage model */
+    /** Stage power pack */
     Stg::PowerPack* mStgPowerPack;
+    /** Stage model */
+    Stg::Model* mStgModel;
     /** Update interval [s] */
     double mSimInterval;
 };

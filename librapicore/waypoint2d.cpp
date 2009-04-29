@@ -18,87 +18,84 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#include "stagefiducialfinder.h"
+#include "waypoint2d.h"
+#include "utilities.h"
 
 namespace Rapi
 {
 
-// Callback for stage, stage calls this function if the corresponding model
-// is updated
-int fiducialUpdate ( Stg::ModelFiducial* mod, CStageFiducialFinder* fiducal )
-{
-  fiducal->updateData();
-  return 0; // ok
-}
-
 //-----------------------------------------------------------------------------
-CStageFiducialFinder::CStageFiducialFinder ( Stg::ModelFiducial* stgModel,
-    std::string devName )
-    : AFiducialFinder ( devName )
+CWaypoint2d::CWaypoint2d ( double x, double y, double yaw, std::string label,
+CRgbColor color )
 {
-  assert( stgModel );
-  mStgFiducial = stgModel;
-  mFgEnabled = false;
-
-  mStgFiducial->AddUpdateCallback ( ( Stg::stg_model_callback_t )
-                                    fiducialUpdate,
-                                    this );
-  setEnabled( true );
+  mPose = CPose2d ( x,y,yaw );
+  mLabel = label;
+  mColor = color;
 }
 //-----------------------------------------------------------------------------
-CStageFiducialFinder::~CStageFiducialFinder()
+CWaypoint2d::CWaypoint2d ( CPose2d pose, std::string label, CRgbColor color)
+{
+  mPose = pose;
+  mLabel = label;
+  mColor = color;
+}
+//-----------------------------------------------------------------------------
+CWaypoint2d::~CWaypoint2d()
 {
 }
 //-----------------------------------------------------------------------------
-int CStageFiducialFinder::init()
+void CWaypoint2d::print()
 {
-  mFov = mStgFiducial->fov;
-  mMinRange = mStgFiducial->min_range;
-  mMaxRange = MAX ( mStgFiducial->max_range_anon, mStgFiducial->max_range_id );
-
-  return 1; // success
+  printf("CWaypoint2d: %s at", mLabel.c_str());
+  mPose.print();
 }
 //-----------------------------------------------------------------------------
-void CStageFiducialFinder::setEnabled ( bool enable )
+void CWaypoint2d::operator= ( const CPose2d pose )
 {
-  if ( mFgEnabled == enable )
-    return;  // we are really have the correct status
-
-  if ( enable )
-    mStgFiducial->Subscribe();
-  else
-    mStgFiducial->Unsubscribe();
-
-  mFgEnabled = enable;
+  mPose = pose;
 }
 //-----------------------------------------------------------------------------
-void CStageFiducialFinder::updateData()
+void CWaypoint2d::operator= ( const CWaypoint2d wp )
 {
-
-  if ( mFgEnabled ) {
-    // clear old data
-    if ( mFiducialData ) {
-      delete[] mFiducialData;
-      mFiducialData = NULL;
-    }
-
-    mNumReadings = mStgFiducial->fiducial_count;
-    // do we have fiducial data ?
-    if ( mNumReadings == 0 ) {
-      return; // no data
-    }
-    // allocate memory for data
-    mFiducialData = new tFiducialData[mNumReadings];
-    // copy data
-    for ( unsigned int i = 0; i < mNumReadings; i++ ) {
-      mFiducialData[i].id = mStgFiducial->fiducials[i].id;
-      mFiducialData[i].range = mStgFiducial->fiducials[i].range;
-      mFiducialData[i].bearing = mStgFiducial->fiducials[i].bearing;
-    }
-    mTimeStamp = mStgFiducial->GetWorld()->SimTimeNow() / 1e6;
-    notifyDataUpdateObservers();
-  }
+  mPose = wp.mPose;
+  mLabel = wp.mLabel;
+  mColor = wp.mColor;
 }
 //-----------------------------------------------------------------------------
-
+CPose2d CWaypoint2d::getPose()
+{
+  return mPose;
+}
+//-----------------------------------------------------------------------------
+std::string CWaypoint2d::getLabel()
+{
+  return mLabel;
+}
+//-----------------------------------------------------------------------------
+void CWaypoint2d::setPose(CPose2d pose)
+{
+  mPose = pose;
+}
+//-----------------------------------------------------------------------------
+void CWaypoint2d::setPose(CPoint2d point, double heading )
+{
+  mPose = point;
+  mPose.mYaw = NORMALIZE_ANGLE( heading );
+}
+//-----------------------------------------------------------------------------
+void CWaypoint2d::setLabel( std::string label)
+{
+  mLabel = label;
+}
+//-----------------------------------------------------------------------------
+CRgbColor CWaypoint2d::getColor()
+{
+  return mColor;
+}
+//-----------------------------------------------------------------------------
+void CWaypoint2d::setColor(CRgbColor color)
+{
+  mColor = color;
+}
+//-----------------------------------------------------------------------------
 } // namespace
