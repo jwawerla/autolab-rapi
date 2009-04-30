@@ -45,7 +45,7 @@ class CLooseStageDrivetrain2dof : public CStageDrivetrain2dof
      */
     CLooseStageDrivetrain2dof ( Stg::ModelPosition* stgModel, std::string devName );
     /** Default destructor */
-    ~CLooseStageDrivetrain2dof();
+    virtual ~CLooseStageDrivetrain2dof();
     /**
      * Gets the underlying stage model
      * @return stage model

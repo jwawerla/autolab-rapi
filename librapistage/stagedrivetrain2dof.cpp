@@ -37,16 +37,16 @@ CStageDrivetrain2dof::CStageDrivetrain2dof ( Stg::ModelPosition* stgModel,
     std::string devName )
     : ADrivetrain2dof ( devName )
 {
-  assert( stgModel );
+  assert ( stgModel );
   mStgPosition = stgModel;
   mFgEnabled = false;
   mStgPosition->AddUpdateCallback ( ( Stg::stg_model_callback_t )
                                     positionUpdate,
                                     this );
   mOdometry = new CStageOdometry ( mStgPosition, devName + ":odometry" );
-  assert(mOdometry);
+  assert ( mOdometry );
 
-  setEnabled(true);
+  setEnabled ( true );
 }
 //-----------------------------------------------------------------------------
 CStageDrivetrain2dof::~CStageDrivetrain2dof()
@@ -73,12 +73,16 @@ void CStageDrivetrain2dof::setEnabled ( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-void CStageDrivetrain2dof::setSpeedCmd ( float velocity, float turnrate )
+void CStageDrivetrain2dof::setSpeedCmd ( const float velocity,
+    const float turnrate )
+{
+  setSpeedCmd ( CVelocity2d ( velocity, 0.0, turnrate ) );
+}
+//-----------------------------------------------------------------------------
+void CStageDrivetrain2dof::setSpeedCmd ( CVelocity2d velocity )
 {
   if ( mFgEnabled ) {
-    mVelocityCmd.mVX = velocity;
-    mVelocityCmd.mVY = 0.0;
-    mVelocityCmd.mYawDot = turnrate;
+    mVelocityCmd = velocity;
   } else {
     mVelocityCmd.setZero();
   }
