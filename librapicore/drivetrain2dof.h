@@ -51,9 +51,29 @@ class ADrivetrain2dof : public ADevice
     /**
      * Sets the velocity and turn rate of the robot
      * @param velocity forward positive, backward negative [m/s]
-     * @param turnRate positve counterclockwise, negative clockwise [rad/s]
+     * @param turnrate positve counterclockwise, negative clockwise [rad/s]
      */
-    virtual void setSpeedCmd( float velocity, float turnRate ) = 0;
+    virtual void setSpeedCmd( const float velocity, const float turnrate ) = 0;
+    /**
+     * Sets the velocity and turn rate of the robot
+     * @param velocity forward positive, backward negative [m/s]
+     *                 positve counterclockwise, negative clockwise [rad/s]
+     */
+    virtual void setSpeedCmd( CVelocity2d velocity ) = 0;
+    /**
+     * Sets a rotational speed for the robot
+     * @param turnrate positve counterclockwise, negative clockwise [rad/s]
+     */
+    virtual void setRotationalSpeedCmd( float turnrate);
+    /**
+     * Sets a translational speed for the robot
+     * @param velocity forward positive, backward negative [m/s]
+     */
+    virtual void setTranslationalSpeedCmd( float velocity);
+    /**
+     * Stops the robot by setting all velocities to zero
+     */
+    virtual void stop();
     /**
      * Prints the devices main information
      */

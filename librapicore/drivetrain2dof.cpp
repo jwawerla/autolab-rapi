@@ -35,6 +35,21 @@ ADrivetrain2dof::~ADrivetrain2dof()
 {
 }
 //-----------------------------------------------------------------------------
+void ADrivetrain2dof::stop()
+{
+  setSpeedCmd( CVelocity2d(0.0, 0.0 ) );
+}
+//-----------------------------------------------------------------------------
+void ADrivetrain2dof::setRotationalSpeedCmd( float turnrate )
+{
+  setSpeedCmd( CVelocity2d( mVelocityCmd.mVX, turnrate) );
+}
+//-----------------------------------------------------------------------------
+void ADrivetrain2dof::setTranslationalSpeedCmd( float velocity )
+{
+  setSpeedCmd( CVelocity2d( velocity, mVelocityCmd.mYawDot ) );
+}
+//-----------------------------------------------------------------------------
 void ADrivetrain2dof::print()
 {
   printf ( "ADriveTrain2dof:v=%01.2f w=%02.1f ", mVelocityCmd.mVX,
