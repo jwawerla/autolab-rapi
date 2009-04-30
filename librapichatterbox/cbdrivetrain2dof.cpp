@@ -59,29 +59,35 @@ void CCBDrivetrain2dof::setEnabled ( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-void CCBDrivetrain2dof::setSpeedCmd ( float velocity, float turnRate )
+void CCBDrivetrain2dof::setSpeedCmd ( const float velocity,
+                                      const float turnrate )
+{
+  setSpeedCmd ( CVelocity2d ( velocity, 0.0, turnrate ) );
+}
+//-----------------------------------------------------------------------------
+void CCBDrivetrain2dof::setSpeedCmd ( CVelocity2d velocity )
 {
 
   if ( mFgEnabled == true ) {
-    if ( fabs ( velocity - mFiltVelocity ) < mMaxVelocityDelta ) {
-      mFiltVelocity = velocity;
+    if ( fabs ( velocity.mVX - mFiltVelocity ) < mMaxVelocityDelta ) {
+      mFiltVelocity = velocity.mVX;
     } else {
-      mFiltVelocity = mFiltVelocity + SIGN ( velocity - mFiltVelocity ) *
+      mFiltVelocity = mFiltVelocity + SIGN ( velocity.mVX - mFiltVelocity ) *
                       mMaxVelocityDelta;
     }
 
-    if ( fabs ( turnRate - mFiltTurnRate ) < mMaxTurnRateDelta ) {
-      mFiltTurnRate = turnRate;
+    if ( fabs ( velocity.mYawDot - mFiltTurnRate ) < mMaxTurnRateDelta ) {
+      mFiltTurnRate = velocity.mYawDot;
     } else {
-      mFiltTurnRate = mFiltTurnRate + SIGN ( turnRate - mFiltTurnRate ) *
+      mFiltTurnRate = mFiltTurnRate + SIGN ( velocity.mYawDot - mFiltTurnRate ) *
                       mMaxTurnRateDelta;
     }
 
     if ( mCBDriver->mCreateSensorPackage.oiMode != mOIMode )
       mCBDriver->setOIMode ( mOIMode );
     if ( mCBDriver->setSpeed ( CVelocity2d ( mFiltVelocity,0, mFiltTurnRate ) ) == 0 ) {
-      ERROR2 ( "Failed to set speed command v=%f w=%f", velocity,
-                 turnRate );
+      ERROR2 ( "Failed to set speed command v=%f w=%f", velocity.mVX,
+               velocity.mYawDot );
     }
   } else {
     if ( mCBDriver->setSpeed ( CVelocity2d ( 0.0,0.0,0.0 ) ) == 0 ) {
@@ -156,7 +162,7 @@ void CCBDrivetrain2dof::print()
   printf ( "\n" );
 }
 //-----------------------------------------------------------------------------
-void CCBDrivetrain2dof::setDefaultOIMode(tOIMode mode)
+void CCBDrivetrain2dof::setDefaultOIMode ( tOIMode mode )
 {
   mOIMode = mode;
 }
@@ -166,10 +172,10 @@ tOIMode CCBDrivetrain2dof::getOIMode()
   return mCBDriver->getOIMode();
 }
 //-----------------------------------------------------------------------------
-int CCBDrivetrain2dof::activateDemo(tDemo demo)
+int CCBDrivetrain2dof::activateDemo ( tDemo demo )
 {
-  if (mCBDriver->activateDemo(demo) == 1) {
-    if (demo == CB_DEMO_STOP)
+  if ( mCBDriver->activateDemo ( demo ) == 1 ) {
+    if ( demo == CB_DEMO_STOP )
       mOIMode = CB_MODE_SAFE;
     else
       mOIMode = CB_MODE_PASSIVE;
