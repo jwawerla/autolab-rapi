@@ -33,7 +33,7 @@ namespace Rapi
 
 // Callback for stage, stage calls this function if the corresponding model
 // is updated
-int ctrlUpdate ( Stg::ModelLaser* mod, CStageRobot* controller )
+int ctrlUpdate ( Stg::World* world, CStageRobot* controller )
 {
   controller->updateControllers();
   return 0; // ok
@@ -43,27 +43,15 @@ int ctrlUpdate ( Stg::ModelLaser* mod, CStageRobot* controller )
 CStageRobot::CStageRobot ( Stg::Model* mod )
     : ARobot()
 {
-  Stg::Model* m;
   assert ( mod );
   mStageModel = mod;
   mName = mStageModel->Token();
   // update interval [s]
   mUpdateInterval = mStageModel->GetWorld()->GetSimInterval() * 1e-6;
 
-  // HACK: we should be attached to the callback of the model, but we attach
-  //       ourself to the laser of this model. Otherwise we get updated before
-  //       the laser does and we get one timestep old laser data
-  m = mStageModel->GetUnusedModelOfType( Stg::MODEL_TYPE_LASER );
-  assert(m);
-  m->AddUpdateCallback ( ( Stg::stg_model_callback_t )
-                                   ctrlUpdate,
-                                   this );
-
-/*
-  mStageModel->AddUpdateCallback ( ( Stg::stg_model_callback_t )
-                                   ctrlUpdate,
-                                   this );
-*/
+  mStageModel->GetWorld()->AddUpdateCallback ( ( Stg::stg_world_callback_t )
+      ctrlUpdate,
+      this );
 }
 //-----------------------------------------------------------------------------
 CStageRobot::~CStageRobot()

@@ -69,7 +69,7 @@ class CStageRobot : public ARobot
 
   protected:
     /** Friend function of stage model updates */
-    friend int ctrlUpdate ( Stg::ModelLaser* mod, CStageRobot* controller );
+    friend int ctrlUpdate ( Stg::World* world, CStageRobot* controller );
 
     /**
      * Searches the list of previously found devices and returns a match or
