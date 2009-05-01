@@ -5,7 +5,7 @@ SET( TARGET ${PRJ} )
 
 INCLUDE(FindPkgConfig)
 
-pkg_search_module( GLIB REQUIRED gthread-2.0 )
+PKG_SEARCH_MODULE( GLIB REQUIRED gthread-2.0 )
 
 IF( GLIB_FOUND )
   MESSAGE( STATUS ${INDENT} "Glib version ${GLIB_VERSION} detected at ${GLIB_PREFIX}" )
@@ -15,9 +15,7 @@ ELSE( GLIB_FOUND )
   MESSAGE( ${INDENT} "Glib not detected" )
 ENDIF( GLIB_FOUND )
 
-pkg_search_module( STAGE REQUIRED stage )
-
-IF(STAGE_FOUND)
+IF (STAGE_FOUND)
   MESSAGE(STAGE "${STAGE_LIBRARY_DIRS}" )
   MESSAGE(STAGE "${STAGE_LIBRARIES}" )
   MESSAGE(STAGEDIR "${STAGE_INCLUDE_DIRS}" )
@@ -89,15 +87,18 @@ IF(STAGE_FOUND)
   SET_TARGET_PROPERTIES( ${TARGET} PROPERTIES
                           VERSION ${VERSION}
   )
+
+  INSTALL(TARGETS ${TARGET}
+    LIBRARY DESTINATION lib
+  )
+
+  INSTALL(FILES ${HEADERS}
+    DESTINATION include/${PRJ}-${APIVERSION}
+  )
+
 ELSEIF(STAGE_FOUND)
-  MESSAGE(STATUS "Stage was not found, rapi-stage will NOT be build")
+  MESSAGE( STATUS "Stage was not found, rapi-stage will NOT be build")
 ENDIF(STAGE_FOUND)
 
 
 
-INSTALL(TARGETS ${TARGET}
-  LIBRARY DESTINATION lib )
-
-INSTALL(FILES ${HEADERS}
-  DESTINATION include/${PRJ}-${APIVERSION}
-)
