@@ -17,76 +17,83 @@ ENDIF( GLIB_FOUND )
 
 pkg_search_module( STAGE REQUIRED stage )
 
-MESSAGE(STAGE "${STAGE_LIBRARY_DIRS}" )
-MESSAGE(STAGE "${STAGE_LIBRARIES}" )
-MESSAGE(STAGEDIR "${STAGE_INCLUDE_DIRS}" )
+IF(STAGE_FOUND)
+  MESSAGE(STAGE "${STAGE_LIBRARY_DIRS}" )
+  MESSAGE(STAGE "${STAGE_LIBRARIES}" )
+  MESSAGE(STAGEDIR "${STAGE_INCLUDE_DIRS}" )
 
-MESSAGE( ${INDENT} "Checking for OpenGL" )
-find_package( OpenGL REQUIRED )
-IF( NOT OPENGL_GLU_FOUND )
-  MESSAGE( FATAL_ERROR "OpenGL GLU not found, aborting" )
-ENDIF( NOT OPENGL_GLU_FOUND )
-MESSAGE( STATUS ${INDENT} "OpenGL GLU found at ${OPENGL_INCLUDE_DIR}" )
-MESSAGE( STATUS "    OPENGL_INCLUDE_DIR = ${OPENGL_INCLUDE_DIR}")
-MESSAGE( STATUS "    OPENGL_glu_LIBRARY = ${OPENGL_glu_LIBRARY}")
+  MESSAGE( ${INDENT} "Checking for OpenGL" )
 
-INCLUDE_DIRECTORIES( ${STAGE_INCLUDE_DIRS}
-                     ${GLIB_INCLUDE_DIRS}
-                     ../librapicore
-)
+  FIND_PACKAGE( OpenGL REQUIRED )
+  IF( NOT OPENGL_GLU_FOUND )
+    MESSAGE( FATAL_ERROR "OpenGL GLU not found, aborting" )
+  ENDIF( NOT OPENGL_GLU_FOUND )
+  MESSAGE( STATUS ${INDENT} "OpenGL GLU found at ${OPENGL_INCLUDE_DIR}" )
+  MESSAGE( STATUS "    OPENGL_INCLUDE_DIR = ${OPENGL_INCLUDE_DIR}")
+  MESSAGE( STATUS "    OPENGL_glu_LIBRARY = ${OPENGL_glu_LIBRARY}")
 
-LINK_DIRECTORIES( ${STAGE_LIBRARY_DIRS} )
+  INCLUDE_DIRECTORIES( ${STAGE_INCLUDE_DIRS}
+                       ${GLIB_INCLUDE_DIRS}
+                       ../librapicore
+  )
+
+  LINK_DIRECTORIES( ${STAGE_LIBRARY_DIRS} )
 
 
-SET( HEADERS
-  stagerobot.h
-  stagelaser.h
-  stagesonar.h
-  stagedrivetrain2dof.h
-  stageodometry.h
-  stagepowerpack.h
-  stagefiducialfinder.h
-  stagelights.h
-  stagetextdisplay.h
-  loosestagerobot.h
-  loosestagelaser.h
-  loosestagelights.h
-  loosestagedrivetrain2dof.h
-  loosestagepowerpack.h
-  loosestagefiducialfinder.h
-  loosestagetextdisplay.h
-  loosestagesonar.h
-  RapiStage
-  RapiLooseStage
-)
+  SET( HEADERS
+    stagerobot.h
+    stagelaser.h
+    stagesonar.h
+    stagedrivetrain2dof.h
+    stageodometry.h
+    stagepowerpack.h
+    stagefiducialfinder.h
+    stagelights.h
+    stagetextdisplay.h
+    loosestagerobot.h
+    loosestagelaser.h
+    loosestagelights.h
+    loosestagedrivetrain2dof.h
+    loosestagepowerpack.h
+    loosestagefiducialfinder.h
+    loosestagetextdisplay.h
+    loosestagesonar.h
+    RapiStage
+    RapiLooseStage
+  )
 
-SET( SOURCES
-  stagerobot.cpp
-  stagelaser.cpp
-  stagesonar.cpp
-  stagedrivetrain2dof.cpp
-  stageodometry.cpp
-  stagepowerpack.cpp
-  stagefiducialfinder.cpp
-  stagelights.cpp
-  stagetextdisplay.cpp
-  loosestagerobot.cpp
-  loosestagelaser.cpp
-  loosestagelights.cpp
-  loosestagedrivetrain2dof.cpp
-  loosestagepowerpack.cpp
-  loosestagefiducialfinder.cpp
-  loosestagetextdisplay.cpp
-  loosestagesonar.cpp
-)
+  SET( SOURCES
+    stagerobot.cpp
+    stagelaser.cpp
+    stagesonar.cpp
+    stagedrivetrain2dof.cpp
+    stageodometry.cpp
+    stagepowerpack.cpp
+    stagefiducialfinder.cpp
+    stagelights.cpp
+    stagetextdisplay.cpp
+    loosestagerobot.cpp
+    loosestagelaser.cpp
+    loosestagelights.cpp
+    loosestagedrivetrain2dof.cpp
+    loosestagepowerpack.cpp
+    loosestagefiducialfinder.cpp
+    loosestagetextdisplay.cpp
+    loosestagesonar.cpp
+  )
 
-# build a shared library
-ADD_LIBRARY( ${TARGET} SHARED ${SOURCES} )
+  # build a shared library
+  ADD_LIBRARY( ${TARGET} SHARED ${SOURCES} )
 
-# give the shared library a version number
-SET_TARGET_PROPERTIES( ${TARGET} PROPERTIES
-                        VERSION ${VERSION}
-)
+  # give the shared library a version number
+  SET_TARGET_PROPERTIES( ${TARGET} PROPERTIES
+                          VERSION ${VERSION}
+  )
+ELSEIF(STAGE_FOUND)
+  MESSAGE(STATUS "Stage was not found, rapi-stage will NOT be build")
+ENDIF(STAGE_FOUND)
+
+
 
 INSTALL(TARGETS ${TARGET}
   LIBRARY DESTINATION lib )
