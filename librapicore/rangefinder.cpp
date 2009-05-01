@@ -90,7 +90,7 @@ float ARangeFinder::localInverseRangeSensorModel ( float x, float y,
   // find the beam index
   // if the beam cone angle is 0, we know it is a laser, therefore
   // we calculate the index of beam that could hit the query point directly
-  if ( mBeamConeAngle == 0 ) {
+  if ( mBeamConeAngle == 0.0f ) {
     if ( phi < -mFov / 2.0 )
       k = 0;
     else if ( phi > mFov / 2.0 )
