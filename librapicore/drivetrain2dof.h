@@ -75,31 +75,64 @@ class ADrivetrain2dof : public ADevice
      */
     virtual void stop();
     /**
+     * Checks if robot is stopped or not
+     * @return true if stopped, false otherwise
+     */
+    virtual bool isStopped();
+    /**
      * Prints the devices main information
      */
     virtual void print();
     /**
-     * Checks if the robot got stuck somewhere
-     * @return true if stuck, false otherwise
+     * Checks if the robot got stuck somewhere and is thus stalled
+     * @return true if stalled, false otherwise
      */
-    virtual bool isStuck();
+    virtual bool isStalled();
     /**
      * Gets the odometry of this drivetrain
      * @return odometry
      */
     COdometry* getOdometry();
+    /**
+     * Gets the upper velocity limits
+     * @return limits
+     */
+    virtual CVelocity2d getUppererVelocityLimit() { return mUpperVelocityLimit; };
+    /**
+     * Gets the lower velocity limits
+     * @return limits
+     */
+    virtual CVelocity2d getLowerVelocityLimit() { return mLowerVelocityLimit; };
+    /**
+     * Sets the upper velocity limits
+     * @param limits
+     */
+    virtual void setUppererVelocityLimit(CVelocity2d limit);
+    /**
+     * Sets the lower velocity limits
+     * @param limits
+     */
+    virtual void setLowerVelocityLimit(CVelocity2d limit);
 
   protected:
     /** Default constructor
      * @param devName name of device
      */
     ADrivetrain2dof( std::string devName = NULL );
+    /**
+     * Limits mVelocityCmd to be within mLowerVelocityLimit and mUpperVelocityLimit
+     */
+    void applyVelocityLimits();
     /** Odometry */
     COdometry* mOdometry;
     /** Velocity command */
     CVelocity2d mVelocityCmd;
-    /** Flags if robot is stuck somewhere */
-    bool mFgStuck;
+    /** Upper velocity limit */
+    CVelocity2d mUpperVelocityLimit;
+    /** Lower velocity limit */
+    CVelocity2d mLowerVelocityLimit;
+    /** Flags if robot is stalled somewhere */
+    bool mFgStalled;
 };
 
 } // namespace

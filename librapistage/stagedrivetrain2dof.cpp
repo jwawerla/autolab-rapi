@@ -20,6 +20,7 @@
  **************************************************************************/
 #include "stagedrivetrain2dof.h"
 #include "stageodometry.h"
+#include "utilities.h"
 
 namespace Rapi
 {
@@ -45,6 +46,9 @@ CStageDrivetrain2dof::CStageDrivetrain2dof ( Stg::ModelPosition* stgModel,
                                     this );
   mOdometry = new CStageOdometry ( mStgPosition, devName + ":odometry" );
   assert ( mOdometry );
+
+  mUpperVelocityLimit = CVelocity2d( 1.0, 0.0,  D2R(60.0) );
+  mLowerVelocityLimit = CVelocity2d(-1.0, 0.0, -D2R(60.0) );
 
   setEnabled ( true );
 }
@@ -83,6 +87,7 @@ void CStageDrivetrain2dof::setSpeedCmd ( CVelocity2d velocity )
 {
   if ( mFgEnabled ) {
     mVelocityCmd = velocity;
+    applyVelocityLimits();
   } else {
     mVelocityCmd.setZero();
   }
@@ -98,7 +103,7 @@ void CStageDrivetrain2dof::updateData()
     ( ( CStageOdometry* ) mOdometry )->updateData();
 
     mTimeStamp = mStgPosition->GetWorld()->SimTimeNow() / 1e6;
-    mFgStuck = mStgPosition->Stalled();
+    mFgStalled = mStgPosition->Stalled();
     notifyDataUpdateObservers();
   }
 }

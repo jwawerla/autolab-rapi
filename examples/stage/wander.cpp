@@ -19,12 +19,23 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+#include "RapiLooseStage"
+#include "wanderctrl.h"
+
+using namespace Rapi;
+
+extern "C" int Init ( Stg::Model* mod )
+{
+  CLooseStageRobot* robot;
+  ARobotCtrl* robotCtrl;
+
+  // init general stuff
+  ErrorInit ( 4, false );
+  initRandomNumberGenerator();
+
+  // create robot and its controller
+  robot = new CLooseStageRobot ( mod );
+  robotCtrl = new CWanderCtrl ( robot );
+
+  return 0; // ok
+}

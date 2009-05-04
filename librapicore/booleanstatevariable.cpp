@@ -18,13 +18,55 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#include "booleanstatevariable.h"
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+namespace Rapi {
+
+//-----------------------------------------------------------------------------
+CBooleanStateVariable::CBooleanStateVariable()
+ : AStateVariable()
+{
+}
+//-----------------------------------------------------------------------------
+CBooleanStateVariable::~CBooleanStateVariable()
+{
+}
+//-----------------------------------------------------------------------------
+bool CBooleanStateVariable::operator= ( const bool b )
+{
+  if ( mValue != b) {
+    mModificationTimestamp = mUpdateTimestamp;
+    mFgModified = true;
+    mValue = b;
+  }
+
+  return mValue;
+}
+//-----------------------------------------------------------------------------
+void CBooleanStateVariable::update(float dt)
+{
+  if (mUpdateTimestamp - mModificationTimestamp > dt)
+    mFgModified = false;
+
+  mUpdateTimestamp += dt;
+}
+//-----------------------------------------------------------------------------
+bool CBooleanStateVariable::operator== ( const bool b )
+{
+  if ( mValue == b)
+    return true;
+
+  return false;
+}
+//-----------------------------------------------------------------------------
+bool CBooleanStateVariable::operator!= ( const bool b )
+{
+  if ( mValue != b)
+    return true;
+
+  return false;
+}
+//-----------------------------------------------------------------------------
+
+
+} // namespace

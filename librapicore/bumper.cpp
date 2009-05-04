@@ -18,13 +18,45 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#include "bumper.h"
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+namespace Rapi {
+
+//-----------------------------------------------------------------------------
+ABumper::ABumper(std::string devName)
+ : ADevice(devName)
+{
+  mBumper = NULL;
+  mBumperPose = NULL;
+  mFgAnyTriggered = false;
+}
+//-----------------------------------------------------------------------------
+ABumper::~ABumper()
+{
+  if (mBumper)
+    delete[] mBumper;
+
+  if (mBumperPose)
+    delete[] mBumperPose;
+}
+//-----------------------------------------------------------------------------
+bool ABumper::isAnyTriggered()
+{
+  return mFgAnyTriggered;
+}
+//-----------------------------------------------------------------------------
+void ABumper::print()
+{
+  printf("ABumper: ");
+
+  for (unsigned int i = 0; i < mNumSamples; i++) {
+    if (mBumper[i] )
+      printf("%d:on ", i);
+    else
+      printf("%d:off ", i);
+  }
+  printf("\n");
+
+}
+//-----------------------------------------------------------------------------
+} // namespace

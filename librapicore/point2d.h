@@ -43,6 +43,8 @@ class CPoint2d
     double mX;
     /** Y coordinate */
     double mY;
+    /** Overloaded = operator */
+    void operator= ( const CPoint2d point );
 };
 
 }  // name space

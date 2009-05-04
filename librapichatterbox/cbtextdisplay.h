@@ -24,9 +24,6 @@
 #include "textdisplay.h"
 #include "cbdriver.h"
 
-// Forward declaration for friendship
-class CCBRobot;
-
 namespace Rapi {
 
 /**

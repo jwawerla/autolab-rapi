@@ -19,12 +19,44 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+#ifndef RAPIBOOLEANSTATEVARIABLE_H
+#define RAPIBOOLEANSTATEVARIABLE_H
+
+#include "statevariable.h"
+
+namespace Rapi {
+
+/**
+ * A boolean state variable that keeps track of changes over time
+ * @author Jens Wawerla
+ */
+class CBooleanStateVariable : public AStateVariable
+{
+  public:
+    /**
+     * Default constructor
+     */
+    CBooleanStateVariable();
+    /** Default destructor */
+    virtual ~CBooleanStateVariable();
+    /** Overloaded = operator */
+    bool operator= ( const bool b );
+    /** Overloaded != operator */
+    bool operator== ( const bool b );
+    /** Overloaded != operator */
+    bool operator!= ( const bool b );
+    /**
+     * Called by the frame work to update the state variable
+     * @param dt time since last call [s]
+     */
+    virtual void update(float dt);
+
+  protected:
+    /** Actual variable */
+    bool mValue;
+
+};
+
+} // namespace
+
+#endif

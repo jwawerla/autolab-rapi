@@ -33,12 +33,12 @@ CCBDrivetrain2dof::CCBDrivetrain2dof ( CCBDriver* driver, std::string devName )
   mCBDriver = driver;
   mOIMode = CB_MODE_SAFE;
 
-  mFiltTurnRate = 0.0;
-  mFiltVelocity = 0.0;
-
   // maximal change in velocities
   mMaxTurnRateDelta = D2R ( 5 );
   mMaxVelocityDelta = 0.1;
+
+  mUpperVelocityLimit = CVelocity2d( 0.5, 0.0,  D2R(30.0) );
+  mLowerVelocityLimit = CVelocity2d(-0.5, 0.0, -D2R(30.0) );
 
   mOdometry = new CCBOdometry ( mCBDriver, devName+":Odometry" );
 }
@@ -69,28 +69,30 @@ void CCBDrivetrain2dof::setSpeedCmd ( CVelocity2d velocity )
 {
 
   if ( mFgEnabled == true ) {
-    if ( fabs ( velocity.mVX - mFiltVelocity ) < mMaxVelocityDelta ) {
-      mFiltVelocity = velocity.mVX;
+    if ( fabs ( velocity.mVX - mVelocityCmd.mVX ) < mMaxVelocityDelta ) {
+      mVelocityCmd.mVX = velocity.mVX;
     } else {
-      mFiltVelocity = mFiltVelocity + SIGN ( velocity.mVX - mFiltVelocity ) *
+      mVelocityCmd.mVX += SIGN ( velocity.mVX -  mVelocityCmd.mVX ) *
                       mMaxVelocityDelta;
     }
 
-    if ( fabs ( velocity.mYawDot - mFiltTurnRate ) < mMaxTurnRateDelta ) {
-      mFiltTurnRate = velocity.mYawDot;
+    if ( fabs ( velocity.mYawDot - mVelocityCmd.mYawDot ) < mMaxTurnRateDelta ) {
+      mVelocityCmd.mYawDot = velocity.mYawDot;
     } else {
-      mFiltTurnRate = mFiltTurnRate + SIGN ( velocity.mYawDot - mFiltTurnRate ) *
+      mVelocityCmd.mYawDot += SIGN ( velocity.mYawDot - mVelocityCmd.mYawDot ) *
                       mMaxTurnRateDelta;
     }
 
+    applyVelocityLimits();
+
     if ( mCBDriver->mCreateSensorPackage.oiMode != mOIMode )
       mCBDriver->setOIMode ( mOIMode );
-    if ( mCBDriver->setSpeed ( CVelocity2d ( mFiltVelocity,0, mFiltTurnRate ) ) == 0 ) {
-      ERROR2 ( "Failed to set speed command v=%f w=%f", velocity.mVX,
-               velocity.mYawDot );
+    if ( mCBDriver->setSpeed ( mVelocityCmd ) == 0 ) {
+      ERROR2 ( "Failed to set speed command v=%f w=%f", mVelocityCmd.mVX,
+               mVelocityCmd.mYawDot );
     }
   } else {
-    if ( mCBDriver->setSpeed ( CVelocity2d ( 0.0,0.0,0.0 ) ) == 0 ) {
+    if ( mCBDriver->setSpeed ( CVelocity2d ( 0.0, 0.0, 0.0 ) ) == 0 ) {
       ERROR0 ( "Failed to set speed command v=0 w=0" );
     }
   }
@@ -129,9 +131,9 @@ void CCBDrivetrain2dof::updateData()
       noProgressCount = 0;
 
     if ( noProgressCount > 50 )
-      mFgStuck = true;
+      mFgStalled = true;
     else
-      mFgStuck = false;
+      mFgStalled = false;
 
     lastPose = pose;
   }

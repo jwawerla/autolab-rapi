@@ -18,13 +18,43 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#ifndef WANDERCTRL_H
+#define WANDERCTRL_H
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+#include "RapiLooseStage"
+
+using namespace Rapi;
+/**
+ * Example robot controller, based on the wander example from Stage
+ * @author Jens Wawerla
+ */
+class CWanderCtrl : public ARobotCtrl
+{
+  public:
+    /**
+     * Default constructor
+     * @param robot to control
+     */
+    CWanderCtrl(ARobot* robot);
+    /** Default destructor */
+    ~CWanderCtrl();
+    /**
+     * Update controller for the current time step
+     * @param dt time since last upate [s]
+     */
+    void update(float dt);
+
+  protected:
+    /** Stage position model */
+    CLooseStageDrivetrain2dof* mDrivetrain;
+    /** Stage laser model */
+    CLooseStageLaser* mLaser;
+    /** Stage power pack */
+    CLooseStagePowerPack* mPowerPack;
+    /** Text display */
+    CLooseStageTextDisplay* mTextDisplay;
+    /** Count avoid time steps */
+    int mAvoidcount;
+};
+
+#endif

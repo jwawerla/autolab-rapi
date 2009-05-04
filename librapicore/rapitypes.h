@@ -33,7 +33,8 @@ typedef enum  {RAPI_RANGEFINDER,
                RAPI_POWERPACK,
                RAPI_FIDUCIALFINDER,
                RAPI_LIGHTS,
-               RAPI_TEXTDISPLAY
+               RAPI_TEXTDISPLAY,
+               RAPI_BUMPER
               } tRapiDeviceType;
 
 } // namespace

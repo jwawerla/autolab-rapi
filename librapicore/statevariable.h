@@ -19,12 +19,53 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+#ifndef RAPISTATEVARIABLE_H
+#define RAPISTATEVARIABLE_H
+
+#include "statevariableinterface.h"
+#include "robot.h"
+
+namespace Rapi
+{
+
+/**
+ * Abstract base class for state variables
+ * @author Jens Wawerla
+ */
+class AStateVariable : public IStateVariable
+{
+  public:
+    /** Default destructor */
+    virtual ~AStateVariable();
+    /**
+     * Checks if variable has changed since last time step
+     * @return true if changed, false other wise
+     */
+    bool hasChanged() { return mFgModified; };
+    /**
+     * Sets a robot for this variable to handle automatic time tracking
+     * @param robot this variable is used by
+     */
+    void setRobot ( ARobot* robot );
+    /**
+     * Gets the time of the last modification
+     * @return [s]
+     */
+    double getModificationTime() { return mModificationTimestamp; };
+
+  protected:
+    /**
+     * Default constructor
+     */
+    AStateVariable();
+    /** Time stamp of last update [s] */
+    double mUpdateTimestamp;
+    /** Time stamp of last modification [s] */
+    double mModificationTimestamp;
+    /** Flags if the value of the variable has been modified or not */
+    bool mFgModified;
+};
+
+}  // namespace
+
+#endif

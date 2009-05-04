@@ -18,13 +18,59 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#ifndef RAPICBBUMPER_H
+#define RAPICBBUMPER_H
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+#include "bumper.h"
+#include "cbdriver.h"
+
+namespace Rapi {
+
+/**
+ * This class provides a Chatterbox implementation of a bumper sensor
+ * @author Jens Wawerla
+ */
+class CCBBumper : public ABumper
+{
+    /** We are friends with our robot, so we get updated */
+    friend class CCBRobot;
+
+  public:
+    /**
+     * Default constructor
+     * @param cbDriver HAL of the chatterbox
+     * @param devName name of this device
+     */
+    CCBBumper(CCBDriver* cbDriver, std::string devName);
+    /** Default destructor */
+    virtual ~CCBBumper();
+    /**
+     * Get device type
+     * @return device type
+     */
+    tRapiDeviceType getDeviceType() { return RAPI_BUMPER; };
+    /**
+     * Enables or disables the device
+     * @param enable = true to enable, false to disable
+     */
+    virtual void setEnabled ( bool enable );
+    /**
+     * Initializes the device
+     * @param return 1 if success 0 otherwise
+     */
+    virtual int init();
+
+  protected:
+    /**
+     * This method gets called by the framework every step to update
+     * the sensor data
+     */
+    virtual void updateData();
+    /** HAL of the chatterbox */
+    CCBDriver* mCBDriver;
+
+};
+
+} // namespace
+
+#endif

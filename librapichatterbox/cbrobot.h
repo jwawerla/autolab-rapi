@@ -29,6 +29,7 @@
 #include "cblaser.h"
 #include "cbirsensor.h"
 #include "cblights.h"
+#include "cbbumper.h"
 #include "cbtextdisplay.h"
 #include "fiducialfinder.h"
 
@@ -79,6 +80,7 @@ class CCBRobot : public ARobot
     virtual int findDevice ( AFiducialFinder* &device, std::string devName );
     virtual int findDevice ( ALights* &device, std::string devName );
     virtual int findDevice ( ATextDisplay* &device, std::string devName );
+    virtual int findDevice ( ABumper* &device, std::string devName );
 
   protected:
     /**
@@ -101,6 +103,8 @@ class CCBRobot : public ARobot
     CCBLights* mCBLights;
     /** Text display */
     CCBTextDisplay* mCBTextDisplay;
+    /** Bumper */
+    CCBBumper* mCBBumper;
     /** Last time synchronize was called */
     double mLastSynchronizeTime;
 };

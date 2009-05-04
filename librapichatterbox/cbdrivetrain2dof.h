@@ -120,10 +120,6 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
     CCBDriver* mCBDriver;
     /** Default OI mode, to be used when ever a speed command is set */
     tOIMode mOIMode;
-    /** Filtered speed command [m/s] */
-    float mFiltVelocity;
-    /** Filtered turn rate command [rad/s] */
-    float mFiltTurnRate;
     /** Maximum by with the velocity can change in one cycle [m/s] */
     float mMaxVelocityDelta;
     /** Maximum by with the turn rate can change in one cycle [rad/s] */

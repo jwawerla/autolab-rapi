@@ -19,12 +19,28 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+#include "RapiChatterbox"
+#include "chatterboxctrl.h"
+
+using namespace Rapi;
+
+int main( int argc, char* argv[] )
+{
+  CCBRobot* robot;
+  CChatterboxCtrl* robotCtrl;
+
+  // init general stuff
+  ErrorInit ( 4, false );
+  initRandomNumberGenerator();
+
+  // create robot and its controller
+  robot = new CCBRobot ();
+  if ( robot->init() == 0)
+    rapiError->print();
+
+  robotCtrl = new CChatterboxCtrl ( robot );
+
+  // blocking call
+  robot->run();
+  return 1;
+}

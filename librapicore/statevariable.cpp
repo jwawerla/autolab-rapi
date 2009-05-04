@@ -18,13 +18,32 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#include "statevariable.h"
+#include <assert.h>
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+namespace Rapi {
+
+
+//-----------------------------------------------------------------------------
+AStateVariable::AStateVariable() : IStateVariable()
+{
+  mUpdateTimestamp = 0.0;
+  mModificationTimestamp = 0.0;
+  mFgModified = false;
+}
+//-----------------------------------------------------------------------------
+AStateVariable::~AStateVariable()
+{
+}
+//-----------------------------------------------------------------------------
+void AStateVariable::setRobot ( ARobot* robot )
+{
+  assert(robot);
+  robot->registerStateVariable( this );
+
+  mUpdateTimestamp = robot->getCurrentTime();
+  mModificationTimestamp = robot->getCurrentTime();
+}
+//-----------------------------------------------------------------------------
+
+} // namespace

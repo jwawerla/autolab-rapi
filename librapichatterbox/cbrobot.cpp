@@ -37,6 +37,7 @@ CCBRobot::CCBRobot()
   mCBIrSensor = NULL;
   mCBLights = NULL;
   mCBTextDisplay = NULL;
+  mCBBumper = NULL;
 
   mFgRunning = true;
 }
@@ -57,6 +58,9 @@ CCBRobot::~CCBRobot()
 
   if ( mCBTextDisplay )
     delete mCBTextDisplay;
+
+  if ( mCBBumper )
+    delete mCBBumper;
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::init()
@@ -99,6 +103,8 @@ void CCBRobot::run ()
       mCBIrSensor->updateData();
     if ( mCBTextDisplay )
       mCBTextDisplay->updateData();
+    if ( mCBBumper )
+      mCBBumper->updateData();
 
     // update all registered constrollers
     updateControllers();
@@ -111,7 +117,7 @@ void CCBRobot::run ()
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
 {
-  if ( ( devName != "CB:laser" ) ||
+  if ( ( devName != "CB:laser" ) &&
        ( devName != "CB:ir" ) ) {
     ERROR1 ( "No such device: %s", devName.c_str() );
     device = NULL;
@@ -232,6 +238,26 @@ int CCBRobot::findDevice ( ATextDisplay* &device, std::string devName )
 
   // return already existing device
   device = mCBTextDisplay;
+  return 1;
+}
+//-----------------------------------------------------------------------------
+int CCBRobot::findDevice ( ABumper* &device, std::string devName )
+{
+  if ( devName != "CB:bumper" ) {
+    ERROR1 ( "No such device: %s", devName.c_str() );
+    device = NULL;
+    return 0; // error
+  }
+
+  // check if device already exists
+  if ( mCBBumper == NULL ) {
+    mCBBumper = new CCBBumper ( &mCBDriver, "CB:textdisplay" );
+    device = mCBBumper;
+    return mCBBumper->init();
+  }
+
+  // return already existing device
+  device = mCBBumper;
   return 1;
 }
 //-----------------------------------------------------------------------------

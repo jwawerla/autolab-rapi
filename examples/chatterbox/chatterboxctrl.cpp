@@ -18,61 +18,71 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-
-#include "robot.h"
-#include <assert.h>
-namespace Rapi
-{
+#include "chatterboxctrl.h"
 
 //-----------------------------------------------------------------------------
-ARobot::ARobot()
+CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
+    : Rapi::ARobotCtrl ( robot )
 {
-  mName = "ARobot";
-  mUpdateInterval = 0.0;
-}
-//-----------------------------------------------------------------------------
-ARobot::~ARobot()
-{
-}
-//-----------------------------------------------------------------------------
-std::string ARobot::getName()
-{
-  return mName;
-}
-//-----------------------------------------------------------------------------
-void ARobot::registerRobotController(ARobotCtrlInterface* ctrl)
-{
-  mRobotCtrlList.push_back( ctrl );
-}
-//-----------------------------------------------------------------------------
-void ARobot::registerStateVariable( IStateVariable* var)
-{
-  mStateVariableList.push_back( var );
-}
-//-----------------------------------------------------------------------------
-void ARobot::updateControllers()
-{
-  ARobotCtrlInterface* ctrl;
-  std::list<ARobotCtrlInterface*>::iterator it;
 
-  for (it = mRobotCtrlList.begin(); it != mRobotCtrlList.end(); it++) {
-    ctrl = (ARobotCtrlInterface*)*it;
-    assert(ctrl);
-    ctrl->update( mUpdateInterval );
+  mRobot->findDevice ( mPowerPack, "CB:powerpack" );
+  mRobot->findDevice ( mDrivetrain, "CB:drivetrain" );
+  mRobot->findDevice ( mIr, "CB:ir" );
+  mRobot->findDevice ( mTextDisplay, "CB:textdisplay" );
+  mRobot->findDevice ( mBumper, "CB:bumper");
+
+  if ( rapiError->hasError() ) {
+    rapiError->print();
+    exit(-1);
   }
 }
 //-----------------------------------------------------------------------------
-void ARobot::updateStateVariable()
+CChatterboxCtrl::~CChatterboxCtrl()
 {
-  IStateVariable* var;
-  std::list<IStateVariable*>::iterator it;
-
-  for (it = mStateVariableList.begin(); it != mStateVariableList.end(); it++) {
-    var = (IStateVariable*)*it;
-    assert(var);
-    var->update( mUpdateInterval );
-  }
 }
 //-----------------------------------------------------------------------------
-} // namespace
+void CChatterboxCtrl::update ( float dt )
+{
+  obstacleAvoid();
+}
+//-----------------------------------------------------------------------------
+void CChatterboxCtrl::obstacleAvoid()
+{
+  float diff;
+  float turnRate = 0.0;
+  float velocity = 0.0;
+  static float diffFilt = 0.0;
 
+  //********************************************************
+  // Obstacle avoidance
+  if ( (mIr->mRangeData[1].range < 0.8) ||
+       (mIr->mRangeData[5].range < 0.8) ) {
+    diff = mIr->mRangeData[1].range - mIr->mRangeData[5].range;
+  }
+  else {
+    diff = 0;
+  }
+  diffFilt = diffFilt + 0.7 * (diff - diffFilt);
+
+
+  if (mBumper->isAnyTriggered() ) {
+
+    velocity = 0;
+    if (mBumper->mBumper[1] )
+      turnRate = D2R(-10.0);
+    if (mBumper->mBumper[0] )
+      turnRate = D2R(10.0);
+  }
+  else if (mIr->mRangeData[0].range < 0.4) {
+    velocity = 0.0;
+    turnRate = D2R(10.0);
+
+  }
+  else {
+    turnRate = LIMIT( diffFilt, D2R(-30.0), D2R(30.0));
+    velocity = (1.0 -fabs(turnRate) / D2R(30.0) ) * 0.3;
+    //printf("speed %f turnrate %f \n", velocity, turnRate);
+  }
+  mDrivetrain->setSpeedCmd(velocity, turnRate);
+}
+//-----------------------------------------------------------------------------

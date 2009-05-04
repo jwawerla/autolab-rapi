@@ -28,9 +28,6 @@
 namespace Rapi
 {
 
-// Forward declaration for friendship
-class CCBRobot;
-
 /** Typedefinition for charger sources the Create can use */
 typedef enum {NO_CHARGER = 0, INTEGRAL_CHARGER, HOMEBASE } tChargeSource;
 
@@ -90,8 +87,6 @@ class CCBPowerPack : public APowerPack
      * the sensor data
      */
     virtual void updateData();
-
-  private:
     /** HAL of the chatterbox */
     CCBDriver* mCBDriver;
 

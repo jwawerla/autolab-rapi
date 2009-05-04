@@ -28,6 +28,7 @@
 #include "velocity2d.h"
 #include "utilities.h"
 #include "drivetrain2dof.h"
+#include "bumper.h"
 #include "dataupdateobserver.h"
 #include "powerpack.h"
 #include "localizer2d.h"
@@ -38,3 +39,4 @@
 #include "robotctrl.h"
 #include "waypoint2d.h"
 #include "rgbcolor.h"
+#include "booleanstatevariable.h"

@@ -18,13 +18,55 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
 #include "cbbumper.h"
+
+namespace Rapi {
+
+//-----------------------------------------------------------------------------
+CCBBumper::CCBBumper(CCBDriver* cbDriver, std::string devName)
+ : ABumper(devName)
+{
+  mCBDriver = cbDriver;
+
+  mNumSamples = 2;
+  mBumper = new bool[mNumSamples];
+  mBumperPose = new CPose2d[mNumSamples];
+
+  mFgEnabled = false;
+
+  setEnabled(true);
+}
+//-----------------------------------------------------------------------------
+CCBBumper::~CCBBumper()
+{
+  if (mBumper)
+    delete[] mBumper;
+}
+//-----------------------------------------------------------------------------
+void CCBBumper::setEnabled ( bool enable )
+{
+  mFgEnabled = enable;
+}
+//-----------------------------------------------------------------------------
+int CCBBumper::init()
+{
+  return 1; // success
+}
+//-----------------------------------------------------------------------------
+void CCBBumper::updateData()
+{
+  mFgAnyTriggered = false;
+
+  if ( mFgEnabled == true ) {
+     mBumper[0] = mCBDriver->rightBumper();
+     if (mBumper[0])
+       mFgAnyTriggered = true;
+
+     mBumper[1] = mCBDriver->leftBumper();
+     if (mBumper[1])
+       mFgAnyTriggered = true;
+  }
+}
+//-----------------------------------------------------------------------------
+
+} // namespace

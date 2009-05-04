@@ -41,5 +41,10 @@ void CPoint2d::print()
   printf("CPoint2d: x %f y %f \n", mX, mY);
 }
 //-----------------------------------------------------------------------------
-
+void CPoint2d::operator= ( const CPoint2d point )
+{
+  mX = point.mX;
+  mY = point.mY;
+}
+//-----------------------------------------------------------------------------
 } // namespace

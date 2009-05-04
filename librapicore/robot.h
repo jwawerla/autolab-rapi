@@ -23,12 +23,14 @@
 #define RAPIROBOT_H
 
 #include "robotctrlinterface.h"
+#include "statevariableinterface.h"
 #include "rangefinder.h"
 #include "drivetrain2dof.h"
 #include "powerpack.h"
 #include "fiducialfinder.h"
 #include "lights.h"
 #include "textdisplay.h"
+#include "bumper.h"
 #include <list>
 #include <string>
 
@@ -59,6 +61,11 @@ class ARobot
      */
     void registerRobotController ( ARobotCtrlInterface* ctrl );
     /**
+     * Registers a state variable with the robot
+     * @param var to register
+     */
+    void registerStateVariable( IStateVariable* var);
+    /**
      * Gets the name of the robot
      * @return robot name
      */
@@ -81,6 +88,7 @@ class ARobot
     virtual int findDevice ( AFiducialFinder* &device, std::string devName ) = 0;
     virtual int findDevice ( ALights* &device, std::string devName ) = 0;
     virtual int findDevice ( ATextDisplay* &device, std::string devName ) = 0;
+    virtual int findDevice ( ABumper* &device, std::string devName ) = 0;
 
   protected:
     /** Default constructor */
@@ -89,8 +97,14 @@ class ARobot
      * Calls the update method in all registered robot controllers
      */
     void updateControllers();
+    /**
+     * Calls the update method in all registered state variables controllers
+     */
+    void updateStateVariable();
     /** Robot controller list */
     std::list<ARobotCtrlInterface*> mRobotCtrlList;
+    /** State variable list */
+    std::list<IStateVariable*> mStateVariableList;
     /** Update interval [s] */
     double mUpdateInterval;
     /** Name of robot */

@@ -60,36 +60,36 @@ namespace Rapi
   #define TWOPI 6.28318530717958
 #endif
 
-/** Converts from joules to watt hours */
-#ifndef JOULE_TO_WATTHOURS
-  #define JOULE_TO_WATTHOURS(x) x / 3600.0f
-#endif
+
+/**
+ * Calculates euclidian distance
+ * @return distance
+ */
+inline double EUCLIDIAN(double x, double y, double a, double b) {
+  return sqrt( (x-a)*(x-a) + (y-b)*(y-b));
+}
 
 /**
  * Conversts x from radians to degree
  * @param x value [rad]
  * @return [deg]
  */
-#ifndef R2D
-  #define R2D(x) x*57.2957795
-#endif
-
-/**
- * Calculates euclidian distance
- * @return distance
- */
-#ifndef EUCLIDIAN
-  #define EUCLIDIAN(x, y, a, b) sqrt( (x-a)*(x-a) + (y-b)*(y-b))
-#endif
+template<typename T>
+inline T R2D(T x)
+{
+  return x*57.2957795;
+}
 
 /**
  * Conversts x from degree to radians
  * @param x value [deg]
  * @return [rad]
  */
-#ifndef D2R
-  #define D2R(x) x*0.01745329
-#endif
+template<typename T>
+inline T D2R(T x)
+{
+ return x*0.01745329;
+}
 
 /**
  * Maximum value of a and b
@@ -116,9 +116,11 @@ namespace Rapi
  * @param z to be normalized
  * @return normalized value
  */
-#ifndef NORMALIZE_ANGLE
-  #define NORMALIZE_ANGLE(z) atan2(sin(z), cos(z))
-#endif
+template<typename T>
+inline T NORMALIZE_ANGLE(T z)
+{
+  return atan2(sin(z), cos(z));
+}
 
 /**
  * Limits the value x to be in the interval [a, b]
@@ -132,8 +134,13 @@ namespace Rapi
 
 /**
  * Rounds a number
+ * @return rounded number
  */
-#define ROUND(x) floor(x+0.5)
+template<typename T>
+inline T ROUND(T x)
+{
+  return floor(x+0.5);
+}
 
 /**
  * Checks if a x is infinity or not

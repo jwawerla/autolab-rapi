@@ -28,7 +28,7 @@ namespace Rapi
 ADrivetrain2dof::ADrivetrain2dof ( std::string devName )
     : ADevice ( devName )
 {
-  mFgStuck = false;
+  mFgStalled = false;
 }
 //-----------------------------------------------------------------------------
 ADrivetrain2dof::~ADrivetrain2dof()
@@ -37,17 +37,44 @@ ADrivetrain2dof::~ADrivetrain2dof()
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::stop()
 {
-  setSpeedCmd( CVelocity2d(0.0, 0.0 ) );
+  setSpeedCmd ( CVelocity2d ( 0.0, 0.0 ) );
 }
 //-----------------------------------------------------------------------------
-void ADrivetrain2dof::setRotationalSpeedCmd( float turnrate )
+void ADrivetrain2dof::setRotationalSpeedCmd ( float turnrate )
 {
-  setSpeedCmd( CVelocity2d( mVelocityCmd.mVX, turnrate) );
+  setSpeedCmd ( CVelocity2d ( mVelocityCmd.mVX, 0.0, turnrate ) );
 }
 //-----------------------------------------------------------------------------
-void ADrivetrain2dof::setTranslationalSpeedCmd( float velocity )
+void ADrivetrain2dof::setTranslationalSpeedCmd ( float velocity )
 {
-  setSpeedCmd( CVelocity2d( velocity, mVelocityCmd.mYawDot ) );
+  setSpeedCmd ( CVelocity2d ( velocity, 0.0,  mVelocityCmd.mYawDot ) );
+}
+//-----------------------------------------------------------------------------
+void ADrivetrain2dof::setUppererVelocityLimit ( CVelocity2d limit )
+{
+  mUpperVelocityLimit = limit;
+}
+//-----------------------------------------------------------------------------
+void ADrivetrain2dof::setLowerVelocityLimit ( CVelocity2d limit )
+{
+  mLowerVelocityLimit = limit;
+}
+//-----------------------------------------------------------------------------
+void ADrivetrain2dof::applyVelocityLimits()
+{
+  if ( mVelocityCmd.mVX <  mLowerVelocityLimit.mVX )
+    mVelocityCmd.mVX =  mLowerVelocityLimit.mVX;
+  if ( mVelocityCmd.mVY <  mLowerVelocityLimit.mVY )
+    mVelocityCmd.mVY =  mLowerVelocityLimit.mVY;
+  if ( mVelocityCmd.mYawDot <  mLowerVelocityLimit.mYawDot )
+    mVelocityCmd.mYawDot =  mLowerVelocityLimit.mYawDot;
+
+  if ( mVelocityCmd.mVX >  mUpperVelocityLimit.mVX )
+    mVelocityCmd.mVX =  mUpperVelocityLimit.mVX;
+  if ( mVelocityCmd.mVY >  mUpperVelocityLimit.mVY )
+    mVelocityCmd.mVY =  mUpperVelocityLimit.mVY;
+  if ( mVelocityCmd.mYawDot > mUpperVelocityLimit.mYawDot )
+    mVelocityCmd.mYawDot =  mUpperVelocityLimit.mYawDot;
 }
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::print()
@@ -57,9 +84,18 @@ void ADrivetrain2dof::print()
   mOdometry->print();
 }
 //-----------------------------------------------------------------------------
-bool ADrivetrain2dof::isStuck()
+bool ADrivetrain2dof::isStopped()
 {
-  return mFgStuck;
+  if ( ( mVelocityCmd.mVX == 0.0 ) &&
+       ( mVelocityCmd.mYawDot == 0.0 ) )
+    return true; // stopped
+
+  return false;
+}
+//-----------------------------------------------------------------------------
+bool ADrivetrain2dof::isStalled()
+{
+  return mFgStalled;
 }
 //-----------------------------------------------------------------------------
 CVelocity2d ADrivetrain2dof::getVelocityCmd()

@@ -13,6 +13,7 @@ SET( HEADERS
   fiducialfinder.h
   lights.h
   textdisplay.h
+  bumper.h
   pose2d.h
   pose3d.h
   point2d.h
@@ -27,6 +28,9 @@ SET( HEADERS
   conversions.h
   waypoint2d.h
   rgbcolor.h
+  statevariableinterface.h
+  statevariable.h
+  booleanstatevariable.h
 )
 
 SET( SOURCES
@@ -40,6 +44,7 @@ SET( SOURCES
   fiducialfinder.cpp
   lights.cpp
   textdisplay.cpp
+  bumper.cpp
   pose2d.cpp
   pose3d.cpp
   point2d.cpp
@@ -50,6 +55,8 @@ SET( SOURCES
   robotctrl.cpp
   waypoint2d.cpp
   rgbcolor.cpp
+  statevariable.cpp
+  booleanstatevariable.cpp
 )
 
 # build a shared library

@@ -19,12 +19,32 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+#ifndef RAPISTATEVARIABLEINTERFACE_H
+#define RAPISTATEVARIABLEINTERFACE_H
+
+namespace Rapi {
+
+/**
+ * Interface class for state variables
+ * @author Jens Wawerla
+ */
+class IStateVariable
+{
+  public:
+
+    /** Default destructor */
+    virtual ~IStateVariable() {};
+    /**
+     * Called by the frame work to update the state variable
+     * @param dt time since last call [s]
+     */
+    virtual void update(float dt) = 0;
+
+  protected:
+    /** Default constructor */
+    IStateVariable() {};
+};
+
+}  // namespace
+
+#endif

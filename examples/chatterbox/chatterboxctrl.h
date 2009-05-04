@@ -18,13 +18,46 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#ifndef CHATTERBOXCTRL_H
+#define CHATTERBOXCTRL_H
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+#include <RapiChatterbox>
+
+using namespace Rapi;
+
+/**
+ * An example controller for chatterbox
+ * @author Jens Wawerla
+ */
+class CChatterboxCtrl : public ARobotCtrl
+{
+  public:
+    /**
+     * Default constructor
+     * @param robot this controller controls
+     */
+    CChatterboxCtrl ( ARobot* robot );
+    /** Default destructor */
+    ~CChatterboxCtrl();
+    /**
+     * Update controller for the current time step
+     * @param dt time since last upate [s]
+     */
+    void update(float dt);
+
+  protected:
+    /** Obstacle avoidance routine */
+    void obstacleAvoid();
+    /** Drivetrain */
+    ADrivetrain2dof* mDrivetrain;
+    /** Infrared sesnors */
+    ARangeFinder* mIr;
+    /** Power pack */
+    APowerPack* mPowerPack;
+    /** Text display */
+    ATextDisplay* mTextDisplay;
+    /** Bumper */
+    ABumper* mBumper;
+};
+
+#endif

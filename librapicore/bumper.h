@@ -19,12 +19,55 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
+#ifndef RAPIBUMPER_H
+#define RAPIBUMPER_H
+
+#include "device.h"
+#include "pose2d.h"
+
+namespace Rapi
+{
+
+/**
+ * Abstract base class for bumber sensor
+ * @author Jens Wawerla
+ */
+class ABumper : public ADevice
+{
+  public:
+    /** Default destructor */
+    ~ABumper();
+    /**
+     * Gets the number of bumper samples
+     * @return number of samples
+     */
+    unsigned int getNumSamples();
+    /** Bumper data */
+    bool* mBumper;
+    /** Pose information for each bumper */
+    CPose2d* mBumperPose;
+    /**
+     * Prints the devices main information
+     */
+    virtual void print();
+    /**
+     * Checks if any bumper was triggered
+     * @return true if one bumper was triggered, false otherwise
+     */
+    virtual bool isAnyTriggered();
+
+  protected:
+    /**
+     * Default constructor
+     * @param devName name of device
+     */
+    ABumper ( std::string devName );
+    /** Number of bumper samples */
+    unsigned int mNumSamples;
+    /** Flags if any bumber was triggered */
+    bool mFgAnyTriggered;
+};
+
+} // namespace
+
+#endif
