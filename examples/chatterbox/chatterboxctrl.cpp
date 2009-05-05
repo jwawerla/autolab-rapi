@@ -43,7 +43,14 @@ CChatterboxCtrl::~CChatterboxCtrl()
 //-----------------------------------------------------------------------------
 void CChatterboxCtrl::update ( float dt )
 {
+  static char c[1];
+
+  c[0] ++;
+
+  mDrivetrain->setSpeedCmd(0.3, 0.0);
   obstacleAvoid();
+
+  mTextDisplay->setText(c);
 }
 //-----------------------------------------------------------------------------
 void CChatterboxCtrl::obstacleAvoid()

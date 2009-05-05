@@ -85,6 +85,8 @@ CCBDriver::~CCBDriver()
 //-----------------------------------------------------------------------------
 int CCBDriver::init()
 {
+  PRT_MSG0(3, "Initializing IRobot Create...");
+
   // lets reset robotstix, just in case
   if ( resetRobotStix() == 0 ) {
     ERROR0 ( "Failed to reset robotstix" );
@@ -117,6 +119,8 @@ int CCBDriver::openPort ( const char* port )
 
   struct termios term;
   int flags;
+
+  PRT_MSG0(3,"Opening port...");
 
   if ( ( mFd = open ( port, O_RDWR | O_NONBLOCK, S_IRUSR | S_IWUSR ) ) < 0 ) {
     ERROR2 ( "Failed to open port %s: ", port, strerror ( errno ) );
@@ -260,20 +264,20 @@ int CCBDriver::setOIMode ( tOIMode mode )
   switch ( mode ) {
     case CB_MODE_OFF:
       PRT_WARN0 ( "This mode is currently not implemented, switching to passive" );
-      PRT_MSG0 ( 3, "Mode changed to OFF" );
+      PRT_MSG0 ( 7, "Mode changed to OFF" );
       cmdbuf[0] = CREATE_OPCODE_START;
       break;
     case CB_MODE_PASSIVE:
       cmdbuf[0] = CREATE_OPCODE_START;  // this also puts us into passive
-      PRT_MSG0 ( 3, "Mode changed to PASSIVE" );
+      PRT_MSG0 ( 7, "Mode changed to PASSIVE" );
       break;
     case CB_MODE_SAFE:
       cmdbuf[0] = CREATE_OPCODE_SAFE;
-      PRT_MSG0 ( 3, "Mode changed to SAFE" );
+      PRT_MSG0 ( 7, "Mode changed to SAFE" );
       break;
     case CB_MODE_FULL:
       cmdbuf[0] = CREATE_OPCODE_FULL;
-      PRT_MSG0 ( 3, "Mode changed to FULL" );
+      PRT_MSG0 ( 7, "Mode changed to FULL" );
       break;
 
   } // switch
@@ -506,7 +510,8 @@ int CCBDriver::resetCreate()
     ERROR1 ( "Failed to reset create: %s", strerror ( errno ) );
     return 0;
   }
-  PRT_MSG0 ( 1, "Reset command send, now we wait for 10 sec, and hope for the best" );
+  PRT_MSG0 ( 7, "Reset command send, now we wait for 10 sec, and "\
+                "hope for the best" );
   sleep ( 10 );
   return 1;
 }
@@ -681,12 +686,12 @@ int CCBDriver::defineSoundSequence ( unsigned char id, unsigned char* sequence,
 int CCBDriver::createPowerEnable ( bool on )
 {
   if ( ( on == true ) && ( isCreatePowerEnabled() == false ) ) {
-    PRT_MSG0 ( 1,"Toggleing power ON" );
+    PRT_MSG0 ( 7, "Toggleing power ON" );
     return createPowerToggle();
   }
 
   if ( ( on == false ) && ( isCreatePowerEnabled() == true ) ) {
-    PRT_MSG0 ( 1,"Toggleing power OFF" );
+    PRT_MSG0 ( 7,"Toggleing power OFF" );
     return createPowerToggle();
   }
 
@@ -755,7 +760,7 @@ int CCBDriver::createPowerToggle()
     return 0;
   }
 
-  PRT_MSG0 ( 6, "Power pin toggled" );
+  PRT_MSG0 ( 7, "Power pin toggled" );
   return 1; // success
 }
 //-----------------------------------------------------------------------------
@@ -793,7 +798,7 @@ int CCBDriver::initI2c()
 {
   I2C_IO_Info_t   info;
 
-  PRT_MSG0 ( 3,"Initializing I2C stuff" );
+  PRT_MSG0 ( 7,"Initializing I2C stuff" );
   // open I2C device
   if ( ( mI2cDev = open ( I2C_DEV_NAME, O_RDWR ) ) < 0 ) {
     ERROR2 ( "Failed to open port %s: %s", I2C_DEV_NAME, strerror ( errno ) );
@@ -1066,14 +1071,14 @@ int CCBDriver::enableIr ( bool enable )
   I2cSetSlaveAddress ( mI2cDev, ROBOSTIX_ADDR, I2C_USE_CRC );
 
   if ( enable == true ) {
-    PRT_MSG0 ( 5, "Enableing IR sensor" );
+    PRT_MSG0 ( 7, "Enableing IR sensor" );
     // (PC2 = port 2 pinmask 4, pinvalue 4)
     if ( I2C_IO_SetGPIO ( mI2cDev, 2, 4, 4 ) == 0 ) {
       ERROR0 ( "Failed to enable IR" );
       return 0;
     }
   } else {
-    PRT_MSG0 ( 5, "Disableing IR sensor" );
+    PRT_MSG0 ( 7, "Disableing IR sensor" );
     // (PC2 = port 2 pinmask 4)
     if ( I2C_IO_SetGPIO ( mI2cDev, 2, 4, 0 ) == 0 ) {
       ERROR0 ( "Failed to disable IR" );

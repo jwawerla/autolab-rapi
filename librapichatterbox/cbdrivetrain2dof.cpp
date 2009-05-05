@@ -37,10 +37,12 @@ CCBDrivetrain2dof::CCBDrivetrain2dof ( CCBDriver* driver, std::string devName )
   mMaxTurnRateDelta = D2R ( 5 );
   mMaxVelocityDelta = 0.1;
 
-  mUpperVelocityLimit = CVelocity2d( 0.5, 0.0,  D2R(30.0) );
-  mLowerVelocityLimit = CVelocity2d(-0.5, 0.0, -D2R(30.0) );
+  mUpperVelocityLimit = CVelocity2d ( 0.5, 0.0,  D2R ( 30.0 ) );
+  mLowerVelocityLimit = CVelocity2d ( -0.5, 0.0, -D2R ( 30.0 ) );
 
   mOdometry = new CCBOdometry ( mCBDriver, devName+":Odometry" );
+
+  setEnabled( true );
 }
 //-----------------------------------------------------------------------------
 CCBDrivetrain2dof::~CCBDrivetrain2dof()
@@ -62,41 +64,12 @@ void CCBDrivetrain2dof::setEnabled ( bool enable )
 void CCBDrivetrain2dof::setSpeedCmd ( const float velocity,
                                       const float turnrate )
 {
-  setSpeedCmd ( CVelocity2d ( velocity, 0.0, turnrate ) );
+  mVelocityCmd = CVelocity2d ( velocity, 0.0, turnrate );
 }
 //-----------------------------------------------------------------------------
 void CCBDrivetrain2dof::setSpeedCmd ( CVelocity2d velocity )
 {
-
-  if ( mFgEnabled == true ) {
-    if ( fabs ( velocity.mVX - mVelocityCmd.mVX ) < mMaxVelocityDelta ) {
-      mVelocityCmd.mVX = velocity.mVX;
-    } else {
-      mVelocityCmd.mVX += SIGN ( velocity.mVX -  mVelocityCmd.mVX ) *
-                      mMaxVelocityDelta;
-    }
-
-    if ( fabs ( velocity.mYawDot - mVelocityCmd.mYawDot ) < mMaxTurnRateDelta ) {
-      mVelocityCmd.mYawDot = velocity.mYawDot;
-    } else {
-      mVelocityCmd.mYawDot += SIGN ( velocity.mYawDot - mVelocityCmd.mYawDot ) *
-                      mMaxTurnRateDelta;
-    }
-
-    applyVelocityLimits();
-
-    if ( mCBDriver->mCreateSensorPackage.oiMode != mOIMode )
-      mCBDriver->setOIMode ( mOIMode );
-    if ( mCBDriver->setSpeed ( mVelocityCmd ) == 0 ) {
-      ERROR2 ( "Failed to set speed command v=%f w=%f", mVelocityCmd.mVX,
-               mVelocityCmd.mYawDot );
-    }
-  } else {
-    if ( mCBDriver->setSpeed ( CVelocity2d ( 0.0, 0.0, 0.0 ) ) == 0 ) {
-      ERROR0 ( "Failed to set speed command v=0 w=0" );
-    }
-  }
-
+  mVelocityCmd = velocity;
 }
 //-----------------------------------------------------------------------------
 void CCBDrivetrain2dof::updateData()
@@ -107,37 +80,62 @@ void CCBDrivetrain2dof::updateData()
   static int noProgressCount = 0;
 
 
-  // read current velocities from chatterbox
-  mVelocityCmd.mVX = ( float ) ( mCBDriver->mCreateSensorPackage.velocity ) /1000.0;
+  if ( mFgEnabled == true ) {
 
-  if ( mCBDriver->mCreateSensorPackage.radius >= 0x7FFF )  // 0x7FFF or 0x8000
-    mVelocityCmd.mYawDot = 0;
-  else if ( mCBDriver->mCreateSensorPackage.radius == 0xFFFF )
-    mVelocityCmd.mYawDot = D2R ( -40 );  // TODO: find real maximum turnrate
-  else if ( mCBDriver->mCreateSensorPackage.radius == 0x0001 )
-    mVelocityCmd.mYawDot = D2R ( 40 );   // TODO: find real maximum turnrate
-  else if ( mCBDriver->mCreateSensorPackage.radius != 0 )
-    mVelocityCmd.mYawDot = mCBDriver->mCreateSensorPackage.velocity /
-                           mCBDriver->mCreateSensorPackage.radius;
+    // read current velocities from chatterbox
+    mVelocityMeas.mVX = ( double ) ( mCBDriver->mCreateSensorPackage.velocity ) /1000.0;
+    mVelocityMeas.mVY = 0.0;
+    if ( mCBDriver->mCreateSensorPackage.radius >= 0x7FFF )  // 0x7FFF or 0x8000
+      mVelocityMeas.mYawDot = 0;
+    else if ( mCBDriver->mCreateSensorPackage.radius == 0xFFFF )
+      mVelocityMeas.mYawDot = D2R ( -40.0 );  // TODO: find real maximum turnrate
+    else if ( mCBDriver->mCreateSensorPackage.radius == 0x0001 )
+      mVelocityMeas.mYawDot = D2R ( 40.0 );   // TODO: find real maximum turnrate
+    else if ( mCBDriver->mCreateSensorPackage.radius != 0 )
+      mVelocityMeas.mYawDot = mCBDriver->mCreateSensorPackage.velocity /
+                              mCBDriver->mCreateSensorPackage.radius;
 
-  // check if we are stuck
-  pose = mOdometry->getPose();
+    // limit acceleration
+    if ( fabs ( mVelocityMeas.mVX - mVelocityCmd.mVX ) > mMaxVelocityDelta ) {
+      mVelocityCmd.mVX += SIGN ( mVelocityCmd.mVX - mVelocityMeas.mVX ) *
+                          mMaxVelocityDelta;
+    }
 
-  if ( count > 10 ) {
-    count = 0;
-    if ( fabs ( pose.distance ( lastPose ) ) < 0.01 )
-      noProgressCount++;
-    else
-      noProgressCount = 0;
+    if ( fabs ( mVelocityMeas.mYawDot - mVelocityCmd.mYawDot ) > mMaxTurnRateDelta ) {
+      mVelocityCmd.mYawDot += SIGN ( mVelocityCmd.mYawDot - mVelocityMeas.mYawDot ) *
+                              mMaxTurnRateDelta;
+    }
 
-    if ( noProgressCount > 50 )
-      mFgStalled = true;
-    else
-      mFgStalled = false;
+    // limit speeds
+    applyVelocityLimits();
 
-    lastPose = pose;
-  }
-  count ++;
+    // set speeds
+    if ( mCBDriver->mCreateSensorPackage.oiMode != mOIMode )
+      mCBDriver->setOIMode ( mOIMode );
+    if ( mCBDriver->setSpeed ( mVelocityCmd ) == 0 ) {
+      ERROR2 ( "Failed to set speed command v=%f w=%f", mVelocityCmd.mVX,
+               mVelocityCmd.mYawDot );
+    }
+
+    // check if we are stuck
+    pose = mOdometry->getPose();
+
+    if ( count > 10 ) {
+      count = 0;
+      if ( fabs ( pose.distance ( lastPose ) ) < 0.01 )
+        noProgressCount++;
+      else
+        noProgressCount = 0;
+
+      if ( noProgressCount > 50 )
+        mFgStalled = true;
+      else
+        mFgStalled = false;
+
+      lastPose = pose;
+    }
+    count ++;
+  } // enabled
 }
 //-----------------------------------------------------------------------------
 void CCBDrivetrain2dof::print()

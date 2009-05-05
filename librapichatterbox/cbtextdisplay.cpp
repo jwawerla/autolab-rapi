@@ -30,6 +30,7 @@ CCBTextDisplay::CCBTextDisplay ( CCBDriver* driver, std::string devName )
     : ATextDisplay ( devName )
 {
   mCBDriver = driver;
+  setEnabled( true );
 }
 //-----------------------------------------------------------------------------
 CCBTextDisplay::~CCBTextDisplay()

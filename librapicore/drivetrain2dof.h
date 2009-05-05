@@ -127,6 +127,8 @@ class ADrivetrain2dof : public ADevice
     COdometry* mOdometry;
     /** Velocity command */
     CVelocity2d mVelocityCmd;
+    /** Velocity measurement */
+    CVelocity2d mVelocityMeas;
     /** Upper velocity limit */
     CVelocity2d mUpperVelocityLimit;
     /** Lower velocity limit */
