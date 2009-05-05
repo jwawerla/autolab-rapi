@@ -104,7 +104,7 @@ void CCBIrSensor::updateData()
 {
   for ( unsigned int i = 0; i < mNumSamples; i++ ) {
     mRangeData[i].range = mCBDriver->readDistance ( i );
-    mRangeData[i].reflectance = 0;
+    mRangeData[i].reflectance = 0.0;
   }
 }
 //---------------------------------------------------------------------------

@@ -338,10 +338,10 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
 
   if ( write ( mFd, cmdbuf, 5 ) < 0 ) {
     ERROR1 ( "IO error: %s", strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
 
-  return 1;
+  return 1; // success
 }
 
 //---------------------------------------------------------------------------
@@ -396,7 +396,7 @@ int CCBDriver::readSensorData()
   if ( totalNumRead != CREATE_SENSOR_PACKET_SIZE ) {
     ERROR2 ( "Wrong package size received, %d expected but got % d",
              totalNumRead, CREATE_SENSOR_PACKET_SIZE );
-    return 0;
+    return 0; // failure
   }
 
   // cast the create package into our data structure
@@ -437,12 +437,10 @@ int CCBDriver::readSensorData()
   mCreateSensorPackage.leftWheelVelocity
   = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.leftWheelVelocity );
 
-
   if ( mCreateSensorPackage.overCurrents != 0 )
     PRT_WARN1 ( "OVER CURRENT -- OVER CURRENT code %d", mCreateSensorPackage.overCurrents );
 
-
-  return 1;
+  return 1; // success
 
 }
 //---------------------------------------------------------------------------
@@ -476,7 +474,7 @@ bool CCBDriver::getCliffSensor ( tCliffSensor id )
       break;
   }  // switch
 
-  return 0;
+  return false; // failure
 }
 //---------------------------------------------------------------------------
 int CCBDriver::setCreateLed ( bool advance, bool play, unsigned char powerColor,
@@ -496,9 +494,9 @@ int CCBDriver::setCreateLed ( bool advance, bool play, unsigned char powerColor,
 
   if ( write ( mFd, cmdBuf, 4 ) < 0 ) {
     ERROR1 ( "Failed to send LED command: %s", strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
-  return 1;
+  return 1;  // success
 }
 //----------------------------------------------------------------------------
 int CCBDriver::resetCreate()
@@ -508,7 +506,7 @@ int CCBDriver::resetCreate()
   cmdBuf[0] = CREATE_OPCODE_RESET;
   if ( write ( mFd, cmdBuf, 1 ) < 0 ) {
     ERROR1 ( "Failed to reset create: %s", strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
   PRT_MSG0 ( 7, "Reset command send, now we wait for 10 sec, and "\
                 "hope for the best" );
@@ -586,7 +584,7 @@ int CCBDriver::playSong ( unsigned char id )
 
   if ( id > 15 ) {
     ERROR1 ( "Song id %d out of bounds [0..15] ", id );
-    return 0;
+    return 0; // failure
   }
 
   cmdBuf[0] = CREATE_OPCODE_PLAY_SONG;
@@ -594,9 +592,9 @@ int CCBDriver::playSong ( unsigned char id )
 
   if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
     ERROR1 ( "Failed to send play sound command: %s", strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
-  return 1;
+  return 1; // success
 }
 //---------------------------------------------------------------------------
 int CCBDriver::setLowSideDriver ( unsigned char id, bool on )
@@ -607,21 +605,21 @@ int CCBDriver::setLowSideDriver ( unsigned char id, bool on )
        ( mCreateSensorPackage.oiMode != CB_MODE_FULL ) ) {
     PRT_WARN0 ( "Low side driver access is only available in SAFE "\
                 "or FULL mode" );
-    return 0;
+    return 0; // failure
   }
 
   if ( id > 2 ) {
     ERROR1 ( "Low side driver id %d out of bounds [0..2]", id );
-    return 0;
+    return 0; // failure
   }
   cmdBuf[0] = CREATE_OPCODE_LOW_SIDE_DRIVER;
   cmdBuf[1] = mLowSideDriverStatus | ( 1 << id );
 
   if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
     ERROR1 ( "Failed to send low side driver command: %s", strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
-  return 1;
+  return 1; // success
 }
 //---------------------------------------------------------------------------
 int CCBDriver::activateDemo ( tDemo demo )
@@ -633,9 +631,9 @@ int CCBDriver::activateDemo ( tDemo demo )
 
   if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
     ERROR1 ( "Failed to active demo: %s", strerror(errno) );
-    return 0;
+    return 0; // failure
   }
-  return 1;
+  return 1; // success
 }
 //---------------------------------------------------------------------------
 int CCBDriver::sendIr ( unsigned char byte )
@@ -647,9 +645,9 @@ int CCBDriver::sendIr ( unsigned char byte )
 
   if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
     ERROR1 ( "Failed to send IR byte: %s", strerror(errno) );
-    return 0;
+    return 0; // failure
   }
-  return 1;
+  return 1; // success
 }
 //---------------------------------------------------------------------------
 int CCBDriver::defineSoundSequence ( unsigned char id, unsigned char* sequence,
@@ -658,12 +656,12 @@ int CCBDriver::defineSoundSequence ( unsigned char id, unsigned char* sequence,
   unsigned cmdBuf[2+2*16];
   if ( id > 15 ) {
     ERROR1 ( "Song id %d out of bounds [0..15]", id );
-    return 0;
+    return 0; // failure
   }
 
   if ( ( len < 1 ) || ( len > 16 ) ) {
     ERROR1 ( "Song length %d out of bounds [1..16]", len );
-    return 0;
+    return 0; // failure
   }
 
   cmdBuf[0] = CREATE_OPCODE_DEFINE_SONG;
@@ -671,16 +669,16 @@ int CCBDriver::defineSoundSequence ( unsigned char id, unsigned char* sequence,
   for ( unsigned char i = 0; i < len; i+=2 ) {
     if ( ( sequence[i] < 31 ) || ( sequence[i] > 127 ) ) {
       ERROR2 ( "Note(%d) = %d out of bounds [31..127] ", i, sequence[i] );
-      return 0;
+      return 0; // failure
     }
     cmdBuf[i+2] = sequence[i];
     cmdBuf[i+3] = sequence[1+1];
   }
   if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
     ERROR1 ( "Failed to send sound sequence: %s", strerror(errno) );
-    return 0;
+    return 0; // failure
   }
-  return 1;
+  return 1; // success
 }
 //---------------------------------------------------------------------------
 int CCBDriver::createPowerEnable ( bool on )
@@ -722,7 +720,7 @@ int CCBDriver::initPCA9634 ( unsigned char addr )
   data[1] = 0x0f;   // register value
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
     ERROR1 ( "Failed to initialize chip %d", addr );
-    return 0;
+    return 0; // failure
   }
 
   // enable led output A
@@ -730,7 +728,7 @@ int CCBDriver::initPCA9634 ( unsigned char addr )
   data[1] = 0xff;   // register value
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
     ERROR1 ( "Error initializing chip %d", addr );
-    return 0;
+    return 0; // failure
   }
 
   // enable led output B
@@ -738,7 +736,7 @@ int CCBDriver::initPCA9634 ( unsigned char addr )
   data[1] = 0xff;   // register value
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
     ERROR1 ( "Error initializing chip %d", addr );
-    return 0;
+    return 0; // failure
   }
 
   return 1; // success
@@ -757,7 +755,7 @@ int CCBDriver::createPowerToggle()
   /// set power pin PC0 to "0" (port 2 pinmask 1)
   if ( I2C_IO_SetGPIO ( mI2cDev, 2, 1, 0 ) == 0 ) {
     ERROR0 ( "failed to toggle Create power pin (off)" );
-    return 0;
+    return 0; // failure
   }
 
   PRT_MSG0 ( 7, "Power pin toggled" );
@@ -776,10 +774,10 @@ int CCBDriver::resetPCA9634()
   data[1] = 0x5a;
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
     ERROR0 ( "failed to reset pca9634 chips" );
-    return 0;
+    return 0; // failure
   }
 
-  return 1;
+  return 1;  // success
 }
 //----------------------------------------------------------------------------
 int CCBDriver::set7SegDisplay ( unsigned char value )
@@ -787,11 +785,11 @@ int CCBDriver::set7SegDisplay ( unsigned char value )
   I2cSetSlaveAddress ( mI2cDev, ROBOSTIX_ADDR, I2C_USE_CRC );
   if ( I2C_IO_WriteReg8 ( mI2cDev, PORTA, value ) == 0 ) {
     ERROR0 ( "failed to set 7 segment display" );
-    return 0;
+    return 0; // failure
   }
 
   m7SegByteValue = value;
-  return 1;
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 int CCBDriver::initI2c()
@@ -802,7 +800,7 @@ int CCBDriver::initI2c()
   // open I2C device
   if ( ( mI2cDev = open ( I2C_DEV_NAME, O_RDWR ) ) < 0 ) {
     ERROR2 ( "Failed to open port %s: %s", I2C_DEV_NAME, strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
 
   //*****************************************
@@ -815,17 +813,17 @@ int CCBDriver::initI2c()
   if ( !I2C_IO_GetInfo ( mI2cDev, &info ) ) {
     ERROR1 ( "Unable to retrieve information from i2c address %d",
              ROBOSTIX_ADDR );
-    return 0;
+    return 0; // failure
   }
   if ( info.version < 2 ) {
     ERROR0 ( "i2c-io.hex on the robostix is too old and needs to be updated" );
-    return 0;
+    return 0; // failure
   }
 
   // configure DDRA port as output
   if ( I2C_IO_WriteReg8 ( mI2cDev, DDRA, 0xFF ) == 0 ) {
     ERROR0 ( "Faile to setup 7 seg display" );
-    return 0;
+    return 0; // failure
   }
 
   // clear 7 seg display
@@ -835,13 +833,13 @@ int CCBDriver::initI2c()
   // configure ir enable pin as output (PC2 = port 2 pinmask 4)
   if ( I2C_IO_SetGPIODir ( mI2cDev, 2, 4, 4 ) == 0 ) {
     ERROR0 ( "Failed to setup IR enable pin" );
-    return 0;
+    return 0; // failure
   }
 
   // set ir enabled pin 0 (PC2 = port 2 pinmask 4)
   if ( I2C_IO_SetGPIO ( mI2cDev, 2, 4, 0 ) == 0 ) {
     ERROR0 ( "Failed to clear Create power pin" );
-    return 0;
+    return 0; // failure
   }
 
   //*********************************************************
@@ -849,20 +847,20 @@ int CCBDriver::initI2c()
   // see if create is on or not (PC3 = port 2 pinmask 8)
   if ( I2C_IO_SetGPIODir ( mI2cDev, 2, 8, 0 ) == 0 ) {
     ERROR0 ( "Failed to setup power monitor pin" );
-    return 0;
+    return 0; // failure
   }
 
   //*********************************************************
   // configure create power toggle pin as output (PC0 = port 2 pinmask 1)
   if ( I2C_IO_SetGPIODir ( mI2cDev, 2, 1, 1 ) == 0 ) {
     ERROR0 ( "Failed to setup power toggle pin" );
-    return 0;
+    return 0; // failure
   }
 
   // set power pin "0" (PC0 = port 2 pinmask 1)
   if ( I2C_IO_SetGPIO ( mI2cDev, 2, 1, 0 ) == 0 ) {
     ERROR0 ( "Failed to clear Create power pin" );
-    return 0;
+    return 0; // failure
   }
 
 
@@ -906,15 +904,15 @@ int CCBDriver::initI2c()
 
   // reset all chips and then initialize them
   if ( resetPCA9634() == 0 )
-    return 0;
+    return 0; // failure
 
   if ( initPCA9634 ( CHIP_A_ADDR ) == 0 )
-    return 0;
+    return 0; // failure
 
   if ( initPCA9634 ( CHIP_B_ADDR ) == 0 )
-    return 0;
+    return 0; // failure
 
-  return 1;
+  return 1;  // success
 }
 //----------------------------------------------------------------------------
 int CCBDriver::setRgbLed ( unsigned char id, unsigned char red,
@@ -924,7 +922,7 @@ int CCBDriver::setRgbLed ( unsigned char id, unsigned char red,
 
   if ( id > 4 ) {
     ERROR1 ( "mLed id out of bounds [0..4] %d",id );
-    return 0;
+    return 0; // failure
   }
 
   //*************************************
@@ -935,7 +933,7 @@ int CCBDriver::setRgbLed ( unsigned char id, unsigned char red,
   data[1] = red;
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
     ERROR2 ( "Failed to set color red of led %d to %d", id, red );
-    return 0;
+    return 0; // failure
   }
 
   //*************************************
@@ -946,7 +944,7 @@ int CCBDriver::setRgbLed ( unsigned char id, unsigned char red,
   data[1] = green;
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
     ERROR2 ( "Failed to set color green of led %d to %d", id, green );
-    return 0;
+    return 0; // failure
   }
 
   //*************************************
@@ -957,10 +955,10 @@ int CCBDriver::setRgbLed ( unsigned char id, unsigned char red,
   data[1] = blue;
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
     ERROR2 ( "Failed to set color blue of led %d to %d \n", id, blue );
-    return 0;
+    return 0; // failure
   }
 
-  return 1;
+  return 1; // success
 }
 
 //-----------------------------------------------------------------------------
@@ -1019,7 +1017,7 @@ int CCBDriver::set7SegHexNumber ( unsigned char n, bool dot )
       break;
     default:
       ERROR1 ( "character %c out of bounds [0..F] \n", n );
-      return 0;
+      return 0; // failure
 
   } // switch
 
@@ -1075,18 +1073,18 @@ int CCBDriver::enableIr ( bool enable )
     // (PC2 = port 2 pinmask 4, pinvalue 4)
     if ( I2C_IO_SetGPIO ( mI2cDev, 2, 4, 4 ) == 0 ) {
       ERROR0 ( "Failed to enable IR" );
-      return 0;
+      return 0; // failure
     }
   } else {
     PRT_MSG0 ( 7, "Disableing IR sensor" );
     // (PC2 = port 2 pinmask 4)
     if ( I2C_IO_SetGPIO ( mI2cDev, 2, 4, 0 ) == 0 ) {
       ERROR0 ( "Failed to disable IR" );
-      return 0;
+      return 0; // failure
     }
   }
 
-  return 1;
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 int CCBDriver::isIrEnabled()
@@ -1097,7 +1095,7 @@ int CCBDriver::isIrEnabled()
   // PC2 => port 2
   if ( I2C_IO_GetGPIO ( mI2cDev, 2, &pinVal ) == 0 ) {
     ERROR0 ( "Failed to read ir status" );
-    return 0;
+    return 0; // failure
   }
   // PC2 is 0x04
   return ( pinVal & 0x04 );
@@ -1109,13 +1107,13 @@ int CCBDriver::readAdc ( unsigned char id )
 
   if ( id > 7 ) {
     ERROR1 ( "ADC id out of bounds [0..7] %d", id );
-    return 0;
+    return 0; // failure
   }
   I2cSetSlaveAddress ( mI2cDev, ROBOSTIX_ADDR, I2C_USE_CRC );
 
   if ( I2C_IO_GetADC ( mI2cDev, id, &adcVal ) == 0 ) {
     ERROR1 ( "Failed to read from ADC %d", id );
-    return 0;
+    return 0; // failure
   }
   return adcVal;
 }
@@ -1126,13 +1124,13 @@ float CCBDriver::readLpfAdc ( unsigned char id )
 
   if ( id > 7 ) {
     ERROR1 ( "ADC id out of bounds [0..7] %d", id );
-    return 0;
+    return 0; // failure
   }
   I2cSetSlaveAddress ( mI2cDev, ROBOSTIX_ADDR, I2C_USE_CRC );
 
   if ( I2C_IO_GetLpfADC ( mI2cDev, id, &adcVal ) == 0 ) {
     ERROR1 ( "Failed to read from ADC %d", id );
-    return 0;
+    return 0; // failure
   }
   return adcVal;
 }
@@ -1143,10 +1141,9 @@ int CCBDriver::setLpfAdcTau ( float tau )
 
   if ( I2C_IO_SetTauLpf ( mI2cDev, tau ) == 0 ) {
     ERROR0 ( "Failed to set time constant for ADC low pass filter" );
-    return 0;
-
+    return 0; // failure
   }
-  return 1;
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 float CCBDriver::readDistance ( unsigned char id )
@@ -1158,7 +1155,7 @@ float CCBDriver::readDistance ( unsigned char id )
 
   if ( id > 5 ) {
     ERROR1 ( "IR id out of bounds [0..5] %d", id );
-    return 0;
+    return 0; // failure
   }
 
   switch ( id ) {

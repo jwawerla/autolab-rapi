@@ -62,6 +62,8 @@ void CChatterboxCtrl::obstacleAvoid()
 
   //********************************************************
   // Obstacle avoidance
+
+  // check left and right
   if ( (mIr->mRangeData[1].range < 0.8) ||
        (mIr->mRangeData[5].range < 0.8) ) {
     diff = mIr->mRangeData[1].range - mIr->mRangeData[5].range;
@@ -73,8 +75,7 @@ void CChatterboxCtrl::obstacleAvoid()
 
 
   if (mBumper->isAnyTriggered() ) {
-
-    velocity = 0;
+    velocity = 0.0;
     if (mBumper->mBumper[1] )
       turnRate = D2R(-10.0);
     if (mBumper->mBumper[0] )
