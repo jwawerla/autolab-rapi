@@ -62,19 +62,17 @@ void ADrivetrain2dof::setLowerVelocityLimit ( CVelocity2d limit )
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::applyVelocityLimits()
 {
-  if ( mVelocityCmd.mVX <  mLowerVelocityLimit.mVX )
-    mVelocityCmd.mVX =  mLowerVelocityLimit.mVX;
-  if ( mVelocityCmd.mVY <  mLowerVelocityLimit.mVY )
-    mVelocityCmd.mVY =  mLowerVelocityLimit.mVY;
-  if ( mVelocityCmd.mYawDot <  mLowerVelocityLimit.mYawDot )
-    mVelocityCmd.mYawDot =  mLowerVelocityLimit.mYawDot;
+  mVelocityCmd.mVX = LIMIT ( mVelocityCmd.mVX,
+                             mLowerVelocityLimit.mVX,
+                             mUpperVelocityLimit.mVX );
 
-  if ( mVelocityCmd.mVX >  mUpperVelocityLimit.mVX )
-    mVelocityCmd.mVX =  mUpperVelocityLimit.mVX;
-  if ( mVelocityCmd.mVY >  mUpperVelocityLimit.mVY )
-    mVelocityCmd.mVY =  mUpperVelocityLimit.mVY;
-  if ( mVelocityCmd.mYawDot > mUpperVelocityLimit.mYawDot )
-    mVelocityCmd.mYawDot =  mUpperVelocityLimit.mYawDot;
+  mVelocityCmd.mVY = LIMIT ( mVelocityCmd.mVY,
+                             mLowerVelocityLimit.mVY,
+                             mUpperVelocityLimit.mVY );
+
+  mVelocityCmd.mYawDot = LIMIT ( mVelocityCmd.mYawDot,
+                             mLowerVelocityLimit.mYawDot,
+                             mUpperVelocityLimit.mYawDot );
 }
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::print()

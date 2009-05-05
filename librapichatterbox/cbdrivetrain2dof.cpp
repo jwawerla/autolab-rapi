@@ -81,6 +81,8 @@ void CCBDrivetrain2dof::updateData()
 
 
   if ( mFgEnabled == true ) {
+    printf("start ");
+    mVelocityCmd.print();
 
     // read current velocities from chatterbox
     mVelocityMeas.mVX = ( double ) ( mCBDriver->mCreateSensorPackage.velocity ) /1000.0;
@@ -105,10 +107,11 @@ void CCBDrivetrain2dof::updateData()
       mVelocityCmd.mYawDot += SIGN ( mVelocityCmd.mYawDot - mVelocityMeas.mYawDot ) *
                               mMaxTurnRateDelta;
     }
-
+    printf("before limit ");
+    mVelocityCmd.print();
     // limit speeds
     applyVelocityLimits();
-
+    printf("after limit ");
     mVelocityCmd.print();
     // set OpenInterface Mode
     if ( mCBDriver->mCreateSensorPackage.oiMode != mOIMode )

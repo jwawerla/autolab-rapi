@@ -40,11 +40,6 @@ namespace Rapi
   #define SEC_PER_HOUR 3600.0
 #endif
 
-/** Figure out the sign of a number */
-#ifndef SIGN
-  #define SIGN(x) (((x) == 0) ? 0 : (((x) > 0) ? 1 : -1))
-#endif
-
 /** Well... ?! */
 #ifndef PI
   #define PI 3.14159265358979323846
@@ -60,6 +55,13 @@ namespace Rapi
   #define TWOPI 6.28318530717958
 #endif
 
+
+/** Figure out the sign of a number */
+template<typename T>
+inline int SIGN( T x)
+{
+  return (((x) == 0) ? 0 : (((x) > 0) ? 1 : -1));
+}
 
 /**
  * Calculates euclidian distance
@@ -97,9 +99,13 @@ inline T D2R(T x)
  * @param b
  * @return max of a and b
  */
-#ifndef MAX
-  #define MAX(a,b) ((a > b) ? (a) : (b))
+#ifdef MAX
+  #undef MAX
 #endif
+inline double MAX(double a, double b)
+{
+ return ((a > b) ? (a) : (b));
+}
 
 /**
  * Minimum value of a and b
@@ -107,9 +113,13 @@ inline T D2R(T x)
  * @param b
  * @return min of a and b
  */
-#ifndef MIN
-  #define MIN(a,b) ((a < b) ? (a) : (b))
+#ifdef MIN
+  #undef MIN
 #endif
+inline double MIN(double a, double b)
+{
+  return ((a < b) ? (a) : (b));
+}
 
 /**
  * Normalizes the value z to be in the interval [-pi, pi]
@@ -128,9 +138,10 @@ inline T NORMALIZE_ANGLE(T z)
  * @param b upper limit
  * @return limited value
  */
-#ifndef LIMIT
-  #define LIMIT(x,a,b) MIN(MAX(x,a), b)
-#endif
+inline double LIMIT(double x, double a, double b)
+{
+ return MIN(MAX(x,a), b);
+}
 
 /**
  * Rounds a number
