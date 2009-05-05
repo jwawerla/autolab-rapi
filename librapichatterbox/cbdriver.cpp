@@ -88,22 +88,28 @@ int CCBDriver::init()
   // lets reset robotstix, just in case
   if ( resetRobotStix() == 0 ) {
     ERROR0 ( "Failed to reset robotstix" );
-    return 0;
+    return 0; // failure
   }
   sleep ( 1 );
 
   // init all the robostix and PCA9634 stuff
   if ( initI2c() == 0 )
-    return 0;
+    return 0; // failure
 
+  // power create down and up
+  if ( createPowerEnable ( false ) == 0 ) {
+    ERROR0 ( "Failed to power up Create" );
+    return 0; // failure
+  }
+  sleep(2);
   if ( createPowerEnable ( true ) == 0 ) {
     ERROR0 ( "Failed to power up Create" );
-    return 0;
+    return 0; // failure
   }
 
-  sleep ( 1 );
+  sleep (2);
 
-  return 1;
+  return 1; // success
 }
 //--------------------------------------------------------------------------
 int CCBDriver::openPort ( const char* port )
@@ -114,17 +120,17 @@ int CCBDriver::openPort ( const char* port )
 
   if ( ( mFd = open ( port, O_RDWR | O_NONBLOCK, S_IRUSR | S_IWUSR ) ) < 0 ) {
     ERROR2 ( "Failed to open port %s: ", port, strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
 
   if ( tcflush ( mFd, TCIFLUSH ) < 0 ) {
     ERROR1 ( "IO error: %s", strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
 
   if ( tcgetattr ( mFd, &term ) < 0 ) {
     ERROR1 ( "IO error: %s", strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
 
   cfmakeraw ( &term );
@@ -134,28 +140,26 @@ int CCBDriver::openPort ( const char* port )
 
   if ( tcsetattr ( mFd, TCSAFLUSH, &term ) < 0 ) {
     ERROR1 ( "IO error: %s", strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
-
-  //resetCreate();
 
   sleep ( 1 );
   if ( startCreate() == 0 ) {
     ERROR0 ( "failed to initialize connection to Create" );
-    return 0;
+    return 0; // failure
   }
   sleep ( 1 );
   if ( ( flags = fcntl ( mFd, F_GETFL ) ) < 0 ) {
     ERROR1 ( "IO error: %s ", strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
 
   if ( fcntl ( mFd, F_SETFL, flags ^ O_NONBLOCK ) < 0 ) {
     ERROR1 ( "IO error: %s", strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
 
-  return 1;
+  return 1; // success
 }
 
 //--------------------------------------------------------------------------
@@ -175,10 +179,10 @@ int CCBDriver::closePort()
 
   if ( close ( mFd ) < 0 ) {
     ERROR1 ( "IO error: %s", strerror ( errno ) );
-    return 0;
+    return 0; // failure
   }
 
-  return 1;
+  return 1; // success
 }
 
 //--------------------------------------------------------------------------

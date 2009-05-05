@@ -51,7 +51,9 @@ class CCBRobot : public ARobot
     /** Default destructor */
     virtual ~CCBRobot();
     /**
-     * Ininitializes the robot
+     * Ininitializes the robot, this includes powering up ICreate, resetting
+     * robostix and opening the serial port. The robot is ready to use after
+     * this call.
      * @return 1 if successfull, 0 otherwise
      */
     virtual int init();
