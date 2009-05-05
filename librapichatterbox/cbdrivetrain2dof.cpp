@@ -37,7 +37,7 @@ CCBDrivetrain2dof::CCBDrivetrain2dof ( CCBDriver* driver, std::string devName )
   mMaxTurnRateDelta = D2R ( 5 );
   mMaxVelocityDelta = 0.1;
 
-  mUpperVelocityLimit = CVelocity2d ( 0.5, 0.0,  D2R ( 30.0 ) );
+  mUpperVelocityLimit = CVelocity2d (  0.5, 0.0,  D2R ( 30.0 ) );
   mLowerVelocityLimit = CVelocity2d ( -0.5, 0.0, -D2R ( 30.0 ) );
 
   mOdometry = new CCBOdometry ( mCBDriver, devName+":Odometry" );
@@ -109,9 +109,12 @@ void CCBDrivetrain2dof::updateData()
     // limit speeds
     applyVelocityLimits();
 
-    // set speeds
+    mVelocityCmd.print();
+    // set OpenInterface Mode
     if ( mCBDriver->mCreateSensorPackage.oiMode != mOIMode )
       mCBDriver->setOIMode ( mOIMode );
+
+    // set speeds
     if ( mCBDriver->setSpeed ( mVelocityCmd ) == 0 ) {
       ERROR2 ( "Failed to set speed command v=%f w=%f", mVelocityCmd.mVX,
                mVelocityCmd.mYawDot );
