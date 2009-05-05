@@ -49,7 +49,7 @@ CCBLaser::CCBLaser ( CCBDriver* driver, std::string devName )
   mScpiVersion = 1;
   mFd = -1;
   mLaserPort = NULL;
-  strcpy(mLaserDevice, "/dev/ttyS0");
+  strcpy ( mLaserDevice, "/dev/ttyS0" );
   mNumSamples = 654;
   mBaudRate = B115200;
   mMinRange = 0;
@@ -80,7 +80,7 @@ CCBLaser::~CCBLaser()
 void CCBLaser::setEnabled ( bool enable )
 {
   if ( mCBDriver->setLowSideDriver ( CB_LASER_POWER, enable ) == 0 ) {
-    ERROR0 (  "Failed to enable/disable laser" );
+    ERROR0 ( "Failed to enable/disable laser" );
     return;
   }
   mFgEnabled = enable;
@@ -95,7 +95,7 @@ int CCBLaser::init()
   }
 
   if ( getSensorConfig() == 0 ) {
-    ERROR0 (  "Failed to configure laser" );
+    ERROR0 ( "Failed to configure laser" );
     return 0;
   }
   return 1; // success
@@ -103,8 +103,13 @@ int CCBLaser::init()
 //-----------------------------------------------------------------------------
 void CCBLaser::updateData()
 {
-  if ( readData() == 0 )
-    ERROR0 ( "Failed to read data from device" );
+  if ( mFgEnabled ) {
+    if ( readData() == 0 )
+      ERROR0 ( "Failed to read data from device" );
+
+    // update time stamp of this measurement
+    mTimeStamp = timeStamp();
+  }
 }
 //-----------------------------------------------------------------------------
 int CCBLaser::readUntilNthOccurence ( int n, char c )
@@ -147,7 +152,7 @@ int CCBLaser::getSCIPVersion ()
     tcflush ( mFd, TCIFLUSH );
 
     if ( strncmp ( ( const char * ) Buffer, "VV\n00P\n", 7 ) != 0 )  {
-      ERROR1 (  "reading after VV command. Answer: %s", Buffer );
+      ERROR1 ( "reading after VV command. Answer: %s", Buffer );
       return 0;
     }
     // Set SCIP version 2 and return
@@ -226,7 +231,7 @@ int CCBLaser::getSensorConfig ()
     readUntil ( Buffer, 4, -1 );
 
     if ( strncmp ( ( const char * ) Buffer, "V\n0\n", 4 ) != 0 )  {
-      ERROR1 (  "reading command result: %s", Buffer );
+      ERROR1 ( "reading command result: %s", Buffer );
       tcflush ( mFd, TCIFLUSH );
       return 0;
     }
@@ -244,7 +249,7 @@ int CCBLaser::getSensorConfig ()
       int firmware = atol ( ( const char* ) Buffer );
 
       if ( firmware < 3 ) {
-        ERROR1 (  "Wrong firmware %d", firmware );
+        ERROR1 ( "Wrong firmware %d", firmware );
         readUntilNthOccurence ( 4, ( char ) 0xa );
         tcflush ( mFd, TCIFLUSH );
         return 0;
@@ -280,8 +285,8 @@ int CCBLaser::getSensorConfig ()
 
     readUntil ( Buffer, 4, -1 );
     if ( strncmp ( ( const char * ) Buffer, "step", 4 ) != 0 ) {
-      ERROR0 (  "reading angle_min_idx and angle_max_idx. Using an "\
-                 "older firmware?" );
+      ERROR0 ( "reading angle_min_idx and angle_max_idx. Using an "\
+               "older firmware?" );
       tcflush ( mFd, TCIFLUSH );
       return 0;
     }
@@ -305,7 +310,7 @@ int CCBLaser::getSensorConfig ()
     readUntil ( Buffer,7, -1 );
 
     if ( strncmp ( ( const char * ) Buffer, "PP\n00P\n", 7 ) != 0 )  {
-      ERROR1 (  "reading command result: %s", Buffer );
+      ERROR1 ( "reading command result: %s", Buffer );
       tcflush ( mFd, TCIFLUSH );
       return 0;
     }
@@ -378,25 +383,25 @@ int CCBLaser::readUntil ( unsigned char *buf, int len, int timeout )
   do  {
     if ( timeout >= 0 ) {
       if ( ( retval = poll ( ufd, 1, timeout ) ) < 0 )  {
-        ERROR1 (  "Failed to poll: %s", strerror ( errno ) );
+        ERROR1 ( "Failed to poll: %s", strerror ( errno ) );
         return 0;
       } else if ( retval == 0 ) {
-        ERROR0( "Timeout" );
+        ERROR0 ( "Timeout" );
         return 0;
       }
     }
 
     ret = read ( mFd, &buf[current], len-current );
     if ( ret < 0 ) {
-      ERROR1 (  "Failed reading: %s", strerror ( errno ) );
+      ERROR1 ( "Failed reading: %s", strerror ( errno ) );
       return 0;
     }
 
     current += ret;
     if ( ( current > 2 ) && ( current < len )  && ( buf[current-2] == '\n' )
          && ( buf[current-1] == '\n' ) ) {
-      ERROR0 (  "Got an end of command while waiting for more data, "\
-                 "this is bad." );
+      ERROR0 ( "Got an end of command while waiting for more data, "\
+               "this is bad." );
       return 0;
     }
   } while ( current < len );
@@ -408,7 +413,7 @@ int CCBLaser::changeBaud ( int currBaud, int newBaud, int timeout )
   struct termios newtio;
 
   if ( tcgetattr ( mFd, &newtio ) < 0 ) {
-    ERROR1 (  "tcgetattr(): %s", strerror(errno) );
+    ERROR1 ( "tcgetattr(): %s", strerror ( errno ) );
     close ( mFd );
     return 0;
   }
@@ -417,7 +422,7 @@ int CCBLaser::changeBaud ( int currBaud, int newBaud, int timeout )
   cfsetospeed ( &newtio, currBaud );
 
   if ( tcsetattr ( mFd, TCSAFLUSH, &newtio ) < 0 ) {
-    ERROR1 (  "tcsetattr():%s", strerror(errno) );
+    ERROR1 ( "tcsetattr():%s", strerror ( errno ) );
     close ( mFd );
     return 0;
   }
@@ -454,7 +459,7 @@ int CCBLaser::changeBaud ( int currBaud, int newBaud, int timeout )
         buf[6] = '0';
         break;
       default:
-        ERROR1 (  "unknown baud rate %d", newBaud );
+        ERROR1 ( "unknown baud rate %d", newBaud );
         return 0;
     }
     buf[7] = '0';
@@ -494,7 +499,7 @@ int CCBLaser::changeBaud ( int currBaud, int newBaud, int timeout )
         buf[7] = '0';
         break;
       default:
-        ERROR1 (  "unknown baud rate %d", newBaud );
+        ERROR1 ( "unknown baud rate %d", newBaud );
         return 0;
     }
     buf[8] = '\n';
@@ -508,11 +513,11 @@ int CCBLaser::changeBaud ( int currBaud, int newBaud, int timeout )
   // the response actually ends in 'LF status LF'.
   if ( ( ( len = readUntil ( buf, sizeof ( buf ), timeout ) ) < 0 ) ||
        ( buf[15] != '0' ) ) {
-    ERROR0 (  "failed to change baud rate" );
+    ERROR0 ( "failed to change baud rate" );
     return 0;
   } else {
     if ( tcgetattr ( mFd, &newtio ) < 0 ) {
-      ERROR1 ( "tcgetattr(): %s", strerror(errno) );
+      ERROR1 ( "tcgetattr(): %s", strerror ( errno ) );
       close ( mFd );
       return 0;
     }
@@ -520,7 +525,7 @@ int CCBLaser::changeBaud ( int currBaud, int newBaud, int timeout )
     cfsetispeed ( &newtio, newBaud );
     cfsetospeed ( &newtio, newBaud );
     if ( tcsetattr ( mFd, TCSAFLUSH, &newtio ) < 0 ) {
-      ERROR1 ( "tcsetattr(): %s", strerror(errno) );
+      ERROR1 ( "tcsetattr(): %s", strerror ( errno ) );
       close ( mFd );
       return 0;
     } else {
@@ -538,7 +543,7 @@ int CCBLaser::openPort ( const char * portName, int baud )
   mLaserPort = fopen ( portName, "r+" );
   if ( mLaserPort == NULL ) {
     ERROR2 ( "Failed to open port %s: %s",
-               portName, strerror ( errno ) );
+             portName, strerror ( errno ) );
     return 0;
   }
 
@@ -549,7 +554,7 @@ int CCBLaser::openPort ( const char * portName, int baud )
     if ( changeBaud ( B57600, baud, 100 ) == 0 ) {
       PRT_MSG0 ( 1, "Trying to connect at 115200" );
       if ( changeBaud ( B115200, baud, 100 ) == 0 ) {
-        ERROR0( "failed to connect at any baud" );
+        ERROR0 ( "failed to connect at any baud" );
         close ( mFd );
         return 0;
       }
@@ -595,7 +600,7 @@ int CCBLaser::readData ()
   max_i = 771;
 
   if ( mLaserPort == NULL ) {
-    ERROR0( "Serial port to laser not open" );
+    ERROR0 ( "Serial port to laser not open" );
     return 0;
   }
 
@@ -607,7 +612,7 @@ int CCBLaser::readData ()
     readUntil ( Buffer, 10, -1 );
 
     if ( strncmp ( ( const char * ) Buffer, "G00076801", 9 ) != 0 ) {
-      ERROR1( "Error reading command result: %s", Buffer );
+      ERROR1 ( "Error reading command result: %s", Buffer );
       tcflush ( mFd, TCIFLUSH );
       return 0;
     }
@@ -615,7 +620,7 @@ int CCBLaser::readData ()
     // check the returned status
     readUntil ( Buffer, 2, -1 );
     if ( Buffer[0] != '0' ) {
-      ERROR0(  "Failed to receive correct status byte from laser" );
+      ERROR0 ( "Failed to receive correct status byte from laser" );
       return 0;
     }
 
@@ -627,7 +632,7 @@ int CCBLaser::readData ()
       } else if ( Buffer[0] == '\n' ) {
         Buffer[0] = Buffer[1];
         if ( readUntil ( &Buffer[1], 1, -1 ) < 0 ) {
-          ERROR0(  "Undefined error" );
+          ERROR0 ( "Undefined error" );
           return 0;
         }
       }
@@ -647,7 +652,7 @@ int CCBLaser::readData ()
           //printf("%d -> %d (%f) \n", k, range, mRangeData[k].range);
         }
       } else
-        ERROR1(  "Got too many readings! %d",i );
+        ERROR1 ( "Got too many readings! %d",i );
 
     }
   } else { // mScpiVersion == 2
@@ -659,7 +664,7 @@ int CCBLaser::readData ()
     readUntil ( Buffer, 13, -1 );
 
     if ( strncmp ( ( const char * ) Buffer, "GD0000076801", 12 ) != 0 ) {
-      ERROR1( "Error reading command result: %s", Buffer );
+      ERROR1 ( "Error reading command result: %s", Buffer );
       tcflush ( mFd, TCIFLUSH );
       return 0;
     }
@@ -689,7 +694,7 @@ int CCBLaser::readData ()
           if ( readUntil ( &Buffer[1], 2, -1 ) < 0 )
             return 0;
         } else
-          ERROR1(  "Got too many readings! %d",i );
+          ERROR1 ( "Got too many readings! %d",i );
       } else if ( Buffer[1] == '\n' ) {
         Buffer[0] = Buffer[2];
         if ( readUntil ( &Buffer[1], 2, -1 ) < 0 )
@@ -705,7 +710,7 @@ int CCBLaser::readData ()
           PRT_WARN2 ( "[%d] read error: %f is bigger than 5.6 meters\n",
                       i, mRangeData[i].range );
       } else
-        ERROR1( "Got too many readings! %d",i );
+        ERROR1 ( "Got too many readings! %d",i );
     }
   }
   return 1; // success
@@ -729,7 +734,7 @@ int CCBLaser::getIDInfo ()
     readUntil ( Buffer, 2, -1 );
 
     if ( strncmp ( ( const char * ) Buffer, "V", 1 ) != 0 ) {
-      ERROR1(  "Error reading command result: %s", Buffer );
+      ERROR1 ( "Error reading command result: %s", Buffer );
       tcflush ( mFd, TCIFLUSH );
       return 0;
     }
@@ -765,7 +770,7 @@ int CCBLaser::getIDInfo ()
     readUntil ( Buffer, 7, -1 );
 
     if ( strncmp ( ( const char * ) Buffer, "VV\n00P\n", 7 ) != 0 ) {
-      ERROR1( "Error reading command result: %s", Buffer );
+      ERROR1 ( "Error reading command result: %s", Buffer );
       tcflush ( mFd, TCIFLUSH );
       return 0;
     }

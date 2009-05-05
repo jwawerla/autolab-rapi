@@ -76,8 +76,7 @@ inline double EUCLIDIAN(double x, double y, double a, double b) {
  * @param x value [rad]
  * @return [deg]
  */
-template<typename T>
-inline T R2D(T x)
+inline double R2D(double x)
 {
   return x*57.2957795;
 }
@@ -87,8 +86,7 @@ inline T R2D(T x)
  * @param x value [deg]
  * @return [rad]
  */
-template<typename T>
-inline T D2R(T x)
+inline double D2R(double x)
 {
  return x*0.01745329;
 }

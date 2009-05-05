@@ -46,6 +46,8 @@ void CCBOdometry::updateData()
   mPose.mX += distance * cos ( mPose.mYaw );
   mPose.mY += distance * sin ( mPose.mYaw );
 
+  // update time stamp of this measurement
+  mTimeStamp = timeStamp();
 }
 //-----------------------------------------------------------------------------
 

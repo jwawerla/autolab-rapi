@@ -22,23 +22,24 @@
 #include "cblights.h"
 #include "rapierror.h"
 #include "printerror.h"
+#include "utilities.h"
 
 namespace Rapi
 {
 
 
 //---------------------------------------------------------------------------
-CCBLights::CCBLights(CCBDriver* cbDriver, std::string devName)
- : ALights(devName)
+CCBLights::CCBLights ( CCBDriver* cbDriver, std::string devName )
+    : ALights ( devName )
 {
   mCBDriver = cbDriver;
 
-  setEnabled(true);
+  setEnabled ( true );
   mNumRbgLeds = 5;
 
   mDot = DOT_OFF;
 
-  for (int i =0; i < mNumRbgLeds; i++) {
+  for ( int i =0; i < mNumRbgLeds; i++ ) {
     mBlink[i].on = true;
     mBlink[i].enabled = true;
     mBlink[i].freq = 1;
@@ -58,14 +59,14 @@ CCBLights::~CCBLights()
 {
 }
 //---------------------------------------------------------------------------
-void CCBLights::setEnabled(bool enable)
+void CCBLights::setEnabled ( bool enable )
 {
-  if (enable == true) {
+  if ( enable == true ) {
     mFgEnabled = true;
   } else {
     mFgEnabled = false;
-    for (unsigned char i = 0; i < mNumRbgLeds; i++)
-      mCBDriver->setRgbLed(i, 0, 0, 0);
+    for ( unsigned char i = 0; i < mNumRbgLeds; i++ )
+      mCBDriver->setRgbLed ( i, 0, 0, 0 );
   }
 }
 //----------------------------------------------------------------------------
@@ -76,104 +77,104 @@ int CCBLights::init()
 //----------------------------------------------------------------------------
 void CCBLights::updateData()
 {
+  if ( mFgEnabled ) {
+    for ( int i = 0; i < mNumRbgLeds; i++ ) {
+      if ( mBlink[i].enabled ) {
+        mBlink[i].tick = mBlink[i].tick - 1;
+        if ( mBlink[i].tick <= 0 ) {
 
-  for (int i = 0; i < mNumRbgLeds; i++) {
-    if (mBlink[i].enabled) {
-      mBlink[i].tick = mBlink[i].tick - 1;
-      if (mBlink[i].tick <= 0) {
-
-        mBlink[i].tick = (int)(0.5/(mBlink[i].freq * CB_T) );
-        if (mBlink[i].on == true) {
-          mBlink[i].on = false;
-          mCBDriver->setRgbLed(i, mBlink[i].red, mBlink[i].green, mBlink[i].blue);
-        }
-        else {
-          mBlink[i].on = true;
-          mCBDriver->setRgbLed(i, 0, 0, 0);
-        }
-      }
-    }
-  } // for
-
-  switch (mDot) {
-    case DOT_OFF:
-      mCBDriver->set7SegDot(false);
-      mDotBlink.on = false;
-      break;
-
-    case DOT_ON:
-      mCBDriver->set7SegDot(true);
-      mDotBlink.on = true;
-      break;
-
-    case DOT_BLINK:
-      mDotBlink.tick = mDotBlink.tick - 1;
-      if (mDotBlink.tick <= 0) {
-
-        mDotBlink.tick = (int)(0.5/(mDotBlink.freq * CB_T) );
-        if (mDotBlink.on == true) {
-          mDotBlink.on = false;
-          mCBDriver->set7SegDot(false);
-        }
-        else {
-          mDotBlink.on = true;
-          mCBDriver->set7SegDot(true);
+          mBlink[i].tick = ( int ) ( 0.5/ ( mBlink[i].freq * CB_T ) );
+          if ( mBlink[i].on == true ) {
+            mBlink[i].on = false;
+            mCBDriver->setRgbLed ( i, mBlink[i].red, mBlink[i].green, mBlink[i].blue );
+          } else {
+            mBlink[i].on = true;
+            mCBDriver->setRgbLed ( i, 0, 0, 0 );
+          }
         }
       }
-      break;
+    } // for
 
-  }  // switch
+    switch ( mDot ) {
+      case DOT_OFF:
+        mCBDriver->set7SegDot ( false );
+        mDotBlink.on = false;
+        break;
 
-  return; // nothing to do
+      case DOT_ON:
+        mCBDriver->set7SegDot ( true );
+        mDotBlink.on = true;
+        break;
+
+      case DOT_BLINK:
+        mDotBlink.tick = mDotBlink.tick - 1;
+        if ( mDotBlink.tick <= 0 ) {
+
+          mDotBlink.tick = ( int ) ( 0.5/ ( mDotBlink.freq * CB_T ) );
+          if ( mDotBlink.on == true ) {
+            mDotBlink.on = false;
+            mCBDriver->set7SegDot ( false );
+          } else {
+            mDotBlink.on = true;
+            mCBDriver->set7SegDot ( true );
+          }
+        }
+        break;
+
+    }  // switch
+
+    // update time stamp of this measurement
+    mTimeStamp = timeStamp();
+  } // enabled
 }
 //----------------------------------------------------------------------------
-int CCBLights::set7SegDot(t7SegDot dot)
+int CCBLights::set7SegDot ( t7SegDot dot )
 {
   mDot = dot;
 
   return 1; // success
 }
 //----------------------------------------------------------------------------
-int CCBLights::setBlink(int id, bool enabled, float freq)
+int CCBLights::setBlink ( int id, bool enabled, float freq )
 {
 
-  if (id == -1) {
-    for (int i =0; i < mNumRbgLeds; i++) {
-      setBlink(i, enabled, freq);
+  if ( id == -1 ) {
+    for ( int i =0; i < mNumRbgLeds; i++ ) {
+      setBlink ( i, enabled, freq );
     }
     return 1;
   }
 
-  if ( (id >= mNumRbgLeds) || (id < 0) ) {
-    ERROR2("Led id out of bounds %d [0..%d]",id, mNumRbgLeds-1);
+  if ( ( id >= mNumRbgLeds ) || ( id < 0 ) ) {
+    ERROR2 ( "Led id out of bounds %d [0..%d]",id, mNumRbgLeds-1 );
     return 0;
   }
-  if (freq == 0) {
-    PRT_WARN1("Blink frequency for led %d cannot be 0",id);
+  if ( freq == 0 ) {
+    PRT_WARN1 ( "Blink frequency for led %d cannot be 0",id );
     return 0;
   }
 
   mBlink[id].enabled = enabled;
-  if (mBlink[id].freq != freq) {
+  if ( mBlink[id].freq != freq ) {
     mBlink[id].freq = freq;
-    mBlink[id].tick = (int)(1.0 / (mBlink[id].freq * CB_T) );
+    mBlink[id].tick = ( int ) ( 1.0 / ( mBlink[id].freq * CB_T ) );
   }
 
   return 1;
 }
 //----------------------------------------------------------------------------
-int CCBLights::setLight(int id, unsigned char red, unsigned char green,
-                        unsigned char blue)
+int CCBLights::setLight ( int id, unsigned char red, unsigned char green,
+                          unsigned char blue )
 {
-  if (id == -1) {
-    for (int i =0; i < mNumRbgLeds; i++) {
-      setLight(i, red, green, blue);
+  if ( id == -1 ) {
+    for ( int i =0; i < mNumRbgLeds; i++ ) {
+      setLight ( i, red, green, blue );
     }
     return 1;
   }
 
-  if ( (id >= mNumRbgLeds) || (id < 0) ) {
-    ERROR2("Led id out of bounds %d [0..%d]",id, mNumRbgLeds-1);
+  if ( ( id >= mNumRbgLeds ) || ( id < 0 ) ) {
+    ERROR2 ( "Led id out of bounds %d [0..%d]",id, mNumRbgLeds-1 );
     return 0;
   }
 
@@ -183,32 +184,32 @@ int CCBLights::setLight(int id, unsigned char red, unsigned char green,
 
   // set led rgb value only if not blinking, if blinking stuff is handled by
   // update()
-  if (mBlink[id].enabled == false)
-    return mCBDriver->setRgbLed(id, red, green, blue);
+  if ( mBlink[id].enabled == false )
+    return mCBDriver->setRgbLed ( id, red, green, blue );
 
   return 1;
 }
 //----------------------------------------------------------------------------
 void CCBLights::print()
 {
-  printf("Lights: ");
+  printf ( "Lights: " );
   //for (int i = 0; i < mNumRbgLeds; i ++) {
-  //  printf(" %d (%03d %03d %03d) ", i, 
-  printf("\n");
+  //  printf(" %d (%03d %03d %03d) ", i,
+  printf ( "\n" );
 }
 //----------------------------------------------------------------------------
-int CCBLights::setLight(int id, tColor color)
+int CCBLights::setLight ( int id, tColor color )
 {
-  switch (color) {
-    case RED:    return setLight(id, 255,   0,   0);
-    case GREEN:  return setLight(id,   0, 255,   0);
-    case BLUE:   return setLight(id,   0,   0, 255);
-    case YELLOW: return setLight(id, 255, 255,   0);
-    case WHITE:  return setLight(id, 255, 255, 255);
-    case BLACK:  return setLight(id,   0,   0,   0);
+  switch ( color ) {
+    case RED:    return setLight ( id, 255,   0,   0 );
+    case GREEN:  return setLight ( id,   0, 255,   0 );
+    case BLUE:   return setLight ( id,   0,   0, 255 );
+    case YELLOW: return setLight ( id, 255, 255,   0 );
+    case WHITE:  return setLight ( id, 255, 255, 255 );
+    case BLACK:  return setLight ( id,   0,   0,   0 );
 
-  default:
-    ERROR1("Unknown color %d ", color);
+    default:
+      ERROR1 ( "Unknown color %d ", color );
   }  // switch;
 
   return 0;

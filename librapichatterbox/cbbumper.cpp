@@ -19,6 +19,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 #include "cbbumper.h"
+#include "utilities.h"
 
 namespace Rapi {
 
@@ -65,6 +66,9 @@ void CCBBumper::updateData()
      mBumper[1] = mCBDriver->leftBumper();
      if (mBumper[1])
        mFgAnyTriggered = true;
+
+    // update time stamp of this measurement
+    mTimeStamp = timeStamp();
   }
 }
 //-----------------------------------------------------------------------------

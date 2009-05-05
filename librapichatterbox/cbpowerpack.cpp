@@ -20,6 +20,7 @@
  **************************************************************************/
 
 #include "cbpowerpack.h"
+#include "utilities.h"
 
 namespace Rapi
 {
@@ -75,7 +76,11 @@ void CCBPowerPack::updateData()
     mVoltage = ( float ) ( mCBDriver->mCreateSensorPackage.voltage ) / 1000.0;
     // comes in [C]
     mBatteryTemperature = ( float ) ( mCBDriver->mCreateSensorPackage.batTemp );
-  }
+
+    // update time stamp of this measurement
+    mTimeStamp = timeStamp();
+
+  } // enabled
 }
 //-----------------------------------------------------------------------------
 int CCBPowerPack::getChargingSource()

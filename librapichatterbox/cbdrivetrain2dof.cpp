@@ -34,15 +34,15 @@ CCBDrivetrain2dof::CCBDrivetrain2dof ( CCBDriver* driver, std::string devName )
   mOIMode = CB_MODE_SAFE;
 
   // maximal change in velocities
-  mMaxTurnRateDelta = D2R ( 5 );
+  mMaxTurnRateDelta = D2R ( 5.0 );
   mMaxVelocityDelta = 0.1;
 
-  mUpperVelocityLimit = CVelocity2d (  0.5, 0.0,  D2R ( 30.0 ) );
+  mUpperVelocityLimit = CVelocity2d ( 0.5, 0.0,  D2R ( 30.0 ) );
   mLowerVelocityLimit = CVelocity2d ( -0.5, 0.0, -D2R ( 30.0 ) );
 
   mOdometry = new CCBOdometry ( mCBDriver, devName+":Odometry" );
 
-  setEnabled( true );
+  setEnabled ( true );
 }
 //-----------------------------------------------------------------------------
 CCBDrivetrain2dof::~CCBDrivetrain2dof()
@@ -81,7 +81,7 @@ void CCBDrivetrain2dof::updateData()
 
 
   if ( mFgEnabled == true ) {
-    printf("start ");
+    printf ( "start " );
     mVelocityCmd.print();
 
     // read current velocities from chatterbox
@@ -99,19 +99,19 @@ void CCBDrivetrain2dof::updateData()
 
     // limit acceleration
     if ( fabs ( mVelocityMeas.mVX - mVelocityCmd.mVX ) > mMaxVelocityDelta ) {
-      mVelocityCmd.mVX += SIGN ( mVelocityCmd.mVX - mVelocityMeas.mVX ) *
-                          mMaxVelocityDelta;
+      mVelocityCmd.mVX = mVelocityMeas.mVX + SIGN ( mVelocityCmd.mVX -
+                         mVelocityMeas.mVX ) * mMaxVelocityDelta;
     }
 
     if ( fabs ( mVelocityMeas.mYawDot - mVelocityCmd.mYawDot ) > mMaxTurnRateDelta ) {
-      mVelocityCmd.mYawDot += SIGN ( mVelocityCmd.mYawDot - mVelocityMeas.mYawDot ) *
-                              mMaxTurnRateDelta;
+      mVelocityCmd.mYawDot = mVelocityMeas.mYawDot + SIGN ( mVelocityCmd.mYawDot -
+                             mVelocityMeas.mYawDot ) * mMaxTurnRateDelta;
     }
-    printf("before limit ");
+    printf ( "before limit " );
     mVelocityCmd.print();
     // limit speeds
     applyVelocityLimits();
-    printf("after limit ");
+    printf ( "after limit " );
     mVelocityCmd.print();
     // set OpenInterface Mode
     if ( mCBDriver->mCreateSensorPackage.oiMode != mOIMode )
@@ -141,6 +141,7 @@ void CCBDrivetrain2dof::updateData()
       lastPose = pose;
     }
     count ++;
+    mTimeStamp = timeStamp();
   } // enabled
 }
 //-----------------------------------------------------------------------------
