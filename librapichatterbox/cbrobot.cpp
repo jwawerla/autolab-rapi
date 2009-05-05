@@ -90,22 +90,25 @@ void CCBRobot::run ()
 {
   while ( mFgRunning ) {
 
-    // update all devices
-    if ( mCBDrivetrain )
-      mCBDrivetrain->updateData();
-    if ( mCBPowerPack )
-      mCBPowerPack->updateData();
-    if ( mCBLaser )
-      mCBLaser->updateData();
-    if ( mCBLights )
-      mCBLights->updateData();
-    if ( mCBIrSensor )
-      mCBIrSensor->updateData();
-    if ( mCBTextDisplay )
-      mCBTextDisplay->updateData();
-    if ( mCBBumper )
-      mCBBumper->updateData();
+    // get data from ICreate
+    if ( mCBDriver.readSensorData() == 1 ) {
 
+      // update all devices
+      if ( mCBDrivetrain )
+        mCBDrivetrain->updateData();
+      if ( mCBPowerPack )
+        mCBPowerPack->updateData();
+      if ( mCBLaser )
+        mCBLaser->updateData();
+      if ( mCBLights )
+        mCBLights->updateData();
+      if ( mCBIrSensor )
+        mCBIrSensor->updateData();
+      if ( mCBTextDisplay )
+        mCBTextDisplay->updateData();
+      if ( mCBBumper )
+        mCBBumper->updateData();
+    }
     // update all registered constrollers
     updateControllers();
 

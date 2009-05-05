@@ -47,6 +47,8 @@ void CChatterboxCtrl::update ( float dt )
 
   c[0] ++;
 
+  ((CCBDrivetrain2dof*)mDrivetrain)->setDefaultOIMode(CB_MODE_FULL);
+
   mDrivetrain->setSpeedCmd(0.3, 0.0);
   obstacleAvoid();
 
