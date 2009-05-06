@@ -124,6 +124,8 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
     float mMaxVelocityDelta;
     /** Maximum by with the turn rate can change in one cycle [rad/s] */
     float mMaxTurnRateDelta;
+    /** Velocity command from previous time step */
+    CVelocity2d mPrevVelocityCmd;
 };
 
 } // namespace

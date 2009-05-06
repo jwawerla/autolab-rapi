@@ -37,6 +37,7 @@ CCBDrivetrain2dof::CCBDrivetrain2dof ( CCBDriver* driver, std::string devName )
   mMaxTurnRateDelta = D2R ( 5.0 );
   mMaxVelocityDelta = 0.1;
 
+  // Create can drive max 0.5m/s
   mUpperVelocityLimit = CVelocity2d ( 0.5, 0.0,  D2R ( 30.0 ) );
   mLowerVelocityLimit = CVelocity2d ( -0.5, 0.0, -D2R ( 30.0 ) );
 
@@ -85,10 +86,10 @@ void CCBDrivetrain2dof::updateData()
     mVelocityCmd.print();
 
     // read current velocities from chatterbox
-    mVelocityMeas.mVX = ( double ) ( mCBDriver->mCreateSensorPackage.velocity ) /1000.0;
+    mVelocityMeas.mVX = ( double ) ( mCBDriver->mCreateSensorPackage.velocity ) / 1e3;
     mVelocityMeas.mVY = 0.0;
     if ( mCBDriver->mCreateSensorPackage.radius >= 0x7FFF )  // 0x7FFF or 0x8000
-      mVelocityMeas.mYawDot = 0;
+      mVelocityMeas.mYawDot = 0.0;
     else if ( mCBDriver->mCreateSensorPackage.radius == 0xFFFF )
       mVelocityMeas.mYawDot = D2R ( -40.0 );  // TODO: find real maximum turnrate
     else if ( mCBDriver->mCreateSensorPackage.radius == 0x0001 )
@@ -98,22 +99,26 @@ void CCBDrivetrain2dof::updateData()
                               mCBDriver->mCreateSensorPackage.radius;
 
     // limit acceleration
-    if ( fabs ( mVelocityMeas.mVX - mVelocityCmd.mVX ) > mMaxVelocityDelta ) {
-      mVelocityCmd.mVX = mVelocityMeas.mVX + SIGN ( mVelocityCmd.mVX -
-                         mVelocityMeas.mVX ) * mMaxVelocityDelta;
+    if ( fabs ( mPrevVelocityCmd.mVX - mVelocityCmd.mVX ) > mMaxVelocityDelta ) {
+      mVelocityCmd.mVX = mPrevVelocityCmd.mVX + 
+                         SIGN ( mVelocityCmd.mVX - mPrevVelocityCmd.mVX ) *
+                         mMaxVelocityDelta;
     }
 
     if ( fabs ( mVelocityMeas.mYawDot - mVelocityCmd.mYawDot ) > mMaxTurnRateDelta ) {
-      mVelocityCmd.mYawDot = mVelocityMeas.mYawDot + SIGN ( mVelocityCmd.mYawDot -
-                             mVelocityMeas.mYawDot ) * mMaxTurnRateDelta;
+      mVelocityCmd.mYawDot = mPrevVelocityCmd.mYawDot + 
+                             SIGN ( mVelocityCmd.mYawDot - mPrevVelocityCmd.mYawDot ) *
+                             mMaxTurnRateDelta;
     }
+
+    mPrevVelocityCmd = mVelocityCmd;
     printf ( "before limit " );
     mVelocityCmd.print();
     // limit speeds
     applyVelocityLimits();
     printf ( "after limit " );
     mVelocityCmd.print();
-printf("OIMODE %d %d \n", mCBDriver->mCreateSensorPackage.oiMode, mOIMode);
+
     // set OpenInterface Mode
     if ( mCBDriver->mCreateSensorPackage.oiMode != mOIMode )
       mCBDriver->setOIMode ( mOIMode );

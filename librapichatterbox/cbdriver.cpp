@@ -295,8 +295,7 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
   int16_t tv_mm, rad_mm;
 
   tv_mm = ( int16_t ) rint ( vel.mVX * 1e3 );
-  tv_mm = MAX ( tv_mm, -CREATE_TVEL_MAX_MM_S );
-  tv_mm = MIN ( tv_mm, CREATE_TVEL_MAX_MM_S );
+  tv_mm = LIMIT ( tv_mm, -CREATE_TVEL_MAX_MM_S, CREATE_TVEL_MAX_MM_S );
 
   if ( fabs ( vel.mYawDot ) < 0.0001 ) {
     // Special case: drive straight
