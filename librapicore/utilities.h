@@ -120,6 +120,18 @@ inline double MIN(double a, double b)
 }
 
 /**
+ * Checks if x is about zero, within 1e-6
+ * @param x value to check
+ * @return true if about zero, false otherwise
+ */
+inline bool isAboutZero(double x)
+{
+  if ( fabs( x ) < 1e-6 )
+    return true;
+  return false;
+}
+
+/**
  * Normalizes the value z to be in the interval [-pi, pi]
  * @param z to be normalized
  * @return normalized value

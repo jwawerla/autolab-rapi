@@ -82,8 +82,6 @@ void CCBDrivetrain2dof::updateData()
 
 
   if ( mFgEnabled == true ) {
-    printf ( "start " );
-    mVelocityCmd.print();
 
     // read current velocities from chatterbox
     mVelocityMeas.mVX = ( double ) ( mCBDriver->mCreateSensorPackage.velocity ) / 1e3;
@@ -112,8 +110,6 @@ void CCBDrivetrain2dof::updateData()
     }
 
     mPrevVelocityCmd = mVelocityCmd;
-    printf ( "before limit " );
-    mVelocityCmd.print();
     // limit speeds
     applyVelocityLimits();
     printf ( "after limit " );
