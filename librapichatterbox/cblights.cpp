@@ -27,6 +27,7 @@
 namespace Rapi
 {
 
+const int DOT = 5;
 
 //---------------------------------------------------------------------------
 CCBLights::CCBLights ( CCBDriver* cbDriver, std::string devName )
@@ -35,22 +36,16 @@ CCBLights::CCBLights ( CCBDriver* cbDriver, std::string devName )
   mCBDriver = cbDriver;
 
   setEnabled ( true );
-  mNumLights = 5;
+  mNumLights = 6;
 
-  mDot = DOT_OFF;
-
-  for (unsigned int i =0; i < mNumLights; i++ ) {
+  for ( unsigned int i =0; i < mNumLights; i++ ) {
     mBlink[i].on = true;
-    mBlink[i].enabled = true;
-    mBlink[i].freq = 1;
+    mBlink[i].enabled = false;
+    mBlink[i].freq = 1.0f;
     mBlink[i].tick = 0;
-    mBlink[i].color = CRgbColor(0, 0, 0);
+    mBlink[i].color = CRgbColor ( 0, 0, 0 );
   }
 
-  mDotBlink.on = false;
-  mDotBlink.enabled = false;
-  mDotBlink.freq = 1;
-  mDotBlink.tick = 0;
 }
 //---------------------------------------------------------------------------
 CCBLights::~CCBLights()
@@ -63,8 +58,8 @@ void CCBLights::setEnabled ( bool enable )
     mFgEnabled = true;
   } else {
     mFgEnabled = false;
-    for ( unsigned char i = 0; i < mNumLights; i++ )
-      mCBDriver->setRgbLed ( i, CRgbColor(0, 0, 0) );
+    for ( unsigned char i = 0; i < mNumLights-1; i++ )
+      mCBDriver->setRgbLed ( i, CRgbColor ( 0, 0, 0 ) );
   }
 }
 //----------------------------------------------------------------------------
@@ -76,7 +71,7 @@ int CCBLights::init()
 void CCBLights::updateData()
 {
   if ( mFgEnabled ) {
-    for ( unsigned int i = 0; i < mNumLights; i++ ) {
+    for ( unsigned int i = 0; i < mNumLights-1; i++ ) {
       if ( mBlink[i].enabled ) {
         mBlink[i].tick = mBlink[i].tick - 1;
         if ( mBlink[i].tick <= 0 ) {
@@ -87,50 +82,28 @@ void CCBLights::updateData()
             mCBDriver->setRgbLed ( i, mBlink[i].color );
           } else {
             mBlink[i].on = true;
-            mCBDriver->setRgbLed ( i, CRgbColor(0, 0, 0) );
+            mCBDriver->setRgbLed ( i, CRgbColor ( 0, 0, 0 ) );
           }
         }
       }
     } // for
 
-    switch ( mDot ) {
-      case DOT_OFF:
+    mBlink[DOT].tick = mBlink[DOT].tick - 1;
+    if ( mBlink[DOT].tick <= 0 ) {
+
+      mBlink[DOT].tick = ( int ) ( 0.5/ ( mBlink[DOT].freq * CB_T ) );
+      if ( mBlink[DOT].on == true ) {
+        mBlink[DOT].on = false;
         mCBDriver->set7SegDot ( false );
-        mDotBlink.on = false;
-        break;
-
-      case DOT_ON:
+      } else {
+        mBlink[DOT].on = true;
         mCBDriver->set7SegDot ( true );
-        mDotBlink.on = true;
-        break;
-
-      case DOT_BLINK:
-        mDotBlink.tick = mDotBlink.tick - 1;
-        if ( mDotBlink.tick <= 0 ) {
-
-          mDotBlink.tick = ( int ) ( 0.5/ ( mDotBlink.freq * CB_T ) );
-          if ( mDotBlink.on == true ) {
-            mDotBlink.on = false;
-            mCBDriver->set7SegDot ( false );
-          } else {
-            mDotBlink.on = true;
-            mCBDriver->set7SegDot ( true );
-          }
-        }
-        break;
-
-    }  // switch
+      }
+    }
 
     // update time stamp of this measurement
     mTimeStamp = timeStamp();
   } // enabled
-}
-//----------------------------------------------------------------------------
-int CCBLights::set7SegDot ( t7SegDot dot )
-{
-  mDot = dot;
-
-  return 1; // success
 }
 //----------------------------------------------------------------------------
 int CCBLights::setBlink ( int id, bool enabled, float freq )
@@ -143,13 +116,13 @@ int CCBLights::setBlink ( int id, bool enabled, float freq )
     return 1;
   }
 
-  if ( ( (unsigned int)id >= mNumLights ) || ( id < 0 ) ) {
+  if ( ( ( unsigned int ) id >= mNumLights ) || ( id < 0 ) ) {
     ERROR2 ( "Led id out of bounds %d [0..%d]",id, mNumLights-1 );
     return 0;
   }
   if ( freq == 0 ) {
     PRT_WARN1 ( "Blink frequency for led %d cannot be 0",id );
-    return 0;
+    return 0; // failure
   }
 
   mBlink[id].enabled = enabled;
@@ -164,44 +137,53 @@ int CCBLights::setBlink ( int id, bool enabled, float freq )
 int CCBLights::setLight ( int id, CRgbColor color )
 {
   if ( id == -1 ) {
-    for ( unsigned int i =0; i < mNumLights; i++ ) {
+    for ( unsigned int i =0; i < mNumLights-1; i++ ) {
       setLight ( i, color );
     }
     return 1;
   }
 
-  if ( ( (unsigned int)id >= mNumLights ) || ( id < 0 ) ) {
+  if ( ( ( unsigned int ) id >= mNumLights ) || ( id < 0 ) ) {
     ERROR2 ( "Led id out of bounds %d [0..%d]",id, mNumLights-1 );
-    return 0;
+    return 0; // failure
   }
 
   mBlink[id].color = color;
 
   // set led rgb value only if not blinking, if blinking stuff is handled by
-  // update()
-  if ( mBlink[id].enabled == false )
-    return mCBDriver->setRgbLed ( id, color );
-
+  // updateData()
+  if ( mBlink[id].enabled == false ) {
+    if ( (unsigned int)id < mNumLights-1 ) {
+      return mCBDriver->setRgbLed ( id, color );
+    } else {
+      if ( color == CRgbColor ( 0,0,0 ) )
+        return mCBDriver->set7SegDot ( false );
+      else
+        return mCBDriver->set7SegDot ( true );
+    }
+  }
   return 1;
 }
 //----------------------------------------------------------------------------
 void CCBLights::print()
 {
-  printf ( "Lights: " );
-  //for (int i = 0; i < mNumRbgLeds; i ++) {
-  //  printf(" %d (%03d %03d %03d) ", i,
+  printf ( "CCBLights: " );
+  for ( unsigned int i = 0; i < mNumLights; i ++ ) {
+    printf ( " %d  ", i );
+    mBlink[i].color.print();
+  }
   printf ( "\n" );
 }
 //----------------------------------------------------------------------------
 int CCBLights::setLight ( int id, tColor color )
 {
   switch ( color ) {
-    case RED:    return setLight ( id, CRgbColor(255,   0,   0) );
-    case GREEN:  return setLight ( id, CRgbColor(  0, 255,   0) );
-    case BLUE:   return setLight ( id, CRgbColor(  0,   0, 255) );
-    case YELLOW: return setLight ( id, CRgbColor(255, 255,   0) );
-    case WHITE:  return setLight ( id, CRgbColor(255, 255, 255) );
-    case BLACK:  return setLight ( id, CRgbColor(  0,   0,   0) );
+    case RED:    return setLight ( id, CRgbColor ( 255,   0,   0 ) );
+    case GREEN:  return setLight ( id, CRgbColor ( 0, 255,   0 ) );
+    case BLUE:   return setLight ( id, CRgbColor ( 0,   0, 255 ) );
+    case YELLOW: return setLight ( id, CRgbColor ( 255, 255,   0 ) );
+    case WHITE:  return setLight ( id, CRgbColor ( 255, 255, 255 ) );
+    case BLACK:  return setLight ( id, CRgbColor ( 0,   0,   0 ) );
 
     default:
       ERROR1 ( "Unknown color %d ", color );

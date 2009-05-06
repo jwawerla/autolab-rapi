@@ -25,19 +25,20 @@
  ***************************************************************************/
 #include "rgbcolor.h"
 #include "utilities.h"
+#include "stdio.h"
 
 namespace Rapi
 {
 
 //---------------------------------------------------------------------------
-CRgbColor::CRgbColor(unsigned char r, unsigned char g, unsigned char b )
+CRgbColor::CRgbColor ( unsigned char r, unsigned char g, unsigned char b )
 {
   mRed = r;
   mGreen = g;
   mBlue = b;
 }
 //---------------------------------------------------------------------------
-CRgbColor::CRgbColor(CRgbColor const &color)
+CRgbColor::CRgbColor ( CRgbColor const &color )
 {
   mRed = color.mRed;
   mGreen = color.mGreen;
@@ -48,7 +49,12 @@ CRgbColor::~CRgbColor()
 {
 }
 //---------------------------------------------------------------------------
-CRgbColor& CRgbColor::operator = (CRgbColor const &color)
+void CRgbColor::print()
+{
+  printf ( "CRgbColor %d %d %d \n", mRed, mGreen, mBlue );
+}
+//---------------------------------------------------------------------------
+CRgbColor& CRgbColor::operator = ( const CRgbColor  &color )
 {
   mRed = color.mRed;
   mGreen = color.mGreen;
@@ -57,6 +63,17 @@ CRgbColor& CRgbColor::operator = (CRgbColor const &color)
   return *this;
 }
 //---------------------------------------------------------------------------
+bool CRgbColor::operator == ( const CRgbColor color )
+{
+  if ( ( mRed == color.mRed ) &&
+       ( mGreen == color.mGreen ) &&
+       ( mBlue == color.mBlue ) )
+    return true;
+
+  return false;
+}
+//---------------------------------------------------------------------------
+
 
 } // namespace
 

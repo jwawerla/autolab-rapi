@@ -52,8 +52,8 @@ class ALights : public ADevice
      * @return 1 if successfull, 0 otherwise
      */
     virtual int setLight(int id, unsigned char red,
-                         unsigned char green = 0,
-                         unsigned char blue = 0);
+                         unsigned char green,
+                         unsigned char blue);
     /**
      * Sets a given rgb value for a light, note for none rgb lights
      * just set the red channel and leave the remaining open

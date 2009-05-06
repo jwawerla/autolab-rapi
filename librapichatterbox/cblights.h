@@ -30,11 +30,12 @@ namespace Rapi
 
 #define ALL_LEDS -1
 
-typedef enum {DOT_OFF, DOT_ON, DOT_BLINK} t7SegDot;
 typedef enum {RED, GREEN, BLUE, YELLOW, WHITE, BLACK} tColor;
 
 /**
  * This class implements control for the rgb leds and the display of chatterbox
+ * The rgb led are addressed by id 0..4 and id 5 can be used to address the dot
+ * of the 7seg display.
  * @author Jens Wawerla <jwawerla@sfu.ca>
  * @version 0.1 - 01/2008
  */
@@ -80,12 +81,6 @@ class CCBLights : public ALights
      */
     virtual int setLight(int id, tColor color);
     /**
-     * Sets the dot of the 7 segment display
-     * @param dot status of dot
-     * @return 1 if successfull, -1 otherwise
-     */
-    int set7SegDot(t7SegDot dot);
-    /**
      * Prints the devices main information
      */
     virtual void print();
@@ -111,11 +106,8 @@ class CCBLights : public ALights
     /** Chatterbox driver to enable or disable the laser power */
     CCBDriver* mCBDriver;
     /** Blink setting for led */
-    tBlink mBlink[5];
-    /** Status of 7 segment dot */
-    t7SegDot mDot;
-    /** Status of dot */
-    tBlink mDotBlink;
+    tBlink mBlink[6];
+
 };
 
 } // namespace

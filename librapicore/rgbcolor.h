@@ -51,9 +51,13 @@ class CRgbColor
     /** Default destructor */
     ~CRgbColor();
     /**
-     * Assignment operator
+     * Prints the color value
      */
-    CRgbColor& operator = (CRgbColor const &color);
+    void print();
+    /** Assignment operator */
+    CRgbColor& operator = (const CRgbColor &color);
+    /** Overloaded == operator */
+    bool operator== ( const CRgbColor color );
     /** Red value */
     unsigned char mRed;
     /** Green value */
