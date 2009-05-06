@@ -112,13 +112,10 @@ void CCBDrivetrain2dof::updateData()
     mPrevVelocityCmd = mVelocityCmd;
     // limit speeds
     applyVelocityLimits();
-    printf ( "after limit " );
-    mVelocityCmd.print();
 
     // set OpenInterface Mode
     if ( mCBDriver->mCreateSensorPackage.oiMode != mOIMode )
       mCBDriver->setOIMode ( mOIMode );
-
 
     // set speeds
     if ( mCBDriver->setSpeed ( mVelocityCmd ) == 0 ) {

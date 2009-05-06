@@ -63,11 +63,11 @@ CCBDriver::~CCBDriver()
 {
   // disable lights
   set7SegDisplay ( 0 );
-  setRgbLed ( 0, 0, 0, 0 );
-  setRgbLed ( 1, 0, 0, 0 );
-  setRgbLed ( 2, 0, 0, 0 );
-  setRgbLed ( 3, 0, 0, 0 );
-  setRgbLed ( 4, 0, 0, 0 );
+  setRgbLed ( 0, CRgbColor(0, 0, 0) );
+  setRgbLed ( 1, CRgbColor(0, 0, 0) );
+  setRgbLed ( 2, CRgbColor(0, 0, 0) );
+  setRgbLed ( 3, CRgbColor(0, 0, 0) );
+  setRgbLed ( 4, CRgbColor(0, 0, 0) );
 
   // disable  7 seg display
   set7SegDisplay ( 0 );
@@ -302,7 +302,6 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
     rad_mm = ( int16_t ) 0x8000;
   } else {
     if ( isAboutZero(vel.mVX) ) {
-      printf("Special cases: turn in place\n");
       // Special cases: turn in place
       if ( vel.mYawDot > 0.0 )
         rad_mm = 1;
@@ -911,8 +910,7 @@ int CCBDriver::initI2c()
   return 1;  // success
 }
 //----------------------------------------------------------------------------
-int CCBDriver::setRgbLed ( unsigned char id, unsigned char red,
-                           unsigned char green, unsigned char blue )
+int CCBDriver::setRgbLed ( unsigned char id, CRgbColor color )
 {
   unsigned char data[2];
 
@@ -926,9 +924,9 @@ int CCBDriver::setRgbLed ( unsigned char id, unsigned char red,
   I2cSetSlaveAddress ( mI2cDev, mLed[id][RED].chipAddr, I2C_NO_CRC );
 
   data[0] = mLed[id][RED].ledAddr;
-  data[1] = red;
+  data[1] = color.mRed;
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
-    ERROR2 ( "Failed to set color red of led %d to %d", id, red );
+    ERROR2 ( "Failed to set color red of led %d to %d", id, color.mRed );
     return 0; // failure
   }
 
@@ -937,9 +935,9 @@ int CCBDriver::setRgbLed ( unsigned char id, unsigned char red,
   I2cSetSlaveAddress ( mI2cDev, mLed[id][GREEN].chipAddr, I2C_NO_CRC );
 
   data[0] = mLed[id][GREEN].ledAddr;
-  data[1] = green;
+  data[1] = color.mGreen;
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
-    ERROR2 ( "Failed to set color green of led %d to %d", id, green );
+    ERROR2 ( "Failed to set color green of led %d to %d", id, color.mGreen );
     return 0; // failure
   }
 
@@ -948,9 +946,9 @@ int CCBDriver::setRgbLed ( unsigned char id, unsigned char red,
   I2cSetSlaveAddress ( mI2cDev, mLed[id][BLUE].chipAddr, I2C_NO_CRC );
 
   data[0] = mLed[id][BLUE].ledAddr;
-  data[1] = blue;
+  data[1] = color.mBlue;
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
-    ERROR2 ( "Failed to set color blue of led %d to %d \n", id, blue );
+    ERROR2 ( "Failed to set color blue of led %d to %d \n", id, color.mBlue );
     return 0; // failure
   }
 

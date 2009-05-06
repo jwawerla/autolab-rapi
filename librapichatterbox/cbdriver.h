@@ -24,6 +24,7 @@
 
 #include "cbtypes.h"
 #include "velocity2d.h"
+#include "rgbcolor.h"
 
 namespace Rapi
 {
@@ -214,13 +215,10 @@ class CCBDriver
      *  3 - back
      *  4 - right
      * @param id of led to set
-     * @param red [0..255]
-     * @param green [0..255]
-     * @param blue [0..255]
+     * @param color to be set
      * @return 1 successfull, 0 error
      */
-    int setRgbLed(unsigned char id, unsigned char red, unsigned char green,
-                  unsigned char blue);
+    int setRgbLed(unsigned char id, CRgbColor color);
     /**
      * Sets the 7 segment display to show a given decimal and the dot
      * @param h hexadecimal to display [0..F]

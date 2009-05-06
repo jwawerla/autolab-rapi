@@ -27,11 +27,17 @@ namespace Rapi
 ALights::ALights( std::string devName )
  : ADevice( devName)
 {
+  mFgEnabled = false;
 }
 //-----------------------------------------------------------------------------
-
 ALights::~ALights()
 {
+}
+//-----------------------------------------------------------------------------
+int ALights::setLight(int id, unsigned char red, unsigned char green,
+                  unsigned char blue)
+{
+  return setLight(id, CRgbColor(red, green, blue) );
 }
 //-----------------------------------------------------------------------------
 void ALights::print()

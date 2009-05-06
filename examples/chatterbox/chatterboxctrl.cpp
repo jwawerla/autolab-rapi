@@ -30,6 +30,7 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mRobot->findDevice ( mIr, "CB:ir" );
   mRobot->findDevice ( mTextDisplay, "CB:textdisplay" );
   mRobot->findDevice ( mBumper, "CB:bumper");
+  mRobot->findDevice( mLights, "CB:lights");
 
   if ( rapiError->hasError() ) {
     rapiError->print();
@@ -43,10 +44,17 @@ CChatterboxCtrl::~CChatterboxCtrl()
 //-----------------------------------------------------------------------------
 void CChatterboxCtrl::update ( float dt )
 {
+  static unsigned char c = 0;
+
+
   ((CCBDrivetrain2dof*)mDrivetrain)->setDefaultOIMode(CB_MODE_FULL);
 
-  mDrivetrain->setSpeedCmd(0.3, 0.0);
-  obstacleAvoid();
+   c++;
+   mLights->setLight(-1, CRgbColor( c, c, c) );
+   mTextDisplay->setText("1");
+
+  //mDrivetrain->setSpeedCmd(0.3, 0.0);
+  //obstacleAvoid();
 
   if ( rapiError->hasError() ) {
     rapiError->print();

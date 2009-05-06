@@ -35,18 +35,16 @@ CCBLights::CCBLights ( CCBDriver* cbDriver, std::string devName )
   mCBDriver = cbDriver;
 
   setEnabled ( true );
-  mNumRbgLeds = 5;
+  mNumLights = 5;
 
   mDot = DOT_OFF;
 
-  for ( int i =0; i < mNumRbgLeds; i++ ) {
+  for (unsigned int i =0; i < mNumLights; i++ ) {
     mBlink[i].on = true;
     mBlink[i].enabled = true;
     mBlink[i].freq = 1;
     mBlink[i].tick = 0;
-    mBlink[i].red = 0;
-    mBlink[i].green = 0;
-    mBlink[i].blue = 0;
+    mBlink[i].color = CRgbColor(0, 0, 0);
   }
 
   mDotBlink.on = false;
@@ -65,8 +63,8 @@ void CCBLights::setEnabled ( bool enable )
     mFgEnabled = true;
   } else {
     mFgEnabled = false;
-    for ( unsigned char i = 0; i < mNumRbgLeds; i++ )
-      mCBDriver->setRgbLed ( i, 0, 0, 0 );
+    for ( unsigned char i = 0; i < mNumLights; i++ )
+      mCBDriver->setRgbLed ( i, CRgbColor(0, 0, 0) );
   }
 }
 //----------------------------------------------------------------------------
@@ -78,7 +76,7 @@ int CCBLights::init()
 void CCBLights::updateData()
 {
   if ( mFgEnabled ) {
-    for ( int i = 0; i < mNumRbgLeds; i++ ) {
+    for ( unsigned int i = 0; i < mNumLights; i++ ) {
       if ( mBlink[i].enabled ) {
         mBlink[i].tick = mBlink[i].tick - 1;
         if ( mBlink[i].tick <= 0 ) {
@@ -86,10 +84,10 @@ void CCBLights::updateData()
           mBlink[i].tick = ( int ) ( 0.5/ ( mBlink[i].freq * CB_T ) );
           if ( mBlink[i].on == true ) {
             mBlink[i].on = false;
-            mCBDriver->setRgbLed ( i, mBlink[i].red, mBlink[i].green, mBlink[i].blue );
+            mCBDriver->setRgbLed ( i, mBlink[i].color );
           } else {
             mBlink[i].on = true;
-            mCBDriver->setRgbLed ( i, 0, 0, 0 );
+            mCBDriver->setRgbLed ( i, CRgbColor(0, 0, 0) );
           }
         }
       }
@@ -139,14 +137,14 @@ int CCBLights::setBlink ( int id, bool enabled, float freq )
 {
 
   if ( id == -1 ) {
-    for ( int i =0; i < mNumRbgLeds; i++ ) {
+    for ( unsigned int i =0; i < mNumLights; i++ ) {
       setBlink ( i, enabled, freq );
     }
     return 1;
   }
 
-  if ( ( id >= mNumRbgLeds ) || ( id < 0 ) ) {
-    ERROR2 ( "Led id out of bounds %d [0..%d]",id, mNumRbgLeds-1 );
+  if ( ( (unsigned int)id >= mNumLights ) || ( id < 0 ) ) {
+    ERROR2 ( "Led id out of bounds %d [0..%d]",id, mNumLights-1 );
     return 0;
   }
   if ( freq == 0 ) {
@@ -163,29 +161,26 @@ int CCBLights::setBlink ( int id, bool enabled, float freq )
   return 1;
 }
 //----------------------------------------------------------------------------
-int CCBLights::setLight ( int id, unsigned char red, unsigned char green,
-                          unsigned char blue )
+int CCBLights::setLight ( int id, CRgbColor color )
 {
   if ( id == -1 ) {
-    for ( int i =0; i < mNumRbgLeds; i++ ) {
-      setLight ( i, red, green, blue );
+    for ( unsigned int i =0; i < mNumLights; i++ ) {
+      setLight ( i, color );
     }
     return 1;
   }
 
-  if ( ( id >= mNumRbgLeds ) || ( id < 0 ) ) {
-    ERROR2 ( "Led id out of bounds %d [0..%d]",id, mNumRbgLeds-1 );
+  if ( ( (unsigned int)id >= mNumLights ) || ( id < 0 ) ) {
+    ERROR2 ( "Led id out of bounds %d [0..%d]",id, mNumLights-1 );
     return 0;
   }
 
-  mBlink[id].red = red;
-  mBlink[id].green = green;
-  mBlink[id].blue = blue;
+  mBlink[id].color = color;
 
   // set led rgb value only if not blinking, if blinking stuff is handled by
   // update()
   if ( mBlink[id].enabled == false )
-    return mCBDriver->setRgbLed ( id, red, green, blue );
+    return mCBDriver->setRgbLed ( id, color );
 
   return 1;
 }
@@ -201,12 +196,12 @@ void CCBLights::print()
 int CCBLights::setLight ( int id, tColor color )
 {
   switch ( color ) {
-    case RED:    return setLight ( id, 255,   0,   0 );
-    case GREEN:  return setLight ( id,   0, 255,   0 );
-    case BLUE:   return setLight ( id,   0,   0, 255 );
-    case YELLOW: return setLight ( id, 255, 255,   0 );
-    case WHITE:  return setLight ( id, 255, 255, 255 );
-    case BLACK:  return setLight ( id,   0,   0,   0 );
+    case RED:    return setLight ( id, CRgbColor(255,   0,   0) );
+    case GREEN:  return setLight ( id, CRgbColor(  0, 255,   0) );
+    case BLUE:   return setLight ( id, CRgbColor(  0,   0, 255) );
+    case YELLOW: return setLight ( id, CRgbColor(255, 255,   0) );
+    case WHITE:  return setLight ( id, CRgbColor(255, 255, 255) );
+    case BLACK:  return setLight ( id, CRgbColor(  0,   0,   0) );
 
     default:
       ERROR1 ( "Unknown color %d ", color );

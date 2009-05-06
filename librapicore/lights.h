@@ -22,6 +22,7 @@
 #define ALIGHTS_H
 
 #include "device.h"
+#include "rgbcolor.h"
 
 namespace Rapi
 {
@@ -52,7 +53,15 @@ class ALights : public ADevice
      */
     virtual int setLight(int id, unsigned char red,
                          unsigned char green = 0,
-                         unsigned char blue = 0) = 0;
+                         unsigned char blue = 0);
+    /**
+     * Sets a given rgb value for a light, note for none rgb lights
+     * just set the red channel and leave the remaining open
+     * @param id of light, -1 all
+     * @param color to be set
+     * @return 1 if successfull, 0 otherwise
+     */
+    virtual int setLight(int id, CRgbColor color)  = 0;;
     /**
      * Sets the blinking frequency of a led
      * @param id of led to be set, -1 all leds
@@ -64,6 +73,11 @@ class ALights : public ADevice
      * Prints the devices main information
      */
     virtual void print();
+    /**
+     * Gets the number of available lights
+     * @return number of lights
+     */
+    unsigned int getNumLights() { return mNumLights; };
 
   protected:
     /**
@@ -71,6 +85,8 @@ class ALights : public ADevice
      * @param devName name of device
      */
     ALights(std::string devName);
+    /** Number of lights */
+    unsigned int mNumLights;
 };
 
 } // namespace

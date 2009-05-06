@@ -68,14 +68,10 @@ class CCBLights : public ALights
      * Sets a given rgb value for a light, note for none rgb lights
      * just set the red channel and leave the remaining open
      * @param id of light, -1 all leds
-     * @param red [0..255]
-     * @param green [0..255]
-     * @param blue [0..255]
+     * @param color to be set
      * @return 1 if successfull, -1 otherwise
      */
-    virtual int setLight(int id, unsigned char red,
-                         unsigned char green = 0,
-                         unsigned char blue = 0);
+    virtual int setLight(int id, CRgbColor color);
 
     /**
      * Sets a color for a given led
@@ -108,9 +104,7 @@ class CCBLights : public ALights
       int tick;
       bool enabled;
       bool on;
-      unsigned char red;
-      unsigned char green;
-      unsigned char blue;
+      CRgbColor color;
     } tBlink;
 
   private:
@@ -118,8 +112,6 @@ class CCBLights : public ALights
     CCBDriver* mCBDriver;
     /** Blink setting for led */
     tBlink mBlink[5];
-    /** Number of rgb leds available */
-    unsigned char mNumRbgLeds;
     /** Status of 7 segment dot */
     t7SegDot mDot;
     /** Status of dot */

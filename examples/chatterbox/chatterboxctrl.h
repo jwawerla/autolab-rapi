@@ -56,6 +56,8 @@ class CChatterboxCtrl : public ARobotCtrl
     APowerPack* mPowerPack;
     /** Text display */
     ATextDisplay* mTextDisplay;
+    /** Lights */
+    ALights* mLights;
     /** Bumper */
     ABumper* mBumper;
 };

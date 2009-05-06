@@ -30,11 +30,11 @@ namespace Rapi
 {
 
 //---------------------------------------------------------------------------
-CRgbColor::CRgbColor(int r, int g, int b )
+CRgbColor::CRgbColor(unsigned char r, unsigned char g, unsigned char b )
 {
-  mRed = MIN(MAX(r, 0), 255);
-  mGreen = MIN(MAX(g, 0), 255);
-  mBlue = MIN(MAX(b, 0), 255);
+  mRed = r;
+  mGreen = g;
+  mBlue = b;
 }
 //---------------------------------------------------------------------------
 CRgbColor::CRgbColor(CRgbColor const &color)
@@ -48,11 +48,13 @@ CRgbColor::~CRgbColor()
 {
 }
 //---------------------------------------------------------------------------
-void CRgbColor::operator = (CRgbColor const &color)
+CRgbColor& CRgbColor::operator = (CRgbColor const &color)
 {
   mRed = color.mRed;
   mGreen = color.mGreen;
   mBlue = color.mBlue;
+
+  return *this;
 }
 //---------------------------------------------------------------------------
 

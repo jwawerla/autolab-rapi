@@ -43,7 +43,7 @@ class CRgbColor
      * @param g green
      * @param b blue
      */
-    CRgbColor( int r=0, int g=0, int b=0 );
+    CRgbColor( unsigned char r=0, unsigned char g=0, unsigned char b=0 );
     /**
      * Copy constructor 
      */
@@ -53,13 +53,13 @@ class CRgbColor
     /**
      * Assignment operator
      */
-    void operator = (CRgbColor const &color);
+    CRgbColor& operator = (CRgbColor const &color);
     /** Red value */
-    int mRed;
+    unsigned char mRed;
     /** Green value */
-    int mGreen;
+    unsigned char mGreen;
     /** Blue value */
-    int mBlue;
+    unsigned char mBlue;
 
 };
 
