@@ -48,7 +48,7 @@ extern "C"
 namespace Rapi
 {
 
-typedef enum {RED, GREEN, BLUE} tLed;
+typedef enum {RED_CH, GREEN_CH, BLUE_CH} tLed;
 
 // TODO: add singleton
 //-----------------------------------------------------------------------------
@@ -862,40 +862,40 @@ int CCBDriver::initI2c()
   //****************************************
   // RGB stuff
 
-  mLed[0][RED].chipAddr   = LED0_R_ADDR;
-  mLed[0][RED].ledAddr    = LED0_R_PORT;
-  mLed[0][GREEN].chipAddr = LED0_G_ADDR;
-  mLed[0][GREEN].ledAddr  = LED0_G_PORT;
-  mLed[0][BLUE].chipAddr  = LED0_B_ADDR;
-  mLed[0][BLUE].ledAddr   = LED0_B_PORT;
+  mLed[0][RED_CH].chipAddr   = LED0_R_ADDR;
+  mLed[0][RED_CH].ledAddr    = LED0_R_PORT;
+  mLed[0][GREEN_CH].chipAddr = LED0_G_ADDR;
+  mLed[0][GREEN_CH].ledAddr  = LED0_G_PORT;
+  mLed[0][BLUE_CH].chipAddr  = LED0_B_ADDR;
+  mLed[0][BLUE_CH].ledAddr   = LED0_B_PORT;
 
-  mLed[1][RED].chipAddr   = LED1_R_ADDR;
-  mLed[1][RED].ledAddr    = LED1_R_PORT;
-  mLed[1][GREEN].chipAddr = LED1_G_ADDR;
-  mLed[1][GREEN].ledAddr  = LED1_G_PORT;
-  mLed[1][BLUE].chipAddr  = LED1_B_ADDR;
-  mLed[1][BLUE].ledAddr   = LED1_B_PORT;
+  mLed[1][RED_CH].chipAddr   = LED1_R_ADDR;
+  mLed[1][RED_CH].ledAddr    = LED1_R_PORT;
+  mLed[1][GREEN_CH].chipAddr = LED1_G_ADDR;
+  mLed[1][GREEN_CH].ledAddr  = LED1_G_PORT;
+  mLed[1][BLUE_CH].chipAddr  = LED1_B_ADDR;
+  mLed[1][BLUE_CH].ledAddr   = LED1_B_PORT;
 
-  mLed[2][RED].chipAddr   = LED2_R_ADDR;
-  mLed[2][RED].ledAddr    = LED2_R_PORT;
-  mLed[2][GREEN].chipAddr = LED2_G_ADDR;
-  mLed[2][GREEN].ledAddr  = LED2_G_PORT;
-  mLed[2][BLUE].chipAddr  = LED2_B_ADDR;
-  mLed[2][BLUE].ledAddr   = LED2_B_PORT;
+  mLed[2][RED_CH].chipAddr   = LED2_R_ADDR;
+  mLed[2][RED_CH].ledAddr    = LED2_R_PORT;
+  mLed[2][GREEN_CH].chipAddr = LED2_G_ADDR;
+  mLed[2][GREEN_CH].ledAddr  = LED2_G_PORT;
+  mLed[2][BLUE_CH].chipAddr  = LED2_B_ADDR;
+  mLed[2][BLUE_CH].ledAddr   = LED2_B_PORT;
 
-  mLed[3][RED].chipAddr   = LED3_R_ADDR;
-  mLed[3][RED].ledAddr    = LED3_R_PORT;
-  mLed[3][GREEN].chipAddr = LED3_G_ADDR;
-  mLed[3][GREEN].ledAddr  = LED3_G_PORT;
-  mLed[3][BLUE].chipAddr  = LED3_B_ADDR;
-  mLed[3][BLUE].ledAddr   = LED3_B_PORT;
+  mLed[3][RED_CH].chipAddr   = LED3_R_ADDR;
+  mLed[3][RED_CH].ledAddr    = LED3_R_PORT;
+  mLed[3][GREEN_CH].chipAddr = LED3_G_ADDR;
+  mLed[3][GREEN_CH].ledAddr  = LED3_G_PORT;
+  mLed[3][BLUE_CH].chipAddr  = LED3_B_ADDR;
+  mLed[3][BLUE_CH].ledAddr   = LED3_B_PORT;
 
-  mLed[4][RED].chipAddr   = LED4_R_ADDR;
-  mLed[4][RED].ledAddr    = LED4_R_PORT;
-  mLed[4][GREEN].chipAddr = LED4_G_ADDR;
-  mLed[4][GREEN].ledAddr  = LED4_G_PORT;
-  mLed[4][BLUE].chipAddr  = LED4_B_ADDR;
-  mLed[4][BLUE].ledAddr   = LED4_B_PORT;
+  mLed[4][RED_CH].chipAddr   = LED4_R_ADDR;
+  mLed[4][RED_CH].ledAddr    = LED4_R_PORT;
+  mLed[4][GREEN_CH].chipAddr = LED4_G_ADDR;
+  mLed[4][GREEN_CH].ledAddr  = LED4_G_PORT;
+  mLed[4][BLUE_CH].chipAddr  = LED4_B_ADDR;
+  mLed[4][BLUE_CH].ledAddr   = LED4_B_PORT;
 
   // reset all chips and then initialize them
   if ( resetPCA9634() == 0 )
@@ -921,9 +921,9 @@ int CCBDriver::setRgbLed ( unsigned char id, CRgbColor color )
 
   //*************************************
   // send red channel data
-  I2cSetSlaveAddress ( mI2cDev, mLed[id][RED].chipAddr, I2C_NO_CRC );
+  I2cSetSlaveAddress ( mI2cDev, mLed[id][RED_CH].chipAddr, I2C_NO_CRC );
 
-  data[0] = mLed[id][RED].ledAddr;
+  data[0] = mLed[id][RED_CH].ledAddr;
   data[1] = color.mRed;
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
     ERROR2 ( "Failed to set color red of led %d to %d", id, color.mRed );
@@ -932,9 +932,9 @@ int CCBDriver::setRgbLed ( unsigned char id, CRgbColor color )
 
   //*************************************
   // send green channel data
-  I2cSetSlaveAddress ( mI2cDev, mLed[id][GREEN].chipAddr, I2C_NO_CRC );
+  I2cSetSlaveAddress ( mI2cDev, mLed[id][GREEN_CH].chipAddr, I2C_NO_CRC );
 
-  data[0] = mLed[id][GREEN].ledAddr;
+  data[0] = mLed[id][GREEN_CH].ledAddr;
   data[1] = color.mGreen;
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
     ERROR2 ( "Failed to set color green of led %d to %d", id, color.mGreen );
@@ -943,9 +943,9 @@ int CCBDriver::setRgbLed ( unsigned char id, CRgbColor color )
 
   //*************************************
   // send blue channel data
-  I2cSetSlaveAddress ( mI2cDev, mLed[id][BLUE].chipAddr, I2C_NO_CRC );
+  I2cSetSlaveAddress ( mI2cDev, mLed[id][BLUE_CH].chipAddr, I2C_NO_CRC );
 
-  data[0] = mLed[id][BLUE].ledAddr;
+  data[0] = mLed[id][BLUE_CH].ledAddr;
   data[1] = color.mBlue;
   if ( I2cSendBytes ( mI2cDev, data, 2 ) != 0 ) {
     ERROR2 ( "Failed to set color blue of led %d to %d \n", id, color.mBlue );

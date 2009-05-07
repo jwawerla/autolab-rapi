@@ -28,10 +28,6 @@
 namespace Rapi
 {
 
-#define ALL_LEDS -1
-
-typedef enum {RED, GREEN, BLUE, YELLOW, WHITE, BLACK} tColor;
-
 /**
  * This class implements control for the rgb leds and the display of chatterbox
  * The rgb led are addressed by id 0..4 and id 5 can be used to address the dot
@@ -73,13 +69,6 @@ class CCBLights : public ALights
      * @return 1 if successfull, -1 otherwise
      */
     virtual int setLight(int id, CRgbColor color);
-
-    /**
-     * Sets a color for a given led
-     * @param id of light, -1 all leds
-     * @param color to be set
-     */
-    virtual int setLight(int id, tColor color);
     /**
      * Prints the devices main information
      */

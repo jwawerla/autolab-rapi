@@ -19,6 +19,7 @@ SET( HEADERS
   cbwallsensor.h
   cbwheeldropsensor.h
   cbcliffsensor.h
+  cbovercurrentsensor.h
 )
 
 SET( SOURCES
@@ -35,6 +36,7 @@ SET( SOURCES
   cbwallsensor.cpp
   cbwheeldropsensor.cpp
   cbcliffsensor.cpp
+  cbovercurrentsensor.cpp
 )
 
 INCLUDE_DIRECTORIES(

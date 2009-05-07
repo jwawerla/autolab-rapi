@@ -30,4 +30,4 @@
 #include "cbbumper.h"
 #include "cbwallsensor.h"
 #include "cbcliffsensor.h"
-
+#include "cbovercurrentsensor.h"

@@ -175,22 +175,6 @@ void CCBLights::print()
   printf ( "\n" );
 }
 //----------------------------------------------------------------------------
-int CCBLights::setLight ( int id, tColor color )
-{
-  switch ( color ) {
-    case RED:    return setLight ( id, CRgbColor ( 255,   0,   0 ) );
-    case GREEN:  return setLight ( id, CRgbColor ( 0, 255,   0 ) );
-    case BLUE:   return setLight ( id, CRgbColor ( 0,   0, 255 ) );
-    case YELLOW: return setLight ( id, CRgbColor ( 255, 255,   0 ) );
-    case WHITE:  return setLight ( id, CRgbColor ( 255, 255, 255 ) );
-    case BLACK:  return setLight ( id, CRgbColor ( 0,   0,   0 ) );
 
-    default:
-      ERROR1 ( "Unknown color %d ", color );
-  }  // switch;
-
-  return 0;
-}
-//----------------------------------------------------------------------------
 
 } // namespace

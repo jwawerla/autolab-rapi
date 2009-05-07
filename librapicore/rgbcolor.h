@@ -43,11 +43,11 @@ class CRgbColor
      * @param g green
      * @param b blue
      */
-    CRgbColor( unsigned char r=0, unsigned char g=0, unsigned char b=0 );
+    CRgbColor ( unsigned char r=0, unsigned char g=0, unsigned char b=0 );
     /**
-     * Copy constructor 
+     * Copy constructor
      */
-    CRgbColor(CRgbColor const &color);
+    CRgbColor ( CRgbColor const &color );
     /** Default destructor */
     ~CRgbColor();
     /**
@@ -55,7 +55,7 @@ class CRgbColor
      */
     void print();
     /** Assignment operator */
-    CRgbColor& operator = (const CRgbColor &color);
+    CRgbColor& operator = ( const CRgbColor &color );
     /** Overloaded == operator */
     bool operator== ( const CRgbColor color );
     /** Red value */
@@ -65,7 +65,15 @@ class CRgbColor
     /** Blue value */
     unsigned char mBlue;
 
+
 };
+
+/** Define some handy colors */
+const CRgbColor RED ( 255,0,0 );
+const CRgbColor GREEN ( 0,255,0 );
+const CRgbColor BLUE ( 0,0,255 );
+const CRgbColor WHITE ( 255,255,255 );
+const CRgbColor BLACK ( 0,0,0 );
 
 } // namespace
 

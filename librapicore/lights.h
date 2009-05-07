@@ -27,6 +27,8 @@
 namespace Rapi
 {
 
+#define ALL_LIGHTS -1
+
 /**
  * Abstract base class for all lights stuff
  * @author Jens Wawerla <jwawerla@sfu.ca>

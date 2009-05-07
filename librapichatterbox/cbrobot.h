@@ -34,6 +34,7 @@
 #include "cbwallsensor.h"
 #include "cbcliffsensor.h"
 #include "cbwheeldropsensor.h"
+#include "cbovercurrentsensor.h"
 #include "fiducialfinder.h"
 
 
@@ -116,6 +117,8 @@ class CCBRobot : public ARobot
     CCBWheelDropSensor* mCBWheelDrop;
     /** Cliff sensor */
     CCBCliffSensor* mCBCliff;
+    /** Over current sensors */
+    CCBOverCurrentSensor* mCBOverCurrent;
     /** Last time synchronize was called */
     double mLastSynchronizeTime;
 };

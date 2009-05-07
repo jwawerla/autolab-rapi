@@ -61,6 +61,8 @@ class CChatterboxCtrl : public ARobotCtrl
     ALights* mLights;
     /** Bumper */
     ABinarySensorArray* mBumper;
+    /** Wheel drop */
+    ABinarySensorArray* mWheelDrop;
 };
 
 #endif

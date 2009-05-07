@@ -41,6 +41,7 @@ CCBRobot::CCBRobot()
   mCBWall = NULL;
   mCBWheelDrop = NULL;
   mCBCliff = NULL;
+  mCBOverCurrent = NULL;
 
   mFgRunning = true;
 }
@@ -73,6 +74,9 @@ CCBRobot::~CCBRobot()
 
   if ( mCBCliff )
     delete mCBCliff;
+
+  if ( mCBOverCurrent )
+    delete mCBOverCurrent;
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::init()
@@ -126,6 +130,8 @@ void CCBRobot::run ()
         mCBWheelDrop->updateData();
       if ( mCBCliff )
         mCBCliff->updateData();
+      if ( mCBOverCurrent )
+        mCBOverCurrent->updateData();
     }
     // update all registered constrollers
     updateControllers();
@@ -286,6 +292,7 @@ int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
 {
   if ( ( devName != "CB:bumper" ) &&
        ( devName != "CB:cliff" ) &&
+       ( devName != "CB:overcurrent" ) &&
        ( devName != "CB:wheeldrop" ) ) {
     ERROR1 ( "No such device: %s", devName.c_str() );
     device = NULL;
@@ -329,6 +336,19 @@ int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
 
   // return already existing device
   device = mCBCliff;
+  return 1;
+
+  //************************************
+  // Overcurrent sensor
+  // check if device already exists
+  if ( mCBOverCurrent == NULL ) {
+    mCBOverCurrent = new CCBOverCurrentSensor ( &mCBDriver, "CB:overcurrent" );
+    device = mCBOverCurrent;
+    return mCBOverCurrent->init();
+  }
+
+  // return already existing device
+  device = mCBOverCurrent;
   return 1;
 }
 //-----------------------------------------------------------------------------
