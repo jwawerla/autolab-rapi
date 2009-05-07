@@ -36,6 +36,7 @@ void ErrorPrint(int msgType, int level, const char *file, int line, const char *
 #define PRT_ERR_ERR 0
 #define PRT_ERR_WARN 1
 #define PRT_ERR_MSG 2
+#define PRT_ERR_STAT 3
 #define PRT_ERR_DBG 2
 
 
@@ -68,6 +69,9 @@ void ErrorPrint(int msgType, int level, const char *file, int line, const char *
 #define PRT_MSG2(level, msg, a, b)       ErrorPrint(PRT_ERR_MSG, level, __FILE__, __LINE__, "\033[1;37;42mINFO\033[0m: " msg "\n", a, b)
 #define PRT_MSG3(level, msg, a, b, c)    ErrorPrint(PRT_ERR_MSG, level, __FILE__, __LINE__, "\033[1;37;42mINFO\033[0m: " msg "\n", a, b, c)
 #define PRT_MSG4(level, msg, a, b, c, d) ErrorPrint(PRT_ERR_MSG, level, __FILE__, __LINE__, "\033[1;37;42mINFO\033[0m: " msg "\n", a, b, c, d)
+
+/// Status messages
+#define PRT_STATUS(msg)           ErrorPrint(PRT_ERR_STAT, 1, NULL, 0,"\033[1;37;42mSTATUS\033[0m: " msg "\n")
 
 #else
 // FOR WIN32

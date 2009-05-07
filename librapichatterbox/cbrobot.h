@@ -31,6 +31,9 @@
 #include "cblights.h"
 #include "cbbumper.h"
 #include "cbtextdisplay.h"
+#include "cbwallsensor.h"
+#include "cbcliffsensor.h"
+#include "cbwheeldropsensor.h"
 #include "fiducialfinder.h"
 
 
@@ -82,7 +85,7 @@ class CCBRobot : public ARobot
     virtual int findDevice ( AFiducialFinder* &device, std::string devName );
     virtual int findDevice ( ALights* &device, std::string devName );
     virtual int findDevice ( ATextDisplay* &device, std::string devName );
-    virtual int findDevice ( ABumper* &device, std::string devName );
+    virtual int findDevice ( ABinarySensorArray* &device, std::string devName );
 
   protected:
     /**
@@ -107,6 +110,12 @@ class CCBRobot : public ARobot
     CCBTextDisplay* mCBTextDisplay;
     /** Bumper */
     CCBBumper* mCBBumper;
+    /** Wall sensor */
+    CCBWallSensor* mCBWall;
+    /** Wheel drop sensor */
+    CCBWheelDropSensor* mCBWheelDrop;
+    /** Cliff sensor */
+    CCBCliffSensor* mCBCliff;
     /** Last time synchronize was called */
     double mLastSynchronizeTime;
 };

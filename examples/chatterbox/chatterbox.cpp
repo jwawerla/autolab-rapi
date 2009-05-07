@@ -22,11 +22,10 @@
 #include "RapiChatterbox"
 #include "chatterboxctrl.h"
 
-using namespace Rapi;
 
 int main( int argc, char* argv[] )
 {
-  CCBRobot* robot;
+  Rapi::CCBRobot* robot;
   CChatterboxCtrl* robotCtrl;
 
   // init general stuff
@@ -34,9 +33,9 @@ int main( int argc, char* argv[] )
   initRandomNumberGenerator();
 
   // create robot and its controller
-  robot = new CCBRobot ();
+  robot = new Rapi::CCBRobot ();
   if ( robot->init() == 0)
-    rapiError->print();
+    Rapi::rapiError->print();
 
   robotCtrl = new CChatterboxCtrl ( robot );
 

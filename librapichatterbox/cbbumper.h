@@ -21,7 +21,7 @@
 #ifndef RAPICBBUMPER_H
 #define RAPICBBUMPER_H
 
-#include "bumper.h"
+#include "binarysensorarray.h"
 #include "cbdriver.h"
 
 namespace Rapi {
@@ -30,7 +30,7 @@ namespace Rapi {
  * This class provides a Chatterbox implementation of a bumper sensor
  * @author Jens Wawerla
  */
-class CCBBumper : public ABumper
+class CCBBumper : public ABinarySensorArray
 {
     /** We are friends with our robot, so we get updated */
     friend class CCBRobot;
@@ -44,11 +44,6 @@ class CCBBumper : public ABumper
     CCBBumper(CCBDriver* cbDriver, std::string devName);
     /** Default destructor */
     virtual ~CCBBumper();
-    /**
-     * Get device type
-     * @return device type
-     */
-    tRapiDeviceType getDeviceType() { return RAPI_BUMPER; };
     /**
      * Enables or disables the device
      * @param enable = true to enable, false to disable

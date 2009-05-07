@@ -32,24 +32,23 @@ namespace Rapi
  * to register with the framework
  * @author Jens Wawerla <jwawerla@sfu.ca>
  */
-class ARobotCtrl : public ARobotCtrlInterface
+class ARobotCtrl : public IRobotUpdate
 {
   public:
     /** Default desctructor */
     virtual ~ARobotCtrl();
-    /**
-     * Update controller for the current time step
-     * @param dt time since last upate [s]
-     */
-    virtual void update(float dt) = 0;
 
   protected:
-
     /**
      * Default constructor
      * @param robot this controller controls
      */
     ARobotCtrl( ARobot* robot );
+    /**
+     * Update controller for the current time step
+     * @param dt time since last upate [s]
+     */
+    virtual void updateData(float dt) = 0;
     /** Robot controlled by this controller */
     ARobot* mRobot;
 };

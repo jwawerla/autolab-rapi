@@ -43,7 +43,7 @@ bool CBooleanStateVariable::operator= ( const bool b )
   return mValue;
 }
 //-----------------------------------------------------------------------------
-void CBooleanStateVariable::update(float dt)
+void CBooleanStateVariable::updateData(float dt)
 {
   if (mUpdateTimestamp - mModificationTimestamp > dt)
     mFgModified = false;

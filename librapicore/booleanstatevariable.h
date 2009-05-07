@@ -49,7 +49,7 @@ class CBooleanStateVariable : public AStateVariable
      * Called by the frame work to update the state variable
      * @param dt time since last call [s]
      */
-    virtual void update(float dt);
+    virtual void updateData(float dt);
 
   protected:
     /** Actual variable */

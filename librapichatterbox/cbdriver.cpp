@@ -85,7 +85,7 @@ CCBDriver::~CCBDriver()
 //-----------------------------------------------------------------------------
 int CCBDriver::init()
 {
-  PRT_MSG0(3, "Initializing IRobot Create...");
+  PRT_STATUS( "Initializing IRobot Create...");
 
   // lets reset robotstix, just in case
   if ( resetRobotStix() == 0 ) {
@@ -120,7 +120,7 @@ int CCBDriver::openPort ( const char* port )
   struct termios term;
   int flags;
 
-  PRT_MSG0(3,"Opening port...");
+  PRT_STATUS("Opening port...");
 
   if ( ( mFd = open ( port, O_RDWR | O_NONBLOCK, S_IRUSR | S_IWUSR ) ) < 0 ) {
     ERROR2 ( "Failed to open port %s: ", port, strerror ( errno ) );

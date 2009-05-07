@@ -40,37 +40,37 @@ std::string ARobot::getName()
   return mName;
 }
 //-----------------------------------------------------------------------------
-void ARobot::registerRobotController(ARobotCtrlInterface* ctrl)
+void ARobot::registerRobotController(IRobotUpdate* ctrl)
 {
   mRobotCtrlList.push_back( ctrl );
 }
 //-----------------------------------------------------------------------------
-void ARobot::registerStateVariable( IStateVariable* var)
+void ARobot::registerStateVariable( IRobotUpdate* var)
 {
   mStateVariableList.push_back( var );
 }
 //-----------------------------------------------------------------------------
 void ARobot::updateControllers()
 {
-  ARobotCtrlInterface* ctrl;
-  std::list<ARobotCtrlInterface*>::iterator it;
+  IRobotUpdate* ctrl;
+  std::list<IRobotUpdate*>::iterator it;
 
   for (it = mRobotCtrlList.begin(); it != mRobotCtrlList.end(); it++) {
-    ctrl = (ARobotCtrlInterface*)*it;
+    ctrl = (IRobotUpdate*)*it;
     assert(ctrl);
-    ctrl->update( mUpdateInterval );
+    ctrl->updateData( mUpdateInterval );
   }
 }
 //-----------------------------------------------------------------------------
 void ARobot::updateStateVariable()
 {
-  IStateVariable* var;
-  std::list<IStateVariable*>::iterator it;
+  IRobotUpdate* var;
+  std::list<IRobotUpdate*>::iterator it;
 
   for (it = mStateVariableList.begin(); it != mStateVariableList.end(); it++) {
-    var = (IStateVariable*)*it;
+    var = (IRobotUpdate*)*it;
     assert(var);
-    var->update( mUpdateInterval );
+    var->updateData( mUpdateInterval );
   }
 }
 //-----------------------------------------------------------------------------

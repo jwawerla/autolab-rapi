@@ -66,7 +66,7 @@ class CStageRobot : public ARobot
     virtual int findDevice ( AFiducialFinder* &device, std::string devName );
     virtual int findDevice ( ALights* &device, std::string devName );
     virtual int findDevice ( ATextDisplay* &device, std::string devName );
-    virtual int findDevice ( ABumper* &device, std::string devName );
+    virtual int findDevice ( ABinarySensorArray* &device, std::string devName );
 
   protected:
     /** Friend function of stage model updates */

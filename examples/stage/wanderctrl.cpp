@@ -50,7 +50,7 @@ CWanderCtrl::~CWanderCtrl()
 {
 }
 //-----------------------------------------------------------------------------
-void CWanderCtrl::update ( float dt )
+void CWanderCtrl::updateData ( float dt )
 {
 
   bool obstruction = false;

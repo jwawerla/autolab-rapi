@@ -52,7 +52,7 @@ CCBLaser::CCBLaser ( CCBDriver* driver, std::string devName )
   strcpy ( mLaserDevice, "/dev/ttyS0" );
   mNumSamples = 654;
   mBaudRate = B115200;
-  mMinRange = 0;
+  mMinRange = 0.0;
   mMaxRange = 4.0;
   mRangeData = new tRangeData[mNumSamples];
   mRelativeBeamPose = new CPose2d[mNumSamples];

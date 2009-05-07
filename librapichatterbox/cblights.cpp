@@ -110,7 +110,7 @@ int CCBLights::setBlink ( int id, bool enabled, float freq )
 {
 
   if ( id == -1 ) {
-    for ( unsigned int i =0; i < mNumLights; i++ ) {
+    for ( unsigned int i = 0; i < mNumLights; i++ ) {
       setBlink ( i, enabled, freq );
     }
     return 1;
@@ -153,7 +153,7 @@ int CCBLights::setLight ( int id, CRgbColor color )
   // set led rgb value only if not blinking, if blinking stuff is handled by
   // updateData()
   if ( mBlink[id].enabled == false ) {
-    if ( (unsigned int)id < mNumLights-1 ) {
+    if ( ( unsigned int ) id < mNumLights-1 ) {
       return mCBDriver->setRgbLed ( id, color );
     } else {
       if ( color == CRgbColor ( 0,0,0 ) )

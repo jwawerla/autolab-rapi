@@ -25,7 +25,7 @@ namespace Rapi {
 
 
 //-----------------------------------------------------------------------------
-AStateVariable::AStateVariable() : IStateVariable()
+AStateVariable::AStateVariable() : IRobotUpdate()
 {
   mUpdateTimestamp = 0.0;
   mModificationTimestamp = 0.0;

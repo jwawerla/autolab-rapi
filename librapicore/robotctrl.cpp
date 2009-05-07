@@ -25,7 +25,7 @@
 namespace Rapi {
 
 //-----------------------------------------------------------------------------
-ARobotCtrl::ARobotCtrl( ARobot* robot ) : ARobotCtrlInterface()
+ARobotCtrl::ARobotCtrl( ARobot* robot ) : IRobotUpdate()
 {
   assert( robot );
   mRobot = robot;

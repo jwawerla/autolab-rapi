@@ -32,6 +32,8 @@
 namespace Rapi
 {
 
+#define ESPILON 1e-6
+
 #ifndef INFINITY
   #define INFINITY infinity()
 #endif
@@ -56,11 +58,17 @@ namespace Rapi
 #endif
 
 
-/** Figure out the sign of a number */
+/**
+ * Figure out the sign of a number, 0 is assumed to be positive
+ * @param x value to get sign for
+ * @return -1 or +1
+ */
 template<typename T>
 inline int SIGN( T x)
 {
-  return (((x) == 0) ? 0 : (((x) > 0) ? 1 : -1));
+  if ( x < 0 )
+    return -1;
+  return 1;
 }
 
 /**
@@ -120,13 +128,26 @@ inline double MIN(double a, double b)
 }
 
 /**
+ * Check if the modulo is about zero
+ * @param x
+ * @param y
+ * @return true is about zero, false otherwise
+ */
+inline bool isModAboutZero(double x, double y)
+{
+  if ( fmod(x, y) < ESPILON)
+    return true;
+  return false;
+}
+
+/**
  * Checks if x is about zero, within 1e-6
  * @param x value to check
  * @return true if about zero, false otherwise
  */
 inline bool isAboutZero(double x)
 {
-  if ( fabs( x ) < 1e-6 )
+  if ( fabs( x ) < ESPILON )
     return true;
   return false;
 }
@@ -191,7 +212,7 @@ inline bool isInf ( T value )
  * @param epslion
  * @return true if about equal, false otherwise
  */
-inline bool epsilonEqual(double x, double y, double epsilon)
+inline bool epsilonEqual(double x, double y, double epsilon = ESPILON)
 {
   if ( fabs ( x - y ) < epsilon )
     return true;

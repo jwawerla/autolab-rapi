@@ -22,7 +22,7 @@
 #ifndef RAPISTATEVARIABLE_H
 #define RAPISTATEVARIABLE_H
 
-#include "statevariableinterface.h"
+#include "robotupdateinterface.h"
 #include "robot.h"
 
 namespace Rapi
@@ -32,7 +32,7 @@ namespace Rapi
  * Abstract base class for state variables
  * @author Jens Wawerla
  */
-class AStateVariable : public IStateVariable
+class AStateVariable : public IRobotUpdate
 {
   public:
     /** Default destructor */

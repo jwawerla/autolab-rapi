@@ -84,8 +84,8 @@ void ADrivetrain2dof::print()
 //-----------------------------------------------------------------------------
 bool ADrivetrain2dof::isStopped()
 {
-  if ( ( mVelocityCmd.mVX == 0.0 ) &&
-       ( mVelocityCmd.mYawDot == 0.0 ) )
+  if ( isAboutZero(mVelocityCmd.mVX ) &&
+       isAboutZero(mVelocityCmd.mYawDot ) )
     return true; // stopped
 
   return false;

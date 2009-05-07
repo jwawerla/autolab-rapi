@@ -25,13 +25,13 @@ namespace Rapi {
 
 //-----------------------------------------------------------------------------
 CCBBumper::CCBBumper(CCBDriver* cbDriver, std::string devName)
- : ABumper(devName)
+ : ABinarySensorArray(devName)
 {
   mCBDriver = cbDriver;
 
   mNumSamples = 2;
-  mBumper = new bool[mNumSamples];
-  mBumperPose = new CPose2d[mNumSamples];
+  mBitData = new bool[mNumSamples];
+  mBitPose = new CPose2d[mNumSamples];
 
   mFgEnabled = false;
 
@@ -40,8 +40,11 @@ CCBBumper::CCBBumper(CCBDriver* cbDriver, std::string devName)
 //-----------------------------------------------------------------------------
 CCBBumper::~CCBBumper()
 {
-  if (mBumper)
-    delete[] mBumper;
+  if (mBitData)
+    delete[] mBitData;
+
+  if (mBitPose)
+    delete[] mBitPose;
 }
 //-----------------------------------------------------------------------------
 void CCBBumper::setEnabled ( bool enable )
@@ -59,12 +62,12 @@ void CCBBumper::updateData()
   mFgAnyTriggered = false;
 
   if ( mFgEnabled == true ) {
-     mBumper[0] = mCBDriver->rightBumper();
-     if (mBumper[0])
+     mBitData[0] = mCBDriver->rightBumper();
+     if (mBitData[0])
        mFgAnyTriggered = true;
 
-     mBumper[1] = mCBDriver->leftBumper();
-     if (mBumper[1])
+     mBitData[1] = mCBDriver->leftBumper();
+     if (mBitData[1])
        mFgAnyTriggered = true;
 
     // update time stamp of this measurement

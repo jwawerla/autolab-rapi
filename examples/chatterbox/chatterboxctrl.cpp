@@ -36,13 +36,19 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
     rapiError->print();
     exit(-1);
   }
+
+  // show some text, just for fun
+  mTextDisplay->setText("1");
+
+  // set up a heart beat with 1Hz
+  mLights->setBlink(5, true, 1.0);
 }
 //-----------------------------------------------------------------------------
 CChatterboxCtrl::~CChatterboxCtrl()
 {
 }
 //-----------------------------------------------------------------------------
-void CChatterboxCtrl::update ( float dt )
+void CChatterboxCtrl::updateData ( float dt )
 {
   static unsigned char c = 0;
 
@@ -51,6 +57,7 @@ void CChatterboxCtrl::update ( float dt )
 
    c++;
    mLights->setLight(-1, CRgbColor( c, c, c) );
+   mLights->setBlink(5, true, 1.0);
    mTextDisplay->setText("1");
 
   //mDrivetrain->setSpeedCmd(0.3, 0.0);
@@ -84,9 +91,9 @@ void CChatterboxCtrl::obstacleAvoid()
 
   if (mBumper->isAnyTriggered() ) {
     velocity = 0.0;
-    if (mBumper->mBumper[1] )
+    if (mBumper->mBitData[1] )
       turnRate = D2R(-10.0);
-    if (mBumper->mBumper[0] )
+    if (mBumper->mBitData[0] )
       turnRate = D2R(10.0);
   }
   else if (mIr->mRangeData[0].range < 0.4) {

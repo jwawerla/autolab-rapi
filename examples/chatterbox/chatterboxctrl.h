@@ -39,13 +39,14 @@ class CChatterboxCtrl : public ARobotCtrl
     CChatterboxCtrl ( ARobot* robot );
     /** Default destructor */
     ~CChatterboxCtrl();
+
+
+  protected:
     /**
      * Update controller for the current time step
      * @param dt time since last upate [s]
      */
-    void update(float dt);
-
-  protected:
+    void updateData(float dt);
     /** Obstacle avoidance routine */
     void obstacleAvoid();
     /** Drivetrain */
@@ -59,7 +60,7 @@ class CChatterboxCtrl : public ARobotCtrl
     /** Lights */
     ALights* mLights;
     /** Bumper */
-    ABumper* mBumper;
+    ABinarySensorArray* mBumper;
 };
 
 #endif

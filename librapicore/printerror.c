@@ -48,19 +48,30 @@ void ErrorPrint( int msgType, int level, const char *file, int line,
   if ( level <= msgLevel ) {
     va_start( ap, fmt );
     vprintf( fmt, ap );
-    printf( "    %s:%d \n", file, line );
+    if (file)
+      printf( "    %s:%d \n", file, line );
+    else
+      printf("\n");
+
     va_end( ap );
   }
 #else
   if ( level <= msgLevel ) {
     va_start( ap, fmt );
     vfprintf( stderr, fmt, ap );
-    fprintf( stderr, "    %s:%d \n", file, line );
+    if (file)
+      fprintf( stderr, "    %s:%d \n", file, line );
+    else
+      fprintf( stderr, "\n");
     va_end( ap );
   }
 #endif
   if ( msgFile ) {
-    fprintf( msgFile, "%d %s:%d ", msgType, file, line );
+    if (file)
+      fprintf( msgFile, "%d %s:%d ", msgType, file, line );
+    else
+      fprintf( msgFile, "%d ", msgType );
+
     va_start( ap, fmt );
     vfprintf( msgFile, fmt, ap );
     va_end( ap );

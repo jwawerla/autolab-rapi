@@ -28,3 +28,6 @@
 #include "cblights.h"
 #include "cbtextdisplay.h"
 #include "cbbumper.h"
+#include "cbwallsensor.h"
+#include "cbcliffsensor.h"
+

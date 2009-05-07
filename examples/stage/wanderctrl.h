@@ -38,13 +38,14 @@ class CWanderCtrl : public ARobotCtrl
     CWanderCtrl(ARobot* robot);
     /** Default destructor */
     ~CWanderCtrl();
+
+  protected:
     /**
      * Update controller for the current time step
      * @param dt time since last upate [s]
      */
-    void update(float dt);
+    void updateData(float dt);
 
-  protected:
     /** Stage position model */
     CLooseStageDrivetrain2dof* mDrivetrain;
     /** Stage laser model */

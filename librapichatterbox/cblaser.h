@@ -124,8 +124,6 @@ class CCBLaser : public ARangeFinder
      * @return 1 if successful, -1 otherwise
      */
     int readData();
-
-  protected:
     /**
      * This method gets called by the framework every step to update
      * the sensor data

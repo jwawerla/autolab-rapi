@@ -38,6 +38,9 @@ CCBRobot::CCBRobot()
   mCBLights = NULL;
   mCBTextDisplay = NULL;
   mCBBumper = NULL;
+  mCBWall = NULL;
+  mCBWheelDrop = NULL;
+  mCBCliff = NULL;
 
   mFgRunning = true;
 }
@@ -61,6 +64,15 @@ CCBRobot::~CCBRobot()
 
   if ( mCBBumper )
     delete mCBBumper;
+
+  if ( mCBWall )
+    delete mCBWall;
+
+  if ( mCBWheelDrop )
+    delete mCBWheelDrop;
+
+  if ( mCBCliff )
+    delete mCBCliff;
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::init()
@@ -108,6 +120,12 @@ void CCBRobot::run ()
         mCBTextDisplay->updateData();
       if ( mCBBumper )
         mCBBumper->updateData();
+      if ( mCBWall )
+        mCBWall->updateData();
+      if ( mCBWheelDrop )
+        mCBWheelDrop->updateData();
+      if ( mCBCliff )
+        mCBCliff->updateData();
     }
     // update all registered constrollers
     updateControllers();
@@ -121,12 +139,15 @@ void CCBRobot::run ()
 int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
 {
   if ( ( devName != "CB:laser" ) &&
+       ( devName != "CB:wall" ) &&
        ( devName != "CB:ir" ) ) {
     ERROR1 ( "No such device: %s", devName.c_str() );
     device = NULL;
     return 0; // error
   }
 
+  //************************************
+  // Laser
 
   if ( devName == "CB:laser" ) {
     // check if device already exists
@@ -141,6 +162,8 @@ int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
     return 1;
   }
 
+  //************************************
+  // IR sensor
   if ( devName == "CB:ir" ) {
     // check if device already exists
     if ( mCBIrSensor == NULL ) {
@@ -151,6 +174,21 @@ int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
 
     // return already existing device
     device = mCBIrSensor;
+    return 1;
+  }
+
+  //************************************
+  // Wall sensor
+  if ( devName == "CB:wall" ) {
+    // check if device already exists
+    if ( mCBWall == NULL ) {
+      mCBWall = new CCBWallSensor ( &mCBDriver, "CB:wall" );
+      device = mCBIrSensor;
+      return mCBWall->init();
+    }
+
+    // return already existing device
+    device = mCBWall;
     return 1;
   }
 
@@ -244,23 +282,53 @@ int CCBRobot::findDevice ( ATextDisplay* &device, std::string devName )
   return 1;
 }
 //-----------------------------------------------------------------------------
-int CCBRobot::findDevice ( ABumper* &device, std::string devName )
+int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
 {
-  if ( devName != "CB:bumper" ) {
+  if ( ( devName != "CB:bumper" ) &&
+       ( devName != "CB:cliff" ) &&
+       ( devName != "CB:wheeldrop" ) ) {
     ERROR1 ( "No such device: %s", devName.c_str() );
     device = NULL;
     return 0; // error
   }
 
+  //************************************
+  // Bumper
   // check if device already exists
   if ( mCBBumper == NULL ) {
-    mCBBumper = new CCBBumper ( &mCBDriver, "CB:textdisplay" );
+    mCBBumper = new CCBBumper ( &mCBDriver, "CB:bumper" );
     device = mCBBumper;
     return mCBBumper->init();
   }
 
   // return already existing device
   device = mCBBumper;
+  return 1;
+
+  //************************************
+  // Wheel drop sensor
+  // check if device already exists
+  if ( mCBWheelDrop == NULL ) {
+    mCBWheelDrop = new CCBWheelDropSensor ( &mCBDriver, "CB:wheeldrop" );
+    device = mCBWheelDrop;
+    return mCBWheelDrop->init();
+  }
+
+  // return already existing device
+  device = mCBWheelDrop;
+  return 1;
+
+  //************************************
+  // Cliff sensor
+  // check if device already exists
+  if ( mCBCliff == NULL ) {
+    mCBCliff = new CCBCliffSensor ( &mCBDriver, "CB:cliff" );
+    device = mCBCliff;
+    return mCBCliff->init();
+  }
+
+  // return already existing device
+  device = mCBCliff;
   return 1;
 }
 //-----------------------------------------------------------------------------
