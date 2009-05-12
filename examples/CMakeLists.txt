@@ -1,4 +1,4 @@
 
 ADD_SUBDIRECTORY(stage)
 ADD_SUBDIRECTORY(chatterbox)
-ADD_SUBDIRECTORY(guitest)
+#ADD_SUBDIRECTORY(guitest)

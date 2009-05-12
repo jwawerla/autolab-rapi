@@ -117,7 +117,8 @@ class ADrivetrain2dof : public ADevice
      * Gets the name of a gui this device can be visualized
      * @return name of gui
      */
-    virtual std::string getGuiName() { return "DrivetrainWidget";};
+    virtual std::string getGuiName() { return "DrivetrainWidget"; };
+
   protected:
     /** Default constructor
      * @param devName name of device

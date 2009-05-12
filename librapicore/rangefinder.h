@@ -104,6 +104,11 @@ class ARangeFinder : public ADevice
      * @return [rad]
      */
     float getFov();
+    /**
+     * Gets the name of a gui this device can be visualized
+     * @return name of gui
+     */
+    virtual std::string getGuiName() { return "RangeFinderWidget"; };
 
   protected:
     /**

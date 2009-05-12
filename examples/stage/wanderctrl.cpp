@@ -36,10 +36,10 @@ CWanderCtrl::CWanderCtrl ( ARobot* robot )
   mRobot = robot;
 
   looseRobot = ( CLooseStageRobot* ) mRobot;
-  looseRobot->findDevice ( mLaser, "laser:0" );
-  looseRobot->findDevice ( mPowerPack, "powerpack:0" );
-  looseRobot->findDevice ( mTextDisplay, "textdisplay:0" );
   looseRobot->findDevice ( mDrivetrain, "position:0" );
+  looseRobot->findDevice ( mPowerPack, "powerpack:0" );
+  looseRobot->findDevice ( mLaser, "laser:0" );
+  looseRobot->findDevice ( mTextDisplay, "textdisplay:0" );
   if ( rapiError->hasError() ) {
     rapiError->print();
     exit ( -1 );
