@@ -53,13 +53,13 @@ class ADrivetrain2dof : public ADevice
      * @param velocity forward positive, backward negative [m/s]
      * @param turnrate positve counterclockwise, negative clockwise [rad/s]
      */
-    virtual void setSpeedCmd( const float velocity, const float turnrate ) = 0;
+    virtual void setVelocityCmd( const float velocity, const float turnrate ) = 0;
     /**
      * Sets the velocity and turn rate of the robot
      * @param velocity forward positive, backward negative [m/s]
      *                 positve counterclockwise, negative clockwise [rad/s]
      */
-    virtual void setSpeedCmd( CVelocity2d velocity ) = 0;
+    virtual void setVelocityCmd( CVelocity2d velocity ) = 0;
     /**
      * Sets a rotational speed for the robot
      * @param turnrate positve counterclockwise, negative clockwise [rad/s]
@@ -113,7 +113,11 @@ class ADrivetrain2dof : public ADevice
      * @param limits
      */
     virtual void setLowerVelocityLimit(CVelocity2d limit);
-
+    /**
+     * Gets the name of a gui this device can be visualized
+     * @return name of gui
+     */
+    virtual std::string getGuiName() { return "DrivetrainWidget";};
   protected:
     /** Default constructor
      * @param devName name of device

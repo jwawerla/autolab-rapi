@@ -31,6 +31,7 @@
 #include "textdisplay.h"
 #include "binarysensorarray.h"
 #include <list>
+#include <vector>
 #include <string>
 
 namespace Rapi
@@ -70,6 +71,17 @@ class ARobot
      */
     std::string getName();
     /**
+     * Gets the number of available devices
+     * @return number of devices
+     */
+    unsigned int getNumOfDevices() { return mDeviceList.size(); };
+    /**
+     * Gets a device by the index of the device list
+     * @param index of device
+     * @return device or NULL
+     */
+    ADevice* getDeviceByIndex(unsigned int index);
+    /**
      * Gets the current time of the robot, this maybe simulated time, real time,
      * elapsed time since start of robot etc.
      * @return [s]
@@ -108,7 +120,8 @@ class ARobot
     double mUpdateInterval;
     /** Name of robot */
     std::string mName;
-
+    /** List of all devices generated */
+    std::vector<ADevice*> mDeviceList;
 };
 
 } // namespace

@@ -110,11 +110,11 @@ void CWanderCtrl::updateData ( float dt )
     PRT_MSG0 ( 4, "Cruise" );
 
     mAvoidcount = 0;
-    mDrivetrain->setSpeedCmd ( CRUISESPEED, 0.0 );
+    mDrivetrain->setVelocityCmd ( CRUISESPEED, 0.0 );
   }
 
   if ( mDrivetrain->isStalled() ) {
-    mDrivetrain->setSpeedCmd ( CRUISESPEED, 0.0 );
+    mDrivetrain->setVelocityCmd ( CRUISESPEED, 0.0 );
   }
 
 

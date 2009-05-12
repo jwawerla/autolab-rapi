@@ -62,13 +62,13 @@ void CCBDrivetrain2dof::setEnabled ( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-void CCBDrivetrain2dof::setSpeedCmd ( const float velocity,
+void CCBDrivetrain2dof::setVelocityCmd ( const float velocity,
                                       const float turnrate )
 {
   mVelocityCmd = CVelocity2d ( velocity, 0.0, turnrate );
 }
 //-----------------------------------------------------------------------------
-void CCBDrivetrain2dof::setSpeedCmd ( CVelocity2d velocity )
+void CCBDrivetrain2dof::setVelocityCmd ( CVelocity2d velocity )
 {
   mVelocityCmd = velocity;
 }

@@ -39,6 +39,12 @@ class CPoint2d
      * Prints the points data to std out
      */
     void print();
+    /**
+     * Sets the point from polar coordinates
+     * @param length
+     * @param angle [rad]
+     */
+    void fromPolar(double length, double angle);
     /** X coordinate */
     double mX;
     /** Y coordinate */

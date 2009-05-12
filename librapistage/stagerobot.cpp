@@ -71,7 +71,7 @@ double CStageRobot::getCurrentTime()
 ADevice* CStageRobot::findDeviceByName ( std::string devName )
 {
   ADevice* device;
-  std::list<ADevice*>::iterator it;
+  std::vector<ADevice*>::iterator it;
 
   for ( it = mDeviceList.begin(); it != mDeviceList.end(); it++ ) {
     device = *it;

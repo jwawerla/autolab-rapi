@@ -46,7 +46,7 @@ CWaypoint2d::~CWaypoint2d()
 //-----------------------------------------------------------------------------
 void CWaypoint2d::print()
 {
-  printf("CWaypoint2d: %s at", mLabel.c_str());
+  printf("CWaypoint2d: %s at ", mLabel.c_str());
   mPose.print();
 }
 //-----------------------------------------------------------------------------

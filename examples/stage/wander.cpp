@@ -20,22 +20,27 @@
  **************************************************************************/
 
 #include "RapiLooseStage"
+#include "RapiGui"
 #include "wanderctrl.h"
+
 
 using namespace Rapi;
 
 extern "C" int Init ( Stg::Model* mod )
 {
+  CGui* gui = CGui::getInstance(0, NULL);
+
   CLooseStageRobot* robot;
   ARobotCtrl* robotCtrl;
 
   // init general stuff
-  ErrorInit ( 4, false );
+  ErrorInit ( 1, false );
   initRandomNumberGenerator();
 
   // create robot and its controller
   robot = new CLooseStageRobot ( mod );
   robotCtrl = new CWanderCtrl ( robot );
 
+  gui->registerRobot(robot);
   return 0; // ok
 }

@@ -37,17 +37,17 @@ ADrivetrain2dof::~ADrivetrain2dof()
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::stop()
 {
-  setSpeedCmd ( CVelocity2d ( 0.0, 0.0 ) );
+  setVelocityCmd ( CVelocity2d ( 0.0, 0.0 ) );
 }
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::setRotationalSpeedCmd ( float turnrate )
 {
-  setSpeedCmd ( CVelocity2d ( mVelocityCmd.mVX, 0.0, turnrate ) );
+  setVelocityCmd ( CVelocity2d ( mVelocityCmd.mVX, 0.0, turnrate ) );
 }
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::setTranslationalSpeedCmd ( float velocity )
 {
-  setSpeedCmd ( CVelocity2d ( velocity, 0.0,  mVelocityCmd.mYawDot ) );
+  setVelocityCmd ( CVelocity2d ( velocity, 0.0,  mVelocityCmd.mYawDot ) );
 }
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::setUppererVelocityLimit ( CVelocity2d limit )

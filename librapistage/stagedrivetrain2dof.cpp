@@ -77,13 +77,13 @@ void CStageDrivetrain2dof::setEnabled ( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-void CStageDrivetrain2dof::setSpeedCmd ( const float velocity,
+void CStageDrivetrain2dof::setVelocityCmd ( const float velocity,
     const float turnrate )
 {
-  setSpeedCmd ( CVelocity2d ( velocity, 0.0, turnrate ) );
+  setVelocityCmd ( CVelocity2d ( velocity, 0.0, turnrate ) );
 }
 //-----------------------------------------------------------------------------
-void CStageDrivetrain2dof::setSpeedCmd ( CVelocity2d velocity )
+void CStageDrivetrain2dof::setVelocityCmd ( CVelocity2d velocity )
 {
   if ( mFgEnabled ) {
     mVelocityCmd = velocity;

@@ -40,6 +40,14 @@ std::string ARobot::getName()
   return mName;
 }
 //-----------------------------------------------------------------------------
+ADevice* ARobot::getDeviceByIndex(unsigned int index)
+{
+  if ( index >= mDeviceList.size() )
+    return NULL;
+
+  return mDeviceList[index];
+}
+//-----------------------------------------------------------------------------
 void ARobot::registerRobotController(IRobotUpdate* ctrl)
 {
   mRobotCtrlList.push_back( ctrl );

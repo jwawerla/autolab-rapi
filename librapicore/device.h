@@ -72,6 +72,11 @@ class ADevice
      */
     std::string getName();
     /**
+     * Gets the name of a gui this device can be visualized
+     * @return name of gui
+     */
+    virtual std::string getGuiName() { return "nogui";};
+    /**
      * Gets the time stamp of the last data set
      * @return time stamp
      */

@@ -81,8 +81,7 @@ class CStageRobot : public ARobot
     ADevice* findDeviceByName ( std::string devName );
     /** Main Stage model */
     Stg::Model*mStageModel;
-    /** List of all devices generated */
-    std::list<ADevice*> mDeviceList;
+
 };
 
 } // namespace

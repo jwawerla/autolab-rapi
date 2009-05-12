@@ -109,6 +109,6 @@ void CChatterboxCtrl::obstacleAvoid()
     velocity = ( 1.0 -fabs ( turnRate ) / D2R ( 30.0 ) ) * 0.3;
     //printf("speed %f turnrate %f \n", velocity, turnRate);
   }
-  mDrivetrain->setSpeedCmd ( velocity, turnRate );
+  mDrivetrain->setVelocityCmd ( velocity, turnRate );
 }
 //-----------------------------------------------------------------------------

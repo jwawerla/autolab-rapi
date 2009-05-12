@@ -21,6 +21,7 @@
 
 #include "point2d.h"
 #include <stdio.h>
+#include <math.h>
 
 namespace Rapi {
 
@@ -34,6 +35,12 @@ CPoint2d::CPoint2d(double x, double y)
 CPoint2d::~CPoint2d()
 {
   // nothing to do
+}
+//-----------------------------------------------------------------------------
+void CPoint2d::fromPolar(double length, double angle)
+{
+  mX = length * cos(angle);
+  mY = length * sin(angle);
 }
 //-----------------------------------------------------------------------------
 void CPoint2d::print()
