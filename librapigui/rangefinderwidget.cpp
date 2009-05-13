@@ -30,18 +30,17 @@ CRangeFinderWidget::CRangeFinderWidget ( ARangeFinder* rangeFinder,
     QWidget* parent ) : ADeviceWidget ( parent )
 {
   assert(rangeFinder);
+  setTitle ( "Rangefinder" );
 
   mPolygonItem = NULL;
   mRobotPolygonItem = NULL;
   mRangeFinder = rangeFinder;
 
-  setTitle ( "Rangefinder" );
-
   // create a scene and add it to the widget
   mGraphicsScene = new QGraphicsScene ( this );
   mGraphicsScene->setSceneRect ( -100, -100, 200, 200 ); // x, y, w, h
 
-  mGraphicsView = new QGraphicsView ( mGraphicsScene );
+  mGraphicsView = new QGraphicsView ( mGraphicsScene, this );
   mGraphicsView->setMinimumSize(202,202);
   mGraphicsView->setDisabled(true);
   mMainLayout->addWidget ( mGraphicsView );
@@ -117,12 +116,6 @@ void CRangeFinderWidget::createPolygons ( int n )
 
 }
 //---------------------------------------------------------------------------
-void CRangeFinderWidget::paintEvent ( QPaintEvent* event )
-{
-  event->ignore();
-  updateData();
-}
-//---------------------------------------------------------------------------
 void CRangeFinderWidget::updateData()
 {
   QPolygonF polygon;
@@ -135,16 +128,15 @@ void CRangeFinderWidget::updateData()
   if ( mRangeFinder == NULL)
     return;
 
+  // call update of base class
+  ADeviceWidget::updateData ( mRangeFinder );
+
   // should we display stuff or are we turned off
-  if ( mUpdateCheckBox->isChecked() == false ) {
+  if ( isChecked() == false ) {
     mGraphicsView->setHidden(true);
     return;
   }
   mGraphicsView->setHidden(false);
-
-  // call update of base class
-  ADeviceWidget::updateData ( mRangeFinder );
-
 
   // if the number of samples is zero, there is nothing to draw and we can
   // quit right here

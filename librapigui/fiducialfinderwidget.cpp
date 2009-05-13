@@ -18,83 +18,107 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#include "variablemonitorwidget.h"
+#include "fiducialfinderwidget.h"
+#include "assert.h"
+#include "unicodechar.h"
+#include "utilities.h"
+#include <QString>
 
 namespace Rapi
 {
 
 //-----------------------------------------------------------------------------
-CVariableMonitorWidget::CVariableMonitorWidget ( CVariableMonitor* monitor,
+CFiducialFinderWidget::CFiducialFinderWidget ( AFiducialFinder* fiducial,
     QWidget* parent ) : ADeviceWidget ( parent )
 {
-  setTitle ( "Monitor" );
+  assert ( fiducial );
+  mFiducialFinder = fiducial;
 
-  mVariableMonitor = monitor;
-  mTableWidget = new QTableWidget ( mVariableMonitor->getNumOfVariables(), 3,
-                                    this );
+  setTitle ( "Fiducial Finder" );
+
+  mTableWidget = new QTableWidget ( 0, 3, this );
   mMainLayout->addWidget ( mTableWidget );
 
-  mTableWidget->setSortingEnabled(false);
-  mTableWidget->setHorizontalHeaderItem ( 0, new QTableWidgetItem ( "Type" ) );
-  mTableWidget->setHorizontalHeaderItem ( 1, new QTableWidgetItem ( "Variable" ) );
-  mTableWidget->setHorizontalHeaderItem ( 2, new QTableWidgetItem ( "Value" ) );
+  mTableWidget->setHorizontalHeaderItem ( 0, new QTableWidgetItem ( "Id" ) );
+  mTableWidget->setHorizontalHeaderItem ( 1, new QTableWidgetItem ( "Range [m]" ) );
+  mTableWidget->setHorizontalHeaderItem ( 2, new QTableWidgetItem (
+                                            "Bearing ["+Q_DEGREE+"]" ) );
+
+  mMinRange = new CDataLine ( mGeneralInfoBox, "Min. Range [m]" );
+  mGeneralInfoBoxLayout->addWidget ( mMinRange );
+  
+  mMaxRange = new CDataLine ( mGeneralInfoBox, "Max. Range [m]" );
+  mGeneralInfoBoxLayout->addWidget ( mMaxRange );
+  
+  mFov = new CDataLine ( mGeneralInfoBox, "FOV ["+Q_DEGREE+"]" );
+  mGeneralInfoBoxLayout->addWidget ( mFov );
 }
 //-----------------------------------------------------------------------------
-CVariableMonitorWidget::~CVariableMonitorWidget()
+CFiducialFinderWidget::~CFiducialFinderWidget()
 {
 }
 //-----------------------------------------------------------------------------
-void CVariableMonitorWidget::updateData()
+void CFiducialFinderWidget::toggled ( bool on )
 {
-  QFont font;
-  std::string value;
-  std::string name;
-  std::string varType;
+  if ( on ) {
+    mEnabledLed->setHidden ( false );
+    mMinRange->setHidden( false );
+    mMaxRange->setHidden( false );
+    mFov->setHidden(false);
+  }
+  else {
+    mEnabledLed->setHidden ( true );
+    mMinRange->setHidden( true );
+    mMaxRange->setHidden( true );
+    mFov->setHidden(true);
+  }
+}
+//-----------------------------------------------------------------------------
+void CFiducialFinderWidget::updateData ()
+{
   QTableWidgetItem* tableItem;
+  QString str;
 
   if ( isChecked() ) {
+    mFov->setData( R2D(mFiducialFinder->getFov() ) );
+    mMinRange->setData(mFiducialFinder->getMinRange() );
+    mMaxRange->setData(mFiducialFinder->getMaxRange() );
     mTableWidget->setHidden ( false );
+    mTableWidget->setRowCount ( mFiducialFinder->getNumReadings() );
 
-    for ( unsigned int i = 0; i < mVariableMonitor->getNumOfVariables(); i++ ) {
-      mVariableMonitor->getVariableString ( i, varType, name, value );
+    for ( unsigned int i = 0; i < mFiducialFinder->getNumReadings(); i++ ) {
+      // Fiducial ID
       tableItem = mTableWidget->item ( i, 0 );
-      // variable type
       if ( tableItem == NULL ) {
         tableItem = new QTableWidgetItem();
-        //tableItem->setFlags(0);
-        tableItem->setForeground ( QBrush ( QColor ( 128,0,0 ) ) );
-        font = tableItem->font();
-        font.setBold ( true );
-        tableItem->setFont ( font );
         mTableWidget->setItem ( i, 0, tableItem );
       }
-      tableItem->setText ( varType.c_str() );
+      str.setNum ( mFiducialFinder->mFiducialData[i].id );
+      tableItem->setText ( str );
 
-      // variable name
+      // Fiducial Range
       tableItem = mTableWidget->item ( i, 1 );
       if ( tableItem == NULL ) {
         tableItem = new QTableWidgetItem();
-        //tableItem->setFlags(0);
         mTableWidget->setItem ( i, 1, tableItem );
       }
-      tableItem->setText ( name.c_str() );
+      str.setNum ( mFiducialFinder->mFiducialData[i].range );
+      tableItem->setText ( str );
 
-      // variable value
+      // Fiducial Bearing
       tableItem = mTableWidget->item ( i, 2 );
       if ( tableItem == NULL ) {
         tableItem = new QTableWidgetItem();
-        //tableItem->setFlags(0);
         mTableWidget->setItem ( i, 2, tableItem );
       }
-      tableItem->setText ( value.c_str() );
+      str.setNum ( R2D ( mFiducialFinder->mFiducialData[i].bearing ) );
+      tableItem->setText ( str );
     }
   }
   else {
     mTableWidget->setHidden ( true );
   }
-
-  // always hide general info box, because we don't need it
-  mGeneralInfoBox->setHidden ( true );
+  ADeviceWidget::updateData ( mFiducialFinder );
 }
 //-----------------------------------------------------------------------------
 } // namespace

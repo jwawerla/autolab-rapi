@@ -40,7 +40,7 @@ CGui::CGui ( int argc, char* argv[] )
   mArgv = mArgv;
   pthread_create ( &mPThread, NULL, &threadMain, this );
 
-  sleep(2.0);  // need to wait for thread to finish creating the Qt App
+  sleep(2);  // need to wait for thread to finish creating the Qt App
 }
 //-----------------------------------------------------------------------------
 CGui::~CGui()

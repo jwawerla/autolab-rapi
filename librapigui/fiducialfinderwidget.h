@@ -18,36 +18,52 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#ifndef RAPICVARIABLEMONITORWIDGET_H
-#define RAPICVARIABLEMONITORWIDGET_H
+#ifndef RAPIFIDUCIALFINDERWIDGET_H
+#define RAPIFIDUCIALFINDERWIDGET_H
 
-#include <QTableWidget>
-#include "variablemonitor.h"
 #include "devicewidget.h"
+#include "fiducialfinder.h"
+#include "dataline.h"
+#include <QTableWidget>
 
 namespace Rapi
 {
 
 /**
- * A widget for the variable monitor
+ * Widget to visualize fiducial data
  * @author Jens Wawerla
  */
-class CVariableMonitorWidget : public ADeviceWidget
+class CFiducialFinderWidget : public ADeviceWidget
 {
+  Q_OBJECT
+
   public:
-    /** Default constructor */
-    CVariableMonitorWidget ( CVariableMonitor* variableMonitor,
-                             QWidget* parent = NULL );
+    /**
+     * Default constructor
+     * @param fiducial to display
+     * @param parent of class
+     */
+    CFiducialFinderWidget ( AFiducialFinder* fiducial, QWidget* parent = NULL );
     /** Default destructor */
-    ~CVariableMonitorWidget();
-    /** Update the display */
-    void updateData();
+    ~CFiducialFinderWidget();
+    /** Update the data of the display */
+    void updateData ();
+
+  protected slots:
+    virtual void toggled(bool on );
 
   protected:
-    /** Table to display variables */
+    /** Fiducial finder */
+    AFiducialFinder* mFiducialFinder;
+    /** Table to display fiducial data */
     QTableWidget* mTableWidget;
-    /** Monitor */
-    CVariableMonitor* mVariableMonitor;
+    /** Field of view  */
+    CDataLine* mFov;
+    /** Minimum Range */
+    CDataLine* mMinRange;
+    /** Maximum Range */
+    CDataLine* mMaxRange;
+
 };
 
 } // namespace

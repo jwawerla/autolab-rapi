@@ -29,7 +29,6 @@ CDrivetrain2dofWidget::CDrivetrain2dofWidget ( ADrivetrain2dof* drivetrain,
 {
   mDrivetrain = drivetrain;
   setTitle ( "Drivetrain" );
-
   mVelocityCmdWidget = new CVelocity2dWidget ( this );
   mMainLayout->addWidget ( mVelocityCmdWidget );
 
@@ -44,10 +43,9 @@ CDrivetrain2dofWidget::~CDrivetrain2dofWidget()
 //-----------------------------------------------------------------------------
 void CDrivetrain2dofWidget::updateData ()
 {
-  if ( mUpdateCheckBox->isChecked() ) {
+  if ( isChecked() ) {
     mOdometryWidget->setHidden(false);
     mVelocityCmdWidget->setHidden(false);
-    ADeviceWidget::updateData ( mDrivetrain );
     mVelocityCmdWidget->setData ( mDrivetrain->getVelocityCmd() );
     mOdometryWidget->setData ( mDrivetrain->getOdometry()->getPose() );
   }
@@ -55,6 +53,7 @@ void CDrivetrain2dofWidget::updateData ()
     mOdometryWidget->setHidden(true);
     mVelocityCmdWidget->setHidden(true);
   }
+  ADeviceWidget::updateData ( mDrivetrain );
 }
 //-----------------------------------------------------------------------------
 

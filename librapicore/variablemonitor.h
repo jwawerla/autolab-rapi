@@ -50,9 +50,10 @@ class CVariableMonitor
     /**
      * Gets the variable with a given index as a string
      * @param index of variable to get
-     * @return variable value and name
+     * @return variable variable type, name and value
      */
-    void getVariableString(unsigned int index, std::string& value, std::string& name);
+    void getVariableString(unsigned int index, std::string& varType,
+                           std::string& name, std::string& value);
     /**
      * Gets the number of monitored variables
      * @return number of variables

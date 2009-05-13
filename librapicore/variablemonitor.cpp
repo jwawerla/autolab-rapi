@@ -34,8 +34,9 @@ CVariableMonitor::~CVariableMonitor()
 }
 //-----------------------------------------------------------------------------
 void CVariableMonitor::getVariableString ( unsigned int index,
-    std::string& value,
-    std::string& name )
+                                           std::string& varType,
+                                           std::string& name,
+                                           std::string& value )
 {
   tVarEntry entry;
   int intVar;
@@ -46,7 +47,8 @@ void CVariableMonitor::getVariableString ( unsigned int index,
 
   if ( index >= mVarList.size() ) {
     name = "unknown";
-    value = "unkown";
+    value = "unknown";
+    varType = "unknown";
     return;
   }
 
@@ -57,6 +59,7 @@ void CVariableMonitor::getVariableString ( unsigned int index,
   switch ( entry.varType ) {
 
     case BOOL:
+      varType = "bool";
       boolVar = * ( ( bool* ) entry.ptr );
       if ( boolVar )
         value = "true";
@@ -64,16 +67,19 @@ void CVariableMonitor::getVariableString ( unsigned int index,
         value = "false";
       break;
     case FLOAT:
+      varType = "float";
       floatVar = * ( ( float* ) entry.ptr );
       strOut << floatVar;
       value = strOut.str();
       break;
     case DOUBLE:
+      varType = "double";
       doubleVar = * ( ( double* ) entry.ptr );
       strOut << doubleVar;
       value = strOut.str();
       break;
     case INT:
+      varType = "int";
       intVar = * ( ( int* ) entry.ptr );
       strOut << intVar;
       value = strOut.str();

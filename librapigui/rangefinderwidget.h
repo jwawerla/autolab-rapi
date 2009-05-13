@@ -49,8 +49,6 @@ class CRangeFinderWidget : public ADeviceWidget
     CRangeFinderWidget( ARangeFinder* rangefinder, QWidget* parent = NULL );
     /** Default destructor */
     ~CRangeFinderWidget();
-    /** Repaint event handler from QWidget */
-    void paintEvent(QPaintEvent* event);
     /** Updates the data display */
     void updateData();
 

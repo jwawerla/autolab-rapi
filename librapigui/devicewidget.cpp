@@ -27,41 +27,55 @@ namespace Rapi
 ADeviceWidget::ADeviceWidget ( QWidget* parent )
     : QGroupBox ( parent )
 {
-  QGroupBox* generalBox;
-  QHBoxLayout* boxLayout;
-
   setFlat ( false );
   setTitle ( "Device" );
+  setCheckable ( true );
 
   mMainLayout = new QVBoxLayout ( this );
 
-  generalBox = new QGroupBox ( this );
-  //generalBox->setTitle ( "General" );
-  mMainLayout->addWidget ( generalBox );
+  mGeneralInfoBox = new QGroupBox ( this );
+  mGeneralInfoBox->setTitle("General");
+  mMainLayout->addWidget ( mGeneralInfoBox );
+  mGeneralInfoBox->setCheckable ( true );
 
-  boxLayout = new QHBoxLayout ( generalBox );
-  generalBox->setLayout ( boxLayout );
+  mGeneralInfoBoxLayout = new QHBoxLayout ( mGeneralInfoBox );
+  mGeneralInfoBox->setLayout ( mGeneralInfoBoxLayout );
 
-  mEnabledLed = new CDataLed ( generalBox, "Enabled" );
+  mEnabledLed = new CDataLed ( mGeneralInfoBox, "Enabled" );
   mEnabledLed->setData ( CDataLed::GREEN_OFF );
-  boxLayout->addWidget ( mEnabledLed );
+  mGeneralInfoBoxLayout->addWidget ( mEnabledLed );
 
-  mUpdateCheckBox = new QCheckBox ("Update", generalBox );
-  mUpdateCheckBox->setChecked(true);
-  boxLayout->addWidget ( mUpdateCheckBox );
   setLayout ( mMainLayout );
+
+  connect(mGeneralInfoBox, SIGNAL(toggled(bool)), this, SLOT(toggled(bool)));
 }
 //-----------------------------------------------------------------------------
 ADeviceWidget::~ADeviceWidget()
 {
 }
 //-----------------------------------------------------------------------------
+void ADeviceWidget::toggled ( bool on )
+{
+  if ( on ) {
+    mEnabledLed->setHidden ( false );
+  }
+  else {
+    mEnabledLed->setHidden ( true );
+  }
+}
+//-----------------------------------------------------------------------------
 void ADeviceWidget::updateData ( ADevice* device )
 {
-  if ( device->isEnabled() )
-    mEnabledLed->setData ( CDataLed::GREEN_ON );
-  else
-    mEnabledLed->setData ( CDataLed::GREEN_OFF );
+  if ( isChecked() ) {
+    mGeneralInfoBox->setHidden ( false );
+    if ( device->isEnabled() )
+      mEnabledLed->setData ( CDataLed::GREEN_ON );
+    else
+      mEnabledLed->setData ( CDataLed::GREEN_OFF );
+  }
+  else {
+    mGeneralInfoBox->setHidden ( true );
+  }
 }
 //-----------------------------------------------------------------------------
 

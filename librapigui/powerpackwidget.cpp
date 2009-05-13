@@ -104,10 +104,9 @@ CPowerPackWidget::~CPowerPackWidget()
 //---------------------------------------------------------------------------
 void CPowerPackWidget::updateData()
 {
-  if ( mUpdateCheckBox->isChecked() ) {
+  if ( isChecked() ) {
     mBatteryBox->setHidden(false);
     mChargingBox->setHidden(false);
-    ADeviceWidget::updateData ( mPowerPack );
     mBatCapacity->setData ( mPowerPack->getBatteryCapacity() );
     mMaxBatCapacity->setData ( mPowerPack->getMaxBatteryCapacity() );
     mCurrent->setData ( mPowerPack->getCurrent() );
@@ -126,6 +125,7 @@ void CPowerPackWidget::updateData()
     mBatteryBox->setHidden(true);
     mChargingBox->setHidden(true);
   }
+  ADeviceWidget::updateData ( mPowerPack );
 }
 //---------------------------------------------------------------------------
 

@@ -34,17 +34,20 @@ CWanderCtrl::CWanderCtrl ( ARobot* robot )
   CLooseStageRobot* looseRobot;
 
   mRobot = robot;
+  mAvoidcount = 0;
 
   looseRobot = ( CLooseStageRobot* ) mRobot;
   looseRobot->findDevice ( mDrivetrain, "position:0" );
   looseRobot->findDevice ( mPowerPack, "powerpack:0" );
   looseRobot->findDevice ( mLaser, "laser:0" );
   looseRobot->findDevice ( mTextDisplay, "textdisplay:0" );
+  looseRobot->findDevice ( mFiducial, "model:0.fiducial:0" );
   if ( rapiError->hasError() ) {
     rapiError->print();
     exit ( -1 );
   }
   mRobot->mVariableMonitor.addVar(&mAvoidcount, "avoid count");
+  mRobot->mVariableMonitor.addVar(&mFgAvoid, "avoiding");
 }
 //-----------------------------------------------------------------------------
 CWanderCtrl::~CWanderCtrl()

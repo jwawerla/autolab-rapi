@@ -54,8 +54,12 @@ class CWanderCtrl : public ARobotCtrl
     CLooseStagePowerPack* mPowerPack;
     /** Text display */
     CLooseStageTextDisplay* mTextDisplay;
+    /** Fiducial Finder */
+    CLooseStageFiducialFinder* mFiducial;
     /** Count avoid time steps */
     int mAvoidcount;
+    /** Just for test purpose */
+    bool mFgAvoid;
 };
 
 #endif

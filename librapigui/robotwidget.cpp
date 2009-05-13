@@ -21,6 +21,7 @@
 #include "robotwidget.h"
 #include "drivetrain2dofwidget.h"
 #include "rangefinderwidget.h"
+#include "fiducialfinderwidget.h"
 #include "powerpackwidget.h"
 #include "printerror.h"
 #include <QVBoxLayout>
@@ -29,7 +30,7 @@ namespace Rapi {
 
 //-----------------------------------------------------------------------------
 CRobotWidget::CRobotWidget(ARobot* robot,QWidget* parent)
- : QWidget(parent)
+ : QScrollArea( parent)
 {
   ADeviceWidget* widget;
   ADevice* device;
@@ -54,6 +55,11 @@ CRobotWidget::CRobotWidget(ARobot* robot,QWidget* parent)
     }
     else if ( device->getGuiName() == "PowerPackWidget" ) {
       widget = new CPowerPackWidget((APowerPack*)device, this);
+      layout->addWidget( widget);
+      mWidgetList.push_back(widget);
+    }
+    else if ( device->getGuiName() == "FiducialFinderWidget" ) {
+      widget = new CFiducialFinderWidget((AFiducialFinder*)device, this);
       layout->addWidget( widget);
       mWidgetList.push_back(widget);
     }

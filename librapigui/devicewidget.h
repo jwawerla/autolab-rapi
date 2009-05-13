@@ -37,11 +37,16 @@ namespace Rapi
  */
 class ADeviceWidget : public QGroupBox
 {
+  Q_OBJECT
+
   public:
     /** Default destructor */
     virtual ~ADeviceWidget();
     /** Update the data of the widget */
     virtual void updateData() = 0;
+
+  protected slots:
+    virtual void toggled(bool on );
 
   protected:
     /**
@@ -59,8 +64,10 @@ class ADeviceWidget : public QGroupBox
     QVBoxLayout* mMainLayout;
     /** Device enabled LED */
     CDataLed* mEnabledLed;
-    /** Check box for update enable */
-    QCheckBox* mUpdateCheckBox;
+    /** General info box */
+    QGroupBox* mGeneralInfoBox;
+    /** General info box layout */
+    QHBoxLayout* mGeneralInfoBoxLayout;
 };
 
 } // namespace

@@ -21,11 +21,11 @@
 #ifndef RAPIROBOTWIDGET_H
 #define RAPIROBOTWIDGET_H
 
-#include <qwidget.h>
 #include "robot.h"
 #include "devicewidget.h"
 #include "variablemonitorwidget.h"
 #include <list>
+#include <QScrollArea>
 
 namespace Rapi
 {
@@ -34,7 +34,7 @@ namespace Rapi
  * Basic container widget for a robot
  * @author Jens Wawerla
  */
-class CRobotWidget : public QWidget
+class CRobotWidget : public QScrollArea
 {
   public:
     /**

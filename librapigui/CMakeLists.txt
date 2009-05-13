@@ -15,6 +15,8 @@ IF (QT_FOUND)
     mainwindow.h
     dataline.h
     dataled.h
+    devicewidget.h
+    fiducialfinderwidget.h
   )
 
   SET( HEADERS
@@ -35,6 +37,7 @@ IF (QT_FOUND)
     dataline.cpp
     dataled.cpp
     variablemonitorwidget.cpp
+    fiducialfinderwidget.cpp
     ${MOC_SRC}
   )
 
