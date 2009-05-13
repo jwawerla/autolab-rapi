@@ -45,9 +45,15 @@ CDrivetrain2dofWidget::~CDrivetrain2dofWidget()
 void CDrivetrain2dofWidget::updateData ()
 {
   if ( mUpdateCheckBox->isChecked() ) {
+    mOdometryWidget->setHidden(false);
+    mVelocityCmdWidget->setHidden(false);
     ADeviceWidget::updateData ( mDrivetrain );
     mVelocityCmdWidget->setData ( mDrivetrain->getVelocityCmd() );
     mOdometryWidget->setData ( mDrivetrain->getOdometry()->getPose() );
+  }
+  else {
+    mOdometryWidget->setHidden(true);
+    mVelocityCmdWidget->setHidden(true);
   }
 }
 //-----------------------------------------------------------------------------

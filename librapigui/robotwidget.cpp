@@ -62,6 +62,9 @@ CRobotWidget::CRobotWidget(ARobot* robot,QWidget* parent)
     }
   }
 
+  mVariableMonitor = new CVariableMonitorWidget(&(mRobot->mVariableMonitor), this);
+  layout->addWidget(mVariableMonitor);
+
   setLayout( layout );
 }
 //-----------------------------------------------------------------------------
@@ -79,6 +82,7 @@ void CRobotWidget::update()
     widget->updateData();
   }
 
+  mVariableMonitor->updateData();
   QWidget::update();
 }
 //-----------------------------------------------------------------------------

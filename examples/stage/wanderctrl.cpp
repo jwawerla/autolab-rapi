@@ -44,6 +44,7 @@ CWanderCtrl::CWanderCtrl ( ARobot* robot )
     rapiError->print();
     exit ( -1 );
   }
+  mRobot->mVariableMonitor.addVar(&mAvoidcount, "avoid count");
 }
 //-----------------------------------------------------------------------------
 CWanderCtrl::~CWanderCtrl()

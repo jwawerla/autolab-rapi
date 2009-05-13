@@ -18,65 +18,59 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#ifndef RAPIPOWERMANAGEMENTVIEW_H
-#define RAPIPOWERMANAGEMENTVIEW_H
+#ifndef RAPIVARIABLEMONITOR_H
+#define RAPIVARIABLEMONITOR_H
 
-#include "devicewidget.h"
-#include "powerpack.h"
-#include "dataline.h"
-#include "dataled.h"
-#include <QGroupBox>
-#include <list>
+#include <string>
+#include <vector>
 
 namespace Rapi
 {
 
 /**
- * Visualization for the power management
- * @author Jens Wawerla <jwawerla@sfu.ca>
- * @version 0.1 - 01/2008
- */
-class CPowerPackWidget : public ADeviceWidget
+ * Helps to debug robot controllers by monitoring registered variables
+ * @author Jens Wawerla
+*/
+class CVariableMonitor
 {
   public:
-    /**
-     * Default constructor
-     * @param parent Qt's parent object
-     * @param powerpack to visualize
-     */
-    CPowerPackWidget(APowerPack* powerpack, QWidget* parent = NULL );
+    /** Default constructor */
+    CVariableMonitor();
     /** Default destructor */
-    ~CPowerPackWidget();
-    /** Update display */
-    void updateData();
+    ~CVariableMonitor();
+    /**
+     * Adds a varible to the monitor
+     * @param ptr pointer to varible to be added
+     * @param name of variable
+     */
+    void addVar(float* ptr, std::string name);
+    void addVar(double* ptr, std::string name);
+    void addVar(bool* ptr, std::string name);
+    void addVar(int* ptr, std::string name);
+    /**
+     * Gets the variable with a given index as a string
+     * @param index of variable to get
+     * @return variable value and name
+     */
+    void getVariableString(unsigned int index, std::string& value, std::string& name);
+    /**
+     * Gets the number of monitored variables
+     * @return number of variables
+     */
+    unsigned int getNumOfVariables() { return mVarList.size(); };
 
-  private:
-    /** Power pack device to visualize */
-    APowerPack* mPowerPack;
-    /** Battery capacity display */
-    CDataLine* mBatCapacity;
-    /** Maximal Battery capacity display */
-    CDataLine* mMaxBatCapacity;
-    /** Current drawn from battery display */
-    CDataLine* mCurrent;
-    /** Voltage of battery  */
-    CDataLine* mVoltage;
-    /** Battery temperature */
-    CDataLine* mBatTemp;
-    /** Charging Led */
-    CDataLed* mChargingLed;
-    /** Charging source */
-    CDataLine* mChargingSource;
-    /** Charging state */
-    CDataLine* mChargingState;
-    /** Total energy dissipated */
-    CDataLine* mDissipated;
-    /** Group box for battery data */
-    QGroupBox* mBatteryBox;
-    /** Group box for charger information */
-    QGroupBox* mChargingBox;
+  protected:
+    typedef enum {FLOAT, DOUBLE, INT, BOOL} tVar;
+    typedef struct {
+      void* ptr;
+      tVar varType;
+      std::string name;
+    } tVarEntry;
+    /** Vector of monitored variables */
+    std::vector<tVarEntry> mVarList;
 
 };
 
-} // namespace
+}// namespace
+
 #endif

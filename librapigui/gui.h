@@ -21,9 +21,10 @@
 #ifndef RAPIGUI_H
 #define RAPIGUI_H
 
+#include "robot.h"
 #include <pthread.h>
 #include <QtGui>
-#include "mainwindow.h"
+
 
 namespace Rapi
 {
@@ -50,7 +51,7 @@ class CGui
 
   protected:
     /** Default constructor */
-    CGui ( int argc, char* argv[] );
+    CGui ( int argc=0, char* argv[]=NULL );
     /** Main for the thread */
     static void* threadMain(void* arg);
 

@@ -3,66 +3,72 @@ SET( PRJ autolab-rapi-gui )
 
 SET( TARGET ${PRJ} )
 
-FIND_PACKAGE(Qt4 REQUIRED)
-#SET(QT_USE_QTGUI TRUE)
-INCLUDE(${QT_USE_FILE})
-ADD_DEFINITIONS( ${QT_DEFINITIONS} )
+FIND_PACKAGE(Qt4)
 
-# list all qt header files here for moc
-QT_WRAP_CPP(${TARGET} MOC_SRC
-  mainwindow.h
-  dataline.h
-  dataled.h
-)
+IF (QT_FOUND)
 
-SET( HEADERS
-  RapiGui
-  gui.h
-)
+  INCLUDE(${QT_USE_FILE})
+  ADD_DEFINITIONS( ${QT_DEFINITIONS} )
 
-SET( SOURCES
-  gui.cpp
-  mainwindow.cpp
-  robotwidget.cpp
-  devicewidget.cpp
-  drivetrain2dofwidget.cpp
-  velocity2dwidget.cpp
-  pose2dwidget.cpp
-  rangefinderwidget.cpp
-  powerpackwidget.cpp
-  dataline.cpp
-  dataled.cpp
-  ${MOC_SRC}
-)
+  # list all qt header files here for moc
+  QT_WRAP_CPP(${TARGET} MOC_SRC
+    mainwindow.h
+    dataline.h
+    dataled.h
+  )
 
-LINK_DIRECTORIES(
-  ${QT_LIBRARY_DIR}
-  ../librapicore
-)
+  SET( HEADERS
+    RapiGui
+    gui.h
+  )
 
-INCLUDE_DIRECTORIES(
-  ${QT_INCLUDE_DIR}
-  ../librapicore
-)
+  SET( SOURCES
+    gui.cpp
+    mainwindow.cpp
+    robotwidget.cpp
+    devicewidget.cpp
+    drivetrain2dofwidget.cpp
+    velocity2dwidget.cpp
+    pose2dwidget.cpp
+    rangefinderwidget.cpp
+    powerpackwidget.cpp
+    dataline.cpp
+    dataled.cpp
+    variablemonitorwidget.cpp
+    ${MOC_SRC}
+  )
 
-link_libraries(${TARGET}
-  ${QT_LIBRARIES}
-  autolab-rapi
-)
+  LINK_DIRECTORIES(
+    ${QT_LIBRARY_DIR}
+    ../librapicore
+  )
 
-MESSAGE(STATUS "QT ${QT_INCLUDE_DIR} ")
+  INCLUDE_DIRECTORIES(
+    ${QT_INCLUDE_DIR}
+    ../librapicore
+  )
 
-# build a shared library
-ADD_LIBRARY( ${TARGET} SHARED ${SOURCES} )
+  LINK_LIBRARIES(${TARGET}
+    ${QT_LIBRARIES}
+    autolab-rapi
+  )
 
-# give the shared library a version number
-SET_TARGET_PROPERTIES( ${TARGET} PROPERTIES
-                        VERSION ${VERSION}
-)
+  MESSAGE(STATUS "QT ${QT_INCLUDE_DIR} ")
 
-INSTALL(TARGETS ${TARGET}
-  LIBRARY DESTINATION lib )
+  # build a shared library
+  ADD_LIBRARY( ${TARGET} SHARED ${SOURCES} )
 
-INSTALL(FILES ${HEADERS}
-  DESTINATION include/${PROJECT_NAME}-${APIVERSION}
-)
+  # give the shared library a version number
+  SET_TARGET_PROPERTIES( ${TARGET} PROPERTIES
+                          VERSION ${VERSION}
+  )
+
+  INSTALL(TARGETS ${TARGET}
+    LIBRARY DESTINATION lib )
+
+  INSTALL(FILES ${HEADERS}
+    DESTINATION include/${PROJECT_NAME}-${APIVERSION}
+  )
+ELSE(QT_FOUND)
+  MESSAGE(STATUS "QT4 not found, autolab-rapi-gui will NOT be build")
+ENDIF(QT_FOUND)

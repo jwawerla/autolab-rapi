@@ -19,6 +19,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 #include "rangefinderwidget.h"
+#include "assert.h"
 #include <QPaintEvent>
 
 namespace Rapi
@@ -28,6 +29,8 @@ namespace Rapi
 CRangeFinderWidget::CRangeFinderWidget ( ARangeFinder* rangeFinder,
     QWidget* parent ) : ADeviceWidget ( parent )
 {
+  assert(rangeFinder);
+
   mPolygonItem = NULL;
   mRobotPolygonItem = NULL;
   mRangeFinder = rangeFinder;
@@ -128,9 +131,16 @@ void CRangeFinderWidget::updateData()
   float r;          // [pixel]
   float pixelPerMeter;
 
-  // should we display stuff or are we turned off
-  if ( mUpdateCheckBox->isChecked() == false )
+  // check if device still exists
+  if ( mRangeFinder == NULL)
     return;
+
+  // should we display stuff or are we turned off
+  if ( mUpdateCheckBox->isChecked() == false ) {
+    mGraphicsView->setHidden(true);
+    return;
+  }
+  mGraphicsView->setHidden(false);
 
   // call update of base class
   ADeviceWidget::updateData ( mRangeFinder );

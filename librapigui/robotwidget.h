@@ -24,6 +24,7 @@
 #include <qwidget.h>
 #include "robot.h"
 #include "devicewidget.h"
+#include "variablemonitorwidget.h"
 #include <list>
 
 namespace Rapi
@@ -51,6 +52,8 @@ class CRobotWidget : public QWidget
     ARobot* mRobot;
     /** List of all widgets */
     std::list<ADeviceWidget*> mWidgetList;
+    /** Variable monitor */
+    CVariableMonitorWidget* mVariableMonitor;
 };
 
 } // namespace

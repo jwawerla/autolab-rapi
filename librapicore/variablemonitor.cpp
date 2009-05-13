@@ -18,59 +18,103 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#include "gui.h"
-#include "mainwindow.h"
-#include <stdio.h>
-
+#include "variablemonitor.h"
+#include <sstream>
 
 namespace Rapi
 {
 
-/** Only instance of this class */
-CGui* cguiInstance = NULL;
-/** Qt Application */
-QApplication* mQtApp = NULL;
-/** Main window */
-CMainWindow* mMainWindow = NULL;
-
 //-----------------------------------------------------------------------------
-CGui::CGui ( int argc, char* argv[] )
-{
-  mArgc = argc;
-  mArgv = mArgv;
-  pthread_create ( &mPThread, NULL, &threadMain, this );
-
-  sleep(2.0);  // need to wait for thread to finish creating the Qt App
-}
-//-----------------------------------------------------------------------------
-CGui::~CGui()
+CVariableMonitor::CVariableMonitor()
 {
 }
 //-----------------------------------------------------------------------------
-CGui* CGui::getInstance ( int argc, char* argv[] )
+CVariableMonitor::~CVariableMonitor()
 {
-  if ( cguiInstance == NULL )
-    cguiInstance = new CGui ( argc, argv );
-
-  return cguiInstance;
 }
 //-----------------------------------------------------------------------------
-void* CGui::threadMain ( void* arg )
+void CVariableMonitor::getVariableString ( unsigned int index,
+    std::string& value,
+    std::string& name )
 {
-  CGui* gui = (CGui*)arg;
-  mQtApp =  new QApplication ( gui->mArgc, gui->mArgv );
-  mQtApp->setStyle("plastique");
-  mMainWindow = new CMainWindow();
-  mMainWindow->show();
-  mQtApp->exec();
+  tVarEntry entry;
+  int intVar;
+  bool boolVar;
+  float floatVar;
+  double doubleVar;
+  std::ostringstream strOut;
 
-  return NULL;
+  if ( index >= mVarList.size() ) {
+    name = "unknown";
+    value = "unkown";
+    return;
+  }
+
+  entry = mVarList[index];
+
+  name = entry.name;
+
+  switch ( entry.varType ) {
+
+    case BOOL:
+      boolVar = * ( ( bool* ) entry.ptr );
+      if ( boolVar )
+        value = "true";
+      else
+        value = "false";
+      break;
+    case FLOAT:
+      floatVar = * ( ( float* ) entry.ptr );
+      strOut << floatVar;
+      value = strOut.str();
+      break;
+    case DOUBLE:
+      doubleVar = * ( ( double* ) entry.ptr );
+      strOut << doubleVar;
+      value = strOut.str();
+      break;
+    case INT:
+      intVar = * ( ( int* ) entry.ptr );
+      strOut << intVar;
+      value = strOut.str();
+      break;
+  };
 }
 //-----------------------------------------------------------------------------
-void CGui::registerRobot(ARobot* robot)
+void CVariableMonitor::addVar ( float* ptr, std::string name )
 {
-  mMainWindow->addRobot(robot);
+  tVarEntry entry;
+  entry.ptr = ptr;
+  entry.name = name;
+  entry.varType = FLOAT;
+  mVarList.push_back ( entry );
 }
 //-----------------------------------------------------------------------------
-
+void CVariableMonitor::addVar ( bool* ptr, std::string name )
+{
+  tVarEntry entry;
+  entry.ptr = ptr;
+  entry.name = name;
+  entry.varType = BOOL;
+  mVarList.push_back ( entry );
+}
+//-----------------------------------------------------------------------------
+void CVariableMonitor::addVar ( double* ptr, std::string name )
+{
+  tVarEntry entry;
+  entry.ptr = ptr;
+  entry.name = name;
+  entry.varType = DOUBLE;
+  mVarList.push_back ( entry );
+}
+//-----------------------------------------------------------------------------
+void CVariableMonitor::addVar ( int* ptr, std::string name )
+{
+  tVarEntry entry;
+  entry.ptr = ptr;
+  entry.name = name;
+  entry.varType = INT;
+  mVarList.push_back ( entry );
+}
+//-----------------------------------------------------------------------------
 } // namespace

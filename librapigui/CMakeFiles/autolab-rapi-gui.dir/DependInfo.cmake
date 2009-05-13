@@ -17,6 +17,7 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/powerpackwidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o"
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/rangefinderwidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o"
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/robotwidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o"
+  "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/variablemonitorwidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o"
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/velocity2dwidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")

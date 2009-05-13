@@ -30,6 +30,7 @@ SET( HEADERS
   robotupdateinterface.h
   statevariable.h
   booleanstatevariable.h
+  variablemonitor.h
   timer.h
 )
 
@@ -57,6 +58,7 @@ SET( SOURCES
   rgbcolor.cpp
   statevariable.cpp
   booleanstatevariable.cpp
+  variablemonitor.cpp
   timer.cpp
 )
 

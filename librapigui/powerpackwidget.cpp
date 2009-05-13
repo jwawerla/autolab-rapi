@@ -36,6 +36,7 @@
  ***************************************************************************/
 #include "powerpackwidget.h"
 #include "unicodechar.h"
+#include "assert.h"
 #include <QHBoxLayout>
 
 namespace Rapi
@@ -44,52 +45,53 @@ namespace Rapi
 CPowerPackWidget::CPowerPackWidget ( APowerPack* powerpack,
                                      QWidget* parent ) : ADeviceWidget ( parent )
 {
-  QGroupBox* batteryBox;
-  QGroupBox* chargingBox;
+
   QHBoxLayout* batteryLayout;
   QHBoxLayout* chargingLayout;
+
+  assert(powerpack);
   mPowerPack = powerpack;
 
   setTitle ( "Powerpack" );
 
-  batteryBox = new QGroupBox ( "Battery", this );
-  chargingBox = new QGroupBox ( "Charger", this );
+  mBatteryBox = new QGroupBox ( "Battery", this );
+  mChargingBox = new QGroupBox ( "Charger", this );
   batteryLayout = new QHBoxLayout();
   chargingLayout = new QHBoxLayout();
 
-  batteryBox->setLayout ( batteryLayout );
-  chargingBox->setLayout ( chargingLayout );
-  mMainLayout->addWidget ( batteryBox );
-  mMainLayout->addWidget ( chargingBox );
+  mBatteryBox->setLayout ( batteryLayout );
+  mChargingBox->setLayout ( chargingLayout );
+  mMainLayout->addWidget ( mBatteryBox );
+  mMainLayout->addWidget ( mChargingBox );
 
-  mBatCapacity = new CDataLine ( batteryBox, "Capacity [Wh]" );
+  mBatCapacity = new CDataLine ( mBatteryBox, "Capacity [Wh]" );
   mBatCapacity->setFloatPrecision ( 3 );
   batteryLayout->addWidget ( mBatCapacity );
 
-  mMaxBatCapacity = new CDataLine ( batteryBox, "Max. Capacity [Wh]" );
+  mMaxBatCapacity = new CDataLine ( mBatteryBox, "Max. Capacity [Wh]" );
   batteryLayout->addWidget ( mMaxBatCapacity );
 
-  mCurrent = new CDataLine ( batteryBox, "Current [A]" );
+  mCurrent = new CDataLine ( mBatteryBox, "Current [A]" );
   batteryLayout->addWidget ( mCurrent );
 
-  mVoltage = new CDataLine ( batteryBox, "Voltage [V]" );
+  mVoltage = new CDataLine ( mBatteryBox, "Voltage [V]" );
   batteryLayout->addWidget ( mVoltage );
 
-  mBatTemp = new CDataLine( batteryBox, "Temp ["+Q_DEGREE+"]");
+  mBatTemp = new CDataLine( mBatteryBox, "Temp ["+Q_DEGREE+"]");
   batteryLayout->addWidget(mBatTemp);
 
 
-  mChargingLed = new CDataLed( chargingBox, "Charging");
+  mChargingLed = new CDataLed( mChargingBox, "Charging");
   mChargingLed->setData( CDataLed::RED_OFF);
   chargingLayout->addWidget(mChargingLed);
 
-  mChargingSource = new CDataLine( chargingBox, "Source");
+  mChargingSource = new CDataLine( mChargingBox, "Source");
   chargingLayout->addWidget(mChargingSource);
 
-  mChargingState =  new CDataLine( chargingBox, "State");
+  mChargingState =  new CDataLine( mChargingBox, "State");
   chargingLayout->addWidget(mChargingState);
 
-  mDissipated = new CDataLine( chargingBox, "Dissipated [Wh]");
+  mDissipated = new CDataLine( mChargingBox, "Dissipated [Wh]");
   chargingLayout->addWidget(mDissipated);
 
 
@@ -103,6 +105,8 @@ CPowerPackWidget::~CPowerPackWidget()
 void CPowerPackWidget::updateData()
 {
   if ( mUpdateCheckBox->isChecked() ) {
+    mBatteryBox->setHidden(false);
+    mChargingBox->setHidden(false);
     ADeviceWidget::updateData ( mPowerPack );
     mBatCapacity->setData ( mPowerPack->getBatteryCapacity() );
     mMaxBatCapacity->setData ( mPowerPack->getMaxBatteryCapacity() );
@@ -117,6 +121,10 @@ void CPowerPackWidget::updateData()
       mChargingLed->setData( CDataLed::RED_ON);
     else
       mChargingLed->setData( CDataLed::RED_OFF);
+  }
+  else {
+    mBatteryBox->setHidden(true);
+    mChargingBox->setHidden(true);
   }
 }
 //---------------------------------------------------------------------------

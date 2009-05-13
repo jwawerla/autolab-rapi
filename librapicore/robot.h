@@ -30,6 +30,7 @@
 #include "lights.h"
 #include "textdisplay.h"
 #include "binarysensorarray.h"
+#include "variablemonitor.h"
 #include <list>
 #include <vector>
 #include <string>
@@ -101,6 +102,7 @@ class ARobot
     virtual int findDevice ( ATextDisplay* &device, std::string devName ) = 0;
     virtual int findDevice ( ABinarySensorArray* &device, std::string devName ) = 0;
 
+    CVariableMonitor mVariableMonitor;
   protected:
     /** Default constructor */
     ARobot();

@@ -39,13 +39,13 @@ int laserUpdate ( Stg::ModelLaser* mod, CStageLaser* laser )
 CStageLaser::CStageLaser ( Stg::ModelLaser* stgLaser, std::string devName )
     : ARangeFinder ( devName )
 {
-  assert(stgLaser);
+  assert ( stgLaser );
   mStgLaser = stgLaser;
   mFgEnabled = false;
   mStgLaser->AddUpdateCallback ( ( Stg::stg_model_callback_t )
                                  laserUpdate,
                                  this );
-  setEnabled( true );
+  setEnabled ( true );
 }
 //-----------------------------------------------------------------------------
 CStageLaser::~CStageLaser()
@@ -97,6 +97,9 @@ int CStageLaser::init()
     mRelativeBeamPose[i].mY = 0.0;
     mRelativeBeamPose[i].mYaw =  beamBearing;
     beamBearing += beamIncrement;
+
+    mRangeData[i].range = 0.0;
+    mRangeData[i].reflectance = 0.0;
   }
 
   return 1; // success
@@ -104,15 +107,24 @@ int CStageLaser::init()
 //-----------------------------------------------------------------------------
 void CStageLaser::updateData()
 {
+  tRangeData* temp;
   uint32_t sampleCount;
+
   if ( mFgEnabled ) {
-    mRangeData = ( tRangeData* ) mStgLaser->GetSamples ( &sampleCount );
+    // get range data from stage, if the simulation is paused at start up
+    // stage returns NULL, so we store the result in a temporal variable
+    // and store is only if it is any good
+    temp = ( tRangeData* ) mStgLaser->GetSamples ( &sampleCount );
+    if ( temp != NULL ) {
+      mRangeData = temp;
+    }
+
     mTimeStamp = mStgLaser->GetWorld()->SimTimeNow() / 1e6;
     notifyDataUpdateObservers();
 
     if ( sampleCount != mNumSamples )
       ERROR2 ( "Got wrong number of laser readings from Stage, "\
-                 "expected %d but got %d", mNumSamples, sampleCount );
+               "expected %d but got %d", mNumSamples, sampleCount );
   }
 }
 //-----------------------------------------------------------------------------

@@ -87,16 +87,18 @@ pose2dwidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/gui.cpp
 gui.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/gui.h
+mainwindow.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/mainwindow.h
 stdio.h
 -
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/gui.h
+robot.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/robot.h
 pthread.h
 -
 QtGui
 -
-mainwindow.h
-/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/mainwindow.h
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/mainwindow.cpp
 mainwindow.h
@@ -149,6 +151,8 @@ powerpackwidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/powerpackwidget.h
 unicodechar.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/unicodechar.h
+assert.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/assert.h
 QHBoxLayout
 -
 
@@ -169,6 +173,8 @@ list
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/rangefinderwidget.cpp
 rangefinderwidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/rangefinderwidget.h
+assert.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/assert.h
 QPaintEvent
 -
 
@@ -211,10 +217,26 @@ robot.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/robot.h
 devicewidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.h
+variablemonitorwidget.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/variablemonitorwidget.h
 list
 -
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/unicodechar.h
+
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/variablemonitorwidget.cpp
+variablemonitorwidget.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/variablemonitorwidget.h
+QHBoxLayout
+-
+
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/variablemonitorwidget.h
+QGroupBox
+-
+QTableWidget
+-
+variablemonitor.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/variablemonitor.h
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/velocity2dwidget.cpp
 velocity2dwidget.h
@@ -1461,6 +1483,10 @@ qpolygon.h
 /usr/include/qt4/QtGui/QPrinter
 qprinter.h
 /usr/include/qt4/QtGui/qprinter.h
+
+/usr/include/qt4/QtGui/QTableWidget
+qtablewidget.h
+/usr/include/qt4/QtGui/qtablewidget.h
 
 /usr/include/qt4/QtGui/QVBoxLayout
 qboxlayout.h
@@ -3455,6 +3481,8 @@ textdisplay.h
 librapigui/../librapicore/textdisplay.h
 binarysensorarray.h
 librapigui/../librapicore/binarysensorarray.h
+variablemonitor.h
+librapigui/../librapicore/variablemonitor.h
 list
 -
 vector
@@ -3480,6 +3508,12 @@ math.h
 limits
 -
 stdlib.h
+-
+
+librapigui/../librapicore/variablemonitor.h
+string
+-
+vector
 -
 
 librapigui/../librapicore/velocity2d.h

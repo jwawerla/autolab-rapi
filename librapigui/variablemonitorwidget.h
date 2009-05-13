@@ -18,65 +18,37 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#ifndef RAPIPOWERMANAGEMENTVIEW_H
-#define RAPIPOWERMANAGEMENTVIEW_H
+#ifndef RAPICVARIABLEMONITORWIDGET_H
+#define RAPICVARIABLEMONITORWIDGET_H
 
-#include "devicewidget.h"
-#include "powerpack.h"
-#include "dataline.h"
-#include "dataled.h"
 #include <QGroupBox>
-#include <list>
+#include <QTableWidget>
+#include "variablemonitor.h"
 
 namespace Rapi
 {
 
 /**
- * Visualization for the power management
- * @author Jens Wawerla <jwawerla@sfu.ca>
- * @version 0.1 - 01/2008
+ * A widget for the variable monitor
+ * @author Jens Wawerla
  */
-class CPowerPackWidget : public ADeviceWidget
+class CVariableMonitorWidget : public QGroupBox
 {
   public:
-    /**
-     * Default constructor
-     * @param parent Qt's parent object
-     * @param powerpack to visualize
-     */
-    CPowerPackWidget(APowerPack* powerpack, QWidget* parent = NULL );
+    /** Default constructor */
+    CVariableMonitorWidget ( CVariableMonitor* variableMonitor, QWidget* parent = NULL );
     /** Default destructor */
-    ~CPowerPackWidget();
-    /** Update display */
+    ~CVariableMonitorWidget();
+    /** Update the display */
     void updateData();
 
-  private:
-    /** Power pack device to visualize */
-    APowerPack* mPowerPack;
-    /** Battery capacity display */
-    CDataLine* mBatCapacity;
-    /** Maximal Battery capacity display */
-    CDataLine* mMaxBatCapacity;
-    /** Current drawn from battery display */
-    CDataLine* mCurrent;
-    /** Voltage of battery  */
-    CDataLine* mVoltage;
-    /** Battery temperature */
-    CDataLine* mBatTemp;
-    /** Charging Led */
-    CDataLed* mChargingLed;
-    /** Charging source */
-    CDataLine* mChargingSource;
-    /** Charging state */
-    CDataLine* mChargingState;
-    /** Total energy dissipated */
-    CDataLine* mDissipated;
-    /** Group box for battery data */
-    QGroupBox* mBatteryBox;
-    /** Group box for charger information */
-    QGroupBox* mChargingBox;
-
+  protected:
+    /** Table to display variables */
+    QTableWidget* mTableWidget;
+    /** Monitor */
+    CVariableMonitor* mVariableMonitor;
 };
 
 } // namespace
+
 #endif

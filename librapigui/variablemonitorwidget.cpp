@@ -18,59 +18,56 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#include "gui.h"
-#include "mainwindow.h"
-#include <stdio.h>
-
+#include "variablemonitorwidget.h"
+#include <QHBoxLayout>
 
 namespace Rapi
 {
 
-/** Only instance of this class */
-CGui* cguiInstance = NULL;
-/** Qt Application */
-QApplication* mQtApp = NULL;
-/** Main window */
-CMainWindow* mMainWindow = NULL;
-
 //-----------------------------------------------------------------------------
-CGui::CGui ( int argc, char* argv[] )
+CVariableMonitorWidget::CVariableMonitorWidget ( CVariableMonitor* monitor,
+    QWidget* parent ) : QGroupBox ( parent )
 {
-  mArgc = argc;
-  mArgv = mArgv;
-  pthread_create ( &mPThread, NULL, &threadMain, this );
+  QHBoxLayout* layout;
 
-  sleep(2.0);  // need to wait for thread to finish creating the Qt App
+  setTitle ( "Monitor" );
+  layout = new QHBoxLayout ( this );
+
+  mVariableMonitor = monitor;
+  mTableWidget = new QTableWidget ( mVariableMonitor->getNumOfVariables(), 2, this );
+  layout->addWidget ( mTableWidget );
+
+  mTableWidget->setHorizontalHeaderItem ( 0, new QTableWidgetItem ( "Variable" ) );
+  mTableWidget->setHorizontalHeaderItem ( 1, new QTableWidgetItem ( "Value" ) );
+  setLayout ( layout );
 }
 //-----------------------------------------------------------------------------
-CGui::~CGui()
+CVariableMonitorWidget::~CVariableMonitorWidget()
 {
 }
 //-----------------------------------------------------------------------------
-CGui* CGui::getInstance ( int argc, char* argv[] )
+void CVariableMonitorWidget::updateData()
 {
-  if ( cguiInstance == NULL )
-    cguiInstance = new CGui ( argc, argv );
+  std::string value;
+  std::string name;
+  QTableWidgetItem* tableItem;
 
-  return cguiInstance;
-}
-//-----------------------------------------------------------------------------
-void* CGui::threadMain ( void* arg )
-{
-  CGui* gui = (CGui*)arg;
-  mQtApp =  new QApplication ( gui->mArgc, gui->mArgv );
-  mQtApp->setStyle("plastique");
-  mMainWindow = new CMainWindow();
-  mMainWindow->show();
-  mQtApp->exec();
+  for ( unsigned int i = 0; i < mVariableMonitor->getNumOfVariables(); i++ ) {
+    mVariableMonitor->getVariableString ( i, value, name );
+    tableItem = mTableWidget->item ( i, 0 );
+    if ( tableItem == NULL ) {
+      tableItem = new QTableWidgetItem();
+      mTableWidget->setItem ( i, 0, tableItem );
+    }
+    tableItem->setText ( name.c_str() );
 
-  return NULL;
+    tableItem = mTableWidget->item ( i,1 );
+    if ( tableItem == NULL ) {
+      tableItem = new QTableWidgetItem();
+      mTableWidget->setItem ( i, 1, tableItem );
+    }
+    tableItem->setText ( value.c_str() );
+  }
 }
 //-----------------------------------------------------------------------------
-void CGui::registerRobot(ARobot* robot)
-{
-  mMainWindow->addRobot(robot);
-}
-//-----------------------------------------------------------------------------
-
 } // namespace
