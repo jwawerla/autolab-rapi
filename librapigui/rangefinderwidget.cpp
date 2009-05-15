@@ -53,6 +53,7 @@ CRangeFinderWidget::~CRangeFinderWidget()
   // nothing to do
 }
 //---------------------------------------------------------------------------
+
 void CRangeFinderWidget::createPolygons ( int n )
 {
   QPolygonF polygon;

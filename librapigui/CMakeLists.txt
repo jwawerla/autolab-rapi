@@ -17,6 +17,7 @@ IF (QT_FOUND)
     dataled.h
     devicewidget.h
     fiducialfinderwidget.h
+    devicewidgetlist.h
   )
 
   SET( HEADERS
@@ -40,6 +41,7 @@ IF (QT_FOUND)
     fiducialfinderwidget.cpp
     consolewidget.cpp
     textdisplaywidget.cpp
+    devicewidgetlist.cpp
     ${MOC_SRC}
   )
 

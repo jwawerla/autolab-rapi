@@ -18,74 +18,56 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#include "devicewidget.h"
+#include "devicewidgetlist.h"
 
 namespace Rapi
 {
 
 //-----------------------------------------------------------------------------
-ADeviceWidget::ADeviceWidget ( QWidget* parent )
-    : QGroupBox ( parent )
+CDeviceWidgetList::CDeviceWidgetList ( QMenu* menu, QString name, QObject* parent )
+    : QObject ( parent )
 {
-  setFlat ( false );
-  setTitle ( "Device" );
-  setCheckable ( true );
+  QSettings settings;
 
-  mMainLayout = new QVBoxLayout ( this );
-  mMainLayout->setSizeConstraint(QLayout::SetNoConstraint);
+  mMenu = menu;
+  mName = name;
 
-  mGeneralInfoBox = new QGroupBox ( this );
-  mGeneralInfoBox->setTitle("General");
-  mMainLayout->addWidget ( mGeneralInfoBox );
-  mGeneralInfoBox->setCheckable ( true );
+  mAction = new QAction ( name, this );
+  mAction->setCheckable ( true );
+  mMenu->addAction ( mAction );
+  connect ( mAction, SIGNAL ( toggled ( bool ) ), this,
+                     SLOT ( checkWidgets ( bool ) ) );
 
-
-  mGeneralInfoBoxLayout = new QHBoxLayout ( mGeneralInfoBox );
-  mGeneralInfoBox->setLayout ( mGeneralInfoBoxLayout );
-  mGeneralInfoBox->setChecked(false);
-
-  mEnabledLed = new CDataLed ( mGeneralInfoBox, "Enabled" );
-  mEnabledLed->setData ( CDataLed::GREEN_OFF );
-  mGeneralInfoBoxLayout->addWidget ( mEnabledLed );
-
-  setLayout ( mMainLayout );
-  setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-
-  connect(mGeneralInfoBox, SIGNAL(toggled(bool)), this, SLOT(toggled(bool)));
-  mEnabledLed->setHidden ( true );
+  mAction->setChecked( settings.value(mName+"/checked").toBool() );
 }
 //-----------------------------------------------------------------------------
-ADeviceWidget::~ADeviceWidget()
+CDeviceWidgetList::~CDeviceWidgetList()
 {
 }
 //-----------------------------------------------------------------------------
-void ADeviceWidget::setChecked(bool checked)
+void CDeviceWidgetList::checkWidgets ( bool checked )
 {
-  QGroupBox::setChecked(checked);
-}
-//---------------------------------------------------------------------------
-void ADeviceWidget::toggled ( bool on )
-{
-  if ( on ) {
-    mEnabledLed->setHidden ( false );
-  }
-  else {
-    mEnabledLed->setHidden ( true );
-  }
+  ADeviceWidget* widget;
+
+  std::list<ADeviceWidget*>::iterator it;
+
+  for ( it = mWidgetList.begin(); it != mWidgetList.end(); it++ ) {
+    widget = *it;
+    widget->setChecked ( checked );
+  } // for
 }
 //-----------------------------------------------------------------------------
-void ADeviceWidget::updateData ( ADevice* device )
+void CDeviceWidgetList::addWidget ( ADeviceWidget* widget )
 {
-  if ( isChecked() ) {
-    mGeneralInfoBox->setHidden ( false );
-    if ( device->isEnabled() )
-      mEnabledLed->setData ( CDataLed::GREEN_ON );
-    else
-      mEnabledLed->setData ( CDataLed::GREEN_OFF );
-  }
-  else {
-    mGeneralInfoBox->setHidden ( true );
-  }
+  mWidgetList.push_back ( widget );
+  widget->setChecked(mAction->isChecked());
+}
+//-----------------------------------------------------------------------------
+void CDeviceWidgetList::writeSettings()
+{
+  QSettings settings;
+
+  settings.setValue(mName+"/checked", mAction->isChecked());
 }
 //-----------------------------------------------------------------------------
 

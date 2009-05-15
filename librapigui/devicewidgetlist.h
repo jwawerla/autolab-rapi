@@ -18,59 +18,50 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#ifndef RAPIDEVICEWIDGET_H
-#define RAPIDEVICEWIDGET_H
+#ifndef RAPIDEVICEWIDGETLIST_H
+#define RAPIDEVICEWIDGETLIST_H
 
-#include <QGroupBox>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QCheckBox>
-#include "dataled.h"
-#include "device.h"
+#include <list>
+#include <QtGui>
+#include "devicewidget.h"
 
 namespace Rapi
 {
 
 /**
- * Abstract base class for device widgets
  * @author Jens Wawerla
  */
-class ADeviceWidget : public QGroupBox
+class CDeviceWidgetList : public QObject
 {
-  Q_OBJECT
+Q_OBJECT
 
   public:
+    /** Default constructor */
+    CDeviceWidgetList ( QMenu* menu, QString name, QObject* parent );
     /** Default destructor */
-    virtual ~ADeviceWidget();
-    /** Update the data of the widget */
-    virtual void updateData() = 0;
-    /** Set the whole widget checked or unchecked */
-    virtual void setChecked(bool checked);
+    ~CDeviceWidgetList();
+    /**
+     * Add a device widget
+     * @param widget to add
+     */
+    void addWidget ( ADeviceWidget* widget );
+    /**
+     * Writes the current settings to file
+     */
+    void writeSettings();
 
-
-  protected slots:
-    virtual void toggled(bool on );
+  public slots:
+    void checkWidgets(bool checked);
 
   protected:
-    /**
-     * Default constructor
-     * @param parent widget
-     */
-    ADeviceWidget ( QWidget* parent );
-    /**
-     * Updates the general information
-     * @param device to get data from
-     */
-    void updateData(ADevice* device);
-
-    /** Main layout component */
-    QVBoxLayout* mMainLayout;
-    /** Device enabled LED */
-    CDataLed* mEnabledLed;
-    /** General info box */
-    QGroupBox* mGeneralInfoBox;
-    /** General info box layout */
-    QHBoxLayout* mGeneralInfoBoxLayout;
+    /** List of device widgets */
+    std::list<ADeviceWidget*> mWidgetList;
+    /** Menu */
+    QMenu* mMenu;
+    /** Action */
+    QAction* mAction;
+    /** Name of device widgets */
+    QString mName;
 };
 
 } // namespace

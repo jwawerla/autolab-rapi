@@ -23,6 +23,7 @@
 
 #include "robot.h"
 #include "devicewidget.h"
+#include "mainwindow.h"
 #include "variablemonitorwidget.h"
 #include "consolewidget.h"
 #include <list>
@@ -43,7 +44,7 @@ class CRobotWidget : public QWidget
      * @param robot to visualize
      * @param parent widget
      */
-    CRobotWidget (ARobot* robot, QWidget* parent = NULL );
+    CRobotWidget (ARobot* robot, CMainWindow* mw, QWidget* parent = NULL );
     /** Default destructor */
     ~CRobotWidget();
     virtual void update();
@@ -51,6 +52,8 @@ class CRobotWidget : public QWidget
    protected:
     /** Robot to visualize */
     ARobot* mRobot;
+    /** Main window */
+    CMainWindow* mMainWindow;
     /** List of all widgets */
     std::list<ADeviceWidget*> mWidgetList;
     /** Variable monitor */

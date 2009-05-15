@@ -24,6 +24,7 @@
 #include <QtGui>
 #include <list>
 #include "robot.h"
+#include "devicewidgetlist.h"
 
 namespace Rapi
 {
@@ -47,6 +48,20 @@ class CMainWindow : public QMainWindow
      * @param robot to be added
      */
     void addRobot ( ARobot* robot );
+    /** Rangefinder list */
+    CDeviceWidgetList* mRangeFinderWidgetList;
+    /** Drivetrain list */
+    CDeviceWidgetList* mDrivetrainWidgetList;
+    /** Fiducialfinder list */
+    CDeviceWidgetList* mFiducialFinderWidgetList;
+    /** Powerpack list */
+    CDeviceWidgetList* mPowerPackWidgetList;
+    /** Textdisplay list */
+    CDeviceWidgetList* mTextDisplayWidgetList;
+    /** Variable monitor list */
+    CDeviceWidgetList* mVariableMonitorWidgetList;
+    /** Console list */
+    CDeviceWidgetList* mConsoleWidgetList;
 
   protected slots:
     void update();
@@ -66,6 +81,7 @@ class CMainWindow : public QMainWindow
     bool mFgInit;
     /** Show device menu */
     QMenu* mDeviceMenu;
+
 };
 
 } // namespace

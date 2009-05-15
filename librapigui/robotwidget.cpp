@@ -31,7 +31,7 @@
 namespace Rapi {
 
 //-----------------------------------------------------------------------------
-CRobotWidget::CRobotWidget(ARobot* robot,QWidget* parent)
+CRobotWidget::CRobotWidget(ARobot* robot, CMainWindow* mw, QWidget* parent)
  : QWidget( parent)
 {
   ARobotCtrl* ctrl;
@@ -39,6 +39,7 @@ CRobotWidget::CRobotWidget(ARobot* robot,QWidget* parent)
   ADevice* device;
   mRobot = robot;
 
+  mMainWindow = mw;
   QVBoxLayout* layout = new QVBoxLayout (this );
 
   for ( unsigned int i = 0; i < mRobot->getNumOfDevices(); i++) {
@@ -48,26 +49,31 @@ CRobotWidget::CRobotWidget(ARobot* robot,QWidget* parent)
     }
     else if ( device->getGuiName() == "DrivetrainWidget" ) {
       widget = new CDrivetrain2dofWidget((ADrivetrain2dof*)device, this);
+      mMainWindow->mDrivetrainWidgetList->addWidget(widget);
       layout->addWidget( widget);
       mWidgetList.push_back(widget);
     }
     else if ( device->getGuiName() == "RangeFinderWidget" ) {
       widget = new CRangeFinderWidget((ARangeFinder*)device, this);
+      mMainWindow->mRangeFinderWidgetList->addWidget(widget);
       layout->addWidget( widget);
       mWidgetList.push_back(widget);
     }
     else if ( device->getGuiName() == "PowerPackWidget" ) {
       widget = new CPowerPackWidget((APowerPack*)device, this);
+      mMainWindow->mPowerPackWidgetList->addWidget(widget);
       layout->addWidget( widget);
       mWidgetList.push_back(widget);
     }
     else if ( device->getGuiName() == "FiducialFinderWidget" ) {
       widget = new CFiducialFinderWidget((AFiducialFinder*)device, this);
+      mMainWindow->mFiducialFinderWidgetList->addWidget(widget);
       layout->addWidget( widget);
       mWidgetList.push_back(widget);
     }
     else if ( device->getGuiName() == "TextDisplayWidget" ) {
       widget = new CTextDisplayWidget((ATextDisplay*)device, this);
+      mMainWindow->mTextDisplayWidgetList->addWidget(widget);
       layout->addWidget( widget);
       mWidgetList.push_back(widget);
     }
@@ -79,11 +85,13 @@ CRobotWidget::CRobotWidget(ARobot* robot,QWidget* parent)
   // Now add variable monitor
   mVariableMonitor = new CVariableMonitorWidget(&(mRobot->mVariableMonitor), this);
   layout->addWidget(mVariableMonitor);
+  mMainWindow->mVariableMonitorWidgetList->addWidget(mVariableMonitor);
 
   // Add console widget
   ctrl = ((ARobotCtrl*)mRobot->getRobotController());
   mConsoleWidget = new CConsoleWidget(&(ctrl->mRPrintfString), this );
   layout->addWidget(mConsoleWidget);
+  mMainWindow->mConsoleWidgetList->addWidget(mConsoleWidget);
 
   setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
   setLayout( layout );

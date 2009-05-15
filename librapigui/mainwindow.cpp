@@ -36,11 +36,26 @@ CMainWindow::CMainWindow()
 
   setWindowTitle ( "RapiGui" );
 
-  mDeviceMenu = menuBar()->addMenu("&Devices");
+  mDeviceMenu = menuBar()->addMenu ( "&Devices" );
+
+  mRangeFinderWidgetList = new CDeviceWidgetList ( mDeviceMenu, "Rangefinder",
+      this );
+  mDrivetrainWidgetList = new CDeviceWidgetList ( mDeviceMenu,
+      "Drivetrain", this );
+  mFiducialFinderWidgetList = new CDeviceWidgetList ( mDeviceMenu,
+      "Fiducialfinder", this );
+  mPowerPackWidgetList = new CDeviceWidgetList ( mDeviceMenu, "Powerpack",
+      this );
+  mTextDisplayWidgetList = new CDeviceWidgetList ( mDeviceMenu, "Text Display",
+      this );
+  mVariableMonitorWidgetList = new CDeviceWidgetList ( mDeviceMenu,
+      "Variable Monitor", this );
+  mConsoleWidgetList = new CDeviceWidgetList ( mDeviceMenu,
+      "Console", this );
 
   mTabWidget = new QTabWidget ( this );
-  layout = new QVBoxLayout( mTabWidget );
-  mTabWidget->setLayout(layout);
+  layout = new QVBoxLayout ( mTabWidget );
+  mTabWidget->setLayout ( layout );
   setCentralWidget ( mTabWidget );
 
   mTimer = new QTimer ( this );
@@ -51,19 +66,23 @@ CMainWindow::CMainWindow()
 //-----------------------------------------------------------------------------
 CMainWindow::~CMainWindow()
 {
-  printf("CMainWindow::~CMainWindow()\n");
 }
 //-----------------------------------------------------------------------------
-void CMainWindow::closeEvent(QCloseEvent* event)
+void CMainWindow::closeEvent ( QCloseEvent* event )
 {
-  printf("CMainWindow::closeEvent()\n");
+  printf ( "CMainWindow::closeEvent()\n" );
   event->accept();
 
-  QSettings settings(this);
+  QSettings settings ( this );
 
-
-printf("applicationName %s\n", settings.applicationName().toLatin1().constData () );
-  settings.setValue("mainWindow/size", size());
+  settings.setValue ( "mainWindow/size", size() );
+  mRangeFinderWidgetList->writeSettings();
+  mDrivetrainWidgetList->writeSettings();
+  mVariableMonitorWidgetList->writeSettings();
+  mConsoleWidgetList->writeSettings();
+  mFiducialFinderWidgetList->writeSettings();
+  mTextDisplayWidgetList->writeSettings();
+  mPowerPackWidgetList->writeSettings();
 }
 //-----------------------------------------------------------------------------
 void CMainWindow::update()
@@ -72,7 +91,7 @@ void CMainWindow::update()
   QScrollArea* scrollArea = NULL;
   CRobotWidget* robotWidget;
 
-  setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+  setSizePolicy ( QSizePolicy::Preferred, QSizePolicy::Preferred );
 
   if ( mFgInit == false ) {
     mFgInit = true;
@@ -82,14 +101,14 @@ void CMainWindow::update()
   // add additional robots if necessary
   while ( mNumRobots != mRobotVector.size() ) {
     robot = mRobotVector[mNumRobots];
-    scrollArea = new QScrollArea(mTabWidget);
-    scrollArea->setHorizontalScrollBarPolicy (Qt::ScrollBarAlwaysOff);
-    scrollArea->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    robotWidget = new CRobotWidget(robot, scrollArea);
+    scrollArea = new QScrollArea ( mTabWidget );
+    scrollArea->setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
+    scrollArea->setSizePolicy ( QSizePolicy::Preferred, QSizePolicy::Preferred );
+    robotWidget = new CRobotWidget ( robot, this, scrollArea );
     mTabWidget->addTab ( scrollArea, robot->getName().c_str() );
-    scrollArea->setWidget(robotWidget);
-    scrollArea-> setWidgetResizable(true);
-    resize(scrollArea->sizeHint());
+    scrollArea->setWidget ( robotWidget );
+    scrollArea-> setWidgetResizable ( true );
+    resize ( scrollArea->sizeHint() );
     mNumRobots ++;
   }
 
@@ -104,7 +123,6 @@ void CMainWindow::update()
 //-----------------------------------------------------------------------------
 void CMainWindow::addRobot ( ARobot* robot )
 {
-
   assert ( robot );
   mRobotVector.push_back ( robot );
 }
