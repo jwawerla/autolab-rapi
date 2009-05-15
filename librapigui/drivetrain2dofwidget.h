@@ -25,6 +25,7 @@
 #include "drivetrain2dof.h"
 #include "velocity2dwidget.h"
 #include "pose2dwidget.h"
+#include "dataled.h"
 
 
 namespace Rapi {
@@ -54,6 +55,8 @@ class CDrivetrain2dofWidget : public ADeviceWidget
     CVelocity2dWidget* mVelocityCmdWidget;
     /** Display for odometry */
     CPose2dWidget* mOdometryWidget;
+    /** Stalled led */
+    CDataLed* mStalledLed;
 };
 
 } // namespace

@@ -21,61 +21,92 @@
 #include "mainwindow.h"
 #include "robotwidget.h"
 #include "assert.h"
+#include <QScrollArea>
 
-namespace Rapi {
+namespace Rapi
+{
 
 //-----------------------------------------------------------------------------
 CMainWindow::CMainWindow()
- : QMainWindow()
+    : QMainWindow()
 {
+  QVBoxLayout* layout;
   mNumRobots = 0;
   mFgInit = false;
 
-  setWindowTitle("RapiGui");
+  setWindowTitle ( "RapiGui" );
 
-  mTabWidget = new QTabWidget(this);
-  setCentralWidget( mTabWidget );
+  mDeviceMenu = menuBar()->addMenu("&Devices");
 
-  mTimer = new QTimer(this);
-  connect(mTimer, SIGNAL(timeout()), this, SLOT(update()));
-  mTimer->setSingleShot(false);
-  mTimer->start(100); // msec
+  mTabWidget = new QTabWidget ( this );
+  layout = new QVBoxLayout( mTabWidget );
+  mTabWidget->setLayout(layout);
+  setCentralWidget ( mTabWidget );
+
+  mTimer = new QTimer ( this );
+  connect ( mTimer, SIGNAL ( timeout() ), this, SLOT ( update() ) );
+  mTimer->setSingleShot ( false );
+  mTimer->start ( 100 ); // msec
 }
 //-----------------------------------------------------------------------------
 CMainWindow::~CMainWindow()
 {
+  printf("CMainWindow::~CMainWindow()\n");
+}
+//-----------------------------------------------------------------------------
+void CMainWindow::closeEvent(QCloseEvent* event)
+{
+  printf("CMainWindow::closeEvent()\n");
+  event->accept();
+
+  QSettings settings(this);
+
+
+printf("applicationName %s\n", settings.applicationName().toLatin1().constData () );
+  settings.setValue("mainWindow/size", size());
 }
 //-----------------------------------------------------------------------------
 void CMainWindow::update()
 {
   ARobot* robot;
+  QScrollArea* scrollArea = NULL;
   CRobotWidget* robotWidget;
 
-  if (mFgInit == false) {
+  setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+
+  if ( mFgInit == false ) {
     mFgInit = true;
-    mTimer->start(100); // msec
+    mTimer->start ( 100 ); // msec
     return;
   }
   // add additional robots if necessary
-  while (mNumRobots != mRobotVector.size() ) {
+  while ( mNumRobots != mRobotVector.size() ) {
     robot = mRobotVector[mNumRobots];
-    robotWidget = new CRobotWidget(robot, mTabWidget);
-    mTabWidget->addTab(robotWidget, robot->getName().c_str() );
+    scrollArea = new QScrollArea(mTabWidget);
+    scrollArea->setHorizontalScrollBarPolicy (Qt::ScrollBarAlwaysOff);
+    scrollArea->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    robotWidget = new CRobotWidget(robot, scrollArea);
+    mTabWidget->addTab ( scrollArea, robot->getName().c_str() );
+    scrollArea->setWidget(robotWidget);
+    scrollArea-> setWidgetResizable(true);
+    resize(scrollArea->sizeHint());
     mNumRobots ++;
   }
 
-  robotWidget = (CRobotWidget*)mTabWidget->currentWidget();
-  if (robotWidget)
-    robotWidget->update();
-
+  scrollArea = ( QScrollArea* ) mTabWidget->currentWidget();
+  if ( scrollArea ) {
+    robotWidget = ( CRobotWidget* ) scrollArea->widget();
+    if ( robotWidget )
+      robotWidget->update();
+  }
   QMainWindow::update();
 }
 //-----------------------------------------------------------------------------
 void CMainWindow::addRobot ( ARobot* robot )
 {
 
-  assert(robot);
-  mRobotVector.push_back(robot);
+  assert ( robot );
+  mRobotVector.push_back ( robot );
 }
 //-----------------------------------------------------------------------------
 } // namespace

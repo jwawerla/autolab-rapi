@@ -32,22 +32,27 @@ ADeviceWidget::ADeviceWidget ( QWidget* parent )
   setCheckable ( true );
 
   mMainLayout = new QVBoxLayout ( this );
+  mMainLayout->setSizeConstraint(QLayout::SetNoConstraint);
 
   mGeneralInfoBox = new QGroupBox ( this );
   mGeneralInfoBox->setTitle("General");
   mMainLayout->addWidget ( mGeneralInfoBox );
   mGeneralInfoBox->setCheckable ( true );
 
+
   mGeneralInfoBoxLayout = new QHBoxLayout ( mGeneralInfoBox );
   mGeneralInfoBox->setLayout ( mGeneralInfoBoxLayout );
+  mGeneralInfoBox->setChecked(false);
 
   mEnabledLed = new CDataLed ( mGeneralInfoBox, "Enabled" );
   mEnabledLed->setData ( CDataLed::GREEN_OFF );
   mGeneralInfoBoxLayout->addWidget ( mEnabledLed );
 
   setLayout ( mMainLayout );
+  setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
   connect(mGeneralInfoBox, SIGNAL(toggled(bool)), this, SLOT(toggled(bool)));
+  mEnabledLed->setHidden ( true );
 }
 //-----------------------------------------------------------------------------
 ADeviceWidget::~ADeviceWidget()

@@ -63,6 +63,8 @@ class CFiducialFinderWidget : public ADeviceWidget
     CDataLine* mMinRange;
     /** Maximum Range */
     CDataLine* mMaxRange;
+    /** Own fiducial id */
+    CDataLine* mOwnFiducialId;
 
 };
 

@@ -60,6 +60,9 @@ void* CGui::threadMain ( void* arg )
   CGui* gui = (CGui*)arg;
   mQtApp =  new QApplication ( gui->mArgc, gui->mArgv );
   mQtApp->setStyle("plastique");
+  mQtApp->setOrganizationName("Autolab");
+  mQtApp->setOrganizationDomain("autolab.cmpt.sfu.ca");
+  mQtApp->setApplicationName("RapiGui");
   mMainWindow = new CMainWindow();
   mMainWindow->show();
   mQtApp->exec();

@@ -39,6 +39,6 @@
 #include "robotctrl.h"
 #include "waypoint2d.h"
 #include "rgbcolor.h"
-#include "booleanstatevariable.h"
 #include "timer.h"
+#include "statevariable.h"
 

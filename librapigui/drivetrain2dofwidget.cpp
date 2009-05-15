@@ -29,6 +29,11 @@ CDrivetrain2dofWidget::CDrivetrain2dofWidget ( ADrivetrain2dof* drivetrain,
 {
   mDrivetrain = drivetrain;
   setTitle ( "Drivetrain" );
+
+  mStalledLed = new CDataLed(mGeneralInfoBox, "Stalled");
+  mStalledLed->setData(CDataLed::RED_OFF);
+  mGeneralInfoBoxLayout->addWidget(mStalledLed);
+
   mVelocityCmdWidget = new CVelocity2dWidget ( this );
   mMainLayout->addWidget ( mVelocityCmdWidget );
 
@@ -48,12 +53,17 @@ void CDrivetrain2dofWidget::updateData ()
     mVelocityCmdWidget->setHidden(false);
     mVelocityCmdWidget->setData ( mDrivetrain->getVelocityCmd() );
     mOdometryWidget->setData ( mDrivetrain->getOdometry()->getPose() );
+    if (mDrivetrain->isStalled()) 
+      mStalledLed->setData(CDataLed::RED_ON);
+    else
+      mStalledLed->setData(CDataLed::RED_OFF);
   }
   else {
     mOdometryWidget->setHidden(true);
     mVelocityCmdWidget->setHidden(true);
   }
   ADeviceWidget::updateData ( mDrivetrain );
+  mStalledLed->setHidden(!mGeneralInfoBox->isChecked());
 }
 //-----------------------------------------------------------------------------
 

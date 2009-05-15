@@ -71,6 +71,16 @@ class AFiducialFinder : public ADevice
      */
     unsigned int getNumReadings();
     /**
+     * Set the fiducial this device broadcasts
+     * @param id fiducial id to be set
+     */
+    virtual void setFiducialSignal(int id) = 0;
+    /**
+     * Gets the fiducial signal this device broadcasts
+     * @return own fiducial id
+     */
+    int getFiducialSignal() { return mOwnFiducialId; };
+    /**
      * Prints the devices main information
      */
     virtual void print();
@@ -96,7 +106,8 @@ class AFiducialFinder : public ADevice
     double mFov;
     /** Number of readings */
     unsigned int mNumReadings;
-
+    /** Fiducial id this device broadcasts */
+    int mOwnFiducialId;
 
 };
 

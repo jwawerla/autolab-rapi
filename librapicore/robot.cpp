@@ -20,7 +20,9 @@
  **************************************************************************/
 
 #include "robot.h"
+#include "printerror.h"
 #include <assert.h>
+
 namespace Rapi
 {
 
@@ -29,6 +31,7 @@ ARobot::ARobot()
 {
   mName = "ARobot";
   mUpdateInterval = 0.0;
+  mRobotCtrl = NULL;
 }
 //-----------------------------------------------------------------------------
 ARobot::~ARobot()
@@ -50,7 +53,10 @@ ADevice* ARobot::getDeviceByIndex(unsigned int index)
 //-----------------------------------------------------------------------------
 void ARobot::registerRobotController(IRobotUpdate* ctrl)
 {
-  mRobotCtrlList.push_back( ctrl );
+  if (mRobotCtrl)
+    PRT_WARN0("Already have a controller");
+
+  mRobotCtrl = ctrl;
 }
 //-----------------------------------------------------------------------------
 void ARobot::registerStateVariable( IRobotUpdate* var)
@@ -60,13 +66,8 @@ void ARobot::registerStateVariable( IRobotUpdate* var)
 //-----------------------------------------------------------------------------
 void ARobot::updateControllers()
 {
-  IRobotUpdate* ctrl;
-  std::list<IRobotUpdate*>::iterator it;
-
-  for (it = mRobotCtrlList.begin(); it != mRobotCtrlList.end(); it++) {
-    ctrl = (IRobotUpdate*)*it;
-    assert(ctrl);
-    ctrl->updateData( mUpdateInterval );
+  if (mRobotCtrl) {
+    mRobotCtrl->updateData( mUpdateInterval );
   }
 }
 //-----------------------------------------------------------------------------

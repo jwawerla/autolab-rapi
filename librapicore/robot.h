@@ -89,6 +89,11 @@ class ARobot
      */
     virtual double getCurrentTime() = 0;
     /**
+     * Gets the robot controller
+     * @return controller
+     */
+    IRobotUpdate* getRobotController() { return mRobotCtrl; };
+    /**
      * Gets a device with a given device index
      * @param devName name of device
      * @return device
@@ -101,8 +106,9 @@ class ARobot
     virtual int findDevice ( ALights* &device, std::string devName ) = 0;
     virtual int findDevice ( ATextDisplay* &device, std::string devName ) = 0;
     virtual int findDevice ( ABinarySensorArray* &device, std::string devName ) = 0;
-
+    /** Monitor for variables */
     CVariableMonitor mVariableMonitor;
+
   protected:
     /** Default constructor */
     ARobot();
@@ -114,8 +120,8 @@ class ARobot
      * Calls the update method in all registered state variables controllers
      */
     void updateStateVariable();
-    /** Robot controller list */
-    std::list<IRobotUpdate*> mRobotCtrlList;
+    /** Robot controller */
+    IRobotUpdate* mRobotCtrl;
     /** State variable list */
     std::list<IRobotUpdate*> mStateVariableList;
     /** Update interval [s] */

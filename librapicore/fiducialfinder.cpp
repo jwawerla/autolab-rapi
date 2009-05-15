@@ -34,6 +34,7 @@ AFiducialFinder::AFiducialFinder ( std::string devName )
   mMinRange = 0.0;
   mMaxRange = 0.0;
   mNumReadings = 0;
+  mOwnFiducialId = 0;
   mFiducialData = NULL;
 }
 //-----------------------------------------------------------------------------

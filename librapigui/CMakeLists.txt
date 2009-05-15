@@ -38,6 +38,8 @@ IF (QT_FOUND)
     dataled.cpp
     variablemonitorwidget.cpp
     fiducialfinderwidget.cpp
+    consolewidget.cpp
+    textdisplaywidget.cpp
     ${MOC_SRC}
   )
 

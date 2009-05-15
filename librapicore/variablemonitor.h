@@ -24,6 +24,11 @@
 #include <string>
 #include <vector>
 
+#include "pose2d.h"
+#include "point2d.h"
+#include "velocity2d.h"
+#include "waypoint2d.h"
+
 namespace Rapi
 {
 
@@ -47,6 +52,10 @@ class CVariableMonitor
     void addVar(double* ptr, std::string name);
     void addVar(bool* ptr, std::string name);
     void addVar(int* ptr, std::string name);
+    void addVar(CPose2d* ptr, std::string name);
+    void addVar(CPoint2d* ptr, std::string name);
+    void addVar(CVelocity2d* ptr, std::string name);
+    void addVar(CWaypoint2d* ptr, std::string name);
     /**
      * Gets the variable with a given index as a string
      * @param index of variable to get
@@ -61,7 +70,7 @@ class CVariableMonitor
     unsigned int getNumOfVariables() { return mVarList.size(); };
 
   protected:
-    typedef enum {FLOAT, DOUBLE, INT, BOOL} tVar;
+    typedef enum {FLOAT, DOUBLE, INT, BOOL, POSE2D, POINT2D, VELOCITY2D, WAYPOINT2D} tVar;
     typedef struct {
       void* ptr;
       tVar varType;

@@ -52,6 +52,8 @@ class CMainWindow : public QMainWindow
     void update();
 
   protected:
+    /** Qt close event */
+    void closeEvent(QCloseEvent* event);
     /** List of robots to be displayed */
     std::vector<ARobot*> mRobotVector;
     /** Tab widget for robot */
@@ -62,6 +64,8 @@ class CMainWindow : public QMainWindow
     unsigned int mNumRobots;
     /** Flags if we are initialized or not */
     bool mFgInit;
+    /** Show device menu */
+    QMenu* mDeviceMenu;
 };
 
 } // namespace

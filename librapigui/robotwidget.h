@@ -24,8 +24,9 @@
 #include "robot.h"
 #include "devicewidget.h"
 #include "variablemonitorwidget.h"
+#include "consolewidget.h"
 #include <list>
-#include <QScrollArea>
+#include <QWidget>
 
 namespace Rapi
 {
@@ -34,7 +35,7 @@ namespace Rapi
  * Basic container widget for a robot
  * @author Jens Wawerla
  */
-class CRobotWidget : public QScrollArea
+class CRobotWidget : public QWidget
 {
   public:
     /**
@@ -54,6 +55,8 @@ class CRobotWidget : public QScrollArea
     std::list<ADeviceWidget*> mWidgetList;
     /** Variable monitor */
     CVariableMonitorWidget* mVariableMonitor;
+    /** Widget for displaying robot controller printfs */
+    CConsoleWidget* mConsoleWidget;
 };
 
 } // namespace

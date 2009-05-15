@@ -30,7 +30,7 @@ namespace Rapi {
  * A boolean state variable that keeps track of changes over time
  * @author Jens Wawerla
  */
-class CBooleanStateVariable : public AStateVariable
+class CBooleanStateVariable : public CStateVariable
 {
   public:
     /**

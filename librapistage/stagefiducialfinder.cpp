@@ -72,6 +72,11 @@ void CStageFiducialFinder::setEnabled ( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
+void CStageFiducialFinder::setFiducialSignal(int id)
+{
+  mStgFiducial->SetFiducialReturn(id);
+}
+//-----------------------------------------------------------------------------
 void CStageFiducialFinder::updateData()
 {
 
@@ -81,6 +86,8 @@ void CStageFiducialFinder::updateData()
       delete[] mFiducialData;
       mFiducialData = NULL;
     }
+
+    mOwnFiducialId = mStgFiducial->GetFiducialReturn();
 
     mNumReadings = mStgFiducial->fiducial_count;
     // do we have fiducial data ?

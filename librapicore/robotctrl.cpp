@@ -21,6 +21,8 @@
 
 #include "robotctrl.h"
 #include <assert.h>
+#include <stdio.h>
+#include <stdarg.h>
 
 namespace Rapi {
 
@@ -36,5 +38,23 @@ ARobotCtrl::~ARobotCtrl()
 {
 }
 //-----------------------------------------------------------------------------
+void ARobotCtrl::rprintf ( const char* format, ... )
+{
+  char str[256];
 
+  if (mRPrintfString.length() > 1024)
+    mRPrintfString.clear();
+
+  va_list args;
+  fprintf ( stdout, "\033[1;37;42m[%s]\033[0m: ", mRobot->getName().c_str() );
+  va_start ( args, format );
+  vfprintf ( stdout, format, args );
+  va_end ( args );
+
+  va_start ( args, format );
+  vsprintf ( str, format, args );
+  va_end ( args );
+  mRPrintfString.append(str);
+}
+//-----------------------------------------------------------------------------
 } // namespace

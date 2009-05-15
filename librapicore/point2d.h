@@ -45,6 +45,11 @@ class CPoint2d
      * @param angle [rad]
      */
     void fromPolar(double length, double angle);
+    /**
+     * Gets the distance to a given point
+     * @return distance
+     */
+    double distance(CPoint2d point);
     /** X coordinate */
     double mX;
     /** Y coordinate */

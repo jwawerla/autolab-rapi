@@ -4,6 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
+  "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/consolewidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o"
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o"
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataline.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o"
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o"
@@ -20,6 +21,7 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/powerpackwidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o"
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/rangefinderwidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o"
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/robotwidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o"
+  "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/textdisplaywidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o"
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/variablemonitorwidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o"
   "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/velocity2dwidget.cpp" "/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o"
   )

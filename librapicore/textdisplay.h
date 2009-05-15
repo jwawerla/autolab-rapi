@@ -61,6 +61,11 @@ class ATextDisplay : public ADevice
      * Prints the devices main information
      */
     virtual void print();
+        /**
+     * Gets the name of a gui this device can be visualized
+     * @return name of gui
+     */
+    virtual std::string getGuiName() { return "TextDisplayWidget"; };
 
   protected:
     /** Default constructor

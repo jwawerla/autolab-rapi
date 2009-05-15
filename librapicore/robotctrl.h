@@ -23,6 +23,7 @@
 #define RAPIROBOTCTRL_H
 
 #include "robot.h"
+#include <string>
 
 namespace Rapi
 {
@@ -37,6 +38,13 @@ class ARobotCtrl : public IRobotUpdate
   public:
     /** Default desctructor */
     virtual ~ARobotCtrl();
+    /**
+     * A printf that adds the robots name in the front of the string
+     * @param str string to print
+     */
+    virtual void rprintf ( const char* format, ... );
+    /** RPrintf string */
+    std::string mRPrintfString;
 
   protected:
     /**
@@ -51,6 +59,7 @@ class ARobotCtrl : public IRobotUpdate
     virtual void updateData(float dt) = 0;
     /** Robot controlled by this controller */
     ARobot* mRobot;
+
 };
 
 }

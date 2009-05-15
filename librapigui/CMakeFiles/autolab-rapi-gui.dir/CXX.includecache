@@ -14,6 +14,20 @@
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/./images/ledredon.xpm
 
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/consolewidget.cpp
+consolewidget.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/consolewidget.h
+assert.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/assert.h
+
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/consolewidget.h
+devicewidget.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.h
+QTextEdit
+-
+string
+-
+
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.cpp
 dataled.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
@@ -83,6 +97,8 @@ velocity2dwidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/velocity2dwidget.h
 pose2dwidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/pose2dwidget.h
+dataled.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/fiducialfinderwidget.cpp
 fiducialfinderwidget.h
@@ -129,6 +145,8 @@ robotwidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/robotwidget.h
 assert.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/assert.h
+QScrollArea
+-
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/mainwindow.h
 QtGui
@@ -237,8 +255,12 @@ fiducialfinderwidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/fiducialfinderwidget.h
 powerpackwidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/powerpackwidget.h
+textdisplaywidget.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/textdisplaywidget.h
 printerror.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/printerror.h
+robotctrl.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/robotctrl.h
 QVBoxLayout
 -
 
@@ -249,10 +271,26 @@ devicewidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.h
 variablemonitorwidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/variablemonitorwidget.h
+consolewidget.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/consolewidget.h
 list
 -
-QScrollArea
+QWidget
 -
+
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/textdisplaywidget.cpp
+textdisplaywidget.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/textdisplaywidget.h
+assert.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/assert.h
+
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/textdisplaywidget.h
+devicewidget.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.h
+textdisplay.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/textdisplay.h
+dataline.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataline.h
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/unicodechar.h
 
@@ -632,6 +670,8 @@ QtCore/qatomic_sh4a.h
 
 /usr/include/qt4/QtCore/qatomic_arm.h
 
+/usr/include/qt4/QtCore/qatomic_armv6.h
+
 /usr/include/qt4/QtCore/qatomic_avr32.h
 
 /usr/include/qt4/QtCore/qatomic_bfin.h
@@ -657,6 +697,10 @@ ia64/sys/inline.h
 /usr/include/qt4/QtCore/qatomic_powerpc.h
 
 /usr/include/qt4/QtCore/qatomic_s390.h
+
+/usr/include/qt4/QtCore/qatomic_sh.h
+
+/usr/include/qt4/QtCore/qatomic_sh4a.h
 
 /usr/include/qt4/QtCore/qatomic_sparc.h
 
@@ -1088,6 +1132,18 @@ QtCore/qatomic.h
 QtCore/qobject.h
 -
 
+/usr/include/qt4/QtCore/qsharedpointer.h
+QtCore/qglobal.h
+-
+QtCore/qatomic.h
+-
+QtCore/qshareddata.h
+-
+QtCore/qsharedpointer_impl.h
+-
+
+/usr/include/qt4/QtCore/qsharedpointer_impl.h
+
 /usr/include/qt4/QtCore/qsignalmapper.h
 QtCore/qobject.h
 -
@@ -1436,6 +1492,14 @@ QtCore/QVector
 qcheckbox.h
 /usr/include/qt4/QtGui/qcheckbox.h
 
+/usr/include/qt4/QtGui/QCleanlooksStyle
+qcleanlooksstyle.h
+/usr/include/qt4/QtGui/qcleanlooksstyle.h
+
+/usr/include/qt4/QtGui/QFont
+qfont.h
+/usr/include/qt4/QtGui/qfont.h
+
 /usr/include/qt4/QtGui/QGraphicsPolygonItem
 qgraphicsitem.h
 /usr/include/qt4/QtGui/qgraphicsitem.h
@@ -1472,6 +1536,10 @@ qlineedit.h
 qevent.h
 /usr/include/qt4/QtGui/qevent.h
 
+/usr/include/qt4/QtGui/QPalette
+qpalette.h
+/usr/include/qt4/QtGui/qpalette.h
+
 /usr/include/qt4/QtGui/QPixmap
 qpixmap.h
 /usr/include/qt4/QtGui/qpixmap.h
@@ -1491,6 +1559,10 @@ qscrollarea.h
 /usr/include/qt4/QtGui/QTableWidget
 qtablewidget.h
 /usr/include/qt4/QtGui/qtablewidget.h
+
+/usr/include/qt4/QtGui/QTextEdit
+qtextedit.h
+/usr/include/qt4/QtGui/qtextedit.h
 
 /usr/include/qt4/QtGui/QVBoxLayout
 qboxlayout.h
@@ -2432,6 +2504,14 @@ limits.h
 QtGui/qframe.h
 -
 
+/usr/include/qt4/QtGui/qgtkstyle.h
+QtGui/QCleanlooksStyle
+-
+QtGui/QPalette
+-
+QtGui/QFont
+-
+
 /usr/include/qt4/QtGui/qheaderview.h
 QtGui/qabstractitemview.h
 -
@@ -3134,6 +3214,10 @@ QtGui/qfont.h
 QtCore/qstring.h
 -
 
+/usr/include/qt4/QtGui/qtextdocumentwriter.h
+QtCore/qstring.h
+-
+
 /usr/include/qt4/QtGui/qtextedit.h
 QtGui/qabstractscrollarea.h
 -
@@ -3482,6 +3566,12 @@ vector
 string
 -
 
+librapigui/../librapicore/robotctrl.h
+robot.h
+librapigui/../librapicore/robot.h
+string
+-
+
 librapigui/../librapicore/robotupdateinterface.h
 
 librapigui/../librapicore/textdisplay.h
@@ -3507,6 +3597,22 @@ string
 -
 vector
 -
+pose2d.h
+librapigui/../librapicore/pose2d.h
+point2d.h
+librapigui/../librapicore/point2d.h
+velocity2d.h
+librapigui/../librapicore/velocity2d.h
+waypoint2d.h
+librapigui/../librapicore/waypoint2d.h
 
 librapigui/../librapicore/velocity2d.h
+
+librapigui/../librapicore/waypoint2d.h
+pose2d.h
+librapigui/../librapicore/pose2d.h
+rgbcolor.h
+librapigui/../librapicore/rgbcolor.h
+string
+-
 

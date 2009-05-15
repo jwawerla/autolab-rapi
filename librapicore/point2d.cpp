@@ -20,6 +20,7 @@
  **************************************************************************/
 
 #include "point2d.h"
+#include "utilities.h"
 #include <stdio.h>
 #include <math.h>
 
@@ -41,6 +42,11 @@ void CPoint2d::fromPolar(double length, double angle)
 {
   mX = length * cos(angle);
   mY = length * sin(angle);
+}
+//-----------------------------------------------------------------------------
+double CPoint2d::distance(CPoint2d point)
+{
+  return EUCLIDIAN(point.mX, point.mY, mX, mY);
 }
 //-----------------------------------------------------------------------------
 void CPoint2d::print()

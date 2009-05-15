@@ -23,15 +23,18 @@
 #include "rangefinderwidget.h"
 #include "fiducialfinderwidget.h"
 #include "powerpackwidget.h"
+#include "textdisplaywidget.h"
 #include "printerror.h"
+#include "robotctrl.h"
 #include <QVBoxLayout>
 
 namespace Rapi {
 
 //-----------------------------------------------------------------------------
 CRobotWidget::CRobotWidget(ARobot* robot,QWidget* parent)
- : QScrollArea( parent)
+ : QWidget( parent)
 {
+  ARobotCtrl* ctrl;
   ADeviceWidget* widget;
   ADevice* device;
   mRobot = robot;
@@ -63,19 +66,32 @@ CRobotWidget::CRobotWidget(ARobot* robot,QWidget* parent)
       layout->addWidget( widget);
       mWidgetList.push_back(widget);
     }
+    else if ( device->getGuiName() == "TextDisplayWidget" ) {
+      widget = new CTextDisplayWidget((ATextDisplay*)device, this);
+      layout->addWidget( widget);
+      mWidgetList.push_back(widget);
+    }
     else {
       PRT_WARN1("Unkown gui name %s", device->getGuiName().c_str() );
     }
   }
 
+  // Now add variable monitor
   mVariableMonitor = new CVariableMonitorWidget(&(mRobot->mVariableMonitor), this);
   layout->addWidget(mVariableMonitor);
 
+  // Add console widget
+  ctrl = ((ARobotCtrl*)mRobot->getRobotController());
+  mConsoleWidget = new CConsoleWidget(&(ctrl->mRPrintfString), this );
+  layout->addWidget(mConsoleWidget);
+
+  setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
   setLayout( layout );
 }
 //-----------------------------------------------------------------------------
 CRobotWidget::~CRobotWidget()
 {
+  printf("CRobotWidget::~CRobotWidget()\n");
 }
 //-----------------------------------------------------------------------------
 void CRobotWidget::update()
@@ -89,6 +105,7 @@ void CRobotWidget::update()
   }
 
   mVariableMonitor->updateData();
+  mConsoleWidget->updateData();
   QWidget::update();
 }
 //-----------------------------------------------------------------------------

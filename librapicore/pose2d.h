@@ -47,7 +47,6 @@ class CPose2d
     * @param pose to copy pose from
     */
     CPose2d ( CPose2d const& pose );
-
     /**
     * Constructor
     * @param point to copy x and y from, sets yaw to 0

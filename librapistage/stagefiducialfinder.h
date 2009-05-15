@@ -55,6 +55,11 @@ class CStageFiducialFinder : public AFiducialFinder
      * @param enable = true to enable, false to disable
      */
     virtual void setEnabled ( bool enable );
+    /**
+     * Set the fiducial this device broadcasts
+     * @param id fiducial id to be set
+     */
+    virtual void setFiducialSignal(int id);
 
   protected:
     /**

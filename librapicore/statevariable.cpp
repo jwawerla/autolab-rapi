@@ -21,28 +21,77 @@
 #include "statevariable.h"
 #include <assert.h>
 
-namespace Rapi {
+namespace Rapi
+{
 
 
 //-----------------------------------------------------------------------------
-AStateVariable::AStateVariable() : IRobotUpdate()
+template<class T>
+CStateVariable<T>::CStateVariable() : IRobotUpdate()
 {
   mUpdateTimestamp = 0.0;
   mModificationTimestamp = 0.0;
   mFgModified = false;
 }
 //-----------------------------------------------------------------------------
-AStateVariable::~AStateVariable()
+template<class T>
+CStateVariable<T>::~CStateVariable()
 {
 }
 //-----------------------------------------------------------------------------
-void AStateVariable::setRobot ( ARobot* robot )
+template<class T>
+void CStateVariable<T>::setRobot ( ARobot* robot )
 {
-  assert(robot);
-  robot->registerStateVariable( this );
+  assert ( robot );
+  robot->registerStateVariable ( this );
 
   mUpdateTimestamp = robot->getCurrentTime();
   mModificationTimestamp = robot->getCurrentTime();
+}
+//-----------------------------------------------------------------------------
+template<class T>
+bool CStateVariable<T>::operator== ( const T value )
+{
+  if (mValue == value)
+    return true;
+
+  return false;
+}
+//-----------------------------------------------------------------------------
+template<class T>
+bool CStateVariable<T>::operator!= ( const T value )
+{
+  if (mValue == value)
+    return false;
+
+  return true;
+}
+//-----------------------------------------------------------------------------
+template<class T>
+T CStateVariable<T>::operator= ( const T value )
+{
+  if ( mValue != value) {
+    mModificationTimestamp = mUpdateTimestamp;
+    mFgModified = true;
+    mValue = value;
+  }
+
+  return mValue;
+}
+//-----------------------------------------------------------------------------
+template<class T>
+T CStateVariable<T>::operator*(T value)
+{
+  return mValue;
+}
+//-----------------------------------------------------------------------------
+template<class T>
+void CStateVariable<T>::updateData(float dt)
+{
+  if (mUpdateTimestamp - mModificationTimestamp > dt)
+    mFgModified = false;
+
+  mUpdateTimestamp += dt;
 }
 //-----------------------------------------------------------------------------
 

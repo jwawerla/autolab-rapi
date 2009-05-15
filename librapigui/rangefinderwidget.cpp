@@ -202,6 +202,7 @@ void CRangeFinderWidget::updateData()
       mPolygonItem[i]->setPolygon ( polygon );
     }
   }
+  mGraphicsView->update();
 }
 
 //---------------------------------------------------------------------------

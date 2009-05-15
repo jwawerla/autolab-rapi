@@ -20,6 +20,7 @@
  **************************************************************************/
 #include "variablemonitor.h"
 #include <sstream>
+#include "utilities.h"
 
 namespace Rapi
 {
@@ -34,15 +35,19 @@ CVariableMonitor::~CVariableMonitor()
 }
 //-----------------------------------------------------------------------------
 void CVariableMonitor::getVariableString ( unsigned int index,
-                                           std::string& varType,
-                                           std::string& name,
-                                           std::string& value )
+    std::string& varType,
+    std::string& name,
+    std::string& value )
 {
   tVarEntry entry;
   int intVar;
   bool boolVar;
   float floatVar;
   double doubleVar;
+  CPose2d poseVar;
+  CPoint2d pointVar;
+  CVelocity2d velocityVar;
+  CWaypoint2d waypointVar;
   std::ostringstream strOut;
 
   if ( index >= mVarList.size() ) {
@@ -58,6 +63,35 @@ void CVariableMonitor::getVariableString ( unsigned int index,
 
   switch ( entry.varType ) {
 
+    case POSE2D:
+      varType = "CPose2d";
+      poseVar = * ( ( CPose2d* ) entry.ptr );
+      strOut << "mX=" << poseVar.mX << " mY=" << poseVar.mY << " mYaw=" <<
+      R2D ( poseVar.mYaw );
+      value = strOut.str();
+      break;
+    case VELOCITY2D:
+      varType = "CVelocity2d";
+      velocityVar = * ( ( CVelocity2d* ) entry.ptr );
+      strOut << "mVX=" << velocityVar.mVX << " mVY=" << velocityVar.mVY <<
+      " mYawDot=" <<  R2D ( velocityVar.mYawDot );
+      value = strOut.str();
+      break;
+    case POINT2D:
+      varType = "CPoint2d";
+      pointVar = * ( ( CPoint2d* ) entry.ptr );
+      strOut << "mX=" << pointVar.mX << " mY=" << pointVar.mY;
+      value = strOut.str();
+      break;
+    case WAYPOINT2D:
+      varType = "CWaypoint2d";
+      waypointVar = * ( ( CWaypoint2d* ) entry.ptr );
+      strOut << "name:" << waypointVar.getLabel()
+             << " mX=" << waypointVar.getPose().mX
+             << " mY=" << waypointVar.getPose().mY
+             << " mYaw=" <<R2D ( waypointVar.getPose().mYaw );
+      value = strOut.str();
+      break;
     case BOOL:
       varType = "bool";
       boolVar = * ( ( bool* ) entry.ptr );
@@ -85,6 +119,42 @@ void CVariableMonitor::getVariableString ( unsigned int index,
       value = strOut.str();
       break;
   };
+}
+//-----------------------------------------------------------------------------
+void CVariableMonitor::addVar(CWaypoint2d* ptr, std::string name)
+{
+  tVarEntry entry;
+  entry.ptr = ptr;
+  entry.name = name;
+  entry.varType = WAYPOINT2D;
+  mVarList.push_back ( entry );
+}
+//-----------------------------------------------------------------------------
+void CVariableMonitor::addVar ( CPose2d* ptr, std::string name )
+{
+  tVarEntry entry;
+  entry.ptr = ptr;
+  entry.name = name;
+  entry.varType = POSE2D;
+  mVarList.push_back ( entry );
+}
+//-----------------------------------------------------------------------------
+void CVariableMonitor::addVar ( CPoint2d* ptr, std::string name )
+{
+  tVarEntry entry;
+  entry.ptr = ptr;
+  entry.name = name;
+  entry.varType = POINT2D;
+  mVarList.push_back ( entry );
+}
+//-----------------------------------------------------------------------------
+void CVariableMonitor::addVar ( CVelocity2d* ptr, std::string name )
+{
+  tVarEntry entry;
+  entry.ptr = ptr;
+  entry.name = name;
+  entry.varType = VELOCITY2D;
+  mVarList.push_back ( entry );
 }
 //-----------------------------------------------------------------------------
 void CVariableMonitor::addVar ( float* ptr, std::string name )

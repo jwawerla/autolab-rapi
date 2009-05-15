@@ -65,6 +65,7 @@ void CWanderCtrl::updateData ( float dt )
   // find the closest distance to the left and right and check if
   // there's anything in front
 
+  rprintf("hello %d \n", mAvoidcount);
 
   for ( uint32_t i = 0; i < mLaser->getNumSamples(); i++ ) {
 

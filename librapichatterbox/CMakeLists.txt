@@ -6,6 +6,7 @@ SET( TARGET ${PROJECT_CB} )
 ADD_SUBDIRECTORY(i2c)
 
 SET( HEADERS
+  RapiChatterbox
   cbrobot.h
   cbdrivetrain2dof.h
   cbpowerpack.h
@@ -20,6 +21,7 @@ SET( HEADERS
   cbwheeldropsensor.h
   cbcliffsensor.h
   cbovercurrentsensor.h
+  cbtypes.h
 )
 
 SET( SOURCES

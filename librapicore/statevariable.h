@@ -32,11 +32,16 @@ namespace Rapi
  * Abstract base class for state variables
  * @author Jens Wawerla
  */
-class AStateVariable : public IRobotUpdate
+template<class T>
+class CStateVariable : public IRobotUpdate
 {
   public:
+    /**
+     * Default constructor
+     */
+    CStateVariable();
     /** Default destructor */
-    virtual ~AStateVariable();
+    virtual ~CStateVariable();
     /**
      * Checks if variable has changed since last time step
      * @return true if changed, false other wise
@@ -52,12 +57,23 @@ class AStateVariable : public IRobotUpdate
      * @return [s]
      */
     double getModificationTime() { return mModificationTimestamp; };
+    /** Overloaded = operator */
+    T operator= ( const T value );
+    /** Overloaded != operator */
+    bool operator== ( const T value );
+    /** Overloaded != operator */
+    bool operator!= ( const T value );
+    /** Overloaded * operator */
+    T operator*(T value);
 
   protected:
     /**
-     * Default constructor
+     * Called by the frame work to update the state variable
+     * @param dt time since last call [s]
      */
-    AStateVariable();
+    virtual void updateData(float dt);
+    /** Value of the variable */
+    T mValue;
     /** Time stamp of last update [s] */
     double mUpdateTimestamp;
     /** Time stamp of last modification [s] */

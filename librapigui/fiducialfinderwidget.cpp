@@ -39,19 +39,28 @@ CFiducialFinderWidget::CFiducialFinderWidget ( AFiducialFinder* fiducial,
   mTableWidget = new QTableWidget ( 0, 3, this );
   mMainLayout->addWidget ( mTableWidget );
 
+  mTableWidget->setSelectionMode ( QAbstractItemView::NoSelection );
+  mTableWidget->setEditTriggers ( QAbstractItemView::NoEditTriggers );
   mTableWidget->setHorizontalHeaderItem ( 0, new QTableWidgetItem ( "Id" ) );
   mTableWidget->setHorizontalHeaderItem ( 1, new QTableWidgetItem ( "Range [m]" ) );
   mTableWidget->setHorizontalHeaderItem ( 2, new QTableWidgetItem (
                                             "Bearing ["+Q_DEGREE+"]" ) );
 
+  mOwnFiducialId = new CDataLine ( mGeneralInfoBox, "My Id" );
+  mGeneralInfoBoxLayout->addWidget ( mOwnFiducialId );
+  mOwnFiducialId->setHidden ( true );
+
   mMinRange = new CDataLine ( mGeneralInfoBox, "Min. Range [m]" );
   mGeneralInfoBoxLayout->addWidget ( mMinRange );
-  
+  mMinRange->setHidden ( true );
+
   mMaxRange = new CDataLine ( mGeneralInfoBox, "Max. Range [m]" );
   mGeneralInfoBoxLayout->addWidget ( mMaxRange );
-  
+  mMaxRange->setHidden ( true );
+
   mFov = new CDataLine ( mGeneralInfoBox, "FOV ["+Q_DEGREE+"]" );
   mGeneralInfoBoxLayout->addWidget ( mFov );
+  mFov->setHidden ( true );
 }
 //-----------------------------------------------------------------------------
 CFiducialFinderWidget::~CFiducialFinderWidget()
@@ -62,15 +71,17 @@ void CFiducialFinderWidget::toggled ( bool on )
 {
   if ( on ) {
     mEnabledLed->setHidden ( false );
-    mMinRange->setHidden( false );
-    mMaxRange->setHidden( false );
-    mFov->setHidden(false);
+    mMinRange->setHidden ( false );
+    mMaxRange->setHidden ( false );
+    mFov->setHidden ( false );
+    mOwnFiducialId->setHidden ( false );
   }
   else {
     mEnabledLed->setHidden ( true );
-    mMinRange->setHidden( true );
-    mMaxRange->setHidden( true );
-    mFov->setHidden(true);
+    mMinRange->setHidden ( true );
+    mMaxRange->setHidden ( true );
+    mFov->setHidden ( true );
+    mOwnFiducialId->setHidden ( true );
   }
 }
 //-----------------------------------------------------------------------------
@@ -80,9 +91,10 @@ void CFiducialFinderWidget::updateData ()
   QString str;
 
   if ( isChecked() ) {
-    mFov->setData( R2D(mFiducialFinder->getFov() ) );
-    mMinRange->setData(mFiducialFinder->getMinRange() );
-    mMaxRange->setData(mFiducialFinder->getMaxRange() );
+    mOwnFiducialId->setData( mFiducialFinder->getFiducialSignal() );
+    mFov->setData ( R2D ( mFiducialFinder->getFov() ) );
+    mMinRange->setData ( mFiducialFinder->getMinRange() );
+    mMaxRange->setData ( mFiducialFinder->getMaxRange() );
     mTableWidget->setHidden ( false );
     mTableWidget->setRowCount ( mFiducialFinder->getNumReadings() );
 
