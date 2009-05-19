@@ -43,7 +43,7 @@ class CVelocity2d
     /**
      * Prints the velocity data to std out
      */
-    void print();
+    void print() const;
     /** Assignment operator */
     void operator = ( CVelocity2d const &vel );
     /**

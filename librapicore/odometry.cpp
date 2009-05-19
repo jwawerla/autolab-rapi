@@ -43,7 +43,7 @@ void COdometry::setEnabled ( bool enable )
   // nothing to do
 }
 //-----------------------------------------------------------------------------
-void COdometry::print()
+void COdometry::print() const
 {
   printf("COdometry: ");
   mPose.print();

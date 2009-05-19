@@ -60,17 +60,17 @@ class ADevice
     /**
     * Prints the devices main information
     */
-    virtual void print() = 0;
+    virtual void print() const = 0 ;
     /**
      * Checks if the device is enabled or not
      * @return true if enabled, false otherwise
      */
-    bool isEnabled();
+    bool isEnabled() const;
     /**
      * Gets the name of the device
      * @return name of device
      */
-    std::string getName();
+    std::string getName() const;
     /**
      * Gets the name of a gui this device can be visualized
      * @return name of gui

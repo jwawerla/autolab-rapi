@@ -38,12 +38,12 @@ ARobot::~ARobot()
 {
 }
 //-----------------------------------------------------------------------------
-std::string ARobot::getName()
+std::string ARobot::getName() const
 {
   return mName;
 }
 //-----------------------------------------------------------------------------
-ADevice* ARobot::getDeviceByIndex(unsigned int index)
+ADevice* ARobot::getDeviceByIndex(unsigned int index) const
 {
   if ( index >= mDeviceList.size() )
     return NULL;

@@ -47,7 +47,7 @@ class ADrivetrain2dof : public ADevice
      * Gets the current velocity command set for the robot
      * @return velocity
      */
-    CVelocity2d getVelocityCmd();
+    virtual CVelocity2d getVelocityCmd() const;
     /**
      * Sets the velocity and turn rate of the robot
      * @param velocity forward positive, backward negative [m/s]
@@ -78,21 +78,21 @@ class ADrivetrain2dof : public ADevice
      * Checks if robot is stopped or not
      * @return true if stopped, false otherwise
      */
-    virtual bool isStopped();
+    virtual bool isStopped() const;
     /**
      * Prints the devices main information
      */
-    virtual void print();
+    virtual void print() const;
     /**
      * Checks if the robot got stuck somewhere and is thus stalled
      * @return true if stalled, false otherwise
      */
-    virtual bool isStalled();
+    virtual bool isStalled() const;
     /**
      * Gets the odometry of this drivetrain
      * @return odometry
      */
-    COdometry* getOdometry();
+    virtual COdometry* getOdometry() const;
     /**
      * Gets the upper velocity limits
      * @return limits

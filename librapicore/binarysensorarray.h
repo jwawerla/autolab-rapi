@@ -46,7 +46,7 @@ class ABinarySensorArray : public ADevice
      * Gets the number of bumper samples
      * @return number of samples
      */
-    unsigned int getNumSamples();
+    virtual unsigned int getNumSamples() const;
     /** Binary data */
     bool* mBitData;
     /** Pose information for each bumper */
@@ -54,12 +54,12 @@ class ABinarySensorArray : public ADevice
     /**
      * Prints the devices main information
      */
-    virtual void print();
+    virtual void print() const;
     /**
      * Checks if any bumper was triggered
      * @return true if one bumper was triggered, false otherwise
      */
-    virtual bool isAnyTriggered();
+    virtual bool isAnyTriggered() const;
 
   protected:
     /**

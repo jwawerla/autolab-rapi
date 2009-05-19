@@ -70,5 +70,16 @@ void CDeviceWidgetList::writeSettings()
   settings.setValue(mName+"/checked", mAction->isChecked());
 }
 //-----------------------------------------------------------------------------
+void CDeviceWidgetList::updateData()
+{
+  ADeviceWidget* widget;
 
+  std::list<ADeviceWidget*>::iterator it;
+
+  for ( it = mWidgetList.begin(); it != mWidgetList.end(); it++ ) {
+    widget = *it;
+    widget->updateData();
+  } // for
+}
+//-----------------------------------------------------------------------------
 } // namespace

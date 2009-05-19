@@ -53,7 +53,7 @@ class CRgbColor
     /**
      * Prints the color value
      */
-    void print();
+    void print() const;
     /** Assignment operator */
     CRgbColor& operator = ( const CRgbColor &color );
     /** Overloaded == operator */

@@ -23,7 +23,7 @@ assert.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/consolewidget.h
 devicewidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.h
-QTextEdit
+QPlainTextEdit
 -
 string
 -
@@ -1534,6 +1534,10 @@ qevent.h
 qpixmap.h
 /usr/include/qt4/QtGui/qpixmap.h
 
+/usr/include/qt4/QtGui/QPlainTextEdit
+qplaintextedit.h
+/usr/include/qt4/QtGui/qplaintextedit.h
+
 /usr/include/qt4/QtGui/QPolygonF
 qpolygon.h
 /usr/include/qt4/QtGui/qpolygon.h
@@ -1549,10 +1553,6 @@ qscrollarea.h
 /usr/include/qt4/QtGui/QTableWidget
 qtablewidget.h
 /usr/include/qt4/QtGui/qtablewidget.h
-
-/usr/include/qt4/QtGui/QTextEdit
-qtextedit.h
-/usr/include/qt4/QtGui/qtextedit.h
 
 /usr/include/qt4/QtGui/QVBoxLayout
 qboxlayout.h

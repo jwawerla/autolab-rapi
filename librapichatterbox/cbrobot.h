@@ -66,7 +66,7 @@ class CCBRobot : public ARobot
      * elapsed time since start of robot etc.
      * @return [s]
      */
-    virtual double getCurrentTime();
+    virtual double getCurrentTime() const;
     /**
      * This is the main of the thread
      */

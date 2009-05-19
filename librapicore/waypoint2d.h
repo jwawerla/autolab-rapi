@@ -61,7 +61,7 @@ class CWaypoint2d
     /**
      * Prints the pose data to std out
      */
-    void print();
+    void print() const;
     /** Overloaded = operator */
     void operator= ( const CPose2d pose );
     /** Overloaded = operator */
@@ -70,7 +70,7 @@ class CWaypoint2d
      * Gets the pose of the waypoint
      * @return pose
      */
-    CPose2d getPose();
+    CPose2d getPose() const;
     /**
      * Set pose of waypoint
      * @param pose
@@ -86,7 +86,7 @@ class CWaypoint2d
      * Gets the label of the waypoint
      * @return label
      */
-    std::string getLabel();
+    std::string getLabel() const;
     /**
      * Sets the label
      * @param label
@@ -96,7 +96,7 @@ class CWaypoint2d
      * Gets the color of the waypoint
      * @return color
      */
-    CRgbColor getColor();
+    CRgbColor getColor() const;
     /**
      * Sets the color of the waypoint
      * @param color

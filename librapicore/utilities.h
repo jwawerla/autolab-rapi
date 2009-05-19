@@ -153,12 +153,38 @@ inline bool isAboutZero(double x)
 }
 
 /**
- * Normalizes the value z to be in the interval [-pi, pi]
+ * Normalizes the value z to be in the interval [-2pi, 2pi]
  * @param z to be normalized
  * @return normalized value
  */
 template<typename T>
 inline T NORMALIZE_ANGLE(T z)
+{
+  //return atan2(sin(z), cos(z));
+  while (z > TWOPI) z = z - TWOPI;
+  while (z < -TWOPI) z = z + TWOPI;
+  return z;
+}
+
+/**
+ * Normalizes the value z to be in the interval [-2pi, 2pi]
+ * @param z to be normalized
+ * @return normalized value
+ */
+inline double NORMALIZE_TO_2PI(double z)
+{
+  while (z > TWOPI) z = z - TWOPI;
+  while (z < -TWOPI) z = z + TWOPI;
+  return z;
+}
+
+/**
+ * Normalizes the value z to be in the interval [-pi, pi]
+ * @param z to be normalized
+ * @return normalized value
+ */
+template<typename T>
+inline T NORMALIZE_TO_PI(T z)
 {
   return atan2(sin(z), cos(z));
 }

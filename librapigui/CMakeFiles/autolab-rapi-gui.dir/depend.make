@@ -62,11 +62,12 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/QHBoxLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/QLabel
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/QPixmap
-librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/QTextEdit
+librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/QPlainTextEdit
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/QVBoxLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/QWidget
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qabstractbutton.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qabstractscrollarea.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qabstracttextdocumentlayout.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qboxlayout.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qbrush.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qcheckbox.h
@@ -93,6 +94,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qpalette.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qpen.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qpixmap.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qplaintextedit.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qpolygon.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qregion.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qrgb.h
@@ -1522,10 +1524,10 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/Qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QLabel
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QPixmap
+librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QPlainTextEdit
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QPrinter
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QScrollArea
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QTableWidget
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QTextEdit
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QVBoxLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QWidget
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QtGui
@@ -3364,10 +3366,10 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QLineEdit
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QPixmap
+librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QPlainTextEdit
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QPolygonF
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QPrinter
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QTableWidget
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QTextEdit
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QVBoxLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QWidget
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QtGui

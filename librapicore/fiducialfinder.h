@@ -55,21 +55,21 @@ class AFiducialFinder : public ADevice
      * Gets the minimum sensing range
      * @return [m]
      */
-    double getMinRange();
+    double getMinRange() const;
     /**
      * Gets the maximum sensing range
      * @return [m]
      */
-    double getMaxRange();
+    double getMaxRange() const;
     /**
      * Gets the field of view
      * @return [rad]
      */
-    double getFov();
+    double getFov() const;
     /**
      * Gets the number of current fiducial readings
      */
-    unsigned int getNumReadings();
+    unsigned int getNumReadings() const;
     /**
      * Set the fiducial this device broadcasts
      * @param id fiducial id to be set
@@ -79,11 +79,11 @@ class AFiducialFinder : public ADevice
      * Gets the fiducial signal this device broadcasts
      * @return own fiducial id
      */
-    int getFiducialSignal() { return mOwnFiducialId; };
+    int getFiducialSignal() const;
     /**
      * Prints the devices main information
      */
-    virtual void print();
+    virtual void print() const;
         /**
      * Gets the name of a gui this device can be visualized
      * @return name of gui

@@ -70,29 +70,29 @@ class ARobot
      * Gets the name of the robot
      * @return robot name
      */
-    std::string getName();
+    std::string getName() const;
     /**
      * Gets the number of available devices
      * @return number of devices
      */
-    unsigned int getNumOfDevices() { return mDeviceList.size(); };
+    unsigned int getNumOfDevices() const { return mDeviceList.size(); };
     /**
      * Gets a device by the index of the device list
      * @param index of device
      * @return device or NULL
      */
-    ADevice* getDeviceByIndex(unsigned int index);
+    ADevice* getDeviceByIndex(unsigned int index) const;
     /**
      * Gets the current time of the robot, this maybe simulated time, real time,
      * elapsed time since start of robot etc.
      * @return [s]
      */
-    virtual double getCurrentTime() = 0;
+    virtual double getCurrentTime() const = 0;
     /**
      * Gets the robot controller
      * @return controller
      */
-    IRobotUpdate* getRobotController() { return mRobotCtrl; };
+    IRobotUpdate* getRobotController() const { return mRobotCtrl; };
     /**
      * Gets a device with a given device index
      * @param devName name of device

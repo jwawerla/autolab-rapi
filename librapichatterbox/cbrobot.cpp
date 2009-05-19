@@ -92,7 +92,7 @@ int CCBRobot::init()
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-double CCBRobot::getCurrentTime()
+double CCBRobot::getCurrentTime() const
 {
   double timeNow;
 

@@ -113,7 +113,6 @@ void CRobotWidget::update()
   }
 
   mVariableMonitor->updateData();
-  mConsoleWidget->updateData();
   QWidget::update();
 }
 //-----------------------------------------------------------------------------

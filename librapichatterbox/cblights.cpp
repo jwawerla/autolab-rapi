@@ -165,7 +165,7 @@ int CCBLights::setLight ( int id, CRgbColor color )
   return 1;
 }
 //----------------------------------------------------------------------------
-void CCBLights::print()
+void CCBLights::print() const
 {
   printf ( "CCBLights: " );
   for ( unsigned int i = 0; i < mNumLights; i ++ ) {

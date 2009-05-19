@@ -66,7 +66,7 @@ class CStageTextDisplay : public ATextDisplay
      * Gets the number of characters the display can show
      * @return number characters
      */
-    virtual int getSize();
+    virtual int getSize() const;
 
   protected:
     /**

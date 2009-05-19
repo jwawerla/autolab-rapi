@@ -66,7 +66,7 @@ int CStageTextDisplay::setText ( std::string text )
   return 0; // failure;
 }
 //-----------------------------------------------------------------------------
-int CStageTextDisplay::getSize()
+int CStageTextDisplay::getSize() const
 {
   return 256;
 }

@@ -65,6 +65,7 @@ class CMainWindow : public QMainWindow
 
   protected slots:
     void update();
+    void startStop(bool checked);
 
   protected:
     /** Qt close event */
@@ -79,8 +80,16 @@ class CMainWindow : public QMainWindow
     unsigned int mNumRobots;
     /** Flags if we are initialized or not */
     bool mFgInit;
-    /** Show device menu */
+    /** Device menu */
     QMenu* mDeviceMenu;
+    /** File menu */
+    QMenu* mFileMenu;
+    /** Quit action */
+    QAction* mQuitAction;
+    /** Start/Stop action */
+    QAction* mStartStopAction;
+    /** Label of status bar */
+    QLabel* mStatusBarLabel;
 
 };
 

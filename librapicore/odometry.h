@@ -54,7 +54,7 @@ class COdometry : public ALocalizer2d
     /**
     * Prints the devices main information
     */
-    virtual void print();
+    virtual void print() const;
 
   protected:
     /**

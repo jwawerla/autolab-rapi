@@ -49,6 +49,8 @@ Q_OBJECT
      * Writes the current settings to file
      */
     void writeSettings();
+    /** Update all widgets */
+    void updateData();
 
   public slots:
     void checkWidgets(bool checked);

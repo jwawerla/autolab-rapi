@@ -44,27 +44,27 @@ AFiducialFinder::~AFiducialFinder()
     delete[] mFiducialData;
 }
 //-----------------------------------------------------------------------------
-double AFiducialFinder::getMinRange()
+double AFiducialFinder::getMinRange() const
 {
   return mMinRange;
 }
 //-----------------------------------------------------------------------------
-double AFiducialFinder::getMaxRange()
+double AFiducialFinder::getMaxRange() const
 {
   return mMaxRange;
 }
 //-----------------------------------------------------------------------------
-double AFiducialFinder::getFov()
+double AFiducialFinder::getFov() const
 {
   return mFov;
 }
 //-----------------------------------------------------------------------------
-unsigned int AFiducialFinder::getNumReadings()
+unsigned int AFiducialFinder::getNumReadings() const
 {
   return mNumReadings;
 }
 //-----------------------------------------------------------------------------
-void AFiducialFinder::print()
+void AFiducialFinder::print() const
 {
   printf ( "AFiducialFinder: readings %d \n", mNumReadings );
 
@@ -74,5 +74,9 @@ void AFiducialFinder::print()
   }
 }
 //-----------------------------------------------------------------------------
-
+int AFiducialFinder::getFiducialSignal() const
+{
+  return mOwnFiducialId; 
+}
+//-----------------------------------------------------------------------------
 }  // namespace

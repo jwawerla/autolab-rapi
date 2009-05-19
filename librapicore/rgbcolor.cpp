@@ -49,7 +49,7 @@ CRgbColor::~CRgbColor()
 {
 }
 //---------------------------------------------------------------------------
-void CRgbColor::print()
+void CRgbColor::print() const
 {
   printf ( "CRgbColor %d %d %d \n", mRed, mGreen, mBlue );
 }

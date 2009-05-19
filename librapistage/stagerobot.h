@@ -53,7 +53,7 @@ class CStageRobot : public ARobot
      * elapsed time since start of robot etc.
      * @return [s]
      */
-    virtual double getCurrentTime();
+    virtual double getCurrentTime() const;
     /**
      * Gets a device with a given device index
      * @param devName name of device

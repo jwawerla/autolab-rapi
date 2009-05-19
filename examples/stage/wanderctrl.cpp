@@ -35,6 +35,7 @@ CWanderCtrl::CWanderCtrl ( ARobot* robot )
 
   mRobot = robot;
   mAvoidcount = 0;
+  mCounter = 0;
 
   looseRobot = ( CLooseStageRobot* ) mRobot;
   looseRobot->findDevice ( mDrivetrain, "position:0" );
@@ -65,7 +66,8 @@ void CWanderCtrl::updateData ( float dt )
   // find the closest distance to the left and right and check if
   // there's anything in front
 
-  rprintf("hello %d \n", mAvoidcount);
+  mCounter++;
+  rprintf("hello %d \n", mCounter);
 
   for ( uint32_t i = 0; i < mLaser->getNumSamples(); i++ ) {
 

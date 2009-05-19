@@ -72,7 +72,7 @@ class CCBLights : public ALights
     /**
      * Prints the devices main information
      */
-    virtual void print();
+    virtual void print() const;
     /**
      * Sets the blinking frequency of a led
      * @param id of led to be set, -1 all leds

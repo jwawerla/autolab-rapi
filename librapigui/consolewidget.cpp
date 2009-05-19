@@ -37,11 +37,13 @@ CConsoleWidget::CConsoleWidget ( std::string* str, QWidget* parent )
   assert ( str );
   mRPrintfString = str;
 
-  mTextEdit = new QTextEdit ( this );
-  mMainLayout->addWidget ( mTextEdit );
-  mTextEdit->setReadOnly ( true );
+  mPlainTextEdit = new QPlainTextEdit ( this );
+  mMainLayout->addWidget ( mPlainTextEdit );
+  mPlainTextEdit->setReadOnly ( true );
   font.setStyleHint(QFont::TypeWriter);
-  mTextEdit->setCurrentFont(font);
+  mPlainTextEdit->setFont(font);
+  // limit text output to 1000 lines
+  mPlainTextEdit->setMaximumBlockCount(1000);
 }
 //-----------------------------------------------------------------------------
 CConsoleWidget::~CConsoleWidget()
@@ -50,26 +52,24 @@ CConsoleWidget::~CConsoleWidget()
 //-----------------------------------------------------------------------------
 void CConsoleWidget::updateData()
 {
-  int len;
   QString text;
   if ( isChecked() ) {
-    mTextEdit->setHidden ( false );
-
-    // make sure the text doen't grow too big
-    len = mTextEdit->toPlainText().length();
-    if (len > MAX_CHARACTERS) {
-      text = mTextEdit->toPlainText();
-      text = text.remove(0, len - MAX_CHARACTERS);
-      mTextEdit->clear();
-      mTextEdit->append(text);
+    mPlainTextEdit->setHidden ( false );
+    if (mRPrintfString->empty() == false) {
+      text = mRPrintfString->c_str();
+      // if the text ends with a return, we need to remove it, because
+      // appendPlainText will add one
+      if (text.endsWith('\n') ) {
+        text = text.remove(text.length()-1, 1);
+      }
+      mPlainTextEdit->appendPlainText ( text );
+      mRPrintfString->clear();
     }
-    mTextEdit->append ( mRPrintfString->c_str() );
-    mRPrintfString->clear();
   }
   else {
-    mTextEdit->setHidden ( true );
+    mPlainTextEdit->setHidden ( true );
   }
-  mTextEdit->update();
+  mPlainTextEdit->update();
 }
 //-----------------------------------------------------------------------------
 

@@ -23,38 +23,49 @@
 #include "unicodechar.h"
 #include <QHBoxLayout>
 
-namespace Rapi {
-
-//-----------------------------------------------------------------------------
-CPose2dWidget::CPose2dWidget( QWidget* parent)
- : QGroupBox(parent)
+namespace Rapi
 {
 
-  setTitle("Pose");
-  setFlat(false);
+//-----------------------------------------------------------------------------
+CPose2dWidget::CPose2dWidget ( QWidget* parent )
+    : QGroupBox ( parent )
+{
+  setCheckable ( true );
+  setTitle ( "Pose" );
+  setFlat ( false );
   QHBoxLayout* layout = new QHBoxLayout ( this );
 
-  mXLine = new CDataLine(this, "X [m]");
-  layout->addWidget( mXLine );
+  mXLine = new CDataLine ( this, "X [m]" );
+  layout->addWidget ( mXLine );
 
-  mYLine = new CDataLine(this, "Y [m]");
-  layout->addWidget( mYLine );
+  mYLine = new CDataLine ( this, "Y [m]" );
+  layout->addWidget ( mYLine );
 
-  mYawLine = new CDataLine(this, Q_YAW + " ["+Q_DEGREE+"]");
-  layout->addWidget( mYawLine );
+  mYawLine = new CDataLine ( this, Q_YAW + " ["+Q_DEGREE+"]" );
+  layout->addWidget ( mYawLine );
 
-  setLayout( layout );
+  setLayout ( layout );
 }
 //-----------------------------------------------------------------------------
 CPose2dWidget::~CPose2dWidget()
 {
 }
 //-----------------------------------------------------------------------------
-void CPose2dWidget::setData( CPose2d pose)
+void CPose2dWidget::updateData ( CPose2d pose )
 {
-  mXLine->setData( pose.mX);
-  mYLine->setData( pose.mY);
-  mYawLine->setData(R2D( pose.mYaw) );
+  if ( isChecked() ) {
+    mXLine->setHidden ( false );
+    mYLine->setHidden ( false );
+    mYawLine->setHidden ( false );
+    mXLine->setData ( pose.mX );
+    mYLine->setData ( pose.mY );
+    mYawLine->setData ( R2D ( pose.mYaw ) );
+  }
+  else {
+    mXLine->setHidden ( true );
+    mYLine->setHidden ( true );
+    mYawLine->setHidden ( true );
+  }
 }
 //-----------------------------------------------------------------------------
 } // namespace

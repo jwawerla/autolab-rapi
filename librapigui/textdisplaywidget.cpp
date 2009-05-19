@@ -49,6 +49,7 @@ void CTextDisplayWidget::updateData ()
   else {
     mText->setHidden ( true );
   }
+  ADeviceWidget::updateData (mTextDisplay );
 }
 //-----------------------------------------------------------------------------
 

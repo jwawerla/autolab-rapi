@@ -23,6 +23,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <sstream>
 
 namespace Rapi {
 
@@ -40,12 +41,13 @@ ARobotCtrl::~ARobotCtrl()
 //-----------------------------------------------------------------------------
 void ARobotCtrl::rprintf ( const char* format, ... )
 {
+  //std::ostringstream timeStrOut;
+  va_list args;
   char str[256];
 
   if (mRPrintfString.length() > 1024)
     mRPrintfString.clear();
 
-  va_list args;
   fprintf ( stdout, "\033[1;37;42m[%s]\033[0m: ", mRobot->getName().c_str() );
   va_start ( args, format );
   vfprintf ( stdout, format, args );
@@ -54,6 +56,8 @@ void ARobotCtrl::rprintf ( const char* format, ... )
   va_start ( args, format );
   vsprintf ( str, format, args );
   va_end ( args );
+  //timeStrOut << mRobot->getCurrentTime();
+  //mRPrintfString.append("("+timeStrOut.str()+") " );
   mRPrintfString.append(str);
 }
 //-----------------------------------------------------------------------------

@@ -51,8 +51,8 @@ void CDrivetrain2dofWidget::updateData ()
   if ( isChecked() ) {
     mOdometryWidget->setHidden(false);
     mVelocityCmdWidget->setHidden(false);
-    mVelocityCmdWidget->setData ( mDrivetrain->getVelocityCmd() );
-    mOdometryWidget->setData ( mDrivetrain->getOdometry()->getPose() );
+    mVelocityCmdWidget->updateData ( mDrivetrain->getVelocityCmd());
+    mOdometryWidget->updateData ( mDrivetrain->getOdometry()->getPose() );
     if (mDrivetrain->isStalled()) 
       mStalledLed->setData(CDataLed::RED_ON);
     else

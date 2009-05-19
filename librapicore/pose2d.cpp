@@ -52,7 +52,7 @@ CPose2d::~CPose2d()
   // nothing to do
 }
 //-----------------------------------------------------------------------------
-void CPose2d::print()
+void CPose2d::print() const
 {
   printf("CPose2d: x=%f y=%f yaw=%f\n", mX, mY, R2D(mYaw));
 }
@@ -104,12 +104,12 @@ bool CPose2d::operator!= ( const CPose2d pose )
   return false;
 }
 //-----------------------------------------------------------------------------
-double CPose2d::distance( const CPose2d pose )
+double CPose2d::distance( const CPose2d pose ) const
 {
   return sqrt( pow2( pose.mX - mX ) + pow2( pose.mY - mY ) );
 }
 //-----------------------------------------------------------------------------
-double CPose2d::angleDifference( const CPose2d pose )
+double CPose2d::angleDifference( const CPose2d pose ) const
 {
   return NORMALIZE_ANGLE( mYaw - pose.mYaw );
 }

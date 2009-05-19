@@ -69,7 +69,7 @@ void CCBTextDisplay::updateData()
 {
 }
 //-----------------------------------------------------------------------------
-int CCBTextDisplay::getSize()
+int CCBTextDisplay::getSize() const
 {
   return 1;  // we only have one 7 seg element
 }

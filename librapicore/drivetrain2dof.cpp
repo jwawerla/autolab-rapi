@@ -75,14 +75,14 @@ void ADrivetrain2dof::applyVelocityLimits()
                              mUpperVelocityLimit.mYawDot );
 }
 //-----------------------------------------------------------------------------
-void ADrivetrain2dof::print()
+void ADrivetrain2dof::print() const
 {
   printf ( "ADriveTrain2dof:v=%01.2f w=%02.1f ", mVelocityCmd.mVX,
            R2D ( mVelocityCmd.mYawDot ) );
   mOdometry->print();
 }
 //-----------------------------------------------------------------------------
-bool ADrivetrain2dof::isStopped()
+bool ADrivetrain2dof::isStopped() const
 {
   if ( isAboutZero(mVelocityCmd.mVX ) &&
        isAboutZero(mVelocityCmd.mYawDot ) )
@@ -91,17 +91,17 @@ bool ADrivetrain2dof::isStopped()
   return false;
 }
 //-----------------------------------------------------------------------------
-bool ADrivetrain2dof::isStalled()
+bool ADrivetrain2dof::isStalled() const
 {
   return mFgStalled;
 }
 //-----------------------------------------------------------------------------
-CVelocity2d ADrivetrain2dof::getVelocityCmd()
+CVelocity2d ADrivetrain2dof::getVelocityCmd() const
 {
   return mVelocityCmd;
 }
 //-----------------------------------------------------------------------------
-COdometry* ADrivetrain2dof::getOdometry()
+COdometry* ADrivetrain2dof::getOdometry() const
 {
   return mOdometry;
 }

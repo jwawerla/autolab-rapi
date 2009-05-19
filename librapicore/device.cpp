@@ -35,12 +35,12 @@ ADevice::~ADevice()
 {
 }
 //-----------------------------------------------------------------------------
-bool ADevice::isEnabled()
+bool ADevice::isEnabled() const
 {
   return mFgEnabled;
 }
 //-----------------------------------------------------------------------------
-std::string ADevice::getName()
+std::string ADevice::getName() const
 {
   return mDeviceName;
 }

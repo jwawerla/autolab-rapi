@@ -40,12 +40,17 @@ ABinarySensorArray::~ABinarySensorArray()
     delete[] mBitPose;
 }
 //-----------------------------------------------------------------------------
-bool ABinarySensorArray::isAnyTriggered()
+unsigned int ABinarySensorArray::getNumSamples() const
+{
+  return mNumSamples;
+}
+//-----------------------------------------------------------------------------
+bool ABinarySensorArray::isAnyTriggered() const
 {
   return mFgAnyTriggered;
 }
 //-----------------------------------------------------------------------------
-void ABinarySensorArray::print()
+void ABinarySensorArray::print() const
 {
   printf("ABinarySensorArray: ");
 

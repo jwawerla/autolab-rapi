@@ -48,21 +48,21 @@ class CVariableMonitor
      * @param ptr pointer to varible to be added
      * @param name of variable
      */
-    void addVar(float* ptr, std::string name);
-    void addVar(double* ptr, std::string name);
-    void addVar(bool* ptr, std::string name);
-    void addVar(int* ptr, std::string name);
-    void addVar(CPose2d* ptr, std::string name);
-    void addVar(CPoint2d* ptr, std::string name);
-    void addVar(CVelocity2d* ptr, std::string name);
-    void addVar(CWaypoint2d* ptr, std::string name);
+    void addVar ( float* ptr, std::string name );
+    void addVar ( double* ptr, std::string name );
+    void addVar ( bool* ptr, std::string name );
+    void addVar ( int* ptr, std::string name );
+    void addVar ( CPose2d* ptr, std::string name );
+    void addVar ( CPoint2d* ptr, std::string name );
+    void addVar ( CVelocity2d* ptr, std::string name );
+    void addVar ( CWaypoint2d* ptr, std::string name );
     /**
      * Gets the variable with a given index as a string
      * @param index of variable to get
      * @return variable variable type, name and value
      */
-    void getVariableString(unsigned int index, std::string& varType,
-                           std::string& name, std::string& value);
+    void getVariableString ( unsigned int index, std::string& varType,
+                             std::string& name, std::string& value );
     /**
      * Gets the number of monitored variables
      * @return number of variables
@@ -70,7 +70,9 @@ class CVariableMonitor
     unsigned int getNumOfVariables() { return mVarList.size(); };
 
   protected:
-    typedef enum {FLOAT, DOUBLE, INT, BOOL, POSE2D, POINT2D, VELOCITY2D, WAYPOINT2D} tVar;
+    typedef enum {FLOAT, DOUBLE, INT, BOOL, POSE2D, POINT2D, VELOCITY2D,
+                  WAYPOINT2D
+               } tVar;
     typedef struct {
       void* ptr;
       tVar varType;

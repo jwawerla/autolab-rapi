@@ -18,22 +18,7 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************
- * $Log: cpowermanagementview.cpp,v $
- * Revision 1.1  2008/12/04 02:01:05  jwawerla
- * *** empty log message ***
- *
- * Revision 1.1.1.1  2008/02/02 22:19:54  jwawerla
- * new to cvs
- *
- * Revision 1.1  2008/01/17 23:41:11  jwawerla
- * fixed some bugs
- *
- * Revision 1.1.1.1  2008/01/10 19:43:54  jwawerla
- * first time in cvs
- *
- *
- ***************************************************************************/
+ **************************************************************************/
 #include "powerpackwidget.h"
 #include "unicodechar.h"
 #include "assert.h"
@@ -49,13 +34,17 @@ CPowerPackWidget::CPowerPackWidget ( APowerPack* powerpack,
   QHBoxLayout* batteryLayout;
   QHBoxLayout* chargingLayout;
 
-  assert(powerpack);
+  assert ( powerpack );
   mPowerPack = powerpack;
 
   setTitle ( "Powerpack" );
 
   mBatteryBox = new QGroupBox ( "Battery", this );
+  mBatteryBox->setCheckable ( true );
+
   mChargingBox = new QGroupBox ( "Charger", this );
+  mChargingBox->setCheckable ( true );
+
   batteryLayout = new QHBoxLayout();
   chargingLayout = new QHBoxLayout();
 
@@ -77,25 +66,22 @@ CPowerPackWidget::CPowerPackWidget ( APowerPack* powerpack,
   mVoltage = new CDataLine ( mBatteryBox, "Voltage [V]" );
   batteryLayout->addWidget ( mVoltage );
 
-  mBatTemp = new CDataLine( mBatteryBox, "Temp ["+Q_DEGREE+"]");
-  batteryLayout->addWidget(mBatTemp);
+  mBatTemp = new CDataLine ( mBatteryBox, "Temp ["+Q_DEGREE+"]" );
+  batteryLayout->addWidget ( mBatTemp );
 
 
-  mChargingLed = new CDataLed( mChargingBox, "Charging");
-  mChargingLed->setData( CDataLed::RED_OFF);
-  chargingLayout->addWidget(mChargingLed);
+  mChargingLed = new CDataLed ( mChargingBox, "Charging" );
+  mChargingLed->setData ( CDataLed::RED_OFF );
+  chargingLayout->addWidget ( mChargingLed );
 
-  mChargingSource = new CDataLine( mChargingBox, "Source");
-  chargingLayout->addWidget(mChargingSource);
+  mChargingSource = new CDataLine ( mChargingBox, "Source" );
+  chargingLayout->addWidget ( mChargingSource );
 
-  mChargingState =  new CDataLine( mChargingBox, "State");
-  chargingLayout->addWidget(mChargingState);
+  mChargingState =  new CDataLine ( mChargingBox, "State" );
+  chargingLayout->addWidget ( mChargingState );
 
-  mDissipated = new CDataLine( mChargingBox, "Dissipated [Wh]");
-  chargingLayout->addWidget(mDissipated);
-
-
-
+  mDissipated = new CDataLine ( mChargingBox, "Dissipated [Wh]" );
+  chargingLayout->addWidget ( mDissipated );
 }
 //---------------------------------------------------------------------------
 CPowerPackWidget::~CPowerPackWidget()
@@ -105,25 +91,53 @@ CPowerPackWidget::~CPowerPackWidget()
 void CPowerPackWidget::updateData()
 {
   if ( isChecked() ) {
-    mBatteryBox->setHidden(false);
-    mChargingBox->setHidden(false);
-    mBatCapacity->setData ( mPowerPack->getBatteryCapacity() );
-    mMaxBatCapacity->setData ( mPowerPack->getMaxBatteryCapacity() );
-    mCurrent->setData ( mPowerPack->getCurrent() );
-    mVoltage->setData ( mPowerPack->getVoltage() );
-    mBatTemp->setData ( mPowerPack->getBatteryTemperature() );
-    mChargingSource->setData( mPowerPack->getChargingSource() );
-    mChargingState->setData( mPowerPack->getChargingState() );
-    mDissipated->setData( mPowerPack->getTotalEnergyDissipated() );
+    mBatteryBox->setHidden ( false );
+    if ( mBatteryBox->isChecked() ) {
+      mBatCapacity->setHidden ( false );
+      mMaxBatCapacity->setHidden ( false );
+      mCurrent->setHidden ( false );
+      mVoltage->setHidden ( false );
+      mBatTemp->setHidden ( false );
 
-    if (mPowerPack->isCharging() )
-      mChargingLed->setData( CDataLed::RED_ON);
-    else
-      mChargingLed->setData( CDataLed::RED_OFF);
+      mBatCapacity->setData ( mPowerPack->getBatteryCapacity() );
+      mMaxBatCapacity->setData ( mPowerPack->getMaxBatteryCapacity() );
+      mCurrent->setData ( mPowerPack->getCurrent() );
+      mVoltage->setData ( mPowerPack->getVoltage() );
+      mBatTemp->setData ( mPowerPack->getBatteryTemperature() );
+    }
+    else {
+      mBatCapacity->setHidden ( true );
+      mMaxBatCapacity->setHidden ( true );
+      mCurrent->setHidden ( true );
+      mVoltage->setHidden ( true );
+      mBatTemp->setHidden ( true );
+    }
+
+    mChargingBox->setHidden ( false );
+    if ( mChargingBox->isChecked() ) {
+      mChargingLed->setHidden ( false );
+      mChargingSource->setHidden ( false );
+      mChargingState->setHidden ( false );
+      mDissipated->setHidden ( false );
+      mChargingSource->setData ( mPowerPack->getChargingSource() );
+      mChargingState->setData ( mPowerPack->getChargingState() );
+      mDissipated->setData ( mPowerPack->getTotalEnergyDissipated() );
+
+      if ( mPowerPack->isCharging() )
+        mChargingLed->setData ( CDataLed::RED_ON );
+      else
+        mChargingLed->setData ( CDataLed::RED_OFF );
+    }
+    else {
+      mChargingLed->setHidden ( true );
+      mChargingSource->setHidden ( true );
+      mChargingState->setHidden ( true );
+      mDissipated->setHidden ( true );
+    }
   }
   else {
-    mBatteryBox->setHidden(true);
-    mChargingBox->setHidden(true);
+    mBatteryBox->setHidden ( true );
+    mChargingBox->setHidden ( true );
   }
   ADeviceWidget::updateData ( mPowerPack );
 }

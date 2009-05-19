@@ -37,23 +37,24 @@ class CVelocity2dWidget : public QGroupBox
   public:
     /**
      * Default constructor
-     * @param velocity
-     * @param parent
+     * @param parent object
      */
-    CVelocity2dWidget ( QWidget* parent );
+    CVelocity2dWidget ( QWidget* parent=NULL );
     /** Default destructor */
     ~CVelocity2dWidget();
     /**
-     * Sets data to be displayed
-     * @param velocity
+     * Updates the data to be displayed
+     * @param velocity to display
      */
-    void setData( CVelocity2d velocity);
+    void updateData ( CVelocity2d velocity );
 
   protected:
+    /** Velocity in X direction */
     CDataLine* mVXLine;
+    /** Velocity in Y direction */
     CDataLine* mVYLine;
+    /** Rotational speed */
     CDataLine* mYawDotLine;
-
 };
 
 } // namespace

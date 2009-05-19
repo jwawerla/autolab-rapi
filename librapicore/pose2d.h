@@ -59,16 +59,16 @@ class CPose2d
      * @param pose to get distance to
      * @return distance [m]
      */
-    double distance ( const CPose2d pose );
+    double distance ( const CPose2d pose ) const;
     /**
      * Gets the angular difference between this pose and the given pose
      * @return [rad]
      */
-    double angleDifference ( const CPose2d pose );
+    double angleDifference ( const CPose2d pose ) const;
     /**
      * Prints the pose data to std out
      */
-    void print();
+    void print() const;
     /** Overloaded = operator */
     void operator= ( const CPose2d pose );
     /** Overloaded = operator */

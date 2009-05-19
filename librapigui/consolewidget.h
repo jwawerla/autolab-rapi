@@ -22,7 +22,7 @@
 #define RAPICONSOLWIDGET_H
 
 #include "devicewidget.h"
-#include <QTextEdit>
+#include <QPlainTextEdit>
 #include <string>
 
 namespace Rapi {
@@ -46,7 +46,7 @@ class CConsoleWidget : public ADeviceWidget
 
   protected:
     /** Text display */
-    QTextEdit* mTextEdit;
+    QPlainTextEdit* mPlainTextEdit;
     std::string* mRPrintfString;
 };
 

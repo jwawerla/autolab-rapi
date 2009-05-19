@@ -63,7 +63,7 @@ int CStageRobot::init()
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-double CStageRobot::getCurrentTime()
+double CStageRobot::getCurrentTime() const
 {
   return mStageModel->GetWorld()->SimTimeNow() * 1e-6;
 }

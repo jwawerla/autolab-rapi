@@ -38,7 +38,7 @@ class CPoint2d
     /**
      * Prints the points data to std out
      */
-    void print();
+    void print() const;
     /**
      * Sets the point from polar coordinates
      * @param length
@@ -49,7 +49,7 @@ class CPoint2d
      * Gets the distance to a given point
      * @return distance
      */
-    double distance(CPoint2d point);
+    double distance(const CPoint2d point) const;
     /** X coordinate */
     double mX;
     /** Y coordinate */

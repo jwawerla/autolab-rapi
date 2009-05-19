@@ -34,12 +34,12 @@ ATextDisplay::~ATextDisplay()
 {
 }
 //-----------------------------------------------------------------------------
-std::string ATextDisplay::getText()
+std::string ATextDisplay::getText() const
 {
   return mText;
 }
 //-----------------------------------------------------------------------------
-void ATextDisplay::print()
+void ATextDisplay::print() const
 {
   printf("ATextDisplay: %s \n", mText.c_str() );
 }

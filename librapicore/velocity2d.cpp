@@ -39,7 +39,7 @@ CVelocity2d::~CVelocity2d()
 {
 }
 //-----------------------------------------------------------------------------
-void CVelocity2d::print()
+void CVelocity2d::print() const
 {
   printf ( "CVelocity2d: vx=%f vy=%f yawDot=%f\n",
            mVX, mVY, R2D ( mYawDot ) );

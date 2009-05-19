@@ -60,6 +60,8 @@ class CWanderCtrl : public ARobotCtrl
     int mAvoidcount;
     /** Just for test purpose */
     bool mFgAvoid;
+    /** Just for test purpose */
+    int mCounter;
 };
 
 #endif

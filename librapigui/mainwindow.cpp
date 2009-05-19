@@ -26,56 +26,100 @@
 namespace Rapi
 {
 
+/** Update interval [ms] */
+const int UPDATE_INTERVAL = 100;
+
 //-----------------------------------------------------------------------------
 CMainWindow::CMainWindow()
     : QMainWindow()
 {
+  QSettings settings;
   QVBoxLayout* layout;
   mNumRobots = 0;
   mFgInit = false;
 
-  setWindowTitle ( "RapiGui" );
+  setWindowTitle( "RapiGui" );
 
-  mDeviceMenu = menuBar()->addMenu ( "&Devices" );
+  mStatusBarLabel = new QLabel( this, Qt::FramelessWindowHint );
+  mStatusBarLabel->setAutoFillBackground( true );
 
-  mRangeFinderWidgetList = new CDeviceWidgetList ( mDeviceMenu, "Rangefinder",
+  statusBar()->addWidget( mStatusBarLabel, 2024 );
+  mFileMenu = menuBar()->addMenu( "&File" );
+  mDeviceMenu = menuBar()->addMenu( "&Devices" );
+
+  mStartStopAction = new QAction( "Start", this );
+  mStartStopAction->setCheckable( true );
+  mStartStopAction->setChecked( true );
+  mFileMenu->addAction( mStartStopAction );
+
+  mQuitAction = new QAction( "&Quit", this );
+  mFileMenu->addAction( mQuitAction );
+
+  mRangeFinderWidgetList = new CDeviceWidgetList( mDeviceMenu, "Rangefinder",
       this );
-  mDrivetrainWidgetList = new CDeviceWidgetList ( mDeviceMenu,
+  mDrivetrainWidgetList = new CDeviceWidgetList( mDeviceMenu,
       "Drivetrain", this );
-  mFiducialFinderWidgetList = new CDeviceWidgetList ( mDeviceMenu,
+  mFiducialFinderWidgetList = new CDeviceWidgetList( mDeviceMenu,
       "Fiducialfinder", this );
-  mPowerPackWidgetList = new CDeviceWidgetList ( mDeviceMenu, "Powerpack",
+  mPowerPackWidgetList = new CDeviceWidgetList( mDeviceMenu, "Powerpack",
       this );
-  mTextDisplayWidgetList = new CDeviceWidgetList ( mDeviceMenu, "Text Display",
+  mTextDisplayWidgetList = new CDeviceWidgetList( mDeviceMenu, "Text Display",
       this );
-  mVariableMonitorWidgetList = new CDeviceWidgetList ( mDeviceMenu,
+  mVariableMonitorWidgetList = new CDeviceWidgetList( mDeviceMenu,
       "Variable Monitor", this );
-  mConsoleWidgetList = new CDeviceWidgetList ( mDeviceMenu,
+  mConsoleWidgetList = new CDeviceWidgetList( mDeviceMenu,
       "Console", this );
 
-  mTabWidget = new QTabWidget ( this );
-  layout = new QVBoxLayout ( mTabWidget );
-  mTabWidget->setLayout ( layout );
-  setCentralWidget ( mTabWidget );
+  mTabWidget = new QTabWidget( this );
+  layout = new QVBoxLayout( mTabWidget );
+  mTabWidget->setLayout( layout );
+  setCentralWidget( mTabWidget );
 
-  mTimer = new QTimer ( this );
-  connect ( mTimer, SIGNAL ( timeout() ), this, SLOT ( update() ) );
-  mTimer->setSingleShot ( false );
-  mTimer->start ( 100 ); // msec
+  mTimer = new QTimer( this );
+  connect( mTimer, SIGNAL( timeout() ), this, SLOT( update() ) );
+  mTimer->setSingleShot( false );
+
+  connect( mStartStopAction, SIGNAL( toggled( bool ) ),
+           this, SLOT( startStop( bool ) ) );
+  connect( mQuitAction, SIGNAL( triggered() ), this, SLOT( close() ) );
+
+  resize( settings.value( "mainWindow/size" ).toSize() );
+  move( settings.value( "mainWindow/pos" ).toPoint() );
+
+  startStop( true );
 }
 //-----------------------------------------------------------------------------
 CMainWindow::~CMainWindow()
 {
 }
 //-----------------------------------------------------------------------------
-void CMainWindow::closeEvent ( QCloseEvent* event )
+void CMainWindow::startStop( bool checked )
 {
-  printf ( "CMainWindow::closeEvent()\n" );
+  QPalette palette;
+
+  if ( checked ) {
+    palette.setColor( QPalette::Background, Qt::green );
+    mStatusBarLabel->setPalette( palette );
+    mStatusBarLabel->setText( "Running..." );
+    mTimer->start( UPDATE_INTERVAL );  // msec
+  }
+  else {
+    mTimer->stop();
+    palette.setColor( QPalette::Background, Qt::red );
+    mStatusBarLabel->setPalette( palette );
+    mStatusBarLabel->setText( "Paused" );
+  }
+}
+//-----------------------------------------------------------------------------
+void CMainWindow::closeEvent( QCloseEvent* event )
+{
+  printf( "CMainWindow::closeEvent()\n" );
   event->accept();
 
-  QSettings settings ( this );
+  QSettings settings;
 
-  settings.setValue ( "mainWindow/size", size() );
+  settings.setValue( "mainWindow/size", size() );
+  settings.setValue( "mainWindow/pos", pos() );
   mRangeFinderWidgetList->writeSettings();
   mDrivetrainWidgetList->writeSettings();
   mVariableMonitorWidgetList->writeSettings();
@@ -91,24 +135,24 @@ void CMainWindow::update()
   QScrollArea* scrollArea = NULL;
   CRobotWidget* robotWidget;
 
-  setSizePolicy ( QSizePolicy::Preferred, QSizePolicy::Preferred );
+  setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred );
 
   if ( mFgInit == false ) {
     mFgInit = true;
-    mTimer->start ( 100 ); // msec
+    mTimer->start( 100 );  // msec
     return;
   }
   // add additional robots if necessary
   while ( mNumRobots != mRobotVector.size() ) {
     robot = mRobotVector[mNumRobots];
-    scrollArea = new QScrollArea ( mTabWidget );
-    scrollArea->setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
-    scrollArea->setSizePolicy ( QSizePolicy::Preferred, QSizePolicy::Preferred );
-    robotWidget = new CRobotWidget ( robot, this, scrollArea );
-    mTabWidget->addTab ( scrollArea, robot->getName().c_str() );
-    scrollArea->setWidget ( robotWidget );
-    scrollArea-> setWidgetResizable ( true );
-    resize ( scrollArea->sizeHint() );
+    scrollArea = new QScrollArea( mTabWidget );
+    scrollArea->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+    scrollArea->setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred );
+    robotWidget = new CRobotWidget( robot, this, scrollArea );
+    mTabWidget->addTab( scrollArea, robot->getName().c_str() );
+    scrollArea->setWidget( robotWidget );
+    scrollArea-> setWidgetResizable( true );
+    //resize ( scrollArea->sizeHint() );
     mNumRobots ++;
   }
 
@@ -118,13 +162,16 @@ void CMainWindow::update()
     if ( robotWidget )
       robotWidget->update();
   }
+
+  mConsoleWidgetList->updateData();
+
   QMainWindow::update();
 }
 //-----------------------------------------------------------------------------
-void CMainWindow::addRobot ( ARobot* robot )
+void CMainWindow::addRobot( ARobot* robot )
 {
-  assert ( robot );
-  mRobotVector.push_back ( robot );
+  assert( robot );
+  mRobotVector.push_back( robot );
 }
 //-----------------------------------------------------------------------------
 } // namespace

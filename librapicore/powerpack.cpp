@@ -39,47 +39,47 @@ APowerPack::~APowerPack()
 {
 }
 //-----------------------------------------------------------------------------
-double APowerPack::getCurrent()
+double APowerPack::getCurrent() const
 {
   return mCurrent;
 }
 //-----------------------------------------------------------------------------
-double APowerPack::getBatteryCapacity()
+double APowerPack::getBatteryCapacity() const
 {
   return mBatteryCapacity;
 }
 //-----------------------------------------------------------------------------
-double APowerPack::getMaxBatteryCapacity()
+double APowerPack::getMaxBatteryCapacity() const
 {
   return mMaxBatteryCapacity;
 }
 //-----------------------------------------------------------------------------
-double APowerPack::getVoltage()
+double APowerPack::getVoltage() const
 {
   return mVoltage;
 }
 //-----------------------------------------------------------------------------
-double APowerPack::getBatteryTemperature()
+double APowerPack::getBatteryTemperature() const
 {
   return mBatteryTemperature;
 }
 //-----------------------------------------------------------------------------
-int APowerPack::getChargingSource()
+int APowerPack::getChargingSource() const
 {
   return 0; // default charging source
 }
 //-----------------------------------------------------------------------------
-double APowerPack::getBatteryLevel()
+double APowerPack::getBatteryLevel() const
 {
   return mBatteryCapacity/ mMaxBatteryCapacity;
 }
 //-----------------------------------------------------------------------------
-double APowerPack::getTotalEnergyDissipated()
+double APowerPack::getTotalEnergyDissipated() const
 {
   return mTotalEnergyDissipated;
 }
 //-----------------------------------------------------------------------------
-void APowerPack::print()
+void APowerPack::print() const
 {
   printf ( "APowerPack: voltage %02.2fV, current %02.3fA, cap. %02.3fWh, "\
            "max cap. %02.3fWh, %02.1f C\n",

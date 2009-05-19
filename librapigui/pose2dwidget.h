@@ -44,10 +44,10 @@ class CPose2dWidget : public QGroupBox
     /** Default destructor */
     ~CPose2dWidget();
     /**
-     * Sets data to be displayed
+     * Updates the data to be displayed
      * @param pose
      */
-    void setData( CPose2d pose);
+    void updateData( CPose2d pose);
 
   protected:
     CDataLine* mXLine;

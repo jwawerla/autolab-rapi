@@ -51,16 +51,16 @@ class ATextDisplay : public ADevice
      * Gets the text currently displayed
      * @return text
      */
-    std::string getText();
+    std::string getText() const;
     /**
      * Gets the number of characters the display can show
      * @return number characters
      */
-    virtual int getSize() = 0;
+    virtual int getSize() const = 0;
     /**
      * Prints the devices main information
      */
-    virtual void print();
+    virtual void print() const;
         /**
      * Gets the name of a gui this device can be visualized
      * @return name of gui

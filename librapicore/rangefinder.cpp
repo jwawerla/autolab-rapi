@@ -129,32 +129,32 @@ float ARangeFinder::localInverseRangeSensorModel ( float x, float y,
   return mLFree;
 }
 //---------------------------------------------------------------------------
-float ARangeFinder::getBeamConeAngle()
+float ARangeFinder::getBeamConeAngle() const
 {
   return mBeamConeAngle;
 }
 //---------------------------------------------------------------------------
-unsigned int ARangeFinder::getNumSamples()
+unsigned int ARangeFinder::getNumSamples() const
 {
   return mNumSamples;
 }
 //---------------------------------------------------------------------------
-float ARangeFinder::getFov()
+float ARangeFinder::getFov() const
 {
   return mFov;
 }
 //---------------------------------------------------------------------------
-float ARangeFinder::getMinRange()
+float ARangeFinder::getMinRange() const
 {
   return mMinRange;
 }
 //---------------------------------------------------------------------------
-float ARangeFinder::getMaxRange()
+float ARangeFinder::getMaxRange() const
 {
   return mMaxRange;
 }
 //---------------------------------------------------------------------------
-void ARangeFinder::print()
+void ARangeFinder::print() const
 {
   printf ( "ARangeFinder: samples %3d min %01.2f max %01.2f cone %03.1f",
            mNumSamples, mMinRange, mMaxRange, R2D ( mBeamConeAngle ) );

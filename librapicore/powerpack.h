@@ -50,37 +50,37 @@ class APowerPack : public ADevice
      * Gets the current, negative if drawn from battery or positive if charging
      * @return [A]
      */
-    double getCurrent();
+    virtual double getCurrent() const;
     /**
      * Gets the actual momentary battery capacity
      * @return [Wh]
      */
-    double getBatteryCapacity();
+    virtual double getBatteryCapacity() const;
     /**
      * Gets the maximal battery capacity
      * @return [Wh]
      */
-    double getMaxBatteryCapacity();
+    virtual double getMaxBatteryCapacity() const;
     /**
      * Gets the actual voltage of the system
      * @return [V]
      */
-    double getVoltage();
+    virtual double getVoltage() const;
     /**
      * Gets the temperature of the battery
      * @return [C]
      */
-    double getBatteryTemperature();
+    virtual double getBatteryTemperature() const;
     /**
      * Gets the total energy dissipated since start of robot
      * @return [Wh]
      */
-    double getTotalEnergyDissipated();
+    virtual double getTotalEnergyDissipated() const;
     /**
      * Gets the level of remaining energy in the battery
      * @return [0,1]
      */
-    double getBatteryLevel();
+    double getBatteryLevel() const;
     /**
      * Checks if the robot is charging or not
      * @return true if charging, false otherwise
@@ -93,7 +93,7 @@ class APowerPack : public ADevice
      * power plug.
      * @return charge source id
      */
-    virtual int getChargingSource();
+    virtual int getChargingSource() const;
     /**
      * Gets the state of the charging process
      * @return state
@@ -102,7 +102,7 @@ class APowerPack : public ADevice
     /**
      * Prints the devices main information
      */
-    virtual void print();
+    virtual void print() const;
     /**
      * Gets the name of a gui this device can be visualized
      * @return name of gui

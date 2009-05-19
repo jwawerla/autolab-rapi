@@ -44,7 +44,7 @@ CWaypoint2d::~CWaypoint2d()
 {
 }
 //-----------------------------------------------------------------------------
-void CWaypoint2d::print()
+void CWaypoint2d::print() const
 {
   printf("CWaypoint2d: %s at ", mLabel.c_str());
   mPose.print();
@@ -62,12 +62,12 @@ void CWaypoint2d::operator= ( const CWaypoint2d wp )
   mColor = wp.mColor;
 }
 //-----------------------------------------------------------------------------
-CPose2d CWaypoint2d::getPose()
+CPose2d CWaypoint2d::getPose() const
 {
   return mPose;
 }
 //-----------------------------------------------------------------------------
-std::string CWaypoint2d::getLabel()
+std::string CWaypoint2d::getLabel() const
 {
   return mLabel;
 }
@@ -88,7 +88,7 @@ void CWaypoint2d::setLabel( std::string label)
   mLabel = label;
 }
 //-----------------------------------------------------------------------------
-CRgbColor CWaypoint2d::getColor()
+CRgbColor CWaypoint2d::getColor() const
 {
   return mColor;
 }
