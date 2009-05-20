@@ -114,5 +114,10 @@ double CPose2d::angleDifference( const CPose2d pose ) const
   return NORMALIZE_ANGLE( mYaw - pose.mYaw );
 }
 //-----------------------------------------------------------------------------
+double CPose2d::bearingTo(const CPose2d pose) const
+{
+  return NORMALIZE_ANGLE(mYaw - atan2(pose.mY - mY, pose.mX - mX) );
+}
+//-----------------------------------------------------------------------------
 
 } // namespace

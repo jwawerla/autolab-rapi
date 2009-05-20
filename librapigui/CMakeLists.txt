@@ -23,6 +23,7 @@ IF (QT_FOUND)
   SET( HEADERS
     RapiGui
     gui.h
+    #ndinterface.h
   )
 
   SET( SOURCES
@@ -42,6 +43,7 @@ IF (QT_FOUND)
     consolewidget.cpp
     textdisplaywidget.cpp
     devicewidgetlist.cpp
+   #ndwidget.cpp
     ${MOC_SRC}
   )
 

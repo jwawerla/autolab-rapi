@@ -39,4 +39,12 @@ Stg::ModelPosition* CLooseStageDrivetrain2dof::getStageModel ()
   return mStgPosition;
 }
 //-----------------------------------------------------------------------------
+bool CLooseStageDrivetrain2dof::isSelectedInStage()
+{
+  if (mStgPosition->GetWorld()->RecentlySelectedModel() == mStgPosition)
+    return true; // selected
+
+  return false; // not selected
+}
+//-----------------------------------------------------------------------------
 } // namespace

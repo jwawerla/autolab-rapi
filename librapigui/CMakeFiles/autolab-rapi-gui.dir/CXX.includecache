@@ -690,6 +690,8 @@ QtCore/qatomic_sh4a.h
 
 /usr/include/qt4/QtCore/qatomic_arm.h
 
+/usr/include/qt4/QtCore/qatomic_armv6.h
+
 /usr/include/qt4/QtCore/qatomic_avr32.h
 
 /usr/include/qt4/QtCore/qatomic_bfin.h
@@ -715,6 +717,10 @@ ia64/sys/inline.h
 /usr/include/qt4/QtCore/qatomic_powerpc.h
 
 /usr/include/qt4/QtCore/qatomic_s390.h
+
+/usr/include/qt4/QtCore/qatomic_sh.h
+
+/usr/include/qt4/QtCore/qatomic_sh4a.h
 
 /usr/include/qt4/QtCore/qatomic_sparc.h
 
@@ -1146,6 +1152,18 @@ QtCore/qatomic.h
 QtCore/qobject.h
 -
 
+/usr/include/qt4/QtCore/qsharedpointer.h
+QtCore/qglobal.h
+-
+QtCore/qatomic.h
+-
+QtCore/qshareddata.h
+-
+QtCore/qsharedpointer_impl.h
+-
+
+/usr/include/qt4/QtCore/qsharedpointer_impl.h
+
 /usr/include/qt4/QtCore/qsignalmapper.h
 QtCore/qobject.h
 -
@@ -1494,6 +1512,14 @@ QtCore/QVector
 qcheckbox.h
 /usr/include/qt4/QtGui/qcheckbox.h
 
+/usr/include/qt4/QtGui/QCleanlooksStyle
+qcleanlooksstyle.h
+/usr/include/qt4/QtGui/qcleanlooksstyle.h
+
+/usr/include/qt4/QtGui/QFont
+qfont.h
+/usr/include/qt4/QtGui/qfont.h
+
 /usr/include/qt4/QtGui/QGraphicsPolygonItem
 qgraphicsitem.h
 /usr/include/qt4/QtGui/qgraphicsitem.h
@@ -1529,6 +1555,10 @@ qlineedit.h
 /usr/include/qt4/QtGui/QPaintEvent
 qevent.h
 /usr/include/qt4/QtGui/qevent.h
+
+/usr/include/qt4/QtGui/QPalette
+qpalette.h
+/usr/include/qt4/QtGui/qpalette.h
 
 /usr/include/qt4/QtGui/QPixmap
 qpixmap.h
@@ -2494,6 +2524,14 @@ limits.h
 QtGui/qframe.h
 -
 
+/usr/include/qt4/QtGui/qgtkstyle.h
+QtGui/QCleanlooksStyle
+-
+QtGui/QPalette
+-
+QtGui/QFont
+-
+
 /usr/include/qt4/QtGui/qheaderview.h
 QtGui/qabstractitemview.h
 -
@@ -3193,6 +3231,10 @@ QtGui/qfont.h
 -
 
 /usr/include/qt4/QtGui/qtextdocumentfragment.h
+QtCore/qstring.h
+-
+
+/usr/include/qt4/QtGui/qtextdocumentwriter.h
 QtCore/qstring.h
 -
 

@@ -35,7 +35,13 @@ CDrivetrain2dofWidget::CDrivetrain2dofWidget ( ADrivetrain2dof* drivetrain,
   mGeneralInfoBoxLayout->addWidget(mStalledLed);
 
   mVelocityCmdWidget = new CVelocity2dWidget ( this );
+  mVelocityCmdWidget->setTitle("Velocity Command");
   mMainLayout->addWidget ( mVelocityCmdWidget );
+
+  mVelocityMeasWidget = new CVelocity2dWidget ( this );
+  mVelocityMeasWidget->setTitle("Velocity");
+  mMainLayout->addWidget ( mVelocityMeasWidget );
+
 
   mOdometryWidget = new CPose2dWidget ( this );
   mOdometryWidget->setTitle ( "Odometry" );
@@ -51,7 +57,9 @@ void CDrivetrain2dofWidget::updateData ()
   if ( isChecked() ) {
     mOdometryWidget->setHidden(false);
     mVelocityCmdWidget->setHidden(false);
+    mVelocityMeasWidget->setHidden(false);
     mVelocityCmdWidget->updateData ( mDrivetrain->getVelocityCmd());
+    mVelocityMeasWidget->updateData ( mDrivetrain->getVelocity());
     mOdometryWidget->updateData ( mDrivetrain->getOdometry()->getPose() );
     if (mDrivetrain->isStalled()) 
       mStalledLed->setData(CDataLed::RED_ON);
@@ -61,6 +69,7 @@ void CDrivetrain2dofWidget::updateData ()
   else {
     mOdometryWidget->setHidden(true);
     mVelocityCmdWidget->setHidden(true);
+    mVelocityMeasWidget->setHidden(true);
   }
   ADeviceWidget::updateData ( mDrivetrain );
   mStalledLed->setHidden(!mGeneralInfoBox->isChecked());

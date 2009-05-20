@@ -53,6 +53,8 @@ class CDrivetrain2dofWidget : public ADeviceWidget
     ADrivetrain2dof* mDrivetrain;
     /** Display for velocity command */
     CVelocity2dWidget* mVelocityCmdWidget;
+    /** Display measured velocity */
+    CVelocity2dWidget* mVelocityMeasWidget;
     /** Display for odometry */
     CPose2dWidget* mOdometryWidget;
     /** Stalled led */

@@ -102,6 +102,9 @@ void CStageDrivetrain2dof::updateData()
     // update odometry
     ( ( CStageOdometry* ) mOdometry )->updateData();
 
+    // stage doesn't seem to allow us access to the sensed speed of the robot
+    // so we simply assume it is the commanded velocity
+    mVelocityMeas = mVelocityCmd;
     mTimeStamp = mStgPosition->GetWorld()->SimTimeNow() / 1e6;
     mFgStalled = mStgPosition->Stalled();
     notifyDataUpdateObservers();

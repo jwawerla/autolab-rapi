@@ -44,6 +44,11 @@ class ADrivetrain2dof : public ADevice
      */
     virtual tRapiDeviceType getDeviceType() { return RAPI_DRIVETRAIN2DOF; };
     /**
+     * Gets the measured velocity of the robot
+     * @return velocity
+     */
+    virtual CVelocity2d getVelocity() const;
+    /**
      * Gets the current velocity command set for the robot
      * @return velocity
      */

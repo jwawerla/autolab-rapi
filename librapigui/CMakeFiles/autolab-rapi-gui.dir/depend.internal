@@ -15,6 +15,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -25,6 +26,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -131,6 +134,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -141,6 +145,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -220,6 +226,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -230,6 +237,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -310,6 +319,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -320,6 +330,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -419,6 +431,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -429,6 +442,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -499,6 +514,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o
  /usr/include/qt4/QtCore/qsettings.h
  /usr/include/qt4/QtCore/qshareddata.h
  /usr/include/qt4/QtCore/qsharedmemory.h
+ /usr/include/qt4/QtCore/qsharedpointer.h
+ /usr/include/qt4/QtCore/qsharedpointer_impl.h
  /usr/include/qt4/QtCore/qsignalmapper.h
  /usr/include/qt4/QtCore/qsize.h
  /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -541,10 +558,13 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o
  /usr/include/qt4/QtCore/qwaitcondition.h
  /usr/include/qt4/QtCore/qxmlstream.h
  /usr/include/qt4/QtGui/QCheckBox
+ /usr/include/qt4/QtGui/QCleanlooksStyle
+ /usr/include/qt4/QtGui/QFont
  /usr/include/qt4/QtGui/QGroupBox
  /usr/include/qt4/QtGui/QHBoxLayout
  /usr/include/qt4/QtGui/QLabel
  /usr/include/qt4/QtGui/QLayout
+ /usr/include/qt4/QtGui/QPalette
  /usr/include/qt4/QtGui/QPixmap
  /usr/include/qt4/QtGui/QPrinter
  /usr/include/qt4/QtGui/QVBoxLayout
@@ -625,6 +645,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o
  /usr/include/qt4/QtGui/qgraphicswidget.h
  /usr/include/qt4/QtGui/qgridlayout.h
  /usr/include/qt4/QtGui/qgroupbox.h
+ /usr/include/qt4/QtGui/qgtkstyle.h
  /usr/include/qt4/QtGui/qheaderview.h
  /usr/include/qt4/QtGui/qicon.h
  /usr/include/qt4/QtGui/qiconengine.h
@@ -720,6 +741,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o
  /usr/include/qt4/QtGui/qtextcursor.h
  /usr/include/qt4/QtGui/qtextdocument.h
  /usr/include/qt4/QtGui/qtextdocumentfragment.h
+ /usr/include/qt4/QtGui/qtextdocumentwriter.h
  /usr/include/qt4/QtGui/qtextedit.h
  /usr/include/qt4/QtGui/qtextformat.h
  /usr/include/qt4/QtGui/qtextlayout.h
@@ -773,6 +795,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -783,6 +806,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -886,6 +911,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -896,6 +922,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -1019,6 +1047,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -1029,6 +1058,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -1099,6 +1130,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  /usr/include/qt4/QtCore/qsettings.h
  /usr/include/qt4/QtCore/qshareddata.h
  /usr/include/qt4/QtCore/qsharedmemory.h
+ /usr/include/qt4/QtCore/qsharedpointer.h
+ /usr/include/qt4/QtCore/qsharedpointer_impl.h
  /usr/include/qt4/QtCore/qsignalmapper.h
  /usr/include/qt4/QtCore/qsize.h
  /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -1141,10 +1174,13 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  /usr/include/qt4/QtCore/qwaitcondition.h
  /usr/include/qt4/QtCore/qxmlstream.h
  /usr/include/qt4/QtGui/QCheckBox
+ /usr/include/qt4/QtGui/QCleanlooksStyle
+ /usr/include/qt4/QtGui/QFont
  /usr/include/qt4/QtGui/QGroupBox
  /usr/include/qt4/QtGui/QHBoxLayout
  /usr/include/qt4/QtGui/QLabel
  /usr/include/qt4/QtGui/QLayout
+ /usr/include/qt4/QtGui/QPalette
  /usr/include/qt4/QtGui/QPixmap
  /usr/include/qt4/QtGui/QPrinter
  /usr/include/qt4/QtGui/QVBoxLayout
@@ -1225,6 +1261,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  /usr/include/qt4/QtGui/qgraphicswidget.h
  /usr/include/qt4/QtGui/qgridlayout.h
  /usr/include/qt4/QtGui/qgroupbox.h
+ /usr/include/qt4/QtGui/qgtkstyle.h
  /usr/include/qt4/QtGui/qheaderview.h
  /usr/include/qt4/QtGui/qicon.h
  /usr/include/qt4/QtGui/qiconengine.h
@@ -1320,6 +1357,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  /usr/include/qt4/QtGui/qtextcursor.h
  /usr/include/qt4/QtGui/qtextdocument.h
  /usr/include/qt4/QtGui/qtextdocumentfragment.h
+ /usr/include/qt4/QtGui/qtextdocumentwriter.h
  /usr/include/qt4/QtGui/qtextedit.h
  /usr/include/qt4/QtGui/qtextformat.h
  /usr/include/qt4/QtGui/qtextlayout.h
@@ -1398,6 +1436,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -1408,6 +1447,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -1478,6 +1519,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o
  /usr/include/qt4/QtCore/qsettings.h
  /usr/include/qt4/QtCore/qshareddata.h
  /usr/include/qt4/QtCore/qsharedmemory.h
+ /usr/include/qt4/QtCore/qsharedpointer.h
+ /usr/include/qt4/QtCore/qsharedpointer_impl.h
  /usr/include/qt4/QtCore/qsignalmapper.h
  /usr/include/qt4/QtCore/qsize.h
  /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -1520,10 +1563,13 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o
  /usr/include/qt4/QtCore/qwaitcondition.h
  /usr/include/qt4/QtCore/qxmlstream.h
  /usr/include/qt4/QtGui/QCheckBox
+ /usr/include/qt4/QtGui/QCleanlooksStyle
+ /usr/include/qt4/QtGui/QFont
  /usr/include/qt4/QtGui/QGroupBox
  /usr/include/qt4/QtGui/QHBoxLayout
  /usr/include/qt4/QtGui/QLabel
  /usr/include/qt4/QtGui/QLayout
+ /usr/include/qt4/QtGui/QPalette
  /usr/include/qt4/QtGui/QPixmap
  /usr/include/qt4/QtGui/QPlainTextEdit
  /usr/include/qt4/QtGui/QPrinter
@@ -1607,6 +1653,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o
  /usr/include/qt4/QtGui/qgraphicswidget.h
  /usr/include/qt4/QtGui/qgridlayout.h
  /usr/include/qt4/QtGui/qgroupbox.h
+ /usr/include/qt4/QtGui/qgtkstyle.h
  /usr/include/qt4/QtGui/qheaderview.h
  /usr/include/qt4/QtGui/qicon.h
  /usr/include/qt4/QtGui/qiconengine.h
@@ -1702,6 +1749,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o
  /usr/include/qt4/QtGui/qtextcursor.h
  /usr/include/qt4/QtGui/qtextdocument.h
  /usr/include/qt4/QtGui/qtextdocumentfragment.h
+ /usr/include/qt4/QtGui/qtextdocumentwriter.h
  /usr/include/qt4/QtGui/qtextedit.h
  /usr/include/qt4/QtGui/qtextformat.h
  /usr/include/qt4/QtGui/qtextlayout.h
@@ -1766,6 +1814,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -1776,6 +1825,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -1850,6 +1901,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -1860,6 +1912,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -1935,6 +1989,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -1945,6 +2000,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -2044,6 +2101,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -2054,6 +2112,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -2124,6 +2184,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o
  /usr/include/qt4/QtCore/qsettings.h
  /usr/include/qt4/QtCore/qshareddata.h
  /usr/include/qt4/QtCore/qsharedmemory.h
+ /usr/include/qt4/QtCore/qsharedpointer.h
+ /usr/include/qt4/QtCore/qsharedpointer_impl.h
  /usr/include/qt4/QtCore/qsignalmapper.h
  /usr/include/qt4/QtCore/qsize.h
  /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -2166,10 +2228,13 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o
  /usr/include/qt4/QtCore/qwaitcondition.h
  /usr/include/qt4/QtCore/qxmlstream.h
  /usr/include/qt4/QtGui/QCheckBox
+ /usr/include/qt4/QtGui/QCleanlooksStyle
+ /usr/include/qt4/QtGui/QFont
  /usr/include/qt4/QtGui/QGroupBox
  /usr/include/qt4/QtGui/QHBoxLayout
  /usr/include/qt4/QtGui/QLabel
  /usr/include/qt4/QtGui/QLayout
+ /usr/include/qt4/QtGui/QPalette
  /usr/include/qt4/QtGui/QPixmap
  /usr/include/qt4/QtGui/QPrinter
  /usr/include/qt4/QtGui/QVBoxLayout
@@ -2250,6 +2315,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o
  /usr/include/qt4/QtGui/qgraphicswidget.h
  /usr/include/qt4/QtGui/qgridlayout.h
  /usr/include/qt4/QtGui/qgroupbox.h
+ /usr/include/qt4/QtGui/qgtkstyle.h
  /usr/include/qt4/QtGui/qheaderview.h
  /usr/include/qt4/QtGui/qicon.h
  /usr/include/qt4/QtGui/qiconengine.h
@@ -2345,6 +2411,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o
  /usr/include/qt4/QtGui/qtextcursor.h
  /usr/include/qt4/QtGui/qtextdocument.h
  /usr/include/qt4/QtGui/qtextdocumentfragment.h
+ /usr/include/qt4/QtGui/qtextdocumentwriter.h
  /usr/include/qt4/QtGui/qtextedit.h
  /usr/include/qt4/QtGui/qtextformat.h
  /usr/include/qt4/QtGui/qtextlayout.h
@@ -2397,6 +2464,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -2407,6 +2475,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -2528,6 +2598,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -2538,6 +2609,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -2608,6 +2681,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  /usr/include/qt4/QtCore/qsettings.h
  /usr/include/qt4/QtCore/qshareddata.h
  /usr/include/qt4/QtCore/qsharedmemory.h
+ /usr/include/qt4/QtCore/qsharedpointer.h
+ /usr/include/qt4/QtCore/qsharedpointer_impl.h
  /usr/include/qt4/QtCore/qsignalmapper.h
  /usr/include/qt4/QtCore/qsize.h
  /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -2650,10 +2725,13 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  /usr/include/qt4/QtCore/qwaitcondition.h
  /usr/include/qt4/QtCore/qxmlstream.h
  /usr/include/qt4/QtGui/QCheckBox
+ /usr/include/qt4/QtGui/QCleanlooksStyle
+ /usr/include/qt4/QtGui/QFont
  /usr/include/qt4/QtGui/QGroupBox
  /usr/include/qt4/QtGui/QHBoxLayout
  /usr/include/qt4/QtGui/QLabel
  /usr/include/qt4/QtGui/QLayout
+ /usr/include/qt4/QtGui/QPalette
  /usr/include/qt4/QtGui/QPixmap
  /usr/include/qt4/QtGui/QPrinter
  /usr/include/qt4/QtGui/QVBoxLayout
@@ -2734,6 +2812,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  /usr/include/qt4/QtGui/qgraphicswidget.h
  /usr/include/qt4/QtGui/qgridlayout.h
  /usr/include/qt4/QtGui/qgroupbox.h
+ /usr/include/qt4/QtGui/qgtkstyle.h
  /usr/include/qt4/QtGui/qheaderview.h
  /usr/include/qt4/QtGui/qicon.h
  /usr/include/qt4/QtGui/qiconengine.h
@@ -2829,6 +2908,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  /usr/include/qt4/QtGui/qtextcursor.h
  /usr/include/qt4/QtGui/qtextdocument.h
  /usr/include/qt4/QtGui/qtextdocumentfragment.h
+ /usr/include/qt4/QtGui/qtextdocumentwriter.h
  /usr/include/qt4/QtGui/qtextedit.h
  /usr/include/qt4/QtGui/qtextformat.h
  /usr/include/qt4/QtGui/qtextlayout.h
@@ -2896,6 +2976,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -2906,6 +2987,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -2994,6 +3077,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3004,6 +3088,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -3098,6 +3184,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3108,6 +3195,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -3236,6 +3325,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3246,6 +3336,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -3316,6 +3408,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  /usr/include/qt4/QtCore/qsettings.h
  /usr/include/qt4/QtCore/qshareddata.h
  /usr/include/qt4/QtCore/qsharedmemory.h
+ /usr/include/qt4/QtCore/qsharedpointer.h
+ /usr/include/qt4/QtCore/qsharedpointer_impl.h
  /usr/include/qt4/QtCore/qsignalmapper.h
  /usr/include/qt4/QtCore/qsize.h
  /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -3358,6 +3452,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  /usr/include/qt4/QtCore/qwaitcondition.h
  /usr/include/qt4/QtCore/qxmlstream.h
  /usr/include/qt4/QtGui/QCheckBox
+ /usr/include/qt4/QtGui/QCleanlooksStyle
+ /usr/include/qt4/QtGui/QFont
  /usr/include/qt4/QtGui/QGraphicsPolygonItem
  /usr/include/qt4/QtGui/QGraphicsScene
  /usr/include/qt4/QtGui/QGraphicsView
@@ -3366,6 +3462,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  /usr/include/qt4/QtGui/QLabel
  /usr/include/qt4/QtGui/QLayout
  /usr/include/qt4/QtGui/QLineEdit
+ /usr/include/qt4/QtGui/QPalette
  /usr/include/qt4/QtGui/QPixmap
  /usr/include/qt4/QtGui/QPlainTextEdit
  /usr/include/qt4/QtGui/QPolygonF
@@ -3449,6 +3546,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  /usr/include/qt4/QtGui/qgraphicswidget.h
  /usr/include/qt4/QtGui/qgridlayout.h
  /usr/include/qt4/QtGui/qgroupbox.h
+ /usr/include/qt4/QtGui/qgtkstyle.h
  /usr/include/qt4/QtGui/qheaderview.h
  /usr/include/qt4/QtGui/qicon.h
  /usr/include/qt4/QtGui/qiconengine.h
@@ -3544,6 +3642,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  /usr/include/qt4/QtGui/qtextcursor.h
  /usr/include/qt4/QtGui/qtextdocument.h
  /usr/include/qt4/QtGui/qtextdocumentfragment.h
+ /usr/include/qt4/QtGui/qtextdocumentwriter.h
  /usr/include/qt4/QtGui/qtextedit.h
  /usr/include/qt4/QtGui/qtextformat.h
  /usr/include/qt4/QtGui/qtextlayout.h
@@ -3614,6 +3713,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3624,6 +3724,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -3719,6 +3821,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3729,6 +3832,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
@@ -3845,6 +3950,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_alpha.h
  /usr/include/qt4/QtCore/qatomic_arch.h
  /usr/include/qt4/QtCore/qatomic_arm.h
+ /usr/include/qt4/QtCore/qatomic_armv6.h
  /usr/include/qt4/QtCore/qatomic_avr32.h
  /usr/include/qt4/QtCore/qatomic_bfin.h
  /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3855,6 +3961,8 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o
  /usr/include/qt4/QtCore/qatomic_parisc.h
  /usr/include/qt4/QtCore/qatomic_powerpc.h
  /usr/include/qt4/QtCore/qatomic_s390.h
+ /usr/include/qt4/QtCore/qatomic_sh.h
+ /usr/include/qt4/QtCore/qatomic_sh4a.h
  /usr/include/qt4/QtCore/qatomic_sparc.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h

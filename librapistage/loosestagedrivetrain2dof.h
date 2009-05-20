@@ -51,6 +51,11 @@ class CLooseStageDrivetrain2dof : public CStageDrivetrain2dof
      * @return stage model
      */
     Stg::ModelPosition* getStageModel ();
+    /**
+     * Checks if this model was selected by the user in Stage
+     * @return true if selected false otherwise
+     */
+    bool isSelectedInStage();
 };
 
 } // namespace

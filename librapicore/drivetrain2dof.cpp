@@ -40,6 +40,11 @@ void ADrivetrain2dof::stop()
   setVelocityCmd ( CVelocity2d ( 0.0, 0.0 ) );
 }
 //-----------------------------------------------------------------------------
+CVelocity2d ADrivetrain2dof::getVelocity() const
+{
+  return mVelocityMeas;
+}
+//-----------------------------------------------------------------------------
 void ADrivetrain2dof::setRotationalSpeedCmd ( float turnrate )
 {
   setVelocityCmd ( CVelocity2d ( mVelocityCmd.mVX, 0.0, turnrate ) );

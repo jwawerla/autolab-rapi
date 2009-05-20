@@ -21,7 +21,6 @@
 
 
 #include "rangefinder.h"
-#include "error.h"
 #include "utilities.h"
 #include <stdlib.h>
 #include <stdio.h>

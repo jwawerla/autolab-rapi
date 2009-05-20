@@ -66,6 +66,12 @@ class CPose2d
      */
     double angleDifference ( const CPose2d pose ) const;
     /**
+     * Calculates the bearing from this pose to a given pose
+     * @param pose to get bearing to
+     * @return [rad]
+     */
+    double bearingTo(const CPose2d pose) const;
+    /**
      * Prints the pose data to std out
      */
     void print() const;
