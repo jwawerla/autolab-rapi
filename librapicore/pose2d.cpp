@@ -22,7 +22,7 @@
 #include "pose2d.h"
 #include "utilities.h"
 #include <stdio.h>
-
+#include <sstream>
 namespace Rapi
 {
 //-----------------------------------------------------------------------------
@@ -55,6 +55,14 @@ CPose2d::~CPose2d()
 void CPose2d::print() const
 {
   printf("CPose2d: x=%f y=%f yaw=%f\n", mX, mY, R2D(mYaw));
+}
+//-----------------------------------------------------------------------------
+std::string CPose2d::toStr() const
+{
+  std::ostringstream strOut;
+
+  strOut << "mX=" << mX << " mY=" << mY << " mYaw=" << R2D ( mYaw );
+  return strOut.str();
 }
 //-----------------------------------------------------------------------------
 void CPose2d::operator= ( const CPoint2d point )

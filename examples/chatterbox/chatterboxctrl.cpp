@@ -22,9 +22,8 @@
 
 //-----------------------------------------------------------------------------
 CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
-    : Rapi::ARobotCtrl ( robot )
+    : ARobotCtrl ( robot )
 {
-
   mRobot->findDevice ( mPowerPack, "CB:powerpack" );
   mRobot->findDevice ( mDrivetrain, "CB:drivetrain" );
   mRobot->findDevice ( mIr, "CB:ir" );

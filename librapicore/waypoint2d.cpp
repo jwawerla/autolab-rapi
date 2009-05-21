@@ -20,7 +20,7 @@
  **************************************************************************/
 #include "waypoint2d.h"
 #include "utilities.h"
-
+#include <sstream>
 namespace Rapi
 {
 
@@ -42,6 +42,11 @@ CWaypoint2d::CWaypoint2d ( CPose2d pose, std::string label, CRgbColor color)
 //-----------------------------------------------------------------------------
 CWaypoint2d::~CWaypoint2d()
 {
+}
+//-----------------------------------------------------------------------------
+std::string CWaypoint2d::toStr() const
+{
+  return mLabel + " " + mPose.toStr();
 }
 //-----------------------------------------------------------------------------
 void CWaypoint2d::print() const

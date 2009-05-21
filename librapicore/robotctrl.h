@@ -45,6 +45,11 @@ class ARobotCtrl : public IRobotUpdate
     virtual void rprintf ( const char* format, ... );
     /** RPrintf string */
     std::string mRPrintfString;
+    /**
+     * Gets the robot of this controller
+     * @return robot
+     */
+    ARobot* getRobot() const;
 
   protected:
     /**

@@ -21,6 +21,7 @@
 #ifndef RAPIPOINT2D_H
 #define RAPIPOINT2D_H
 
+#include <string>
 namespace Rapi
 {
 
@@ -39,6 +40,11 @@ class CPoint2d
      * Prints the points data to std out
      */
     void print() const;
+    /**
+     * Converts the point data to a string
+     * @return string
+     */
+    std::string toStr() const;
     /**
      * Sets the point from polar coordinates
      * @param length

@@ -33,10 +33,16 @@ ARobotCtrl::ARobotCtrl( ARobot* robot ) : IRobotUpdate()
   assert( robot );
   mRobot = robot;
   mRobot->registerRobotController( this );
+  printf("ARobotCtrl::ARobotCtrl()  %p \n", mRobot);
 }
 //-----------------------------------------------------------------------------
 ARobotCtrl::~ARobotCtrl()
 {
+}
+//-----------------------------------------------------------------------------
+ARobot* ARobotCtrl::getRobot() const
+{
+  return mRobot;
 }
 //-----------------------------------------------------------------------------
 void ARobotCtrl::rprintf ( const char* format, ... )

@@ -23,6 +23,7 @@
 #include "utilities.h"
 #include <stdio.h>
 #include <math.h>
+#include <sstream>
 
 namespace Rapi {
 
@@ -52,6 +53,14 @@ double CPoint2d::distance(const CPoint2d point) const
 void CPoint2d::print() const
 {
   printf("CPoint2d: x %f y %f \n", mX, mY);
+}
+//-----------------------------------------------------------------------------
+std::string CPoint2d::toStr() const
+{
+  std::ostringstream strOut;
+
+  strOut << "mX=" << mX << " mY=" << mY;
+  return strOut.str();
 }
 //-----------------------------------------------------------------------------
 void CPoint2d::operator= ( const CPoint2d point )

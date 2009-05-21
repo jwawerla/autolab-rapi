@@ -173,9 +173,10 @@ inline T NORMALIZE_ANGLE(T z)
  */
 inline double NORMALIZE_TO_2PI(double z)
 {
-  while (z > TWOPI) z = z - TWOPI;
-  while (z < -TWOPI) z = z + TWOPI;
-  return z;
+  return atan2(sin(z), cos(z));
+  //while (z > TWOPI) z = z - TWOPI;
+  //while (z < -TWOPI) z = z + TWOPI;
+  //return z;
 }
 
 /**

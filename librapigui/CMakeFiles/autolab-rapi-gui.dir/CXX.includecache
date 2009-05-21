@@ -3531,10 +3531,14 @@ localizer2d.h
 librapigui/../librapicore/localizer2d.h
 
 librapigui/../librapicore/point2d.h
+string
+-
 
 librapigui/../librapicore/pose2d.h
 point2d.h
 librapigui/../librapicore/point2d.h
+string
+-
 
 librapigui/../librapicore/pose3d.h
 

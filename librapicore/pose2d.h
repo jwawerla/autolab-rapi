@@ -23,7 +23,7 @@
 #define POSE2D_H
 
 #include "point2d.h"
-
+#include <string>
 namespace Rapi
 {
 
@@ -75,6 +75,11 @@ class CPose2d
      * Prints the pose data to std out
      */
     void print() const;
+    /**
+     * Converts the pose data to a string
+     * @return string
+     */
+    std::string toStr() const;
     /** Overloaded = operator */
     void operator= ( const CPose2d pose );
     /** Overloaded = operator */

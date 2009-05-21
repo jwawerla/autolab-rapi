@@ -165,7 +165,7 @@ int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
 
     // return already existing device
     device = mCBLaser;
-    return 1;
+    return 1; // success
   }
 
   //************************************
@@ -180,7 +180,7 @@ int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
 
     // return already existing device
     device = mCBIrSensor;
-    return 1;
+    return 1; // success
   }
 
   //************************************
@@ -195,7 +195,7 @@ int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
 
     // return already existing device
     device = mCBWall;
-    return 1;
+    return 1; // success
   }
 
   return 0; // should not be able to reach this, but silences compiler

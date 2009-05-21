@@ -102,6 +102,11 @@ class CWaypoint2d
      * @param color
      */
     void setColor(CRgbColor color);
+    /**
+     * Converts the point data to a string
+     * @return string
+     */
+    std::string toStr() const;
 
   protected:
     /** Pose of waypoint */
