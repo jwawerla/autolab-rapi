@@ -21,8 +21,7 @@
 #ifndef WANDERCTRL_H
 #define WANDERCTRL_H
 
-#include "RapiLooseStage"
-
+#include <RapiLooseStage>
 using namespace Rapi;
 /**
  * Example robot controller, based on the wander example from Stage

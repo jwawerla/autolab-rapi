@@ -16,8 +16,16 @@ FIND_PACKAGE(Qt4)
 ADD_DEFINITIONS(-g -Wall -O2)
 ADD_SUBDIRECTORY(librapicore)
 ADD_SUBDIRECTORY(librapistage)
-ADD_SUBDIRECTORY(librapichatterbox)
-ADD_SUBDIRECTORY(librapigui)
+
+IF( APPLE )
+# skipping chatterbox, as it needs Linux
+ELSE( APPLE )
+  ADD_SUBDIRECTORY(librapichatterbox)
+  ADD_SUBDIRECTORY(librapigui)
+ENDIF( APPLE )
+
+#ADD_SUBDIRECTORY(librapigui)
+
 ADD_SUBDIRECTORY(examples)
 
 # Create and install the pkgconfig file from the .in template

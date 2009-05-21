@@ -88,6 +88,7 @@ IF (STAGE_FOUND)
                           VERSION ${VERSION}
   )
 
+
   INSTALL(TARGETS ${TARGET}
     LIBRARY DESTINATION lib
   )
@@ -95,6 +96,10 @@ IF (STAGE_FOUND)
   INSTALL(FILES ${HEADERS}
     DESTINATION include/${PRJ}-${APIVERSION}
   )
+
+ # link Stage and the core RAPI library
+ TARGET_LINK_LIBRARIES( ${TARGET} ${STAGE_LIBRARIES} autolab-rapi )
+
 
 ELSEIF(STAGE_FOUND)
   MESSAGE( STATUS "Stage was not found, rapi-stage will NOT be build")
