@@ -32,6 +32,7 @@ ARobot::ARobot()
   mName = "ARobot";
   mUpdateInterval = 0.0;
   mRobotCtrl = NULL;
+  mFgInitialized = false;
 }
 //-----------------------------------------------------------------------------
 ARobot::~ARobot()

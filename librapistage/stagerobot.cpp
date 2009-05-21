@@ -52,6 +52,8 @@ CStageRobot::CStageRobot ( Stg::Model* mod )
   mStageModel->GetWorld()->AddUpdateCallback ( ( Stg::stg_world_callback_t )
       ctrlUpdate,
       this );
+
+  mFgInitialized = true;
 }
 //-----------------------------------------------------------------------------
 CStageRobot::~CStageRobot()
@@ -60,6 +62,7 @@ CStageRobot::~CStageRobot()
 //-----------------------------------------------------------------------------
 int CStageRobot::init()
 {
+  mFgInitialized = true;
   return 1; // success
 }
 //-----------------------------------------------------------------------------

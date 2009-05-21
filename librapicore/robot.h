@@ -89,6 +89,11 @@ class ARobot
      */
     virtual double getCurrentTime() const = 0;
     /**
+     * Checks if the robot is initialized
+     * @return true if initialized false otherwise
+     */
+    bool isInitialized() { return mFgInitialized; };
+    /**
      * Gets the robot controller
      * @return controller
      */
@@ -130,6 +135,8 @@ class ARobot
     std::string mName;
     /** List of all devices generated */
     std::vector<ADevice*> mDeviceList;
+    /** Flags if the robot is initialized or not */
+    bool mFgInitialized;
 };
 
 } // namespace

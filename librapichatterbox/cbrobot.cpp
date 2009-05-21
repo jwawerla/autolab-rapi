@@ -21,6 +21,7 @@
 #include "cbrobot.h"
 #include <sys/time.h>
 #include "rapierror.h"
+#include "printerror.h"
 
 namespace Rapi
 {
@@ -30,6 +31,7 @@ CCBRobot::CCBRobot()
     : ARobot()
 {
   mUpdateInterval = CB_T;
+  mName = "Chatterbox";
 
   mCBDrivetrain = NULL;
   mCBPowerPack = NULL;
@@ -81,6 +83,10 @@ CCBRobot::~CCBRobot()
 //-----------------------------------------------------------------------------
 int CCBRobot::init()
 {
+  if (mFgInitialized ) {
+    PRT_WARN0("Robot already initialized");
+    return 1;
+  }
   if ( mCBDriver.init() == 0 ) {
     return 0; // failure
   }
@@ -89,6 +95,7 @@ int CCBRobot::init()
     return 0; // failure
   }
 
+  mFgInitialized = true;
   return 1; // success
 }
 //-----------------------------------------------------------------------------
@@ -104,6 +111,11 @@ double CCBRobot::getCurrentTime() const
 //-----------------------------------------------------------------------------
 void CCBRobot::run ()
 {
+  if (not mFgInitialized) {
+    PRT_WARN0("Robot is not initialized, call init() first");
+    return;
+  }
+
   while ( mFgRunning ) {
 
     // get data from ICreate
@@ -144,6 +156,12 @@ void CCBRobot::run ()
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
 {
+  if (not mFgInitialized) {
+    PRT_WARN0("Robot is not initialized, call init() first");
+    device = NULL;
+    return 0; // error
+  }
+
   if ( ( devName != "CB:laser" ) &&
        ( devName != "CB:wall" ) &&
        ( devName != "CB:ir" ) ) {
@@ -203,6 +221,12 @@ int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ADrivetrain2dof* &device, std::string devName )
 {
+  if (not mFgInitialized) {
+    PRT_WARN0("Robot is not initialized, call init() first");
+    device = NULL;
+    return 0; // error
+  }
+
   if ( devName != "CB:drivetrain" ) {
     ERROR1 ( "No such device: %s", devName.c_str() );
     device = NULL;
@@ -223,6 +247,12 @@ int CCBRobot::findDevice ( ADrivetrain2dof* &device, std::string devName )
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( APowerPack* &device, std::string devName )
 {
+  if (not mFgInitialized) {
+    PRT_WARN0("Robot is not initialized, call init() first");
+    device = NULL;
+    return 0; // error
+  }
+
   if ( devName != "CB:powerpack" ) {
     ERROR1 ( "No such device: %s", devName.c_str() );
     device = NULL;
@@ -243,6 +273,12 @@ int CCBRobot::findDevice ( APowerPack* &device, std::string devName )
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( AFiducialFinder* &device, std::string devName )
 {
+  if (not mFgInitialized) {
+    PRT_WARN0("Robot is not initialized, call init() first");
+    device = NULL;
+    return 0; // error
+  }
+
   ERROR0 ( "Fiducial finder not available for Chatterbox" );
   device = NULL;
   return 0; // error
@@ -250,6 +286,12 @@ int CCBRobot::findDevice ( AFiducialFinder* &device, std::string devName )
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ALights* &device, std::string devName )
 {
+  if (not mFgInitialized) {
+    PRT_WARN0("Robot is not initialized, call init() first");
+    device = NULL;
+    return 0; // error
+  }
+
   if ( devName != "CB:lights" ) {
     ERROR1 ( "No such device: %s", devName.c_str() );
     device = NULL;
@@ -270,6 +312,12 @@ int CCBRobot::findDevice ( ALights* &device, std::string devName )
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ATextDisplay* &device, std::string devName )
 {
+  if (not mFgInitialized) {
+    PRT_WARN0("Robot is not initialized, call init() first");
+    device = NULL;
+    return 0; // error
+  }
+
   if ( devName != "CB:textdisplay" ) {
     ERROR1 ( "No such device: %s", devName.c_str() );
     device = NULL;
@@ -290,6 +338,12 @@ int CCBRobot::findDevice ( ATextDisplay* &device, std::string devName )
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
 {
+  if (not mFgInitialized) {
+    PRT_WARN0("Robot is not initialized, call init() first");
+    device = NULL;
+    return 0; // error
+  }
+
   if ( ( devName != "CB:bumper" ) &&
        ( devName != "CB:cliff" ) &&
        ( devName != "CB:overcurrent" ) &&
