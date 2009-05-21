@@ -33,7 +33,6 @@ ARobotCtrl::ARobotCtrl( ARobot* robot ) : IRobotUpdate()
   assert( robot );
   mRobot = robot;
   mRobot->registerRobotController( this );
-  printf("ARobotCtrl::ARobotCtrl()  %p \n", mRobot);
 }
 //-----------------------------------------------------------------------------
 ARobotCtrl::~ARobotCtrl()
