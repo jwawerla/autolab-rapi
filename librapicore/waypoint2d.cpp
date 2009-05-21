@@ -57,15 +57,18 @@ void CWaypoint2d::print() const
 //-----------------------------------------------------------------------------
 void CWaypoint2d::operator= ( const CPose2d pose )
 {
+  printf("CWaypoint2d \n");
   pose.print();
   mPose = pose;
 }
 //-----------------------------------------------------------------------------
-void CWaypoint2d::operator= ( const CWaypoint2d wp )
+CWaypoint2d& CWaypoint2d::operator= ( const CWaypoint2d& wp )
 {
   mPose = wp.mPose;
   mLabel = wp.mLabel;
   mColor = wp.mColor;
+
+  return *this;
 }
 //-----------------------------------------------------------------------------
 CPose2d CWaypoint2d::getPose() const

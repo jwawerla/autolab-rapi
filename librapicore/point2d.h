@@ -61,7 +61,7 @@ class CPoint2d
     /** Y coordinate */
     double mY;
     /** Overloaded = operator */
-    void operator= ( const CPoint2d point );
+    CPoint2d& operator= ( const CPoint2d point );
 };
 
 }  // name space

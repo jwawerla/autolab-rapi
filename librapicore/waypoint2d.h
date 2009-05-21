@@ -65,7 +65,7 @@ class CWaypoint2d
     /** Overloaded = operator */
     void operator= ( const CPose2d pose );
     /** Overloaded = operator */
-    void operator= ( const CWaypoint2d wp );
+    CWaypoint2d& operator= ( const CWaypoint2d& wp );
     /**
      * Gets the pose of the waypoint
      * @return pose
