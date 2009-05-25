@@ -14,7 +14,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -25,8 +24,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -133,7 +130,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCor
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -144,8 +140,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCor
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -225,7 +219,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCo
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -236,8 +229,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCo
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -318,7 +309,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -329,8 +319,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -430,7 +418,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -441,8 +428,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -513,8 +498,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qsettings.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qshareddata.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qsharedmemory.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qsharedpointer.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qsharedpointer_impl.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qsignalmapper.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qsize.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -557,13 +540,10 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qwaitcondition.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/qxmlstream.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/QCheckBox
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/QCleanlooksStyle
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/QFont
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/QGroupBox
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/QHBoxLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/QLabel
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/QLayout
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/QPalette
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/QPixmap
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/QPrinter
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/QVBoxLayout
@@ -644,7 +624,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qgraphicswidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qgridlayout.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qgroupbox.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qgtkstyle.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qheaderview.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qicon.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qiconengine.h
@@ -740,7 +719,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qtextcursor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qtextdocument.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qtextdocumentfragment.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qtextdocumentwriter.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qtextedit.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qtextformat.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qtextlayout.h
@@ -794,7 +772,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -805,8 +782,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -910,7 +885,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -921,8 +895,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -1046,7 +1018,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qa
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -1057,8 +1028,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qa
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -1129,8 +1098,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qs
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qsettings.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qshareddata.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qsharedmemory.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qsharedpointer.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qsharedpointer_impl.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qsignalmapper.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qsize.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -1173,13 +1140,10 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qv
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qwaitcondition.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/qxmlstream.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/QCheckBox
-librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/QCleanlooksStyle
-librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/QFont
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/QGroupBox
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/QHBoxLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/QLabel
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/QLayout
-librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/QPalette
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/QPixmap
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/QPrinter
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/QVBoxLayout
@@ -1260,7 +1224,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qgr
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qgraphicswidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qgridlayout.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qgroupbox.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qgtkstyle.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qheaderview.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qicon.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qiconengine.h
@@ -1356,7 +1319,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qte
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qtextcursor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qtextdocument.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qtextdocumentfragment.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qtextdocumentwriter.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qtextedit.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qtextformat.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qtextlayout.h
@@ -1435,7 +1397,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/Qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -1446,8 +1407,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/Qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -1518,8 +1477,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/Qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qsettings.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qshareddata.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qsharedmemory.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qsharedpointer.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qsharedpointer_impl.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qsignalmapper.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qsize.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -1562,13 +1519,10 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/Qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qwaitcondition.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/qxmlstream.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QCheckBox
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QCleanlooksStyle
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QFont
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QGroupBox
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QHBoxLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QLabel
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QLayout
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QPalette
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QPixmap
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QPlainTextEdit
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/QPrinter
@@ -1652,7 +1606,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/Qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qgraphicswidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qgridlayout.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qgroupbox.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qgtkstyle.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qheaderview.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qicon.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qiconengine.h
@@ -1748,7 +1701,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/Qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qtextcursor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qtextdocument.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qtextdocumentfragment.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qtextdocumentwriter.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qtextedit.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qtextformat.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qtextlayout.h
@@ -1813,7 +1765,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/Q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -1824,8 +1775,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/Q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -1900,7 +1849,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -1911,8 +1859,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -1988,7 +1934,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -1999,8 +1944,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -2100,7 +2043,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -2111,8 +2053,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -2183,8 +2123,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qsettings.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qshareddata.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qsharedmemory.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qsharedpointer.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qsharedpointer_impl.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qsignalmapper.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qsize.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -2227,13 +2165,10 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qwaitcondition.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/qxmlstream.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/QCheckBox
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/QCleanlooksStyle
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/QFont
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/QGroupBox
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/QHBoxLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/QLabel
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/QLayout
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/QPalette
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/QPixmap
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/QPrinter
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/QVBoxLayout
@@ -2314,7 +2249,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qgraphicswidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qgridlayout.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qgroupbox.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qgtkstyle.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qheaderview.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qicon.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qiconengine.h
@@ -2410,7 +2344,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qtextcursor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qtextdocument.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qtextdocumentfragment.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qtextdocumentwriter.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qtextedit.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qtextformat.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qtextlayout.h
@@ -2463,7 +2396,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -2474,8 +2406,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -2597,7 +2527,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -2608,8 +2537,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -2680,8 +2607,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qsettings.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qshareddata.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qsharedmemory.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qsharedpointer.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qsharedpointer_impl.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qsignalmapper.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qsize.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -2724,13 +2649,10 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qwaitcondition.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/qxmlstream.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/QCheckBox
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/QCleanlooksStyle
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/QFont
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/QGroupBox
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/QHBoxLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/QLabel
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/QLayout
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/QPalette
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/QPixmap
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/QPrinter
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/QVBoxLayout
@@ -2811,7 +2733,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qgraphicswidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qgridlayout.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qgroupbox.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qgtkstyle.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qheaderview.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qicon.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qiconengine.h
@@ -2907,7 +2828,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qtextcursor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qtextdocument.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qtextdocumentfragment.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qtextdocumentwriter.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qtextedit.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qtextformat.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qtextlayout.h
@@ -2975,7 +2895,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -2986,8 +2905,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -3076,7 +2993,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3087,8 +3003,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -3183,7 +3097,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3194,8 +3107,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -3324,7 +3235,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3335,8 +3245,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -3407,8 +3315,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qsettings.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qshareddata.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qsharedmemory.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qsharedpointer.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qsharedpointer_impl.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qsignalmapper.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qsize.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qsocketnotifier.h
@@ -3451,8 +3357,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qwaitcondition.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/qxmlstream.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QCheckBox
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QCleanlooksStyle
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QFont
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QGraphicsPolygonItem
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QGraphicsScene
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QGraphicsView
@@ -3461,7 +3365,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QLabel
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QLayout
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QLineEdit
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QPalette
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QPixmap
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QPlainTextEdit
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/QPolygonF
@@ -3545,7 +3448,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qgraphicswidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qgridlayout.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qgroupbox.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qgtkstyle.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qheaderview.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qicon.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qiconengine.h
@@ -3641,7 +3543,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qtextcursor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qtextdocument.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qtextdocumentfragment.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qtextdocumentwriter.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qtextedit.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qtextformat.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qtextlayout.h
@@ -3712,7 +3613,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3723,8 +3623,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -3820,7 +3718,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/inc
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3831,8 +3728,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/inc
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h
@@ -3949,7 +3844,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_alpha.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arch.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_arm.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_armv6.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_avr32.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bfin.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_bootstrap.h
@@ -3960,8 +3854,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_parisc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_powerpc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_s390.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sh4a.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_sparc.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qatomic_x86_64.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/qbasicatomic.h

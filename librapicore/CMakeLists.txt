@@ -17,6 +17,7 @@ SET( HEADERS
   pose2d.h
   pose3d.h
   point2d.h
+  rectangle.h
   velocity2d.h
   utilities.h
   printerror.h
@@ -27,6 +28,7 @@ SET( HEADERS
   conversions.h
   waypoint2d.h
   rgbcolor.h
+  limit.h
   robotupdateinterface.h
   statevariable.h
   #booleanstatevariable.h
@@ -49,6 +51,7 @@ SET( SOURCES
   pose2d.cpp
   pose3d.cpp
   point2d.cpp
+  rectangle.cpp
   velocity2d.cpp
   printerror.c
   utilities.cpp
@@ -56,6 +59,7 @@ SET( SOURCES
   robotctrl.cpp
   waypoint2d.cpp
   rgbcolor.cpp
+  limit.cpp
   statevariable.cpp
   #booleanstatevariable.cpp
   variablemonitor.cpp

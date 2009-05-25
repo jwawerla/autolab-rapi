@@ -42,6 +42,8 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
 
   // set up a heart beat with 1Hz
   mLights->setBlink ( 5, true, 1.0 );
+
+  mLimit.setLimit(0.0, 0.5);
 }
 //-----------------------------------------------------------------------------
 CChatterboxCtrl::~CChatterboxCtrl()
@@ -108,6 +110,7 @@ void CChatterboxCtrl::obstacleAvoid()
     velocity = ( 1.0 -fabs ( turnRate ) / D2R ( 30.0 ) ) * 0.3;
     //printf("speed %f turnrate %f \n", velocity, turnRate);
   }
+  velocity = mLimit.limit(velocity);
   mDrivetrain->setVelocityCmd ( velocity, turnRate );
 }
 //-----------------------------------------------------------------------------

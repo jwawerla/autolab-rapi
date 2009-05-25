@@ -63,7 +63,7 @@ std::string CPoint2d::toStr() const
   return strOut.str();
 }
 //-----------------------------------------------------------------------------
-CPoint2d& CPoint2d::operator= ( const CPoint2d point )
+CPoint2d& CPoint2d::operator= ( const CPoint2d& point )
 {
   mX = point.mX;
   mY = point.mY;

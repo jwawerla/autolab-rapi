@@ -63,6 +63,8 @@ class CChatterboxCtrl : public ARobotCtrl
     ABinarySensorArray* mBumper;
     /** Wheel drop */
     ABinarySensorArray* mWheelDrop;
+    /** Some limit */
+    CLimit<double> mLimit;
 };
 
 #endif

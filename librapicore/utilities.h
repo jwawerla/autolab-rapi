@@ -48,13 +48,13 @@ namespace Rapi
 #endif
 
 /** pi/2 */
-#ifndef HALFPI
-  #define HALFPI PI/2.0
+#ifndef HALF_PI
+  #define HALF_PI 1.570796326794896619
 #endif
 
 /** 2 times pi = 6.28... */
-#ifndef TWOPI
-  #define TWOPI 6.28318530717958
+#ifndef TWO_PI
+  #define TWO_PI 6.28318530717958
 #endif
 
 
