@@ -65,17 +65,21 @@ std::string CPose2d::toStr() const
   return strOut.str();
 }
 //-----------------------------------------------------------------------------
-void CPose2d::operator= ( const CPoint2d point )
+CPose2d& CPose2d::operator= ( const CPoint2d& point )
 {
   mX = point.mX;
   mY = point.mY;
+
+ return *this;
 }
 //-----------------------------------------------------------------------------
-void CPose2d::operator= ( const CPose2d pose )
+CPose2d& CPose2d::operator= ( const CPose2d& pose )
 {
   mX = pose.mX;
   mY = pose.mY;
   mYaw = NORMALIZE_ANGLE( pose.mYaw );
+
+  return *this;
 }
 //-----------------------------------------------------------------------------
 CPose2d CPose2d::operator+ ( const CPose2d pose )

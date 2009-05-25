@@ -81,9 +81,9 @@ class CPose2d
      */
     std::string toStr() const;
     /** Overloaded = operator */
-    void operator= ( const CPose2d pose );
+    CPose2d& operator= ( const CPose2d& pose );
     /** Overloaded = operator */
-    void operator= ( const CPoint2d point );
+    CPose2d& operator= ( const CPoint2d& point );
     /** Overloaded + operator */
     CPose2d operator+ ( const CPose2d pose );
     /** Overloaded - operator */

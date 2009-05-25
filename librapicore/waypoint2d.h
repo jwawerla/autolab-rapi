@@ -63,7 +63,7 @@ class CWaypoint2d
      */
     void print() const;
     /** Overloaded = operator */
-    void operator= ( const CPose2d pose );
+    CWaypoint2d& operator= ( const CPose2d pose );
     /** Overloaded = operator */
     CWaypoint2d& operator= ( const CWaypoint2d& wp );
     /**
