@@ -355,55 +355,66 @@ int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
 
   //************************************
   // Bumper
-  // check if device already exists
-  if ( mCBBumper == NULL ) {
-    mCBBumper = new CCBBumper ( &mCBDriver, "CB:bumper" );
-    device = mCBBumper;
-    return mCBBumper->init();
-  }
+  if ( devName == "CB:bumper" ) {
+    // check if device already exists
+    if ( mCBBumper == NULL ) {
+      mCBBumper = new CCBBumper ( &mCBDriver, "CB:bumper" );
+      device = mCBBumper;
+      return mCBBumper->init();
+    }
 
-  // return already existing device
-  device = mCBBumper;
-  return 1;
+    // return already existing device
+    device = mCBBumper;
+    return 1;
+  }
 
   //************************************
   // Wheel drop sensor
-  // check if device already exists
-  if ( mCBWheelDropSensor == NULL ) {
-    mCBWheelDropSensor = new CCBWheelDropSensor ( &mCBDriver, "CB:wheeldrop" );
-    device = mCBWheelDropSensor;
-    return mCBWheelDropSensor->init();
-  }
+  if ( devName == "CB:wheeldrop" ) {
+    // check if device already exists
+    if ( mCBWheelDropSensor == NULL ) {
+      mCBWheelDropSensor =
+        new CCBWheelDropSensor ( &mCBDriver, "CB:wheeldrop" );
+      device = mCBWheelDropSensor;
+      return mCBWheelDropSensor->init();
+    }
 
-  // return already existing device
-  device = mCBWheelDropSensor;
-  return 1;
+    // return already existing device
+    device = mCBWheelDropSensor;
+    return 1;
+  }
 
   //************************************
   // Cliff sensor
-  // check if device already exists
-  if ( mCBCliffSensor == NULL ) {
-    mCBCliffSensor = new CCBCliffSensor ( &mCBDriver, "CB:cliff" );
-    device = mCBCliffSensor;
-    return mCBCliffSensor->init();
-  }
+  if ( devName == "CB:cliff" ) {
+    // check if device already exists
+    if ( mCBCliffSensor == NULL ) {
+      mCBCliffSensor = new CCBCliffSensor ( &mCBDriver, "CB:cliff" );
+      device = mCBCliffSensor;
+      return mCBCliffSensor->init();
+    }
 
-  // return already existing device
-  device = mCBCliffSensor;
-  return 1;
+    // return already existing device
+    device = mCBCliffSensor;
+    return 1;
+  }
 
   //************************************
   // Overcurrent sensor
-  // check if device already exists
-  if ( mCBOverCurrentSensor == NULL ) {
-    mCBOverCurrentSensor = new CCBOverCurrentSensor ( &mCBDriver, "CB:overcurrent" );
+  if ( devName == "CB:overcurrent" ) {
+    // check if device already exists
+    if ( mCBOverCurrentSensor == NULL ) {
+      mCBOverCurrentSensor = new CCBOverCurrentSensor ( &mCBDriver, "CB:overcurrent" );
+      device = mCBOverCurrentSensor;
+      return mCBOverCurrentSensor->init();
+    }
+
+    // return already existing device
     device = mCBOverCurrentSensor;
-    return mCBOverCurrentSensor->init();
+    return 1;
   }
 
-  // return already existing device
-  device = mCBOverCurrentSensor;
-  return 1;
+  return 0; // should never get here
 }
 //-----------------------------------------------------------------------------
 void CCBRobot::synchronize ( double interval )
