@@ -9,6 +9,7 @@ SET( VERSION ${V_MAJOR}.${V_MINOR}.${V_BUGFIX} )
 SET( APIVERSION ${V_MAJOR}.${V_MINOR} )
 
 OPTION (WITH_GUI "Set this to enable the Rapi graphics stuff" ON)
+# use with -DWITH_GUI:BOOL=off/on
 
 INCLUDE(FindPkgConfig)
 
