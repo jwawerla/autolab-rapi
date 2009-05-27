@@ -8,6 +8,8 @@ SET( V_BUGFIX 0 )
 SET( VERSION ${V_MAJOR}.${V_MINOR}.${V_BUGFIX} )
 SET( APIVERSION ${V_MAJOR}.${V_MINOR} )
 
+OPTION (WITH_GUI "Set this to enable the Rapi graphics stuff" ON)
+
 INCLUDE(FindPkgConfig)
 
 PKG_SEARCH_MODULE( STAGE stage )
@@ -21,12 +23,14 @@ IF( APPLE )
 # skipping chatterbox, as it needs Linux
 ELSE( APPLE )
   ADD_SUBDIRECTORY(librapichatterbox)
-  ADD_SUBDIRECTORY(librapigui)
+  IF (WITH_GUI)
+    ADD_SUBDIRECTORY(librapigui)
+  ENDIF(WITH_GUI)
 ENDIF( APPLE )
 
-#ADD_SUBDIRECTORY(librapigui)
 
 ADD_SUBDIRECTORY(examples)
+
 
 # Create and install the pkgconfig file from the .in template
 SET( PKGFILE ${CMAKE_CURRENT_SOURCE_DIR}/autolab-rapi.pc )
@@ -44,7 +48,11 @@ CONFIGURE_FILE( ${PKGFILE}.in ${PKGFILE} @ONLY)
 INSTALL( FILES ${PKGFILE} DESTINATION lib/pkgconfig/)
 
 IF (QT_FOUND)
-  SET( PKGFILE ${CMAKE_CURRENT_SOURCE_DIR}/autolab-rapi-gui.pc )
-  CONFIGURE_FILE( ${PKGFILE}.in ${PKGFILE} @ONLY)
-  INSTALL( FILES ${PKGFILE} DESTINATION lib/pkgconfig/)
+  IF (WITH_GUI)
+    SET( PKGFILE ${CMAKE_CURRENT_SOURCE_DIR}/autolab-rapi-gui.pc )
+    CONFIGURE_FILE( ${PKGFILE}.in ${PKGFILE} @ONLY)
+    INSTALL( FILES ${PKGFILE} DESTINATION lib/pkgconfig/)
+  ELSE(WITH_GUI)
+    MESSAGE(STATUS "lib-rapi-gui will NOT be build, enable with WITH_GUI")
+  ENDIF(WITH_GUI)
 ENDIF (QT_FOUND)
