@@ -18,53 +18,58 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#ifndef CHATTERBOXCTRL_H
-#define CHATTERBOXCTRL_H
+#ifndef RAPILIMITS_H
+#define RAPILIMITS_H
 
-#include <RapiChatterbox>
-
-using namespace Rapi;
+namespace Rapi
+{
 
 /**
- * An example controller for chatterbox
+ * This class provides limits, a max and min value
  * @author Jens Wawerla
  */
-class CChatterboxCtrl : public ARobotCtrl
+class CLimit
 {
   public:
     /**
      * Default constructor
-     * @param robot this controller controls
+     * @param lower limit
+     * @param upper limit
      */
-    CChatterboxCtrl ( ARobot* robot );
+    CLimit( const double lower = 0.0, const double upper = 0.0 );
     /** Default destructor */
-    ~CChatterboxCtrl();
-
+    ~CLimit();
+    /**
+     * Limits the variable to the limits of this class
+     * @param var variable to apply limit to
+     * @return limited variable
+     */
+    double limit(double var) const;
+    /**
+     * Sets a limit
+     * @param lower limit
+     * @param upper limit
+     */
+    void setLimit(const double lower, const double upper);
+    /**
+     * Gets the lower limit
+     * @return lower limit
+     */
+    double getLowerLimit() const;
+    /**
+     * Gets the upper limit
+     * @return upper limit
+     */
+    double getUpperLimit() const;
 
   protected:
-    /**
-     * Update controller for the current time step
-     * @param dt time since last upate [s]
-     */
-    void updateData(float dt);
-    /** Obstacle avoidance routine */
-    void obstacleAvoid();
-    /** Drivetrain */
-    ADrivetrain2dof* mDrivetrain;
-    /** Infrared sesnors */
-    ARangeFinder* mIr;
-    /** Power pack */
-    APowerPack* mPowerPack;
-    /** Text display */
-    ATextDisplay* mTextDisplay;
-    /** Lights */
-    ALights* mLights;
-    /** Bumper */
-    ABinarySensorArray* mBumper;
-    /** Wheel drop */
-    ABinarySensorArray* mWheelDrop;
-    /** Some limit */
-    CLimit<double> mLimit;
+    /** Lower limit */
+    double mLower;
+    /** Upper limit */
+    double mUpper;
+
 };
+
+} // namespace
 
 #endif

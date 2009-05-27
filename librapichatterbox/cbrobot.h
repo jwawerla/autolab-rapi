@@ -112,13 +112,13 @@ class CCBRobot : public ARobot
     /** Bumper */
     CCBBumper* mCBBumper;
     /** Wall sensor */
-    CCBWallSensor* mCBWall;
+    CCBWallSensor* mCBWallSensor;
     /** Wheel drop sensor */
-    CCBWheelDropSensor* mCBWheelDrop;
+    CCBWheelDropSensor* mCBWheelDropSensor;
     /** Cliff sensor */
-    CCBCliffSensor* mCBCliff;
+    CCBCliffSensor* mCBCliffSensor;
     /** Over current sensors */
-    CCBOverCurrentSensor* mCBOverCurrent;
+    CCBOverCurrentSensor* mCBOverCurrentSensor;
     /** Last time synchronize was called */
     double mLastSynchronizeTime;
 };

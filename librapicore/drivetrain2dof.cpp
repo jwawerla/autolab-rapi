@@ -29,6 +29,7 @@ ADrivetrain2dof::ADrivetrain2dof ( std::string devName )
     : ADevice ( devName )
 {
   mFgStalled = false;
+  mStalledTimer = 0.0;
 }
 //-----------------------------------------------------------------------------
 ADrivetrain2dof::~ADrivetrain2dof()
@@ -45,9 +46,14 @@ CVelocity2d ADrivetrain2dof::getVelocity() const
   return mVelocityMeas;
 }
 //-----------------------------------------------------------------------------
+float ADrivetrain2dof::stalledSince() const
+{
+  return mStalledTimer;
+}
+//-----------------------------------------------------------------------------
 void ADrivetrain2dof::setRotationalSpeedCmd ( float turnrate )
 {
-  setVelocityCmd ( CVelocity2d ( mVelocityCmd.mVX, 0.0, turnrate ) );
+  setVelocityCmd ( CVelocity2d ( mVelocityCmd.mXDot, 0.0, turnrate ) );
 }
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::setTranslationalSpeedCmd ( float velocity )
@@ -67,13 +73,13 @@ void ADrivetrain2dof::setLowerVelocityLimit ( CVelocity2d limit )
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::applyVelocityLimits()
 {
-  mVelocityCmd.mVX = LIMIT ( mVelocityCmd.mVX,
-                             mLowerVelocityLimit.mVX,
-                             mUpperVelocityLimit.mVX );
+  mVelocityCmd.mXDot = LIMIT ( mVelocityCmd.mXDot,
+                             mLowerVelocityLimit.mXDot,
+                             mUpperVelocityLimit.mXDot );
 
-  mVelocityCmd.mVY = LIMIT ( mVelocityCmd.mVY,
-                             mLowerVelocityLimit.mVY,
-                             mUpperVelocityLimit.mVY );
+  mVelocityCmd.mYDot = LIMIT ( mVelocityCmd.mYDot,
+                             mLowerVelocityLimit.mYDot,
+                             mUpperVelocityLimit.mYDot );
 
   mVelocityCmd.mYawDot = LIMIT ( mVelocityCmd.mYawDot,
                              mLowerVelocityLimit.mYawDot,
@@ -82,14 +88,14 @@ void ADrivetrain2dof::applyVelocityLimits()
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::print() const
 {
-  printf ( "ADriveTrain2dof:v=%01.2f w=%02.1f ", mVelocityCmd.mVX,
+  printf ( "ADriveTrain2dof:v=%01.2f w=%02.1f ", mVelocityCmd.mXDot,
            R2D ( mVelocityCmd.mYawDot ) );
   mOdometry->print();
 }
 //-----------------------------------------------------------------------------
 bool ADrivetrain2dof::isStopped() const
 {
-  if ( isAboutZero(mVelocityCmd.mVX ) &&
+  if ( isAboutZero(mVelocityCmd.mXDot ) &&
        isAboutZero(mVelocityCmd.mYawDot ) )
     return true; // stopped
 

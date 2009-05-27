@@ -3631,6 +3631,8 @@ waypoint2d.h
 librapigui/../librapicore/waypoint2d.h
 
 librapigui/../librapicore/velocity2d.h
+string
+-
 
 librapigui/../librapicore/waypoint2d.h
 pose2d.h

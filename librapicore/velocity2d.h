@@ -21,6 +21,8 @@
 #ifndef RAPIVELOCITY2D_H
 #define RAPIVELOCITY2D_H
 
+#include <string>
+
 namespace Rapi
 {
 
@@ -37,13 +39,18 @@ class CVelocity2d
      * @param vY translational speed [m/s]
      * @param yawData rotational speed [rad/s]
      */
-    CVelocity2d( double vX = 0.0, double vY = 0.0, double yawDot = 0.0);
+    CVelocity2d ( double vX = 0.0, double vY = 0.0, double yawDot = 0.0 );
     /** Default destructor */
     ~CVelocity2d();
     /**
      * Prints the velocity data to std out
      */
     void print() const;
+    /**
+     * Converts the velocity data to a string
+     * @return string
+     */
+    std::string toStr() const;
     /** Assignment operator */
     void operator = ( CVelocity2d const &vel );
     /**
@@ -51,9 +58,9 @@ class CVelocity2d
      */
     void setZero();
     /** Translational speed in x direction [m/s] */
-    double mVX;
+    double mXDot;
     /** Translational speed in y direction [m/s] */
-    double mVY;
+    double mYDot;
     /** Rotational speed [rad/s] */
     double mYawDot;
 };

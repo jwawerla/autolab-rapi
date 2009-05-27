@@ -50,9 +50,9 @@ class CVelocity2dWidget : public QGroupBox
 
   protected:
     /** Velocity in X direction */
-    CDataLine* mVXLine;
+    CDataLine* mXDotLine;
     /** Velocity in Y direction */
-    CDataLine* mVYLine;
+    CDataLine* mYDotLine;
     /** Rotational speed */
     CDataLine* mYawDotLine;
 };

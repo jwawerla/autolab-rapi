@@ -18,53 +18,45 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#ifndef CHATTERBOXCTRL_H
-#define CHATTERBOXCTRL_H
+#include "limit.h"
 
-#include <RapiChatterbox>
+namespace Rapi {
 
-using namespace Rapi;
-
-/**
- * An example controller for chatterbox
- * @author Jens Wawerla
- */
-class CChatterboxCtrl : public ARobotCtrl
+//-----------------------------------------------------------------------------
+CLimit::CLimit(const double lower, const double upper)
 {
-  public:
-    /**
-     * Default constructor
-     * @param robot this controller controls
-     */
-    CChatterboxCtrl ( ARobot* robot );
-    /** Default destructor */
-    ~CChatterboxCtrl();
+  mLower = lower;
+  mUpper = upper;
+}
+//-----------------------------------------------------------------------------
+CLimit::~CLimit()
+{
+}
+//-----------------------------------------------------------------------------
+double CLimit::limit(double var) const
+{
+  if ( var > mUpper)
+    return mUpper;
+  if ( var < mLower )
+    return mLower;
 
-
-  protected:
-    /**
-     * Update controller for the current time step
-     * @param dt time since last upate [s]
-     */
-    void updateData(float dt);
-    /** Obstacle avoidance routine */
-    void obstacleAvoid();
-    /** Drivetrain */
-    ADrivetrain2dof* mDrivetrain;
-    /** Infrared sesnors */
-    ARangeFinder* mIr;
-    /** Power pack */
-    APowerPack* mPowerPack;
-    /** Text display */
-    ATextDisplay* mTextDisplay;
-    /** Lights */
-    ALights* mLights;
-    /** Bumper */
-    ABinarySensorArray* mBumper;
-    /** Wheel drop */
-    ABinarySensorArray* mWheelDrop;
-    /** Some limit */
-    CLimit<double> mLimit;
-};
-
-#endif
+  return var;
+}
+//-----------------------------------------------------------------------------
+void CLimit::setLimit( const double lower, const double upper)
+{
+  mLower = lower;
+  mUpper = upper;
+}
+//-----------------------------------------------------------------------------
+double CLimit::getLowerLimit() const
+{
+  return mLower;
+}
+//-----------------------------------------------------------------------------
+double CLimit::getUpperLimit() const
+{
+  return mUpper;
+}
+//-----------------------------------------------------------------------------
+} // namespace

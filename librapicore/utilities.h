@@ -32,31 +32,24 @@
 namespace Rapi
 {
 
-#define ESPILON 1e-6
+/** Espilon */
+double const ESPILON = 1e-6;
 
 #ifndef INFINITY
   #define INFINITY infinity()
 #endif
 
-#ifndef SEC_PER_HOUR
-  #define SEC_PER_HOUR 3600.0
-#endif
+/** Seconds in one hour */
+double const SEC_PER_HOUR  = 3600.0;
 
 /** Well... ?! */
-#ifndef PI
-  #define PI 3.14159265358979323846
-#endif
+double const PI = 3.14159265358979323846;
 
 /** pi/2 */
-#ifndef HALFPI
-  #define HALFPI PI/2.0
-#endif
+double const HALF_PI = 1.570796326794896619;
 
 /** 2 times pi = 6.28... */
-#ifndef TWOPI
-  #define TWOPI 6.28318530717958
-#endif
-
+double const TWO_PI = 6.28318530717958;
 
 /**
  * Figure out the sign of a number, 0 is assumed to be positive
@@ -105,10 +98,7 @@ inline double D2R(double x)
  * @param b
  * @return max of a and b
  */
-#ifdef MAX
-  #undef MAX
-#endif
-inline double MAX(double a, double b)
+inline double max(double a, double b)
 {
  return ((a > b) ? (a) : (b));
 }
@@ -119,10 +109,8 @@ inline double MAX(double a, double b)
  * @param b
  * @return min of a and b
  */
-#ifdef MIN
-  #undef MIN
-#endif
-inline double MIN(double a, double b)
+
+inline double min(double a, double b)
 {
   return ((a < b) ? (a) : (b));
 }
@@ -161,22 +149,6 @@ template<typename T>
 inline T NORMALIZE_ANGLE(T z)
 {
   return atan2(sin(z), cos(z));
-  //while (z > TWOPI) z = z - TWOPI;
-  //while (z < -TWOPI) z = z + TWOPI;
-  //return z;
-}
-
-/**
- * Normalizes the value z to be in the interval [-2pi, 2pi]
- * @param z to be normalized
- * @return normalized value
- */
-inline double NORMALIZE_TO_2PI(double z)
-{
-  return atan2(sin(z), cos(z));
-  //while (z > TWOPI) z = z - TWOPI;
-  //while (z < -TWOPI) z = z + TWOPI;
-  //return z;
 }
 
 /**
@@ -198,7 +170,11 @@ inline T NORMALIZE_TO_PI(T z)
  */
 inline double LIMIT(double x, double a, double b)
 {
- return MIN(MAX(x,a), b);
+ if ( x < a )
+   return a;
+ if ( x > b)
+   return b;
+ return x;
 }
 
 /**

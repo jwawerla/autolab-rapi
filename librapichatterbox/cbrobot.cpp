@@ -40,10 +40,10 @@ CCBRobot::CCBRobot()
   mCBLights = NULL;
   mCBTextDisplay = NULL;
   mCBBumper = NULL;
-  mCBWall = NULL;
-  mCBWheelDrop = NULL;
-  mCBCliff = NULL;
-  mCBOverCurrent = NULL;
+  mCBWallSensor = NULL;
+  mCBWheelDropSensor = NULL;
+  mCBCliffSensor = NULL;
+  mCBOverCurrentSensor = NULL;
 
   mFgRunning = true;
 }
@@ -68,17 +68,17 @@ CCBRobot::~CCBRobot()
   if ( mCBBumper )
     delete mCBBumper;
 
-  if ( mCBWall )
-    delete mCBWall;
+  if ( mCBWallSensor )
+    delete mCBWallSensor;
 
-  if ( mCBWheelDrop )
-    delete mCBWheelDrop;
+  if ( mCBWheelDropSensor )
+    delete mCBWheelDropSensor;
 
-  if ( mCBCliff )
-    delete mCBCliff;
+  if ( mCBCliffSensor )
+    delete mCBCliffSensor;
 
-  if ( mCBOverCurrent )
-    delete mCBOverCurrent;
+  if ( mCBOverCurrentSensor )
+    delete mCBOverCurrentSensor;
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::init()
@@ -136,14 +136,14 @@ void CCBRobot::run ()
         mCBTextDisplay->updateData();
       if ( mCBBumper )
         mCBBumper->updateData();
-      if ( mCBWall )
-        mCBWall->updateData();
-      if ( mCBWheelDrop )
-        mCBWheelDrop->updateData();
-      if ( mCBCliff )
-        mCBCliff->updateData();
-      if ( mCBOverCurrent )
-        mCBOverCurrent->updateData();
+      if ( mCBWallSensor )
+        mCBWallSensor->updateData();
+      if ( mCBWheelDropSensor )
+        mCBWheelDropSensor->updateData();
+      if ( mCBCliffSensor )
+        mCBCliffSensor->updateData();
+      if ( mCBOverCurrentSensor )
+        mCBOverCurrentSensor->updateData();
     }
     // update all registered constrollers
     updateControllers();
@@ -205,14 +205,14 @@ int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
   // Wall sensor
   if ( devName == "CB:wall" ) {
     // check if device already exists
-    if ( mCBWall == NULL ) {
-      mCBWall = new CCBWallSensor ( &mCBDriver, "CB:wall" );
-      device = mCBIrSensor;
-      return mCBWall->init();
+    if ( mCBWallSensor == NULL ) {
+      mCBWallSensor = new CCBWallSensor ( &mCBDriver, "CB:wall" );
+      device = mCBWallSensor;
+      return mCBWallSensor->init();
     }
 
     // return already existing device
-    device = mCBWall;
+    device = mCBWallSensor;
     return 1; // success
   }
 
@@ -369,40 +369,40 @@ int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
   //************************************
   // Wheel drop sensor
   // check if device already exists
-  if ( mCBWheelDrop == NULL ) {
-    mCBWheelDrop = new CCBWheelDropSensor ( &mCBDriver, "CB:wheeldrop" );
-    device = mCBWheelDrop;
-    return mCBWheelDrop->init();
+  if ( mCBWheelDropSensor == NULL ) {
+    mCBWheelDropSensor = new CCBWheelDropSensor ( &mCBDriver, "CB:wheeldrop" );
+    device = mCBWheelDropSensor;
+    return mCBWheelDropSensor->init();
   }
 
   // return already existing device
-  device = mCBWheelDrop;
+  device = mCBWheelDropSensor;
   return 1;
 
   //************************************
   // Cliff sensor
   // check if device already exists
-  if ( mCBCliff == NULL ) {
-    mCBCliff = new CCBCliffSensor ( &mCBDriver, "CB:cliff" );
-    device = mCBCliff;
-    return mCBCliff->init();
+  if ( mCBCliffSensor == NULL ) {
+    mCBCliffSensor = new CCBCliffSensor ( &mCBDriver, "CB:cliff" );
+    device = mCBCliffSensor;
+    return mCBCliffSensor->init();
   }
 
   // return already existing device
-  device = mCBCliff;
+  device = mCBCliffSensor;
   return 1;
 
   //************************************
   // Overcurrent sensor
   // check if device already exists
-  if ( mCBOverCurrent == NULL ) {
-    mCBOverCurrent = new CCBOverCurrentSensor ( &mCBDriver, "CB:overcurrent" );
-    device = mCBOverCurrent;
-    return mCBOverCurrent->init();
+  if ( mCBOverCurrentSensor == NULL ) {
+    mCBOverCurrentSensor = new CCBOverCurrentSensor ( &mCBDriver, "CB:overcurrent" );
+    device = mCBOverCurrentSensor;
+    return mCBOverCurrentSensor->init();
   }
 
   // return already existing device
-  device = mCBOverCurrent;
+  device = mCBOverCurrentSensor;
   return 1;
 }
 //-----------------------------------------------------------------------------

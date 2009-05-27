@@ -84,8 +84,8 @@ void CCBDrivetrain2dof::updateData()
   if ( mFgEnabled == true ) {
 
     // read current velocities from chatterbox
-    mVelocityMeas.mVX = ( double ) ( mCBDriver->mCreateSensorPackage.velocity ) / 1e3;
-    mVelocityMeas.mVY = 0.0;
+    mVelocityMeas.mXDot = ( double ) ( mCBDriver->mCreateSensorPackage.velocity ) / 1e3;
+    mVelocityMeas.mYDot = 0.0;
     if ( mCBDriver->mCreateSensorPackage.radius >= 0x7FFF )  // 0x7FFF or 0x8000
       mVelocityMeas.mYawDot = 0.0;
     else if ( mCBDriver->mCreateSensorPackage.radius == 0xFFFF )
@@ -97,9 +97,9 @@ void CCBDrivetrain2dof::updateData()
                               mCBDriver->mCreateSensorPackage.radius;
 
     // limit acceleration
-    if ( fabs ( mPrevVelocityCmd.mVX - mVelocityCmd.mVX ) > mMaxVelocityDelta ) {
-      mVelocityCmd.mVX = mPrevVelocityCmd.mVX + 
-                         SIGN ( mVelocityCmd.mVX - mPrevVelocityCmd.mVX ) *
+    if ( fabs ( mPrevVelocityCmd.mXDot - mVelocityCmd.mXDot ) > mMaxVelocityDelta ) {
+      mVelocityCmd.mXDot = mPrevVelocityCmd.mXDot + 
+                         SIGN ( mVelocityCmd.mXDot - mPrevVelocityCmd.mXDot ) *
                          mMaxVelocityDelta;
     }
 
@@ -119,7 +119,7 @@ void CCBDrivetrain2dof::updateData()
 
     // set speeds
     if ( mCBDriver->setSpeed ( mVelocityCmd ) == 0 ) {
-      ERROR2 ( "Failed to set speed command v=%f w=%f", mVelocityCmd.mVX,
+      ERROR2 ( "Failed to set speed command v=%f w=%f", mVelocityCmd.mXDot,
                mVelocityCmd.mYawDot );
     }
 
@@ -142,13 +142,17 @@ void CCBDrivetrain2dof::updateData()
     }
     count ++;
     mTimeStamp = timeStamp();
+    if (mFgStalled)
+      mStalledTimer += CB_T;
+    else
+      mStalledTimer =0.0;
   } // enabled
 }
 //-----------------------------------------------------------------------------
 void CCBDrivetrain2dof::print()
 {
   printf ( "Drive: v=%01.3f m/s, w=%03.3f deg/s ",
-           mVelocityCmd.mVX,
+           mVelocityCmd.mXDot,
            R2D ( mVelocityCmd.mYawDot ) );
   mOdometry->print();
 

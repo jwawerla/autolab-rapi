@@ -94,6 +94,11 @@ class ADrivetrain2dof : public ADevice
      */
     virtual bool isStalled() const;
     /**
+     * Gives the time since the drive train is stalled
+     * @return stalled time [s], or 0 if not stalled
+     */
+    virtual float stalledSince() const;
+    /**
      * Gets the odometry of this drivetrain
      * @return odometry
      */
@@ -145,6 +150,8 @@ class ADrivetrain2dof : public ADevice
     CVelocity2d mLowerVelocityLimit;
     /** Flags if robot is stalled somewhere */
     bool mFgStalled;
+    /** Stalled timer */
+    float mStalledTimer;
 };
 
 } // namespace

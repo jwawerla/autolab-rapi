@@ -36,7 +36,7 @@ CDataLine::CDataLine ( QWidget* parent, QString caption )
 {
   QVBoxLayout* layout = new QVBoxLayout();
 
-
+  mFgColor = false;
   mLabel = new QLabel ( this );
   //m_label->setGeometry(1,1,70,19);
   layout->addWidget ( mLabel );
@@ -57,6 +57,12 @@ CDataLine::CDataLine ( QWidget* parent, QString caption )
 //-----------------------------------------------------------------------------
 CDataLine::~CDataLine()
 {
+}
+//-----------------------------------------------------------------------------
+void CDataLine::setColorEnable(bool on)
+{
+  mFgColor = on;
+  setAutoFillBackground( mFgColor );
 }
 //-----------------------------------------------------------------------------
 void CDataLine::setAlignment ( t_alignment align )
@@ -95,6 +101,14 @@ void CDataLine::setData ( double data )
 {
   QString dataStr;
 
+  if ( mFgColor ) {
+    if ( data < 0.0 )
+      mPalette.setColor ( QPalette::Background, Qt::red );
+    else
+      mPalette.setColor ( QPalette::Background, Qt::green );
+  }
+  mLineEdit->setPalette ( mPalette );
+
   dataStr = dataStr.setNum ( data, 'f', mFloatPrecision );
   mLineEdit->setText ( dataStr );
 }
@@ -107,6 +121,14 @@ void CDataLine::setData ( QString data )
 void CDataLine::setData ( int data )
 {
   QString dataStr;
+
+  if ( mFgColor ) {
+    if ( data < 0 )
+      mPalette.setColor ( QPalette::Background, Qt::red );
+    else
+      mPalette.setColor ( QPalette::Background, Qt::green );
+  }
+  mLineEdit->setPalette ( mPalette );
 
   dataStr = dataStr.setNum ( data );
   mLineEdit->setText ( dataStr );

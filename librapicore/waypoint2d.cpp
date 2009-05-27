@@ -26,14 +26,14 @@ namespace Rapi
 
 //-----------------------------------------------------------------------------
 CWaypoint2d::CWaypoint2d ( double x, double y, double yaw, std::string label,
-CRgbColor color )
+                           CRgbColor color )
 {
   mPose = CPose2d ( x,y,yaw );
   mLabel = label;
   mColor = color;
 }
 //-----------------------------------------------------------------------------
-CWaypoint2d::CWaypoint2d ( CPose2d pose, std::string label, CRgbColor color)
+CWaypoint2d::CWaypoint2d ( CPose2d pose, std::string label, CRgbColor color )
 {
   mPose = pose;
   mLabel = label;
@@ -51,11 +51,11 @@ std::string CWaypoint2d::toStr() const
 //-----------------------------------------------------------------------------
 void CWaypoint2d::print() const
 {
-  printf("CWaypoint2d: %s at ", mLabel.c_str());
+  printf ( "CWaypoint2d: %s at ", mLabel.c_str() );
   mPose.print();
 }
 //-----------------------------------------------------------------------------
-CWaypoint2d& CWaypoint2d::operator= ( const CPose2d pose )
+CWaypoint2d& CWaypoint2d::operator= ( const CPose2d& pose )
 {
   mPose = pose;
 
@@ -81,18 +81,18 @@ std::string CWaypoint2d::getLabel() const
   return mLabel;
 }
 //-----------------------------------------------------------------------------
-void CWaypoint2d::setPose(CPose2d pose)
+void CWaypoint2d::setPose ( CPose2d pose )
 {
   mPose = pose;
 }
 //-----------------------------------------------------------------------------
-void CWaypoint2d::setPose(CPoint2d point, double heading )
+void CWaypoint2d::setPose ( CPoint2d point, double heading )
 {
   mPose = point;
-  mPose.mYaw = NORMALIZE_ANGLE( heading );
+  mPose.mYaw = NORMALIZE_ANGLE ( heading );
 }
 //-----------------------------------------------------------------------------
-void CWaypoint2d::setLabel( std::string label)
+void CWaypoint2d::setLabel ( std::string label )
 {
   mLabel = label;
 }
@@ -102,7 +102,7 @@ CRgbColor CWaypoint2d::getColor() const
   return mColor;
 }
 //-----------------------------------------------------------------------------
-void CWaypoint2d::setColor(CRgbColor color)
+void CWaypoint2d::setColor ( CRgbColor color )
 {
   mColor = color;
 }

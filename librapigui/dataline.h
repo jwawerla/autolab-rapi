@@ -88,6 +88,11 @@ class CDataLine : public QWidget
      * @param p number of decimals for floating points
      */
     void setFloatPrecision ( unsigned int p = 1 );
+    /**
+     * Enables color coded output of signed values
+     * @param true enable, false disable
+     */
+    void setColorEnable(bool on);
 
   protected:
     /** Shows the label */
@@ -96,6 +101,10 @@ class CDataLine : public QWidget
     QLineEdit* mLineEdit;
     /** Number of decimals for floating points, default 1 */
     unsigned int mFloatPrecision;
+    /** Enable color out put for negative values */
+    bool mFgColor;
+    /** Qt palette */
+    QPalette mPalette;
 };
 
 #endif

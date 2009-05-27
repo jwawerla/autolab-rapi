@@ -37,11 +37,15 @@ CVelocity2dWidget::CVelocity2dWidget ( QWidget* parent )
 
   QHBoxLayout* layout = new QHBoxLayout ( this );
 
-  mVXLine = new CDataLine ( this, "Vx [m/s]" );
-  layout->addWidget ( mVXLine );
+  mXDotLine = new CDataLine ( this, "Vx [m/s]" );
+  mXDotLine->setFloatPrecision(3);
+  layout->addWidget ( mXDotLine );
+  mXDotLine->setColorEnable( true );
 
-  mVYLine = new CDataLine ( this, "Vy [m/s]" );
-  layout->addWidget ( mVYLine );
+  mYDotLine = new CDataLine ( this, "Vy [m/s]" );
+  mYDotLine->setFloatPrecision(3);
+  layout->addWidget ( mYDotLine );
+  mYDotLine->setColorEnable( true );
 
   mYawDotLine = new CDataLine ( this, "V"+Q_YAW+" ["+Q_DEGREE+"/s]" );
   layout->addWidget ( mYawDotLine );
@@ -56,17 +60,17 @@ CVelocity2dWidget::~CVelocity2dWidget()
 void CVelocity2dWidget::updateData(CVelocity2d velocity)
 {
   if ( isChecked() ) {
-    mVXLine->setHidden ( false );
-    mVYLine->setHidden ( false );
+    mXDotLine->setHidden ( false );
+    mYDotLine->setHidden ( false );
     mYawDotLine->setHidden ( false );
 
-    mVXLine->setData ( velocity.mVX );
-    mVYLine->setData ( velocity.mVY );
+    mXDotLine->setData ( velocity.mXDot );
+    mYDotLine->setData ( velocity.mYDot );
     mYawDotLine->setData ( R2D ( velocity.mYawDot ) );
   }
   else {
-    mVXLine->setHidden ( true );
-    mVYLine->setHidden ( true );
+    mXDotLine->setHidden ( true );
+    mYDotLine->setHidden ( true );
     mYawDotLine->setHidden ( true );
   }
 }

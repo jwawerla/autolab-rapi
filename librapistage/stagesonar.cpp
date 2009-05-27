@@ -62,7 +62,7 @@ int CStageSonar::init()
 
   mNumSamples = mStgRanger->sensor_count;
   mRangeResolution = 0;
-  mFov = TWOPI;
+  mFov = TWO_PI;
 
   // initialize data structures
   mRelativeBeamPose = new CPose2d[mNumSamples];

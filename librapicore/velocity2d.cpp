@@ -21,41 +21,49 @@
 
 #include "velocity2d.h"
 #include <stdio.h>
+#include <sstream>
 #include "utilities.h"
 
 namespace Rapi
 {
 
 //-----------------------------------------------------------------------------
-CVelocity2d::CVelocity2d ( double vX, double vY, double yawDot )
+CVelocity2d::CVelocity2d ( double xDot, double yDot, double yawDot )
 {
-  mVX = vX;
-  mVY = vY;
+  mXDot = xDot;
+  mYDot = yDot;
   mYawDot = yawDot;
 }
 //-----------------------------------------------------------------------------
-
 CVelocity2d::~CVelocity2d()
 {
 }
 //-----------------------------------------------------------------------------
 void CVelocity2d::print() const
 {
-  printf ( "CVelocity2d: vx=%f vy=%f yawDot=%f\n",
-           mVX, mVY, R2D ( mYawDot ) );
+  printf ( "CVelocity2d: xDot=%f yDot=%f yawDot=%f\n",
+           mXDot, mYDot, R2D ( mYawDot ) );
+}
+//-----------------------------------------------------------------------------
+std::string CVelocity2d::toStr() const
+{
+  std::ostringstream strOut;
+
+  strOut << "Xdot=" << mXDot << " Ydot=" << mYDot << " Yawdot=" << R2D ( mYawDot );
+  return strOut.str();
 }
 //-----------------------------------------------------------------------------
 void CVelocity2d::operator = ( CVelocity2d const &vel )
 {
-  mVX = vel.mVX;
-  mVY = vel.mVY;
+  mXDot = vel.mXDot;
+  mYDot = vel.mYDot;
   mYawDot = vel.mYawDot;
 }
 //-----------------------------------------------------------------------------
 void CVelocity2d::setZero()
 {
-  mVX = 0.0;
-  mVY = 0.0;
+  mXDot = 0.0;
+  mYDot = 0.0;
   mYawDot = 0.0;
 }
 //-----------------------------------------------------------------------------

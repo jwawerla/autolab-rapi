@@ -92,12 +92,13 @@ void CStageDrivetrain2dof::setVelocityCmd ( CVelocity2d velocity )
     mVelocityCmd.setZero();
   }
 
-  mStgPosition->SetXSpeed ( mVelocityCmd.mVX );
+  mStgPosition->SetXSpeed ( mVelocityCmd.mXDot );
   mStgPosition->SetTurnSpeed ( mVelocityCmd.mYawDot );
 }
 //-----------------------------------------------------------------------------
 void CStageDrivetrain2dof::updateData()
 {
+  float time;
   if ( mFgEnabled ) {
     // update odometry
     ( ( CStageOdometry* ) mOdometry )->updateData();
@@ -105,8 +106,15 @@ void CStageDrivetrain2dof::updateData()
     // stage doesn't seem to allow us access to the sensed speed of the robot
     // so we simply assume it is the commanded velocity
     mVelocityMeas = mVelocityCmd;
+    time = mTimeStamp;
     mTimeStamp = mStgPosition->GetWorld()->SimTimeNow() / 1e6;
     mFgStalled = mStgPosition->Stalled();
+
+    if (mFgStalled)
+      mStalledTimer += mTimeStamp - time;
+    else
+      mStalledTimer = 0.0;
+
     notifyDataUpdateObservers();
   }
 }

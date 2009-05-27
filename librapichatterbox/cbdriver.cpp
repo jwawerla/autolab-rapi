@@ -294,14 +294,14 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
   unsigned char cmdbuf[5];
   int16_t tv_mm, rad_mm;
 
-  tv_mm = ( int16_t ) rint ( vel.mVX * 1e3 );
+  tv_mm = ( int16_t ) rint ( vel.mXDot * 1e3 );
   tv_mm = ( int16_t )LIMIT ( tv_mm, -CREATE_TVEL_MAX_MM_S, CREATE_TVEL_MAX_MM_S );
 
   if ( fabs ( vel.mYawDot ) < 0.0001 ) {
     // Special case: drive straight
     rad_mm = ( int16_t ) 0x8000;
   } else {
-    if ( isAboutZero(vel.mVX) ) {
+    if ( isAboutZero(vel.mXDot) ) {
       // Special cases: turn in place
       if ( vel.mYawDot > 0.0 )
         rad_mm = 1;
@@ -314,8 +314,8 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
       // The robot seems to turn very slowly with the above
       rad_mm /= 2;
       //printf("real rad_mm: %d\n", rad_mm);
-      rad_mm = (int16_t) MAX ( rad_mm, -CREATE_RADIUS_MAX_MM );
-      rad_mm = (int16_t) MIN ( rad_mm, CREATE_RADIUS_MAX_MM );
+      rad_mm = (int16_t) max ( rad_mm, -CREATE_RADIUS_MAX_MM );
+      rad_mm = (int16_t) min ( rad_mm, CREATE_RADIUS_MAX_MM );
       if ( rad_mm == 1 )
         rad_mm = 2;
       if ( rad_mm == -1 )

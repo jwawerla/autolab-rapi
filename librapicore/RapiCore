@@ -24,6 +24,7 @@
 #include "pose2d.h"
 #include "pose3d.h"
 #include "point2d.h"
+#include "rectangle.h"
 #include "rangefinder.h"
 #include "velocity2d.h"
 #include "utilities.h"
@@ -41,4 +42,5 @@
 #include "rgbcolor.h"
 #include "timer.h"
 #include "statevariable.h"
+#include "limit.h"
 

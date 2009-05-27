@@ -84,7 +84,7 @@ float ARangeFinder::localInverseRangeSensorModel ( float x, float y,
   phi = NORMALIZE_ANGLE ( atan2 ( dy, dx ) - robotPose.mYaw );
 
   // make sure we have a minimum beam cone angle
-  beamConeAngle = MAX ( mBeamConeAngle, D2R ( 2.5 ) );
+  beamConeAngle = max ( mBeamConeAngle, D2R ( 2.5 ) );
 
   // find the beam index
   // if the beam cone angle is 0, we know it is a laser, therefore
@@ -109,7 +109,7 @@ float ARangeFinder::localInverseRangeSensorModel ( float x, float y,
   }
 
   // query point out of range ?
-  if ( r > MIN ( mMaxRange, mRangeData[k].range + mHalfObstacleThickness ) ) {
+  if ( r > min ( mMaxRange, mRangeData[k].range + mHalfObstacleThickness ) ) {
     return mL0;  // L0
   }
 

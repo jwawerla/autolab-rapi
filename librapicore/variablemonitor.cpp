@@ -73,7 +73,7 @@ void CVariableMonitor::getVariableString ( unsigned int index,
     case VELOCITY2D:
       varType = "CVelocity2d";
       velocityVar = * ( ( CVelocity2d* ) entry.ptr );
-      strOut << "mVX=" << velocityVar.mVX << " mVY=" << velocityVar.mVY <<
+      strOut << "mXDot=" << velocityVar.mXDot << " mYDot=" << velocityVar.mYDot <<
       " mYawDot=" <<  R2D ( velocityVar.mYawDot );
       value = strOut.str();
       break;
