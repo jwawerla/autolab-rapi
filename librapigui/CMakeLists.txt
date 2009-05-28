@@ -5,6 +5,7 @@ SET( TARGET ${PRJ} )
 
 FIND_PACKAGE(Qt4)
 
+IF (WITH_GUI)
 IF (QT_FOUND)
 
   INCLUDE(${QT_USE_FILE})
@@ -81,3 +82,4 @@ IF (QT_FOUND)
 ELSE(QT_FOUND)
   MESSAGE(STATUS "QT4 not found, autolab-rapi-gui will NOT be build")
 ENDIF(QT_FOUND)
+ENDIF(WITH_GUI)
