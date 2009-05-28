@@ -302,11 +302,12 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
     rad_mm = ( int16_t ) 0x8000;
   } else {
     if ( isAboutZero(vel.mXDot) ) {
-      // Special cases: turn in place CW
+      // Special cases: turn in place CCW
       if ( vel.mYawDot > 0.0 )
-        rad_mm = 0xFFFF;
-      else
         rad_mm = 0x0001;
+      // Special cases: turn in place CW
+      else
+        rad_mm = 0xFFFF;
       tv_mm = ( int16_t ) rint ( CREATE_AXLE_LENGTH * fabs ( vel.mYawDot ) * 1e3 );
     } else {
       // General case: convert rv to turn radius
