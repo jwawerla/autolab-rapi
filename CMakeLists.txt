@@ -24,9 +24,9 @@ IF( APPLE )
 # skipping chatterbox, as it needs Linux
 ELSE( APPLE )
   ADD_SUBDIRECTORY(librapichatterbox)
-  IF (WITH_GUI)
-    ADD_SUBDIRECTORY(librapigui)
-  ENDIF(WITH_GUI)
+  #IF (WITH_GUI)
+    #ADD_SUBDIRECTORY(librapigui)
+  #ENDIF(WITH_GUI)
 ENDIF( APPLE )
 
 
