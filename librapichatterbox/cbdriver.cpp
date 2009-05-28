@@ -324,7 +324,7 @@ printf("real rad_mm: %d\n", rad_mm);
 #endif
     }
   }
-printf("tv_mm: %d rad_mm: %d\n", tv_mm, rad_mm);
+printf("tv_mm: %#4x = % rad_mm: %#4x\n", tv_mm, rad_mm);
 
   cmdbuf[0] = CREATE_OPCODE_DRIVE;
   cmdbuf[1] = ( unsigned char ) ( tv_mm >> 8 );
