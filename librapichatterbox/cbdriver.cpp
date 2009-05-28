@@ -302,15 +302,16 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
     rad_mm = ( int16_t ) 0x8000;
   } else {
     if ( isAboutZero(vel.mXDot) ) {
-      // Special cases: turn in place
+      // Special cases: turn in place CW
       if ( vel.mYawDot > 0.0 )
-        rad_mm = 1;
+        rad_mm = 0xFFFF;
       else
-        rad_mm = -1;
+        rad_mm = 0x0001;
       tv_mm = ( int16_t ) rint ( CREATE_AXLE_LENGTH * fabs ( vel.mYawDot ) * 1e3 );
     } else {
       // General case: convert rv to turn radius
       rad_mm = ( int16_t ) rint ( tv_mm / vel.mYawDot );
+#if 0
       // The robot seems to turn very slowly with the above
       rad_mm /= 2;
 printf("real rad_mm: %d\n", rad_mm);
@@ -320,7 +321,7 @@ printf("real rad_mm: %d\n", rad_mm);
         rad_mm = 2;
       if ( rad_mm == -1 )
         rad_mm = -2;
-
+#endif
     }
   }
 printf("tv_mm: %d rad_mm: %d\n", tv_mm, rad_mm);
