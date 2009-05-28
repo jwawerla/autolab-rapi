@@ -313,7 +313,8 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
       rad_mm = ( int16_t ) rint ( tv_mm / vel.mYawDot );
       // The robot seems to turn very slowly with the above
       rad_mm /= 2;
-      //printf("real rad_mm: %d\n", rad_mm);
+if (getenv("DEBUG"))
+printf("real rad_mm: %d\n", rad_mm);
       rad_mm = (int16_t) max ( rad_mm, -CREATE_RADIUS_MAX_MM );
       rad_mm = (int16_t) min ( rad_mm, CREATE_RADIUS_MAX_MM );
       if ( rad_mm == 1 )
@@ -323,7 +324,8 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
 
     }
   }
-  //printf("tv_mm: %d rad_mm: %d\n", tv_mm, rad_mm);
+if (getenv("DEBUG"))
+printf("tv_mm: %d rad_mm: %d\n", tv_mm, rad_mm);
 
   cmdbuf[0] = CREATE_OPCODE_DRIVE;
   cmdbuf[1] = ( unsigned char ) ( tv_mm >> 8 );
