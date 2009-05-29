@@ -17,6 +17,9 @@ OPTION (WITH_CB "Enable building of chatterbox library" ON)
 # Enable stage: use with -DWITH_STAGE:BOOL=off/on
 OPTION (WITH_STAGE "Enable building of state library" ON)
 
+# Enable examples: use with -DWITH_EXAMPLES:BOOL=off/on
+OPTION (WITH_EXAMPES "Enable building of examples" ON)
+
 INCLUDE(FindPkgConfig)
 
 PKG_SEARCH_MODULE( STAGE stage )
@@ -50,7 +53,9 @@ IF (WITH_GUI)
 ENDIF(WITH_GUI)
 
 
-ADD_SUBDIRECTORY(examples)
+IF (WITH_EXAMPLES)
+  ADD_SUBDIRECTORY(examples)
+ENDIF(WITH_EXAMPLES)
 
 
 # Create and install the pkgconfig file from the .in template
