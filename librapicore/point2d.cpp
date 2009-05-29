@@ -47,7 +47,7 @@ void CPoint2d::fromPolar(double length, double angle)
 //-----------------------------------------------------------------------------
 double CPoint2d::distance(const CPoint2d point) const
 {
-  return EUCLIDIAN(point.mX, point.mY, mX, mY);
+  return euclidian(point.mX, point.mY, mX, mY);
 }
 //-----------------------------------------------------------------------------
 void CPoint2d::print() const

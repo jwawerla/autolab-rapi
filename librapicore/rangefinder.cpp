@@ -81,7 +81,7 @@ float ARangeFinder::localInverseRangeSensorModel ( float x, float y,
   }
 
   // calculate bearing of query point
-  phi = NORMALIZE_ANGLE ( atan2 ( dy, dx ) - robotPose.mYaw );
+  phi = normalizeAngle ( atan2 ( dy, dx ) - robotPose.mYaw );
 
   // make sure we have a minimum beam cone angle
   beamConeAngle = max ( mBeamConeAngle, D2R ( 2.5 ) );

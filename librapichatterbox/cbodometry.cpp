@@ -42,7 +42,7 @@ void CCBOdometry::updateData()
   angle = D2R ( mCBDriver->mCreateSensorPackage.angle );
   distance = ( float ) ( mCBDriver->mCreateSensorPackage.distance ) / 1e3;
 
-  mPose.mYaw = NORMALIZE_ANGLE ( mPose.mYaw + angle );
+  mPose.mYaw = normalizeAngle ( mPose.mYaw + angle );
   mPose.mX += distance * cos ( mPose.mYaw );
   mPose.mY += distance * sin ( mPose.mYaw );
 

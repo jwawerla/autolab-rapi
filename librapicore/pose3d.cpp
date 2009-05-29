@@ -32,9 +32,9 @@ CPose3d::CPose3d ( double x, double y, double z,
   mX = x;
   mY = y;
   mZ = z;
-  mRoll = NORMALIZE_ANGLE ( roll );
-  mPitch = NORMALIZE_ANGLE ( pitch );
-  mYaw = NORMALIZE_ANGLE ( yaw );
+  mRoll = normalizeAngle ( roll );
+  mPitch = normalizeAngle ( pitch );
+  mYaw = normalizeAngle ( yaw );
 }
 //-----------------------------------------------------------------------------
 CPose3d::~CPose3d()
@@ -47,9 +47,9 @@ CPose3d::CPose3d ( CPose3d const& pose )
   mX = pose.mX;
   mY = pose.mY;
   mZ = pose.mZ;
-  mRoll = NORMALIZE_ANGLE ( pose.mRoll );
-  mPitch = NORMALIZE_ANGLE ( pose.mPitch );
-  mYaw = NORMALIZE_ANGLE ( pose.mYaw );
+  mRoll = normalizeAngle ( pose.mRoll );
+  mPitch = normalizeAngle ( pose.mPitch );
+  mYaw = normalizeAngle ( pose.mYaw );
 }
 //-----------------------------------------------------------------------------
 void CPose3d::print()
@@ -63,9 +63,9 @@ void CPose3d::operator= ( const CPose3d pose )
   mX = pose.mX;
   mY = pose.mY;
   mZ = pose.mZ;
-  mRoll = NORMALIZE_ANGLE ( pose.mRoll );
-  mPitch = NORMALIZE_ANGLE ( pose.mPitch );
-  mYaw = NORMALIZE_ANGLE ( pose.mYaw );
+  mRoll = normalizeAngle ( pose.mRoll );
+  mPitch = normalizeAngle ( pose.mPitch );
+  mYaw = normalizeAngle ( pose.mYaw );
 }
 //-----------------------------------------------------------------------------
 CPose3d CPose3d::operator+ ( const CPose3d pose )
@@ -75,9 +75,9 @@ CPose3d CPose3d::operator+ ( const CPose3d pose )
   newPose.mX = mX + pose.mX;
   newPose.mY = mY + pose.mY;
   newPose.mZ = mZ + pose.mZ;
-  newPose.mRoll = NORMALIZE_ANGLE ( mRoll + pose.mRoll );
-  newPose.mPitch = NORMALIZE_ANGLE ( mPitch + pose.mPitch );
-  newPose.mYaw = NORMALIZE_ANGLE ( mYaw + pose.mYaw );
+  newPose.mRoll = normalizeAngle ( mRoll + pose.mRoll );
+  newPose.mPitch = normalizeAngle ( mPitch + pose.mPitch );
+  newPose.mYaw = normalizeAngle ( mYaw + pose.mYaw );
   return newPose;
 }
 //-----------------------------------------------------------------------------

@@ -30,14 +30,14 @@ CPose2d::CPose2d( double x, double y, double yaw )
 {
   mX = x;
   mY = y;
-  mYaw = NORMALIZE_ANGLE( yaw );
+  mYaw = normalizeAngle( yaw );
 }
 //-----------------------------------------------------------------------------
 CPose2d::CPose2d( CPose2d const& pose )
 {
   mX = pose.mX;
   mY = pose.mY;
-  mYaw = NORMALIZE_ANGLE( pose.mYaw );
+  mYaw = normalizeAngle( pose.mYaw );
 }
 //-----------------------------------------------------------------------------
 CPose2d::CPose2d ( CPoint2d const& point )
@@ -77,7 +77,7 @@ CPose2d& CPose2d::operator= ( const CPose2d& pose )
 {
   mX = pose.mX;
   mY = pose.mY;
-  mYaw = NORMALIZE_ANGLE( pose.mYaw );
+  mYaw = normalizeAngle( pose.mYaw );
 
   return *this;
 }
@@ -88,7 +88,7 @@ CPose2d CPose2d::operator+ ( const CPose2d pose )
 
   newPose.mX = mX + pose.mX;
   newPose.mY = mY + pose.mY;
-  newPose.mYaw = NORMALIZE_ANGLE( mYaw + pose.mYaw );
+  newPose.mYaw = normalizeAngle( mYaw + pose.mYaw );
 
   return newPose;
 }
@@ -99,7 +99,7 @@ CPose2d CPose2d::operator- ( const CPose2d pose )
 
   newPose.mX = mX - pose.mX;
   newPose.mY = mY - pose.mY;
-  newPose.mYaw = NORMALIZE_ANGLE( mYaw - pose.mYaw );
+  newPose.mYaw = normalizeAngle( mYaw - pose.mYaw );
 
   return newPose;
 }
@@ -123,12 +123,12 @@ double CPose2d::distance( const CPose2d pose ) const
 //-----------------------------------------------------------------------------
 double CPose2d::angleDifference( const CPose2d pose ) const
 {
-  return NORMALIZE_ANGLE( mYaw - pose.mYaw );
+  return normalizeAngle( mYaw - pose.mYaw );
 }
 //-----------------------------------------------------------------------------
 double CPose2d::bearingTo(const CPose2d pose) const
 {
-  return NORMALIZE_ANGLE(mYaw - atan2(pose.mY - mY, pose.mX - mX) );
+  return normalizeAngle(mYaw - atan2(pose.mY - mY, pose.mX - mX) );
 }
 //-----------------------------------------------------------------------------
 

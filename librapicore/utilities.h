@@ -57,7 +57,7 @@ double const TWO_PI = 6.28318530717958;
  * @return -1 or +1
  */
 template<typename T>
-inline int SIGN( T x)
+inline int sign( T x)
 {
   if ( x < 0 )
     return -1;
@@ -68,7 +68,7 @@ inline int SIGN( T x)
  * Calculates euclidian distance
  * @return distance
  */
-inline double EUCLIDIAN(double x, double y, double a, double b) {
+inline double euclidian(double x, double y, double a, double b) {
   return sqrt( (x-a)*(x-a) + (y-b)*(y-b));
 }
 
@@ -141,23 +141,12 @@ inline bool isAboutZero(double x)
 }
 
 /**
- * Normalizes the value z to be in the interval [-2pi, 2pi]
- * @param z to be normalized
- * @return normalized value
- */
-template<typename T>
-inline T NORMALIZE_ANGLE(T z)
-{
-  return atan2(sin(z), cos(z));
-}
-
-/**
  * Normalizes the value z to be in the interval [-pi, pi]
  * @param z to be normalized
  * @return normalized value
  */
 template<typename T>
-inline T NORMALIZE_TO_PI(T z)
+inline T normalizeAngle(T z)
 {
   return atan2(sin(z), cos(z));
 }
@@ -168,7 +157,7 @@ inline T NORMALIZE_TO_PI(T z)
  * @param b upper limit
  * @return limited value
  */
-inline double LIMIT(double x, double a, double b)
+inline double limit(double x, double a, double b)
 {
  if ( x < a )
    return a;
@@ -182,7 +171,7 @@ inline double LIMIT(double x, double a, double b)
  * @return rounded number
  */
 template<typename T>
-inline T ROUND(T x)
+inline T round(T x)
 {
   return floor(x+0.5);
 }

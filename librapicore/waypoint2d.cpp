@@ -89,7 +89,7 @@ void CWaypoint2d::setPose ( CPose2d pose )
 void CWaypoint2d::setPose ( CPoint2d point, double heading )
 {
   mPose = point;
-  mPose.mYaw = NORMALIZE_ANGLE ( heading );
+  mPose.mYaw = normalizeAngle ( heading );
 }
 //-----------------------------------------------------------------------------
 void CWaypoint2d::setLabel ( std::string label )

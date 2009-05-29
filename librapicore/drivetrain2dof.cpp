@@ -73,15 +73,15 @@ void ADrivetrain2dof::setLowerVelocityLimit ( CVelocity2d limit )
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::applyVelocityLimits()
 {
-  mVelocityCmd.mXDot = LIMIT ( mVelocityCmd.mXDot,
+  mVelocityCmd.mXDot = limit ( mVelocityCmd.mXDot,
                              mLowerVelocityLimit.mXDot,
                              mUpperVelocityLimit.mXDot );
 
-  mVelocityCmd.mYDot = LIMIT ( mVelocityCmd.mYDot,
+  mVelocityCmd.mYDot = limit ( mVelocityCmd.mYDot,
                              mLowerVelocityLimit.mYDot,
                              mUpperVelocityLimit.mYDot );
 
-  mVelocityCmd.mYawDot = LIMIT ( mVelocityCmd.mYawDot,
+  mVelocityCmd.mYawDot = limit ( mVelocityCmd.mYawDot,
                              mLowerVelocityLimit.mYawDot,
                              mUpperVelocityLimit.mYawDot );
 }

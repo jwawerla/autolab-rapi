@@ -102,13 +102,13 @@ mVelocityCmd.mXDot, mVelocityCmd.mYawDot);
     // limit acceleration
     if ( fabs ( mPrevVelocityCmd.mXDot - mVelocityCmd.mXDot ) > mMaxVelocityDelta ) {
       mVelocityCmd.mXDot = mPrevVelocityCmd.mXDot + 
-                         SIGN ( mVelocityCmd.mXDot - mPrevVelocityCmd.mXDot ) *
+                         sign ( mVelocityCmd.mXDot - mPrevVelocityCmd.mXDot ) *
                          mMaxVelocityDelta;
     }
 
     if ( fabs ( mVelocityMeas.mYawDot - mVelocityCmd.mYawDot ) > mMaxTurnRateDelta ) {
       mVelocityCmd.mYawDot = mPrevVelocityCmd.mYawDot + 
-                             SIGN ( mVelocityCmd.mYawDot - mPrevVelocityCmd.mYawDot ) *
+                             sign ( mVelocityCmd.mYawDot - mPrevVelocityCmd.mYawDot ) *
                              mMaxTurnRateDelta;
     }
 

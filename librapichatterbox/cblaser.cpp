@@ -63,7 +63,7 @@ CCBLaser::CCBLaser ( CCBDriver* driver, std::string devName )
   for ( unsigned int i = 0; i < mNumSamples; i ++ ) {
     mRelativeBeamPose[i].mX   = 0;
     mRelativeBeamPose[i].mY   = 0;
-    mRelativeBeamPose[i].mYaw = NORMALIZE_ANGLE ( -1* ( mFov/2.0 ) +
+    mRelativeBeamPose[i].mYaw = normalizeAngle ( -1* ( mFov/2.0 ) +
                                 i * resolution );
   }
 
