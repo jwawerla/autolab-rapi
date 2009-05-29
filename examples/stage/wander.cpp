@@ -28,7 +28,9 @@ using namespace Rapi;
 
 extern "C" int Init ( Stg::Model* mod )
 {
+#ifdef RAPI_GUI
   CGui* gui = CGui::getInstance(0, NULL);
+#endif
 
   CLooseStageRobot* robot;
   ARobotCtrl* robotCtrl;
@@ -41,6 +43,8 @@ extern "C" int Init ( Stg::Model* mod )
   robot = new CLooseStageRobot ( mod );
   robotCtrl = new CWanderCtrl ( robot );
 
+#ifdef RAPI_GUI
   gui->registerRobot(robot);
+#endif
   return 0; // ok
 }

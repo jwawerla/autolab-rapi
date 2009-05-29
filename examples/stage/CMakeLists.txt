@@ -1,6 +1,8 @@
 
 IF (STAGE_FOUND)
-IF (WITH_GUI)
+
+  ##########################################
+  # Build with GUI
   FIND_PACKAGE(Qt4)
 
   IF (QT_FOUND)
@@ -41,9 +43,6 @@ IF (WITH_GUI)
       wanderctrl.cpp
     )
 
-    # delete the "lib" prefix from the plugin libraries
-    SET_TARGET_PROPERTIES( wander_rapi PROPERTIES PREFIX "" )
-
     #need to link to some other libraries ? just add them here
     TARGET_LINK_LIBRARIES( wander_rapi
       ${STAGE_LIBRARIES}
@@ -54,12 +53,42 @@ IF (WITH_GUI)
       autolab-rapi-gui
     )
 
-    INSTALL(TARGETS wander_rapi
-      RUNTIME DESTINATION bin
-      LIBRARY DESTINATION lib
-    )
   ELSE(QT_FOUND)
-    MESSAGE(STATUS "Qt4 not found, cannot build example" )
+  #####################################
+  # Build without GUI
+    INCLUDE_DIRECTORIES(
+      ../../librapicore
+      ../../librapistage
+      ${STAGE_INCLUDE_DIRS}
+      ${GLIB_INCLUDE_DIRS}
+
+    )
+
+    LINK_DIRECTORIES(
+      ${STAGE_LIBRARY_DIRS}
+      ../../librapicore
+      ../../librapistage
+    )
+
+    #build a shared library
+    ADD_LIBRARY(wander_rapi MODULE
+      wander.cpp
+      wanderctrl.cpp
+    )
+    #need to link to some other libraries ? just add them here
+    TARGET_LINK_LIBRARIES( wander_rapi
+      ${STAGE_LIBRARIES}
+      ${OPENGL_LIBRARIES}
+      autolab-rapi
+      autolab-rapi-stage
+    )
   ENDIF(QT_FOUND)
-ENDIF(WITH_GUI)
+
+  # delete the "lib" prefix from the plugin libraries
+  SET_TARGET_PROPERTIES( wander_rapi PROPERTIES PREFIX "" )
+
+  INSTALL(TARGETS wander_rapi
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+  )
 ENDIF(STAGE_FOUND)

@@ -8,26 +8,46 @@ SET( V_BUGFIX 0 )
 SET( VERSION ${V_MAJOR}.${V_MINOR}.${V_BUGFIX} )
 SET( APIVERSION ${V_MAJOR}.${V_MINOR} )
 
-OPTION (WITH_GUI "Set this to enable the Rapi graphics stuff" ON)
-# use with -DWITH_GUI:BOOL=off/on
+# Enable graphics: use with -DWITH_GUI:BOOL=off/on
+OPTION (WITH_GUI "Enable building of Rapi graphics stuff" ON)
+
+# Enable chatterbox: use with -DWITH_CB:BOOL=off/on
+OPTION (WITH_CB "Enable building of chatterbox library" ON)
+
+# Enable stage: use with -DWITH_STAGE:BOOL=off/on
+OPTION (WITH_STAGE "Enable building of state library" ON)
 
 INCLUDE(FindPkgConfig)
 
 PKG_SEARCH_MODULE( STAGE stage )
 FIND_PACKAGE(Qt4)
 
-ADD_DEFINITIONS(-g -Wall -O2)
-ADD_SUBDIRECTORY(librapicore)
-ADD_SUBDIRECTORY(librapistage)
+IF(QT_FOUND)
+ELSEIF(QT_FOUND)
+  SET(WITH_GUI off)
+ENDIF(QT_FOUND)
 
 IF( APPLE )
-# skipping chatterbox, as it needs Linux
-ELSE( APPLE )
-  ADD_SUBDIRECTORY(librapichatterbox)
-  IF (WITH_GUI)
-    ADD_SUBDIRECTORY(librapigui)
-  ENDIF(WITH_GUI)
+  # skipping chatterbox, as it needs Linux
+  SET(WITH_CB off)
 ENDIF( APPLE )
+
+
+ADD_DEFINITIONS(-g -Wall -O2)
+ADD_SUBDIRECTORY(librapicore)
+
+IF (WITH_STAGE)
+ ADD_SUBDIRECTORY(librapistage)
+ENDIF(WITH_STAGE)
+
+if (WITH_CB)
+  ADD_SUBDIRECTORY(librapichatterbox)
+ENDIF(WITH_CB)
+
+IF (WITH_GUI)
+  ADD_SUBDIRECTORY(librapigui)
+  ADD_DEFINITIONS(-DRAPI_GUI)
+ENDIF(WITH_GUI)
 
 
 ADD_SUBDIRECTORY(examples)
