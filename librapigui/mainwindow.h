@@ -62,6 +62,8 @@ class CMainWindow : public QMainWindow
     CDeviceWidgetList* mVariableMonitorWidgetList;
     /** Console list */
     CDeviceWidgetList* mConsoleWidgetList;
+    /** Binary sensor array list */
+    CDeviceWidgetList* mBinarySensorArrayWidgetList;
 
   protected slots:
     void update();

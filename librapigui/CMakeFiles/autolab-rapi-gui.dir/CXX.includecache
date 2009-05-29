@@ -14,6 +14,24 @@
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/./images/ledredon.xpm
 
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/binarysensorarraywidget.cpp
+binarysensorarraywidget.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/binarysensorarraywidget.h
+assert.h
+-
+QGridLayout
+-
+math.h
+-
+
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/binarysensorarraywidget.h
+devicewidget.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.h
+dataled.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
+binarysensorarray.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/binarysensorarray.h
+
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/consolewidget.cpp
 consolewidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/consolewidget.h
@@ -275,6 +293,8 @@ powerpackwidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/powerpackwidget.h
 textdisplaywidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/textdisplaywidget.h
+binarysensorarraywidget.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/binarysensorarraywidget.h
 printerror.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/printerror.h
 robotctrl.h
@@ -1531,6 +1551,10 @@ qgraphicsscene.h
 /usr/include/qt4/QtGui/QGraphicsView
 qgraphicsview.h
 /usr/include/qt4/QtGui/qgraphicsview.h
+
+/usr/include/qt4/QtGui/QGridLayout
+qgridlayout.h
+/usr/include/qt4/QtGui/qgridlayout.h
 
 /usr/include/qt4/QtGui/QGroupBox
 qgroupbox.h

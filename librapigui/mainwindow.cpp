@@ -69,6 +69,8 @@ CMainWindow::CMainWindow()
       "Variable Monitor", this );
   mConsoleWidgetList = new CDeviceWidgetList( mDeviceMenu,
       "Console", this );
+  mBinarySensorArrayWidgetList = new CDeviceWidgetList( mDeviceMenu,
+      "Binary Sensor", this );
 
   mTabWidget = new QTabWidget( this );
   layout = new QVBoxLayout( mTabWidget );
@@ -127,6 +129,7 @@ void CMainWindow::closeEvent( QCloseEvent* event )
   mFiducialFinderWidgetList->writeSettings();
   mTextDisplayWidgetList->writeSettings();
   mPowerPackWidgetList->writeSettings();
+  mBinarySensorArrayWidgetList->writeSettings();
 }
 //-----------------------------------------------------------------------------
 void CMainWindow::update()

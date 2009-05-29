@@ -15,6 +15,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o"
   "CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o"
   "CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o"
+  "CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o"
   "CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o"
   "CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o"
   "CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o"

@@ -24,6 +24,7 @@
 #include "fiducialfinderwidget.h"
 #include "powerpackwidget.h"
 #include "textdisplaywidget.h"
+#include "binarysensorarraywidget.h"
 #include "printerror.h"
 #include "robotctrl.h"
 #include <QVBoxLayout>
@@ -74,6 +75,12 @@ CRobotWidget::CRobotWidget(ARobot* robot, CMainWindow* mw, QWidget* parent)
     else if ( device->getGuiName() == "TextDisplayWidget" ) {
       widget = new CTextDisplayWidget((ATextDisplay*)device, this);
       mMainWindow->mTextDisplayWidgetList->addWidget(widget);
+      layout->addWidget( widget);
+      mWidgetList.push_back(widget);
+    }
+    else if ( device->getGuiName() == "BinarySensorArray" ) {
+      widget = new CBinarySensorArrayWidget((ABinarySensorArray*)device, this);
+      mMainWindow->mBinarySensorArrayWidgetList->addWidget(widget);
       layout->addWidget( widget);
       mWidgetList.push_back(widget);
     }

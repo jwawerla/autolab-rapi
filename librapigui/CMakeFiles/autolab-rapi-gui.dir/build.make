@@ -433,9 +433,33 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o.provides: libr
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o.provides.build: librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o
 .PHONY : librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o.provides.build
 
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/CMakeFiles/autolab-rapi-gui.dir/flags.make
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/binarysensorarraywidget.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_17)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o"
+	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o -c /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/binarysensorarraywidget.cpp
+
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.i"
+	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/binarysensorarraywidget.cpp > CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.i
+
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.s"
+	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/binarysensorarraywidget.cpp -o CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.s
+
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o.requires:
+.PHONY : librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o.requires
+
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o.provides: librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o.requires
+	$(MAKE) -f librapigui/CMakeFiles/autolab-rapi-gui.dir/build.make librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o.provides.build
+.PHONY : librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o.provides
+
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o.provides.build: librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o
+.PHONY : librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o.provides.build
+
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/CMakeFiles/autolab-rapi-gui.dir/flags.make
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/moc_mainwindow.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o -c /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_mainwindow.cxx
 
@@ -459,7 +483,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o.provides.build: 
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: librapigui/CMakeFiles/autolab-rapi-gui.dir/flags.make
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: librapigui/moc_dataline.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o -c /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_dataline.cxx
 
@@ -483,7 +507,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o.provides.build: li
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: librapigui/CMakeFiles/autolab-rapi-gui.dir/flags.make
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: librapigui/moc_dataled.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_19)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o -c /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_dataled.cxx
 
@@ -507,7 +531,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o.provides.build: lib
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/CMakeFiles/autolab-rapi-gui.dir/flags.make
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/moc_devicewidget.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_20)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o -c /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_devicewidget.cxx
 
@@ -531,7 +555,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o.provides.build
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/CMakeFiles/autolab-rapi-gui.dir/flags.make
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/moc_fiducialfinderwidget.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_21)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_22)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o -c /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_fiducialfinderwidget.cxx
 
@@ -555,7 +579,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o.provid
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/CMakeFiles/autolab-rapi-gui.dir/flags.make
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/moc_devicewidgetlist.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_22)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_23)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o -c /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_devicewidgetlist.cxx
 
@@ -579,37 +603,37 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o.provides.b
 
 librapigui/moc_mainwindow.cxx: /usr/bin/moc-qt4
 librapigui/moc_mainwindow.cxx: librapigui/mainwindow.h
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_23)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_24)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Qt Wrapped File"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/moc-qt4 -o /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_mainwindow.cxx /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/mainwindow.h
 
 librapigui/moc_dataline.cxx: /usr/bin/moc-qt4
 librapigui/moc_dataline.cxx: librapigui/dataline.h
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_24)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_25)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Qt Wrapped File"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/moc-qt4 -o /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_dataline.cxx /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataline.h
 
 librapigui/moc_dataled.cxx: /usr/bin/moc-qt4
 librapigui/moc_dataled.cxx: librapigui/dataled.h
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_25)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_26)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Qt Wrapped File"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/moc-qt4 -o /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_dataled.cxx /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
 
 librapigui/moc_devicewidget.cxx: /usr/bin/moc-qt4
 librapigui/moc_devicewidget.cxx: librapigui/devicewidget.h
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_26)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_27)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Qt Wrapped File"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/moc-qt4 -o /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_devicewidget.cxx /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.h
 
 librapigui/moc_fiducialfinderwidget.cxx: /usr/bin/moc-qt4
 librapigui/moc_fiducialfinderwidget.cxx: librapigui/fiducialfinderwidget.h
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_27)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_28)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Qt Wrapped File"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/moc-qt4 -o /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_fiducialfinderwidget.cxx /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/fiducialfinderwidget.h
 
 librapigui/moc_devicewidgetlist.cxx: /usr/bin/moc-qt4
 librapigui/moc_devicewidgetlist.cxx: librapigui/devicewidgetlist.h
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_28)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/CMakeFiles $(CMAKE_PROGRESS_29)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Qt Wrapped File"
 	cd /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui && /usr/bin/moc-qt4 -o /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_devicewidgetlist.cxx /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidgetlist.h
 
@@ -631,6 +655,7 @@ autolab__rapi__gui_OBJECTS = \
 "CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o" \
 "CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o" \
 "CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o" \
+"CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o" \
 "CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o" \
 "CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o" \
 "CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o" \
@@ -657,6 +682,7 @@ librapigui/libautolab-rapi-gui.so.0.1.0: librapigui/CMakeFiles/autolab-rapi-gui.
 librapigui/libautolab-rapi-gui.so.0.1.0: librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o
 librapigui/libautolab-rapi-gui.so.0.1.0: librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o
 librapigui/libautolab-rapi-gui.so.0.1.0: librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o
+librapigui/libautolab-rapi-gui.so.0.1.0: librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o
 librapigui/libautolab-rapi-gui.so.0.1.0: librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
 librapigui/libautolab-rapi-gui.so.0.1.0: librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o
 librapigui/libautolab-rapi-gui.so.0.1.0: librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o
@@ -697,6 +723,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/requires: librapigui/CMakeFiles/autol
 librapigui/CMakeFiles/autolab-rapi-gui.dir/requires: librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o.requires
 librapigui/CMakeFiles/autolab-rapi-gui.dir/requires: librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o.requires
 librapigui/CMakeFiles/autolab-rapi-gui.dir/requires: librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o.requires
+librapigui/CMakeFiles/autolab-rapi-gui.dir/requires: librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o.requires
 librapigui/CMakeFiles/autolab-rapi-gui.dir/requires: librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o.requires
 librapigui/CMakeFiles/autolab-rapi-gui.dir/requires: librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o.requires
 librapigui/CMakeFiles/autolab-rapi-gui.dir/requires: librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o.requires

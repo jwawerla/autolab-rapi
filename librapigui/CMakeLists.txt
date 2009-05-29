@@ -44,6 +44,7 @@ IF (QT_FOUND)
     consolewidget.cpp
     textdisplaywidget.cpp
     devicewidgetlist.cpp
+    binarysensorarraywidget.cpp
    #ndwidget.cpp
     ${MOC_SRC}
   )
