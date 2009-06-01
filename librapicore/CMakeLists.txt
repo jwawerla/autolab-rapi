@@ -34,6 +34,7 @@ SET( HEADERS
   #booleanstatevariable.h
   variablemonitor.h
   timer.h
+  rapivar.h
 )
 
 SET( SOURCES

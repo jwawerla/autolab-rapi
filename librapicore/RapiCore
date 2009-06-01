@@ -43,4 +43,5 @@
 #include "timer.h"
 #include "statevariable.h"
 #include "limit.h"
+#include "rapivar.h"
 
