@@ -26,6 +26,7 @@
 #include "rgbcolor.h"
 #include "utilities.h"
 #include "stdio.h"
+#include <sstream>
 
 namespace Rapi
 {
@@ -47,6 +48,14 @@ CRgbColor::CRgbColor ( CRgbColor const &color )
 //---------------------------------------------------------------------------
 CRgbColor::~CRgbColor()
 {
+}
+//---------------------------------------------------------------------------
+std::string CRgbColor::toStr() const
+{
+  std::ostringstream strOut;
+
+  strOut << "r=" << mRed << " g=" << mGreen << " b=" << mBlue;
+  return strOut.str();
 }
 //---------------------------------------------------------------------------
 void CRgbColor::print() const

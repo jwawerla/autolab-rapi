@@ -1511,6 +1511,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  librapigui/../librapicore/powerpack.h
  librapigui/../librapicore/rangefinder.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapivar.h
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/robot.h
  librapigui/../librapicore/robotupdateinterface.h
@@ -1903,6 +1904,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o
  librapigui/../librapicore/powerpack.h
  librapigui/../librapicore/rangefinder.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapivar.h
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/robot.h
  librapigui/../librapicore/robotupdateinterface.h
@@ -3062,6 +3064,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  librapigui/../librapicore/powerpack.h
  librapigui/../librapicore/rangefinder.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapivar.h
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/robot.h
  librapigui/../librapicore/robotupdateinterface.h
@@ -3798,6 +3801,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  librapigui/../librapicore/printerror.h
  librapigui/../librapicore/rangefinder.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapivar.h
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/robot.h
  librapigui/../librapicore/robotctrl.h
@@ -4040,6 +4044,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o
  librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapivar.h
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/variablemonitor.h
  librapigui/../librapicore/velocity2d.h

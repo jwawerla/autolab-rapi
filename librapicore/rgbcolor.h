@@ -17,14 +17,12 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************
- * $Log: $
- *
- *
- ***************************************************************************/
+ **************************************************************************/
+
 #ifndef RAPIRGBCOLOR_H
 #define RAPIRGBCOLOR_H
 
+#include "rapivar.h"
 
 namespace Rapi
 {
@@ -34,7 +32,7 @@ namespace Rapi
  * @author Jens Wawerla <jwawerla@sfu.ca>
  * @version 0.1 - 12/2007
  */
-class CRgbColor
+class CRgbColor : public IRapiVar
 {
   public:
     /**
@@ -54,6 +52,16 @@ class CRgbColor
      * Prints the color value
      */
     void print() const;
+    /**
+     * Gets the data of the varible as a string
+     * @return string data
+     */
+    std::string toStr() const;
+    /**
+     * Gets the variable type string
+     * @return variable type name
+     */
+    std::string getTypeStr() const { return "CRgbColor"; };
     /** Assignment operator */
     CRgbColor& operator = ( const CRgbColor &color );
     /** Overloaded == operator */

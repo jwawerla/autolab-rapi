@@ -24,6 +24,7 @@
 #include <string>
 #include <vector>
 
+#include "rapivar.h"
 #include "pose2d.h"
 #include "point2d.h"
 #include "velocity2d.h"
@@ -31,31 +32,6 @@
 
 namespace Rapi
 {
-
-/**
- * Interface class for classes that should be monitored with CVariableMonitor
- * @author Jens Wawerla
- */
-class IRapiVar
-{
-  public:
-    /** Default destructor */
-    virtual ~IRapiVar() {}
-    /**
-     * Gets the data of the varible as a string
-     * @return string data
-     */
-    virtual std::string toStr() = 0;
-    /**
-     * Gets the variable type string
-     * @return variable type name
-     */
-    virtual std::string getTypeStr() = 0;
-
-  protected:
-    /** Default constructor */
-    IRapiVar() {};
-};
 
 /**
  * Helps to debug robot controllers by monitoring registered variables

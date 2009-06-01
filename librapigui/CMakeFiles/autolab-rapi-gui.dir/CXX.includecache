@@ -3586,7 +3586,13 @@ librapigui/../librapicore/device.h
 
 librapigui/../librapicore/rapitypes.h
 
+librapigui/../librapicore/rapivar.h
+string
+-
+
 librapigui/../librapicore/rgbcolor.h
+rapivar.h
+librapigui/../librapicore/rapivar.h
 
 librapigui/../librapicore/robot.h
 robotupdateinterface.h
@@ -3645,6 +3651,8 @@ string
 -
 vector
 -
+rapivar.h
+librapigui/../librapicore/rapivar.h
 pose2d.h
 librapigui/../librapicore/pose2d.h
 point2d.h

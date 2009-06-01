@@ -1510,6 +1510,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/powerpack.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/rangefinder.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/rapivar.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/robot.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/robotupdateinterface.h
@@ -1902,6 +1903,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../libra
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/powerpack.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/rangefinder.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/rapivar.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/robot.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/robotupdateinterface.h
@@ -3061,6 +3063,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../l
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/powerpack.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/rangefinder.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/rapivar.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/robot.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/robotupdateinterface.h
@@ -3797,6 +3800,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../libr
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/printerror.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/rangefinder.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/rapivar.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/robot.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/robotctrl.h
@@ -4039,6 +4043,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapig
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/rapivar.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/variablemonitor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/velocity2d.h
