@@ -38,7 +38,7 @@ void ALocalizer2d::setCoordinateSystemOffset ( CPose2d offset )
   mCoordinateSystemOffset = offset;
 }
 //-----------------------------------------------------------------------------
-CPose2d ALocalizer2d::getPose()
+CPose2d ALocalizer2d::getPose() const
 {
   return mPose;
 }

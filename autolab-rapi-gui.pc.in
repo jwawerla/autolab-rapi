@@ -5,4 +5,4 @@ Description: Robot Application Programming Interface
 Version: @VERSION@
 Requires:
 Libs: -L${prefix}/lib -lautolab-rapi-gui -lautolab-rapi
-Cflags: -I${prefix}/include/autolab-rapi-gui-@APIVERSION@ -I${prefix}/include/autolab-rapi-@APIVERSION@
+Cflags: -I${prefix}/include/autolab-rapi-gui-@APIVERSION@ -I${prefix}/include/autolab-rapi-@APIVERSION@ -DRAPI_GUI

@@ -21,17 +21,20 @@
 
 #include "timer.h"
 #include <assert.h>
+#include <sstream>
+
 namespace Rapi
 {
 
 
 //-----------------------------------------------------------------------------
-CTimer::CTimer(ARobot* robot)
+CTimer::CTimer ( ARobot* robot )
     : IRobotUpdate()
 {
-  assert(robot);
-  robot->registerStateVariable( this );
-  mTime = 0.0f;
+  assert ( robot );
+  mRobot = robot;
+  robot->registerStateVariable ( this );
+  mStartTime = mRobot->getCurrentTime();
   mFgExpired = false;
   mFgRunning = false;
 }
@@ -43,33 +46,46 @@ CTimer::~CTimer()
 void CTimer::updateData ( float dt )
 {
   if ( mFgRunning ) {
-    mTime = mTime - dt;
-    if ( mTime <= 0.0f ) {
-      mTime = 0.0f;
+    if ( mRobot->getCurrentTime() - mStartTime <= 0.0f ) {
       mFgExpired = true;
       mFgRunning = false;
     }
   }
 }
 //-----------------------------------------------------------------------------
-float CTimer::getTimeRemaining()
+std::string CTimer::toStr() const
 {
-  return mTime;
+  std::ostringstream strOut;
+
+  strOut << "start " << mStartTime << " timeout " << mTimeout << " now "
+  << mRobot->getCurrentTime();
+  return  strOut.str();
 }
 //-----------------------------------------------------------------------------
-bool CTimer::isExpired()
+float CTimer::getRemainingTime() const
+{
+  return mStartTime + mTimeout - mRobot->getCurrentTime() ;
+}
+//-----------------------------------------------------------------------------
+float CTimer::getElapsedTime() const
+{
+  return mRobot->getCurrentTime() - mStartTime;
+}
+//-----------------------------------------------------------------------------
+bool CTimer::isExpired() const
 {
   return mFgExpired;
 }
 //-----------------------------------------------------------------------------
-bool CTimer::isRunning()
+bool CTimer::isRunning() const
 {
   return mFgRunning;
 }
 //-----------------------------------------------------------------------------
 void CTimer::start ( float timeout )
 {
-  mTime = timeout;
+  mStartTime = mRobot->getCurrentTime();
+  mTimeout = timeout;
   mFgRunning = true;
   mFgExpired = false;
 }

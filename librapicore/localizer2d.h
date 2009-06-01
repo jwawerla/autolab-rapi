@@ -55,7 +55,7 @@ class ALocalizer2d : public ADevice
      * Gets the current pose
      * @return pose
      */
-    CPose2d getPose();
+    CPose2d getPose() const;
 
   protected:
     /**

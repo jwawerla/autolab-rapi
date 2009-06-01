@@ -87,9 +87,9 @@ void CVariableMonitor::getVariableString ( unsigned int index,
       varType = "CWaypoint2d";
       waypointVar = * ( ( CWaypoint2d* ) entry.ptr );
       strOut << "name:" << waypointVar.getLabel()
-             << " mX=" << waypointVar.getPose().mX
-             << " mY=" << waypointVar.getPose().mY
-             << " mYaw=" <<R2D ( waypointVar.getPose().mYaw );
+      << " mX=" << waypointVar.getPose().mX
+      << " mY=" << waypointVar.getPose().mY
+      << " mYaw=" <<R2D ( waypointVar.getPose().mYaw );
       value = strOut.str();
       break;
     case BOOL:
@@ -118,12 +118,26 @@ void CVariableMonitor::getVariableString ( unsigned int index,
       strOut << intVar;
       value = strOut.str();
       break;
+    case RAPI_VAR:
+      varType = ((IRapiVar*) entry.ptr)->getTypeStr();
+      value = ((IRapiVar*) entry.ptr)->toStr();
+      break;
   };
 }
 //-----------------------------------------------------------------------------
-void CVariableMonitor::addVar(CWaypoint2d* ptr, std::string name)
+void CVariableMonitor::addVar ( IRapiVar* ptr, std::string name )
 {
   tVarEntry entry;
+  entry.ptr = ptr;
+  entry.name = name;
+  entry.varType = RAPI_VAR;
+  mVarList.push_back ( entry );
+}
+//-----------------------------------------------------------------------------
+void CVariableMonitor::addVar ( CWaypoint2d* ptr, std::string name )
+{
+  tVarEntry entry;
+
   entry.ptr = ptr;
   entry.name = name;
   entry.varType = WAYPOINT2D;
@@ -133,6 +147,7 @@ void CVariableMonitor::addVar(CWaypoint2d* ptr, std::string name)
 void CVariableMonitor::addVar ( CPose2d* ptr, std::string name )
 {
   tVarEntry entry;
+
   entry.ptr = ptr;
   entry.name = name;
   entry.varType = POSE2D;
@@ -142,6 +157,7 @@ void CVariableMonitor::addVar ( CPose2d* ptr, std::string name )
 void CVariableMonitor::addVar ( CPoint2d* ptr, std::string name )
 {
   tVarEntry entry;
+
   entry.ptr = ptr;
   entry.name = name;
   entry.varType = POINT2D;
@@ -151,6 +167,7 @@ void CVariableMonitor::addVar ( CPoint2d* ptr, std::string name )
 void CVariableMonitor::addVar ( CVelocity2d* ptr, std::string name )
 {
   tVarEntry entry;
+
   entry.ptr = ptr;
   entry.name = name;
   entry.varType = VELOCITY2D;
@@ -160,6 +177,7 @@ void CVariableMonitor::addVar ( CVelocity2d* ptr, std::string name )
 void CVariableMonitor::addVar ( float* ptr, std::string name )
 {
   tVarEntry entry;
+
   entry.ptr = ptr;
   entry.name = name;
   entry.varType = FLOAT;
@@ -169,6 +187,7 @@ void CVariableMonitor::addVar ( float* ptr, std::string name )
 void CVariableMonitor::addVar ( bool* ptr, std::string name )
 {
   tVarEntry entry;
+
   entry.ptr = ptr;
   entry.name = name;
   entry.varType = BOOL;
@@ -178,6 +197,7 @@ void CVariableMonitor::addVar ( bool* ptr, std::string name )
 void CVariableMonitor::addVar ( double* ptr, std::string name )
 {
   tVarEntry entry;
+
   entry.ptr = ptr;
   entry.name = name;
   entry.varType = DOUBLE;
@@ -187,6 +207,7 @@ void CVariableMonitor::addVar ( double* ptr, std::string name )
 void CVariableMonitor::addVar ( int* ptr, std::string name )
 {
   tVarEntry entry;
+
   entry.ptr = ptr;
   entry.name = name;
   entry.varType = INT;

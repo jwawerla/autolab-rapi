@@ -74,12 +74,12 @@ class ALights : public ADevice
     /**
      * Prints the devices main information
      */
-    virtual void print();
+    virtual void print() const;
     /**
      * Gets the number of available lights
      * @return number of lights
      */
-    unsigned int getNumLights() { return mNumLights; };
+    unsigned int getNumLights() const { return mNumLights; };
 
   protected:
     /**

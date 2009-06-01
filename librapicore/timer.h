@@ -23,6 +23,7 @@
 
 #include "robotupdateinterface.h"
 #include "robot.h"
+#include <string>
 
 namespace Rapi {
 
@@ -30,7 +31,7 @@ namespace Rapi {
  * A simple timer
  * @author Jens Wawerla
  */
-class CTimer : public IRobotUpdate
+class CTimer : public IRobotUpdate, public IRapiVar
 {
   public:
     /**
@@ -44,7 +45,7 @@ class CTimer : public IRobotUpdate
      * Starts the timer with a give timeout
      * @param timeout [s]
      */
-    void start(float timeout);
+    void start(float timeout = 0.0);
     /**
      * Stops the timer
      */
@@ -53,18 +54,33 @@ class CTimer : public IRobotUpdate
      * Checks if the timer if running
      * @return true if running, false otherwise
      */
-    bool isRunning();
+    bool isRunning() const;
     /**
      * Checks if the timer is expired, this is different from isRunning because a
      * stopped timer is not running but it has not expired.
      * @return true if expired, false otherwise
      */
-    bool isExpired();
+    bool isExpired() const ;
     /**
      * Gets the remaining time
      * @return [s]
      */
-    float getTimeRemaining();
+    float getRemainingTime() const;
+    /**
+     * Gets the time that has elapsed since the last start
+     * @return [s]
+     */
+    float getElapsedTime() const;
+    /**
+     * Returns the timer data as a string
+     * @return string
+     */
+    std::string toStr() const;
+    /**
+     * Gets the variable type string
+     * @return variable type name
+     */
+    std::string getTypeStr() const { return "CTimer"; };
 
   protected:
     /**
@@ -74,8 +90,12 @@ class CTimer : public IRobotUpdate
     virtual void updateData(float dt);
 
   private:
-    /** mTime [s] */
-    float mTime;
+    /** Our robot */
+    ARobot* mRobot;
+    /** Start time [s] */
+    float mStartTime;
+    /** Timeout [s] */
+    float mTimeout;
     /** Flags if the timer is running */
     bool mFgRunning;
     /** Flags if the timer has expired or not */

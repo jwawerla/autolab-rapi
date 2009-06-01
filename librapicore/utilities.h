@@ -32,6 +32,10 @@
 namespace Rapi
 {
 
+#ifdef _RAPI_GUI
+  #define RAPI_GUI 1
+#endif
+
 /** Espilon */
 double const ESPILON = 1e-6;
 

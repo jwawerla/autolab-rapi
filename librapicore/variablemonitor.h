@@ -33,9 +33,34 @@ namespace Rapi
 {
 
 /**
+ * Interface class for classes that should be monitored with CVariableMonitor
+ * @author Jens Wawerla
+ */
+class IRapiVar
+{
+  public:
+    /** Default destructor */
+    virtual ~IRapiVar() {}
+    /**
+     * Gets the data of the varible as a string
+     * @return string data
+     */
+    virtual std::string toStr() = 0;
+    /**
+     * Gets the variable type string
+     * @return variable type name
+     */
+    virtual std::string getTypeStr() = 0;
+
+  protected:
+    /** Default constructor */
+    IRapiVar() {};
+};
+
+/**
  * Helps to debug robot controllers by monitoring registered variables
  * @author Jens Wawerla
-*/
+ */
 class CVariableMonitor
 {
   public:
@@ -56,6 +81,7 @@ class CVariableMonitor
     void addVar ( CPoint2d* ptr, std::string name );
     void addVar ( CVelocity2d* ptr, std::string name );
     void addVar ( CWaypoint2d* ptr, std::string name );
+    void addVar ( IRapiVar* ptr, std::string name );
     /**
      * Gets the variable with a given index as a string
      * @param index of variable to get
@@ -71,7 +97,7 @@ class CVariableMonitor
 
   protected:
     typedef enum {FLOAT, DOUBLE, INT, BOOL, POSE2D, POINT2D, VELOCITY2D,
-                  WAYPOINT2D
+                  WAYPOINT2D, RAPI_VAR
                } tVar;
     typedef struct {
       void* ptr;
