@@ -38,11 +38,14 @@ CCBOverCurrentSensor::CCBOverCurrentSensor ( CCBDriver* driver, std::string devN
 //-----------------------------------------------------------------------------
 CCBOverCurrentSensor::~CCBOverCurrentSensor()
 {
-  if ( mBitData )
+  if ( mBitData ) {
     delete[] mBitData;
-
-  if ( mBitPose )
+    mBitData = NULL;
+  }
+  if ( mBitPose ) {
     delete[] mBitPose;
+    mBitPose = NULL;
+  }
 }
 //-----------------------------------------------------------------------------
 void CCBOverCurrentSensor::updateData()

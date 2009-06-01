@@ -38,11 +38,14 @@ CCBWheelDropSensor::CCBWheelDropSensor ( CCBDriver* driver, std::string devName 
 //-----------------------------------------------------------------------------
 CCBWheelDropSensor::~CCBWheelDropSensor()
 {
-  if ( mBitData )
+  if ( mBitData ) {
     delete[] mBitData;
-
-  if ( mBitPose )
+    mBitData = NULL;
+  }
+  if ( mBitPose ) {
     delete[] mBitPose;
+    mBitPose = NULL;
+  }
 }
 //-----------------------------------------------------------------------------
 void CCBWheelDropSensor::updateData()

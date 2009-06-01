@@ -38,11 +38,14 @@ CCBCliffSensor::CCBCliffSensor ( CCBDriver* driver, std::string devName )
 //-----------------------------------------------------------------------------
 CCBCliffSensor::~CCBCliffSensor()
 {
-  if ( mBitData )
+  if ( mBitData ) {
     delete[] mBitData;
-
-  if ( mBitPose )
+    mBitData = NULL;
+  }
+  if ( mBitPose ) {
     delete[] mBitPose;
+    mBitPose = NULL;
+  }
 }
 //-----------------------------------------------------------------------------
 void CCBCliffSensor::updateData()

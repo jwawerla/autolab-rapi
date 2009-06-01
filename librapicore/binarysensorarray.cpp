@@ -33,11 +33,14 @@ ABinarySensorArray::ABinarySensorArray(std::string devName)
 //-----------------------------------------------------------------------------
 ABinarySensorArray::~ABinarySensorArray()
 {
-  if (mBitData)
+  if ( mBitData ) {
     delete[] mBitData;
-
-  if (mBitPose)
+    mBitData = NULL;
+  }
+  if ( mBitPose ) {
     delete[] mBitPose;
+    mBitPose = NULL;
+  }
 }
 //-----------------------------------------------------------------------------
 unsigned int ABinarySensorArray::getNumSamples() const

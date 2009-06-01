@@ -74,8 +74,11 @@ CCBIrSensor::CCBIrSensor ( CCBDriver* cbDriver, std::string devName )
 //---------------------------------------------------------------------------
 CCBIrSensor::~CCBIrSensor()
 {
-  delete mRelativeBeamPose;
-  delete mRangeData;
+  // turn off IR sensors
+  mCBDriver->enableIr ( false );
+
+  delete[] mRelativeBeamPose;
+  delete[] mRangeData;
 }
 //---------------------------------------------------------------------------
 void CCBIrSensor::setEnabled ( bool enable )
@@ -108,7 +111,7 @@ void CCBIrSensor::updateData()
   }
 }
 //---------------------------------------------------------------------------
-void CCBIrSensor::print()
+void CCBIrSensor::print() const
 {
   printf ( "CCBIrSensor: " );
   for ( unsigned int i = 0; i < mNumSamples; i++ ) {

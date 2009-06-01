@@ -35,6 +35,8 @@ CCBTextDisplay::CCBTextDisplay ( CCBDriver* driver, std::string devName )
 //-----------------------------------------------------------------------------
 CCBTextDisplay::~CCBTextDisplay()
 {
+  // turn off display
+  mCBDriver->set7SegDisplay ( 0 );
 }
 //-----------------------------------------------------------------------------
 int CCBTextDisplay::init()

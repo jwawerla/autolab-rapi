@@ -34,7 +34,7 @@ CCBPowerPack::CCBPowerPack ( CCBDriver* cbDriver, std::string devName )
   mMaxBatteryCapacity = 0.0;
   mBatteryCapacity = 0.0;
   mCurrent = 0.0;
-  mMaxCurrent = 4.0;  // TODO: set this to the corret value 4 is just a guess
+  mMaxCurrent = 4.0;  // TODO: set this to the corret value, 4 is just a guess
   mVoltage = 0.0;
   setEnabled ( true );
 }

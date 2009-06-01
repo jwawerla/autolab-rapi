@@ -48,6 +48,10 @@ CCBDrivetrain2dof::CCBDrivetrain2dof ( CCBDriver* driver, std::string devName )
 //-----------------------------------------------------------------------------
 CCBDrivetrain2dof::~CCBDrivetrain2dof()
 {
+  // make sure robot is stopped
+  stop();
+  updateData();
+
   if ( mOdometry )
     delete mOdometry;
 }

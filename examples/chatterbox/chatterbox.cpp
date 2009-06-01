@@ -34,9 +34,10 @@ int main( int argc, char* argv[] )
 
   // create robot and its controller
   robot = new Rapi::CCBRobot ();
-  if ( robot->init() == 0)
+  if ( robot->init() == 0) {
     Rapi::rapiError->print();
-
+    exit(-1);
+  }
   robotCtrl = new CChatterboxCtrl ( robot );
 
   // blocking call

@@ -46,6 +46,14 @@ CCBWallSensor::CCBWallSensor(CCBDriver* driver, std::string devName)
 //-----------------------------------------------------------------------------
 CCBWallSensor::~CCBWallSensor()
 {
+  if (mRelativeBeamPose) {
+    delete[] mRelativeBeamPose;
+    mRelativeBeamPose = NULL;
+  }
+  if (mRangeData) {
+    delete[] mRangeData;
+    mRangeData = NULL;
+  }
 }
 //-----------------------------------------------------------------------------
 void CCBWallSensor::updateData()

@@ -54,6 +54,8 @@ void CChatterboxCtrl::updateData ( float dt )
 {
   static unsigned char c = 0;
 
+  mIr->print();
+
   if ( mWheelDrop->isAnyTriggered() ) {
     mDrivetrain->stop();
     mLights->setLight ( ALL_LIGHTS, RED );
@@ -106,7 +108,7 @@ void CChatterboxCtrl::obstacleAvoid()
 
   }
   else {
-    turnRate = LIMIT ( diffFilt, D2R ( -30.0 ), D2R ( 30.0 ) );
+    turnRate = limit ( diffFilt, D2R ( -30.0 ), D2R ( 30.0 ) );
     velocity = ( 1.0 -fabs ( turnRate ) / D2R ( 30.0 ) ) * 0.3;
     //printf("speed %f turnrate %f \n", velocity, turnRate);
   }

@@ -61,7 +61,7 @@ class CCBIrSensor : public ARangeFinder
     /**
      * Prints the devices main information
      */
-    virtual void print();
+    virtual void print() const;
 
   private:
     /** HAL of the chatterbox */

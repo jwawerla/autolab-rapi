@@ -46,6 +46,14 @@ ARangeFinder::ARangeFinder ( std::string devName )
 //---------------------------------------------------------------------------
 ARangeFinder::~ARangeFinder()
 {
+  if (mRelativeBeamPose) {
+    delete[] mRelativeBeamPose;
+    mRelativeBeamPose = NULL;
+  }
+  if (mRangeData) {
+    delete[] mRangeData;
+    mRangeData = NULL;
+  }
 }
 //------------------------------------------------------------------------------
 float ARangeFinder::localInverseRangeSensorModel ( float x, float y,

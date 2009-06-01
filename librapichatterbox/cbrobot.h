@@ -96,7 +96,7 @@ class CCBRobot : public ARobot
     void synchronize ( double interval );
   private:
     /** Chatterbox hardware driver */
-    CCBDriver mCBDriver;
+    CCBDriver* mCBDriver;
     /** Drivetrain */
     CCBDrivetrain2dof* mCBDrivetrain;
     /** Power pack */

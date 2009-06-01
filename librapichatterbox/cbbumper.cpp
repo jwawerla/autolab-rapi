@@ -40,11 +40,14 @@ CCBBumper::CCBBumper(CCBDriver* cbDriver, std::string devName)
 //-----------------------------------------------------------------------------
 CCBBumper::~CCBBumper()
 {
-  if (mBitData)
+  if ( mBitData ) {
     delete[] mBitData;
-
-  if (mBitPose)
+    mBitData = NULL;
+  }
+  if ( mBitPose ) {
     delete[] mBitPose;
+    mBitPose = NULL;
+  }
 }
 //-----------------------------------------------------------------------------
 void CCBBumper::setEnabled ( bool enable )

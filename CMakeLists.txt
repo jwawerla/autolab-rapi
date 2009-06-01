@@ -18,7 +18,7 @@ OPTION (WITH_CB "Enable building of chatterbox library" ON)
 OPTION (WITH_STAGE "Enable building of state library" ON)
 
 # Enable examples: use with -DWITH_EXAMPLES:BOOL=off/on
-OPTION (WITH_EXAMPES "Enable building of examples" ON)
+OPTION (WITH_EXAMPLES "Enable building of examples" ON)
 
 INCLUDE(FindPkgConfig)
 

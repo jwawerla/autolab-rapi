@@ -50,13 +50,17 @@ CCBLights::CCBLights ( CCBDriver* cbDriver, std::string devName )
 //---------------------------------------------------------------------------
 CCBLights::~CCBLights()
 {
+  // when the music is over - turn off the lights
+  for ( unsigned char i = 0; i < mNumLights-1; i++ )
+    mCBDriver->setRgbLed ( i, CRgbColor ( 0, 0, 0 ) );
 }
 //---------------------------------------------------------------------------
 void CCBLights::setEnabled ( bool enable )
 {
   if ( enable == true ) {
     mFgEnabled = true;
-  } else {
+  }
+  else {
     mFgEnabled = false;
     for ( unsigned char i = 0; i < mNumLights-1; i++ )
       mCBDriver->setRgbLed ( i, CRgbColor ( 0, 0, 0 ) );
@@ -80,7 +84,8 @@ void CCBLights::updateData()
           if ( mBlink[i].on == true ) {
             mBlink[i].on = false;
             mCBDriver->setRgbLed ( i, mBlink[i].color );
-          } else {
+          }
+          else {
             mBlink[i].on = true;
             mCBDriver->setRgbLed ( i, CRgbColor ( 0, 0, 0 ) );
           }
@@ -95,7 +100,8 @@ void CCBLights::updateData()
       if ( mBlink[DOT].on == true ) {
         mBlink[DOT].on = false;
         mCBDriver->set7SegDot ( false );
-      } else {
+      }
+      else {
         mBlink[DOT].on = true;
         mCBDriver->set7SegDot ( true );
       }
@@ -155,7 +161,8 @@ int CCBLights::setLight ( int id, CRgbColor color )
   if ( mBlink[id].enabled == false ) {
     if ( ( unsigned int ) id < mNumLights-1 ) {
       return mCBDriver->setRgbLed ( id, color );
-    } else {
+    }
+    else {
       if ( color == CRgbColor ( 0,0,0 ) )
         return mCBDriver->set7SegDot ( false );
       else
