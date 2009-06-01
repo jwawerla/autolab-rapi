@@ -18,31 +18,55 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#ifndef RAPICBLOWSIDEDRIVER_H
+#define RAPICBLOWSIDEDRIVER_H
 
-#include "printerror.h"
-#include "rapierror.h"
-#include "pose2d.h"
-#include "pose3d.h"
-#include "point2d.h"
-#include "rectangle.h"
-#include "rangefinder.h"
-#include "velocity2d.h"
-#include "utilities.h"
-#include "drivetrain2dof.h"
-#include "binarysensorarray.h"
-#include "dataupdateobserver.h"
-#include "powerpack.h"
-#include "localizer2d.h"
-#include "fiducialfinder.h"
-#include "lights.h"
-#include "conversions.h"
-#include "robotupdateinterface.h"
-#include "robotctrl.h"
-#include "waypoint2d.h"
-#include "rgbcolor.h"
-#include "timer.h"
-#include "statevariable.h"
-#include "limit.h"
-#include "rapivar.h"
 #include "switcharray.h"
+#include "cbdriver.h"
 
+namespace Rapi {
+
+/**
+ * Chatterbox low side driver [0..2]
+ * @author Jens Wawerla
+ */
+class CCBLowSideDriver : public ASwitchArray
+{
+    /** We are friends with our robot, so we get updated */
+    friend class CCBRobot;
+
+  public:
+    /**
+    * Default constructor
+    * @param driver chatterbox driver
+    * @param devName name of device
+    */
+    CCBLowSideDriver( CCBDriver* driver, std::string devName );
+    /** Default destructor */
+    ~CCBLowSideDriver();
+    /**
+      * Initializes the device
+      * @param return 1 if success 0 otherwise
+      */
+    virtual int init();
+    /**
+     * Enables or disables the device
+     * @param enable = true to enable, false to disable
+     */
+    virtual void setEnabled ( bool enable );
+
+  protected:
+    /**
+     * This method gets called by the framework every step to update
+     * the sensor data
+     */
+    virtual void updateData();
+
+  private:
+    /** Hardware driver of chatterbox */
+    CCBDriver* mCBDriver;
+};
+
+} // namespace
+
+#endif

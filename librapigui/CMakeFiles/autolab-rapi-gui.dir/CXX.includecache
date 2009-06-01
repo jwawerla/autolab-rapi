@@ -3611,6 +3611,8 @@ textdisplay.h
 librapigui/../librapicore/textdisplay.h
 binarysensorarray.h
 librapigui/../librapicore/binarysensorarray.h
+switcharray.h
+librapigui/../librapicore/switcharray.h
 variablemonitor.h
 librapigui/../librapicore/variablemonitor.h
 list
@@ -3627,6 +3629,10 @@ string
 -
 
 librapigui/../librapicore/robotupdateinterface.h
+
+librapigui/../librapicore/switcharray.h
+device.h
+librapigui/../librapicore/device.h
 
 librapigui/../librapicore/textdisplay.h
 device.h

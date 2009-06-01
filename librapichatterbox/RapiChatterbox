@@ -31,3 +31,4 @@
 #include "cbwallsensor.h"
 #include "cbcliffsensor.h"
 #include "cbovercurrentsensor.h"
+#include "cblowsidedriver.h"

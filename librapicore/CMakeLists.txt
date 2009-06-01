@@ -14,6 +14,7 @@ SET( HEADERS
   lights.h
   textdisplay.h
   binarysensorarray.h
+  switcharray.h
   pose2d.h
   pose3d.h
   point2d.h
@@ -49,6 +50,7 @@ SET( SOURCES
   lights.cpp
   textdisplay.cpp
   binarysensorarray.cpp
+  switcharray.cpp
   pose2d.cpp
   pose3d.cpp
   point2d.cpp

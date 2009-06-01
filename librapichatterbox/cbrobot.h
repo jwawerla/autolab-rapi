@@ -35,6 +35,7 @@
 #include "cbcliffsensor.h"
 #include "cbwheeldropsensor.h"
 #include "cbovercurrentsensor.h"
+#include "cblowsidedriver.h"
 #include "fiducialfinder.h"
 
 
@@ -87,6 +88,7 @@ class CCBRobot : public ARobot
     virtual int findDevice ( ALights* &device, std::string devName );
     virtual int findDevice ( ATextDisplay* &device, std::string devName );
     virtual int findDevice ( ABinarySensorArray* &device, std::string devName );
+    virtual int findDevice ( ASwitchArray* &device, std::string devName );
 
   protected:
     /**
@@ -119,6 +121,8 @@ class CCBRobot : public ARobot
     CCBCliffSensor* mCBCliffSensor;
     /** Over current sensors */
     CCBOverCurrentSensor* mCBOverCurrentSensor;
+    /** Low side driver */
+    CCBLowSideDriver* mCBLowSideDriver;
     /** Last time synchronize was called */
     double mLastSynchronizeTime;
 };

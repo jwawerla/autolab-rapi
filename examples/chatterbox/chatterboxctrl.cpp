@@ -31,6 +31,7 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mRobot->findDevice ( mBumper, "CB:bumper" );
   mRobot->findDevice ( mLights, "CB:lights" );
   mRobot->findDevice ( mWheelDrop, "CB:wheeldrop" );
+  mRobot->findDevice ( mLowSideDriver, "CB:lowsidedriver");
 
   if ( rapiError->hasError() ) {
     rapiError->print();
@@ -55,6 +56,8 @@ void CChatterboxCtrl::updateData ( float dt )
   static unsigned char c = 0;
 
   mIr->print();
+
+  mLowSideDriver->setSwitch(1, true);
 
   if ( mWheelDrop->isAnyTriggered() ) {
     mDrivetrain->stop();

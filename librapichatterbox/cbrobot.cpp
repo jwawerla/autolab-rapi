@@ -46,6 +46,7 @@ CCBRobot::CCBRobot()
   mCBWheelDropSensor = NULL;
   mCBCliffSensor = NULL;
   mCBOverCurrentSensor = NULL;
+  mCBLowSideDriver = NULL;
 
   mFgRunning = true;
 }
@@ -84,6 +85,9 @@ CCBRobot::~CCBRobot()
 
   if ( mCBDriver )
     delete mCBDriver;
+
+  if (mCBLowSideDriver);
+    delete mCBLowSideDriver;
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::init()
@@ -339,6 +343,32 @@ int CCBRobot::findDevice ( ATextDisplay* &device, std::string devName )
   // return already existing device
   device = mCBTextDisplay;
   return 1;
+}
+//-----------------------------------------------------------------------------
+int  CCBRobot::findDevice ( ASwitchArray* &device, std::string devName )
+{
+  if ( not mFgInitialized ) {
+    PRT_WARN0 ( "Robot is not initialized, call init() first" );
+    device = NULL;
+    return 0; // error
+  }
+
+  if ( devName != "CB:lowsidedriver" ) {
+    ERROR1 ( "No such device: %s", devName.c_str() );
+    device = NULL;
+    return 0; // error
+  }
+
+  // check if device already exists
+  if ( mCBLowSideDriver == NULL ) {
+    mCBLowSideDriver = new CCBLowSideDriver ( mCBDriver, "CB:lowsidedriver" );
+    device = mCBLowSideDriver;
+    return mCBLowSideDriver->init();
+  }
+
+  // return already existing device
+  device = mCBLowSideDriver;
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )

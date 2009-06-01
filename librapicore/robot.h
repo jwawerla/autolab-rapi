@@ -30,6 +30,7 @@
 #include "lights.h"
 #include "textdisplay.h"
 #include "binarysensorarray.h"
+#include "switcharray.h"
 #include "variablemonitor.h"
 #include <list>
 #include <vector>
@@ -111,6 +112,7 @@ class ARobot
     virtual int findDevice ( ALights* &device, std::string devName ) = 0;
     virtual int findDevice ( ATextDisplay* &device, std::string devName ) = 0;
     virtual int findDevice ( ABinarySensorArray* &device, std::string devName ) = 0;
+    virtual int findDevice ( ASwitchArray* &device, std::string devName ) = 0;
     /** Monitor for variables */
     CVariableMonitor mVariableMonitor;
 

@@ -133,7 +133,7 @@ class ADrivetrain2dof : public ADevice
     /** Default constructor
      * @param devName name of device
      */
-    ADrivetrain2dof( std::string devName = NULL );
+    ADrivetrain2dof( std::string devName = "ADrivetrain2dof" );
     /**
      * Limits mVelocityCmd to be within mLowerVelocityLimit and mUpperVelocityLimit
      */

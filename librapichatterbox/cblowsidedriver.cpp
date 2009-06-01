@@ -18,31 +18,50 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#include "cblowsidedriver.h"
+#include <assert.h>
 
-#include "printerror.h"
-#include "rapierror.h"
-#include "pose2d.h"
-#include "pose3d.h"
-#include "point2d.h"
-#include "rectangle.h"
-#include "rangefinder.h"
-#include "velocity2d.h"
-#include "utilities.h"
-#include "drivetrain2dof.h"
-#include "binarysensorarray.h"
-#include "dataupdateobserver.h"
-#include "powerpack.h"
-#include "localizer2d.h"
-#include "fiducialfinder.h"
-#include "lights.h"
-#include "conversions.h"
-#include "robotupdateinterface.h"
-#include "robotctrl.h"
-#include "waypoint2d.h"
-#include "rgbcolor.h"
-#include "timer.h"
-#include "statevariable.h"
-#include "limit.h"
-#include "rapivar.h"
-#include "switcharray.h"
+namespace Rapi
+{
 
+//-----------------------------------------------------------------------------
+CCBLowSideDriver::CCBLowSideDriver ( CCBDriver* driver, std::string devName )
+    : ASwitchArray ( devName )
+{
+  assert ( driver );
+  mCBDriver = driver;
+  mNumSwitches = 3;
+
+  mSwitch = new bool[mNumSwitches];
+  setEnabled ( true );
+}
+//-----------------------------------------------------------------------------
+CCBLowSideDriver::~CCBLowSideDriver()
+{
+  if ( mSwitch ) {
+    delete[] mSwitch;
+    mSwitch = NULL;
+  }
+}
+//-----------------------------------------------------------------------------
+int CCBLowSideDriver::init()
+{
+  return 1; // nothing to do
+}
+//-----------------------------------------------------------------------------
+void CCBLowSideDriver::setEnabled ( bool enable )
+{
+  mFgEnabled = enable;
+}
+//-----------------------------------------------------------------------------
+void CCBLowSideDriver::updateData()
+{
+  if ( mFgEnabled ) {
+    mCBDriver->setLowSideDriver(0, mSwitch[0]);
+    mCBDriver->setLowSideDriver(1, mSwitch[1]);
+    mCBDriver->setLowSideDriver(1, mSwitch[2]);
+  }
+}
+//-----------------------------------------------------------------------------
+
+} // namespace

@@ -21,6 +21,7 @@ SET( HEADERS
   cbwheeldropsensor.h
   cbcliffsensor.h
   cbovercurrentsensor.h
+  cblowsidedriver.h
   cbtypes.h
 )
 
@@ -38,6 +39,7 @@ SET( SOURCES
   cbwallsensor.cpp
   cbwheeldropsensor.cpp
   cbcliffsensor.cpp
+  cblowsidedriver.cpp
   cbovercurrentsensor.cpp
 )
 

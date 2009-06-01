@@ -18,31 +18,61 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#ifndef RAPISWITCHARRAY_H
+#define RAPISWITCHARRAY_H
 
-#include "printerror.h"
-#include "rapierror.h"
-#include "pose2d.h"
-#include "pose3d.h"
-#include "point2d.h"
-#include "rectangle.h"
-#include "rangefinder.h"
-#include "velocity2d.h"
-#include "utilities.h"
-#include "drivetrain2dof.h"
-#include "binarysensorarray.h"
-#include "dataupdateobserver.h"
-#include "powerpack.h"
-#include "localizer2d.h"
-#include "fiducialfinder.h"
-#include "lights.h"
-#include "conversions.h"
-#include "robotupdateinterface.h"
-#include "robotctrl.h"
-#include "waypoint2d.h"
-#include "rgbcolor.h"
-#include "timer.h"
-#include "statevariable.h"
-#include "limit.h"
-#include "rapivar.h"
-#include "switcharray.h"
+#include "device.h"
 
+namespace Rapi {
+
+/**
+ * Abstract base class for an array of switches
+ * @author Jens Wawerla
+ */
+class ASwitchArray : public ADevice
+{
+  public:
+    /** Default destructor */
+    ~ASwitchArray();
+    /**
+     * Get device type
+     * @return device type
+     */
+    virtual tRapiDeviceType getDeviceType() { return RAPI_SWITCHARRAY; };
+    /**
+     * Prints the devices main information
+     */
+    virtual void print() const;
+    /**
+     * Sets the switch with id to a given state
+     * @param on
+     * @param id of switch
+     */
+    virtual void setSwitch(unsigned int id, bool on);
+    /**
+     * Gets the state of the switch with id
+     * @param id of switch
+     * @return state
+     */
+    virtual bool getSwitch(unsigned int id) const;
+    /**
+     * Gets the number of switches available
+     * @return number of switches
+     */
+    virtual unsigned int getNumSwitches() const;
+
+  protected:
+    /**
+     * Default constructor
+     * @param devName name of device
+     */
+    ASwitchArray(std::string devName = "ASwitchArray " );
+    /** Number of switches */
+    unsigned int mNumSwitches;
+    /** Status of the switch */
+    bool* mSwitch;
+};
+
+} // namespace
+
+#endif

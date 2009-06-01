@@ -1515,6 +1515,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/robot.h
  librapigui/../librapicore/robotupdateinterface.h
+ librapigui/../librapicore/switcharray.h
  librapigui/../librapicore/textdisplay.h
  librapigui/../librapicore/variablemonitor.h
  librapigui/../librapicore/velocity2d.h
@@ -1908,6 +1909,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/robot.h
  librapigui/../librapicore/robotupdateinterface.h
+ librapigui/../librapicore/switcharray.h
  librapigui/../librapicore/textdisplay.h
  librapigui/../librapicore/variablemonitor.h
  librapigui/../librapicore/velocity2d.h
@@ -3068,6 +3070,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/robot.h
  librapigui/../librapicore/robotupdateinterface.h
+ librapigui/../librapicore/switcharray.h
  librapigui/../librapicore/textdisplay.h
  librapigui/../librapicore/variablemonitor.h
  librapigui/../librapicore/velocity2d.h
@@ -3806,6 +3809,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  librapigui/../librapicore/robot.h
  librapigui/../librapicore/robotctrl.h
  librapigui/../librapicore/robotupdateinterface.h
+ librapigui/../librapicore/switcharray.h
  librapigui/../librapicore/textdisplay.h
  librapigui/../librapicore/variablemonitor.h
  librapigui/../librapicore/velocity2d.h
