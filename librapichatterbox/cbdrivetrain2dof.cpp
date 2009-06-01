@@ -42,7 +42,8 @@ CCBDrivetrain2dof::CCBDrivetrain2dof ( CCBDriver* driver, std::string devName )
   mLowerVelocityLimit = CVelocity2d ( -0.5, 0.0, -D2R ( 30.0 ) );
 
   mOdometry = new CCBOdometry ( mCBDriver, devName+":Odometry" );
-
+// CAVE:
+mCBDriver->setLowSideDriver(1, true);
   setEnabled ( true );
 }
 //-----------------------------------------------------------------------------

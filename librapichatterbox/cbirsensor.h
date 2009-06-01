@@ -42,7 +42,7 @@ class CCBIrSensor : public ARangeFinder
      */
     CCBIrSensor(CCBDriver* cbDriver, std::string devName);
     /** Default destructor */
-    ~CCBIrSensor();
+    virtual ~CCBIrSensor();
     /**
      * Enables or disables the device
      * @param enable = true to enable, false to disable 
