@@ -140,7 +140,7 @@ class CCBLaser : public ARangeFinder
     /** File pointer */
     FILE* mLaserPort;
     /** Device for the laser */
-    char* mLaserDevice;
+    char mLaserDevice[20];
     /** Default baud rate to use */
     int mBaudRate;
 };

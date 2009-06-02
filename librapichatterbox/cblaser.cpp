@@ -51,7 +51,7 @@ printf("A\n");
   mScpiVersion = 1;
   mFd = -1;
   mLaserPort = NULL;
-  strcpy ( mLaserDevice, "/dev/ttyS0" );
+  strncpy ( mLaserDevice, "/dev/ttyS0", 20 );
   mNumSamples = 654;
   mBaudRate = B115200;
   mMinRange = 0.0;
