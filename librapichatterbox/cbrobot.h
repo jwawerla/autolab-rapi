@@ -134,6 +134,8 @@ class CCBRobot : public ARobot
     CCBLowSideDriver* mCBLowSideDriver;
     /** Last time synchronize was called */
     double mLastSynchronizeTime;
+    /** Flags if the update loop is currently processing data or not */
+    bool mFgProcessing;
 };
 
 } // namespace

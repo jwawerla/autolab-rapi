@@ -38,6 +38,10 @@ CCBLowSideDriver::CCBLowSideDriver ( CCBDriver* driver, std::string devName )
 //-----------------------------------------------------------------------------
 CCBLowSideDriver::~CCBLowSideDriver()
 {
+  mCBDriver->setLowSideDriver(0, false);
+  mCBDriver->setLowSideDriver(1, false);
+  mCBDriver->setLowSideDriver(2, false);
+
   if ( mSwitch ) {
     delete[] mSwitch;
     mSwitch = NULL;
@@ -59,7 +63,7 @@ void CCBLowSideDriver::updateData()
   if ( mFgEnabled ) {
     mCBDriver->setLowSideDriver(0, mSwitch[0]);
     mCBDriver->setLowSideDriver(1, mSwitch[1]);
-    mCBDriver->setLowSideDriver(1, mSwitch[2]);
+    mCBDriver->setLowSideDriver(2, mSwitch[2]);
   }
 }
 //-----------------------------------------------------------------------------
