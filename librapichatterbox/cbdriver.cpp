@@ -614,33 +614,31 @@ int CCBDriver::setLowSideDriver ( unsigned char id, bool on )
     return 0; // failure
   }
 
-  if ( id > 2 ) {
-    ERROR1 ( "Low side driver id %d out of bounds [0..2]", id );
-    return 0; // failure
-  }
-
   switch ( id ) {
     case 0:
       if ( on )
         mLowSideDriverStatus = mLowSideDriverStatus | 0x01;
       else
         mLowSideDriverStatus = mLowSideDriverStatus & 0xFE;
-    break;
+      break;
 
     case 1:
       if ( on )
         mLowSideDriverStatus = mLowSideDriverStatus | 0x02;
       else
         mLowSideDriverStatus = mLowSideDriverStatus & 0xFD;
-    break;
+      break;
 
     case 2:
       if ( on )
         mLowSideDriverStatus = mLowSideDriverStatus | 0x04;
       else
         mLowSideDriverStatus = mLowSideDriverStatus & 0xFB;
-    break;
-
+      break;
+    default:
+      ERROR1 ( "Low side driver id %d out of bounds [0..2]", id );
+      return 0; // failure
+      break;
   } // switch
 
   cmdBuf[0] = CREATE_OPCODE_LOW_SIDE_DRIVER;

@@ -135,7 +135,6 @@ void CCBRobot::run ()
   }
 
   while ( mFgRunning ) {
-    printf("running\n");
     // get data from ICreate
     if ( mCBDriver->readSensorData() == 1 ) {
 

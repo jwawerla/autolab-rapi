@@ -51,6 +51,7 @@ void quitSig(int signum)
   if (robot)
     delete (robot);
  printf("detroying robot\n");
+ exit(1);
 }
 //------------------------------------------------------------------------------
 int main( int argc, char* argv[] )
