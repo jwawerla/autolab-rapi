@@ -64,6 +64,7 @@ void CChatterboxCtrl::updateData ( float dt )
   if ( mWheelDrop->isAnyTriggered() ) {
     mDrivetrain->stop();
     mLights->setLight ( ALL_LIGHTS, RED );
+    mLowSideDriver->setSwitch(1, false);
   }
   else {
     c++;
