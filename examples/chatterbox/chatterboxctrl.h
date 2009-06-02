@@ -65,6 +65,8 @@ class CChatterboxCtrl : public ARobotCtrl
     ABinarySensorArray* mWheelDrop;
     /** Low side driver */
     ASwitchArray* mLowSideDriver;
+    /** Laser range finder */
+    ARangeFinder* mLaser;
     /** Some limit */
     CLimit mLimit;
 };

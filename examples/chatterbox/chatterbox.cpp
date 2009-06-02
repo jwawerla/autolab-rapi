@@ -45,12 +45,11 @@ void quitSig(int signum)
     delete robotCtrl;
     robotCtrl = NULL;
   }
-  printf("detroying controller\n");
 
   // clean up robot
   if (robot)
     delete (robot);
- printf("detroying robot\n");
+
  exit(1);
 }
 //------------------------------------------------------------------------------

@@ -58,40 +58,39 @@ CCBRobot::~CCBRobot()
 
   if ( mCBDrivetrain )
     delete mCBDrivetrain;
-printf("A\n");
+
   if ( mCBPowerPack )
     delete mCBPowerPack;
-printf("B\n");
+
   if ( mCBLaser )
     delete mCBLaser;
-printf("C\n");
+
   if ( mCBLights )
     delete mCBLights;
-printf("D\n");
+
   if ( mCBTextDisplay )
     delete mCBTextDisplay;
-printf("E\n");
+
   if ( mCBBumper )
     delete mCBBumper;
-printf("F\n");
+
   if ( mCBWallSensor )
     delete mCBWallSensor;
-printf("G\n");
+
   if ( mCBWheelDropSensor )
     delete mCBWheelDropSensor;
-printf("H\n");
+
   if ( mCBCliffSensor )
     delete mCBCliffSensor;
-printf("I\n");
+
   if ( mCBOverCurrentSensor )
     delete mCBOverCurrentSensor;
-printf("J\n");
+
   if (mCBLowSideDriver);
     delete mCBLowSideDriver;
-printf("K\n");
+
   if ( mCBDriver )
     delete mCBDriver;
-printf("L\n");
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::init()
