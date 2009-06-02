@@ -19,6 +19,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 #include "cblowsidedriver.h"
+#include "printerror.h"
 #include <assert.h>
 
 namespace Rapi
@@ -38,9 +39,9 @@ CCBLowSideDriver::CCBLowSideDriver ( CCBDriver* driver, std::string devName )
 //-----------------------------------------------------------------------------
 CCBLowSideDriver::~CCBLowSideDriver()
 {
-  mCBDriver->setLowSideDriver(0, false);
-  mCBDriver->setLowSideDriver(1, false);
-  mCBDriver->setLowSideDriver(2, false);
+  mCBDriver->setLowSideDriver ( 0, false );
+  mCBDriver->setLowSideDriver ( 1, false );
+  mCBDriver->setLowSideDriver ( 2, false );
 
   if ( mSwitch ) {
     delete[] mSwitch;
@@ -60,12 +61,19 @@ void CCBLowSideDriver::setEnabled ( bool enable )
 //-----------------------------------------------------------------------------
 void CCBLowSideDriver::updateData()
 {
+  // nothing to do
+}
+//-----------------------------------------------------------------------------
+void CCBLowSideDriver::setSwitch ( unsigned int id, bool on )
+{
   if ( mFgEnabled ) {
-    mCBDriver->setLowSideDriver(0, mSwitch[0]);
-    mCBDriver->setLowSideDriver(1, mSwitch[1]);
-    mCBDriver->setLowSideDriver(2, mSwitch[2]);
+    if ( id < mNumSwitches ) {
+      mSwitch[id] = on;
+      mCBDriver->setLowSideDriver ( id, on );
+    }
+    else
+      PRT_WARN2 ( "Switch %d requested but only have %d switches", id, mNumSwitches );
   }
 }
 //-----------------------------------------------------------------------------
-
 } // namespace

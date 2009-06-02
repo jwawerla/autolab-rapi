@@ -43,7 +43,7 @@ class CCBLowSideDriver : public ASwitchArray
     */
     CCBLowSideDriver( CCBDriver* driver, std::string devName );
     /** Default destructor */
-    ~CCBLowSideDriver();
+    virtual ~CCBLowSideDriver();
     /**
       * Initializes the device
       * @param return 1 if success 0 otherwise
@@ -54,6 +54,12 @@ class CCBLowSideDriver : public ASwitchArray
      * @param enable = true to enable, false to disable
      */
     virtual void setEnabled ( bool enable );
+    /**
+     * Sets the switch with id to a given state
+     * @param on
+     * @param id of switch
+     */
+    virtual void setSwitch(unsigned int id, bool on);
 
   protected:
     /**
