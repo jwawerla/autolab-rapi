@@ -34,6 +34,7 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mRobot->findDevice ( mLowSideDriver, "CB:lowsidedriver");
   mRobot->findDevice ( mLaser, "CB:laser" );
 
+printf("AA\n");
   if ( rapiError->hasError() ) {
     rapiError->print();
     exit ( -1 );
@@ -57,11 +58,13 @@ void CChatterboxCtrl::updateData ( float dt )
 {
   static unsigned char c = 0;
 
+printf("AB\n");
   mIr->print();
+printf("AC\n");
   printf("laser %f \n", mLaser->mRangeData[135].range);
-
+printf("AD\n");
   mLowSideDriver->setSwitch(0, true);
-  mLowSideDriver->setSwitch(2, true);
+  //mLowSideDriver->setSwitch(2, true);
 
   if ( mWheelDrop->isAnyTriggered() ) {
     mDrivetrain->stop();

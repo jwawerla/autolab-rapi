@@ -44,6 +44,8 @@ CCBLaser::CCBLaser ( CCBDriver* driver, std::string devName )
 {
   float resolution;
 
+  assert(driver);
+printf("A\n");
   mCBDriver = driver;
   // Defaults to SCIP version 1
   mScpiVersion = 1;
@@ -54,10 +56,13 @@ CCBLaser::CCBLaser ( CCBDriver* driver, std::string devName )
   mBaudRate = B115200;
   mMinRange = 0.0;
   mMaxRange = 4.0;
+printf("B\n");
   mRangeData = new tRangeData[mNumSamples];
+printf("C\n");
   mRelativeBeamPose = new CPose2d[mNumSamples];
+printf("D\n");
   mFov = D2R ( 230.0 );
-
+printf("E\n");
   resolution = mFov/ ( float ) ( mNumSamples );
   // fill beam position data structure
   for ( unsigned int i = 0; i < mNumSamples; i ++ ) {
@@ -69,6 +74,7 @@ CCBLaser::CCBLaser ( CCBDriver* driver, std::string devName )
 
   mFgEnabled = false;
   setEnabled ( true );
+printf("F\n");
 }
 //-----------------------------------------------------------------------------
 CCBLaser::~CCBLaser()
