@@ -57,7 +57,9 @@ void CChatterboxCtrl::updateData ( float dt )
 
   mIr->print();
 
+  mLowSideDriver->setSwitch(0, true);
   mLowSideDriver->setSwitch(1, true);
+  mLowSideDriver->setSwitch(2, true);
 
   if ( mWheelDrop->isAnyTriggered() ) {
     mDrivetrain->stop();

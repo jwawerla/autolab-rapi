@@ -41,8 +41,10 @@ void quitSig(int signum)
   robot->terminate();
 
   // clean up robot controller
-  if (robotCtrl)
+  if (robotCtrl) {
     delete robotCtrl;
+    robotCtrl = NULL;
+  }
 
   // clean up robot
   if (robot)
