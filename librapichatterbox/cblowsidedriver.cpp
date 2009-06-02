@@ -68,8 +68,10 @@ void CCBLowSideDriver::setSwitch ( unsigned int id, bool on )
 {
   if ( mFgEnabled ) {
     if ( id < mNumSwitches ) {
-      mSwitch[id] = on;
-      mCBDriver->setLowSideDriver ( id, on );
+      if (mSwitch[id] != on) {
+        mSwitch[id] = on;
+        mCBDriver->setLowSideDriver ( id, on );
+      }
     }
     else
       PRT_WARN2 ( "Switch %d requested but only have %d switches", id, mNumSwitches );
