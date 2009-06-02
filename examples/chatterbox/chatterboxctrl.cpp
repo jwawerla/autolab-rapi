@@ -34,7 +34,6 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mRobot->findDevice ( mLowSideDriver, "CB:lowsidedriver");
   mRobot->findDevice ( mLaser, "CB:laser" );
 
-printf("AA\n");
   if ( rapiError->hasError() ) {
     rapiError->print();
     exit ( -1 );
