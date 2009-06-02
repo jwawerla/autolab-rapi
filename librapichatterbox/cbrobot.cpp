@@ -118,6 +118,11 @@ double CCBRobot::getCurrentTime() const
   return timeNow;
 }
 //-----------------------------------------------------------------------------
+void CCBRobot::terminate()
+{
+  mFgRunning = false;
+}
+//-----------------------------------------------------------------------------
 void CCBRobot::run ()
 {
   if ( not mFgInitialized ) {

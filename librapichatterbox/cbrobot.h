@@ -72,9 +72,15 @@ class CCBRobot : public ARobot
      * This is the main of the thread
      */
     void run();
-    /** Flag if main loop is running or not */
-    bool mFgRunning;
-
+    /**
+     * Terminates the execution of the main thread
+     */
+    void terminate();
+    /**
+     * Checks if the main thread is running or not
+     * @return true if running, false otherwise
+     */
+    bool isRunning() const { return mFgRunning; };
     /**
      * Gets a device with a given device index
      * @param devName name of device
@@ -96,6 +102,9 @@ class CCBRobot : public ARobot
      * @param interval [s]
      */
     void synchronize ( double interval );
+    /** Flag if main loop is running or not */
+    bool mFgRunning;
+
   private:
     /** Chatterbox hardware driver */
     CCBDriver* mCBDriver;

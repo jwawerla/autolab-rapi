@@ -21,16 +21,44 @@
 
 #include "RapiChatterbox"
 #include "chatterboxctrl.h"
+#include <signal.h>
+#include <string.h>
 
+Rapi::CCBRobot* robot = NULL;
+CChatterboxCtrl* robotCtrl = NULL;
+
+//-----------------------------------------------------------------------------
+void quitSig(int signum)
+{
+  PRT_MSG0(4,"User requested ctrl-c");
+
+  // set default signal handler
+  if (signal(SIGINT, SIG_DFL) == SIG_ERR) {
+     PRT_ERR1("Error resetting signal handler %s", strerror(errno));
+  }
+
+  // terminate main thread
+  robot->terminate();
+
+  // clean up robot controller
+  if (robotCtrl)
+    delete robotCtrl;
+
+  // clean up robot 
+  if (robot)
+    delete (robot);
+}
+//------------------------------------------------------------------------------
 
 int main( int argc, char* argv[] )
 {
-  Rapi::CCBRobot* robot;
-  CChatterboxCtrl* robotCtrl;
-
   // init general stuff
   ErrorInit ( 4, false );
   initRandomNumberGenerator();
+
+  if (signal(SIGINT, SIG_DFL) == SIG_ERR) {
+     PRT_ERR1("Error resetting signal handler %s", strerror(errno));
+  }
 
   // create robot and its controller
   robot = new Rapi::CCBRobot ();
