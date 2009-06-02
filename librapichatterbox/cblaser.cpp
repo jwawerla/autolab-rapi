@@ -550,12 +550,12 @@ int CCBLaser::openPort ( const char * portName, int baud )
   }
 
   mFd = fileno ( mLaserPort );
-  PRT_MSG0 ( 1,"Trying to connect at 19200" );
-  if ( changeBaud ( B19200, baud, 100 ) == 0 ) {
+  PRT_MSG0 ( 1,"Trying to connect at 115200" );
+  if ( changeBaud ( B115200, baud, 100 ) == 0 ) {
     PRT_MSG0 ( 1,"Trying to connect at 57600" );
     if ( changeBaud ( B57600, baud, 100 ) == 0 ) {
-      PRT_MSG0 ( 1, "Trying to connect at 115200" );
-      if ( changeBaud ( B115200, baud, 100 ) == 0 ) {
+      PRT_MSG0 ( 1, "Trying to connect at 19200" );
+      if ( changeBaud ( B19200, baud, 100 ) == 0 ) {
         ERROR0 ( "failed to connect at any baud" );
         close ( mFd );
         return 0;

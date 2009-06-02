@@ -103,7 +103,7 @@ class CCBLaser : public ARangeFinder
      * Read until, len bytes are read or a timeout occurred
      * @param buffer to store the read bytes
      * @param len of buffer, and number of expected bytes
-     * @param timeout time out
+     * @param timeout time out [ms]
      * @return number of bytes read, or -1 in case of an error
      */
     int readUntil (unsigned char *buf, int len, int timeout);
@@ -111,7 +111,7 @@ class CCBLaser : public ARangeFinder
      * Change the baud rate to a different rate
      * @param currBaud current baud rate
      * @param newBaud new baud rate to set
-     * @param timeout well..
+     * @param timeout well.. [ms]
      * @return 1 if successful, -1 otherwise
      */
     int changeBaud (int currBaud, int newBaud, int timeout);

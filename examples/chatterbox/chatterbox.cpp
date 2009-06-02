@@ -55,6 +55,7 @@ int main( int argc, char* argv[] )
   robot = new Rapi::CCBRobot ();
   if ( robot->init() == 0) {
     Rapi::rapiError->print();
+    delete robot;
     exit(-1);
   }
   robotCtrl = new CChatterboxCtrl ( robot );
