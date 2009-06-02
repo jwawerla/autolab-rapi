@@ -39,18 +39,6 @@ void quitSig(int signum)
 
   // terminate main thread
   robot->terminate();
-
-  // clean up robot controller
-  if (robotCtrl) {
-    delete robotCtrl;
-    robotCtrl = NULL;
-  }
-
-  // clean up robot
-  if (robot)
-    delete (robot);
-
- exit(1);
 }
 //------------------------------------------------------------------------------
 int main( int argc, char* argv[] )
@@ -73,5 +61,15 @@ int main( int argc, char* argv[] )
 
   // blocking call
   robot->run();
+
+  // clean up robot controller
+  if (robotCtrl) {
+    delete robotCtrl;
+    robotCtrl = NULL;
+  }
+
+  // clean up robot
+  if (robot)
+    delete (robot);
   return 1;
 }
