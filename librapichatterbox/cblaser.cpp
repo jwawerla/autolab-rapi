@@ -69,8 +69,8 @@ CCBLaser::CCBLaser ( CCBDriver* driver, std::string devName )
   }
   mFgEnabled = false;
   setEnabled ( true );
-  PRT_MSG0(4,"Waiting for laser to power up");
-  sleep(4);
+  PRT_MSG0(4,"Waiting 10 sec. for laser to power up");
+  sleep(10);
 }
 //-----------------------------------------------------------------------------
 CCBLaser::~CCBLaser()
