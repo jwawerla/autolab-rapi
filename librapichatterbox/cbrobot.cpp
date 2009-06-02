@@ -171,10 +171,14 @@ void CCBRobot::run ()
     // update all registered constrollers
     updateControllers();
     mFgProcessing = false;
+
+printf("void CCBRobot::run ()\n");
     //******************************************************
     // last step - keep everything in a 100 ms loop
     synchronize ( CB_T );
   } // while
+
+  mFgProcessing = false;
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
