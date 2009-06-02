@@ -607,10 +607,10 @@ int CCBDriver::setLowSideDriver ( unsigned char id, bool on )
 {
   unsigned char cmdBuf[2];
 
-  if ( ( mCreateSensorPackage.oiMode != CB_MODE_SAFE ) &&
-       ( mCreateSensorPackage.oiMode != CB_MODE_FULL ) ) {
-    PRT_WARN0 ( "Low side driver access is only available in SAFE "\
-                "or FULL mode" );
+  if ( not (( mCreateSensorPackage.oiMode == CB_MODE_SAFE ) ||
+            ( mCreateSensorPackage.oiMode == CB_MODE_FULL ) ) ) {
+    PRT_WARN1 ( "Low side driver access is only available in SAFE "\
+                "or FULL mode (mode is %d)",  mCreateSensorPackage.oiMode);
     return 0; // failure
   }
 

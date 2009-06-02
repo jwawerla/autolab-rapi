@@ -38,6 +38,7 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
     exit ( -1 );
   }
 
+  ((CCBDrivetrain2dof*)mDrivetrain)->setDefaultOIMode(CB_MODE_FULL);
   // show some text, just for fun
   mTextDisplay->setText ( "1" );
 
