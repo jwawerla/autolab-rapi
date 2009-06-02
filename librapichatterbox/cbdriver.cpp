@@ -63,11 +63,11 @@ CCBDriver::~CCBDriver()
 {
   // disable lights
   set7SegDisplay ( 0 );
-  setRgbLed ( 0, CRgbColor(0, 0, 0) );
-  setRgbLed ( 1, CRgbColor(0, 0, 0) );
-  setRgbLed ( 2, CRgbColor(0, 0, 0) );
-  setRgbLed ( 3, CRgbColor(0, 0, 0) );
-  setRgbLed ( 4, CRgbColor(0, 0, 0) );
+  setRgbLed ( 0, CRgbColor ( 0, 0, 0 ) );
+  setRgbLed ( 1, CRgbColor ( 0, 0, 0 ) );
+  setRgbLed ( 2, CRgbColor ( 0, 0, 0 ) );
+  setRgbLed ( 3, CRgbColor ( 0, 0, 0 ) );
+  setRgbLed ( 4, CRgbColor ( 0, 0, 0 ) );
 
   // disable  7 seg display
   set7SegDisplay ( 0 );
@@ -85,7 +85,7 @@ CCBDriver::~CCBDriver()
 //-----------------------------------------------------------------------------
 int CCBDriver::init()
 {
-  PRT_STATUS( "Initializing IRobot Create...");
+  PRT_STATUS ( "Initializing IRobot Create..." );
 
   // lets reset robotstix, just in case
   if ( resetRobotStix() == 0 ) {
@@ -103,13 +103,13 @@ int CCBDriver::init()
     ERROR0 ( "Failed to power up Create" );
     return 0; // failure
   }
-  sleep(2);
+  sleep ( 2 );
   if ( createPowerEnable ( true ) == 0 ) {
     ERROR0 ( "Failed to power up Create" );
     return 0; // failure
   }
 
-  sleep (2);
+  sleep ( 2 );
 
   return 1; // success
 }
@@ -120,7 +120,7 @@ int CCBDriver::openPort ( const char* port )
   struct termios term;
   int flags;
 
-  PRT_STATUS("Opening port...");
+  PRT_STATUS ( "Opening port..." );
 
   if ( ( mFd = open ( port, O_RDWR | O_NONBLOCK, S_IRUSR | S_IWUSR ) ) < 0 ) {
     ERROR2 ( "Failed to open port %s: ", port, strerror ( errno ) );
@@ -171,7 +171,8 @@ int CCBDriver::closePort()
 {
   if ( mCreateSensorPackage.oiMode == CB_MODE_PASSIVE ) {
     activateDemo ( CB_DEMO_STOP );
-  } else {
+  }
+  else {
     setSpeed ( CVelocity2d ( 0.0,0.0,0.0 ) );
   }
 
@@ -225,7 +226,8 @@ int CCBDriver::startCreate()
       PRT_WARN1 ( "Create still in %s mode, but should be in SAFE mode",
                   getOiModeString() );
     }
-  } while ( mCreateSensorPackage.oiMode != CB_MODE_SAFE );
+  }
+  while ( mCreateSensorPackage.oiMode != CB_MODE_SAFE );
 
   // disable all low side drivers
   if ( setLowSideDriver ( 0, false ) == 0 ) {
@@ -295,13 +297,14 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
   int16_t tv_mm, rad_mm;
 
   tv_mm = ( int16_t ) rint ( vel.mXDot * 1e3 );
-  tv_mm = ( int16_t )limit ( tv_mm, -CREATE_TVEL_MAX_MM_S, CREATE_TVEL_MAX_MM_S );
+  tv_mm = ( int16_t ) limit ( tv_mm, -CREATE_TVEL_MAX_MM_S, CREATE_TVEL_MAX_MM_S );
 
   if ( fabs ( vel.mYawDot ) < 0.0001 ) {
     // Special case: drive straight
     rad_mm = ( int16_t ) 0x8000;
-  } else {
-    if ( isAboutZero(vel.mXDot) ) {
+  }
+  else {
+    if ( isAboutZero ( vel.mXDot ) ) {
       // Special cases: turn in place CCW
       if ( vel.mYawDot > 0.0 )
         rad_mm = 0x0001;
@@ -309,15 +312,16 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
       else
         rad_mm = 0xFFFF;
       tv_mm = ( int16_t ) rint ( CREATE_AXLE_LENGTH * fabs ( vel.mYawDot ) * 1e3 );
-    } else {
+    }
+    else {
       // General case: convert rv to turn radius
       rad_mm = ( int16_t ) rint ( tv_mm / vel.mYawDot );
 #if 0
       // The robot seems to turn very slowly with the above
       rad_mm /= 2;
-      printf("real rad_mm: %d\n", rad_mm);
-      rad_mm = (int16_t) max ( rad_mm, -CREATE_RADIUS_MAX_MM );
-      rad_mm = (int16_t) min ( rad_mm, CREATE_RADIUS_MAX_MM );
+      printf ( "real rad_mm: %d\n", rad_mm );
+      rad_mm = ( int16_t ) max ( rad_mm, -CREATE_RADIUS_MAX_MM );
+      rad_mm = ( int16_t ) min ( rad_mm, CREATE_RADIUS_MAX_MM );
       if ( rad_mm == 1 )
         rad_mm = 2;
       if ( rad_mm == -1 )
@@ -325,9 +329,9 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
 #endif
     }
   }
-if (getenv("DEBUG_DRIVETRAIN"))
-printf("tv_mm: %#4x = %d rad_mm: %#4x = %d\n",
-tv_mm, tv_mm, rad_mm, rad_mm);
+  if ( getenv ( "DEBUG_DRIVETRAIN" ) )
+    printf ( "tv_mm: %#4x = %d rad_mm: %#4x = %d\n",
+             tv_mm, tv_mm, rad_mm, rad_mm );
 
   cmdbuf[0] = CREATE_OPCODE_DRIVE;
   cmdbuf[1] = ( unsigned char ) ( tv_mm >> 8 );
@@ -377,16 +381,19 @@ int CCBDriver::readSensorData()
         ERROR1 ( "IO error: %s", strerror ( errno ) );
         return 0;
       }
-    } else
+    }
+    else
       if ( retVal == 0 ) {
         ERROR1 ( "Timeout (bytes read %d)", totalNumRead );
         return 0;
-      } else {
+      }
+      else {
         if ( ( numRead = read ( mFd, dataBuf + totalNumRead,
                                 sizeof ( dataBuf ) - totalNumRead ) ) < 0 ) {
           ERROR1 ( "IO error: %s", strerror ( errno ) );
           return 0;
-        } else {
+        }
+        else {
           totalNumRead += numRead;
         }
       }
@@ -508,7 +515,7 @@ int CCBDriver::resetCreate()
     return 0; // failure
   }
   PRT_MSG0 ( 7, "Reset command send, now we wait for 10 sec, and "\
-                "hope for the best" );
+             "hope for the best" );
   sleep ( 10 );
   return 1;
 }
@@ -611,8 +618,33 @@ int CCBDriver::setLowSideDriver ( unsigned char id, bool on )
     ERROR1 ( "Low side driver id %d out of bounds [0..2]", id );
     return 0; // failure
   }
+
+  switch ( id ) {
+    case 0:
+      if ( on )
+        mLowSideDriverStatus = mLowSideDriverStatus | 0x01;
+      else
+        mLowSideDriverStatus = mLowSideDriverStatus & 0xFE;
+    break;
+
+    case 1:
+      if ( on )
+        mLowSideDriverStatus = mLowSideDriverStatus | 0x02;
+      else
+        mLowSideDriverStatus = mLowSideDriverStatus & 0xFD;
+    break;
+
+    case 2:
+      if ( on )
+        mLowSideDriverStatus = mLowSideDriverStatus | 0x04;
+      else
+        mLowSideDriverStatus = mLowSideDriverStatus & 0xFB;
+    break;
+
+  } // switch
+
   cmdBuf[0] = CREATE_OPCODE_LOW_SIDE_DRIVER;
-  cmdBuf[1] = mLowSideDriverStatus | ( 1 << id );
+  cmdBuf[1] = mLowSideDriverStatus;
 
   if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
     ERROR1 ( "Failed to send low side driver command: %s", strerror ( errno ) );
@@ -629,7 +661,7 @@ int CCBDriver::activateDemo ( tDemo demo )
   cmdBuf[1] = ( char ) demo;
 
   if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
-    ERROR1 ( "Failed to active demo: %s", strerror(errno) );
+    ERROR1 ( "Failed to active demo: %s", strerror ( errno ) );
     return 0; // failure
   }
   return 1; // success
@@ -643,7 +675,7 @@ int CCBDriver::sendIr ( unsigned char byte )
   cmdBuf[1] = byte;
 
   if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
-    ERROR1 ( "Failed to send IR byte: %s", strerror(errno) );
+    ERROR1 ( "Failed to send IR byte: %s", strerror ( errno ) );
     return 0; // failure
   }
   return 1; // success
@@ -674,7 +706,7 @@ int CCBDriver::defineSoundSequence ( unsigned char id, unsigned char* sequence,
     cmdBuf[i+3] = sequence[1+1];
   }
   if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
-    ERROR1 ( "Failed to send sound sequence: %s", strerror(errno) );
+    ERROR1 ( "Failed to send sound sequence: %s", strerror ( errno ) );
     return 0; // failure
   }
   return 1; // success
@@ -1073,7 +1105,8 @@ int CCBDriver::enableIr ( bool enable )
       ERROR0 ( "Failed to enable IR" );
       return 0; // failure
     }
-  } else {
+  }
+  else {
     PRT_MSG0 ( 7, "Disableing IR sensor" );
     // (PC2 = port 2 pinmask 4)
     if ( I2C_IO_SetGPIO ( mI2cDev, 2, 4, 0 ) == 0 ) {
