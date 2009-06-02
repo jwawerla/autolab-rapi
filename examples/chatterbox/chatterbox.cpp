@@ -44,7 +44,7 @@ void quitSig(int signum)
   if (robotCtrl)
     delete robotCtrl;
 
-  // clean up robot 
+  // clean up robot
   if (robot)
     delete (robot);
 }
@@ -56,7 +56,7 @@ int main( int argc, char* argv[] )
   ErrorInit ( 4, false );
   initRandomNumberGenerator();
 
-  if (signal(SIGINT, SIG_DFL) == SIG_ERR) {
+  if (signal(SIGINT, quitSig) == SIG_ERR) {
      PRT_ERR1("Error resetting signal handler %s", strerror(errno));
   }
 

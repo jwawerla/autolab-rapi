@@ -53,6 +53,10 @@ CCBRobot::CCBRobot()
 //-----------------------------------------------------------------------------
 CCBRobot::~CCBRobot()
 {
+  mFgRunning = false;
+  // wait for 1 second so the main thread has enough time to terminate
+  sleep(1);
+
   if ( mCBDrivetrain )
     delete mCBDrivetrain;
 
@@ -83,11 +87,12 @@ CCBRobot::~CCBRobot()
   if ( mCBOverCurrentSensor )
     delete mCBOverCurrentSensor;
 
+  if (mCBLowSideDriver);
+    delete mCBLowSideDriver;
+
   if ( mCBDriver )
     delete mCBDriver;
 
-  if (mCBLowSideDriver);
-    delete mCBLowSideDriver;
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::init()
@@ -158,6 +163,8 @@ void CCBRobot::run ()
         mCBCliffSensor->updateData();
       if ( mCBOverCurrentSensor )
         mCBOverCurrentSensor->updateData();
+      if ( mCBLowSideDriver )
+        mCBLowSideDriver->updateData();
     }
     // update all registered constrollers
     updateControllers();
