@@ -95,11 +95,12 @@ int CCBLaser::init()
     ERROR1 ( "Failed to open port %s ", mLaserDevice );
     return 0;
   }
-
+printf("D\n");
   if ( getSensorConfig() == 0 ) {
     ERROR0 ( "Failed to configure laser" );
     return 0;
   }
+printf("E\n");
   return 1; // success
 }
 //-----------------------------------------------------------------------------

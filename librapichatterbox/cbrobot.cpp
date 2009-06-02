@@ -123,6 +123,7 @@ double CCBRobot::getCurrentTime() const
 //-----------------------------------------------------------------------------
 void CCBRobot::terminate()
 {
+  printf(" CCBRobot::terminate() \n");
   mFgRunning = false;
 }
 //-----------------------------------------------------------------------------
@@ -170,6 +171,7 @@ void CCBRobot::run ()
     // last step - keep everything in a 100 ms loop
     synchronize ( CB_T );
   } // while
+ printf("DONE\n");
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
