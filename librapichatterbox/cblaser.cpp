@@ -62,9 +62,9 @@ CCBLaser::CCBLaser ( CCBDriver* driver, std::string devName )
   resolution = mFov/ ( float ) ( mNumSamples );
   // fill beam position data structure
   for ( unsigned int i = 0; i < mNumSamples; i ++ ) {
-    mRelativeBeamPose[i].mX   = 0;
-    mRelativeBeamPose[i].mY   = 0;
-    mRelativeBeamPose[i].mYaw = normalizeAngle ( -1* ( mFov/2.0 ) +
+    mRelativeBeamPose[i].mX   = 0.0;
+    mRelativeBeamPose[i].mY   = 0.0;
+    mRelativeBeamPose[i].mYaw = normalizeAngle ( -1.0 * ( mFov/2.0 ) +
                                 i * resolution );
   }
   mFgEnabled = false;
@@ -549,6 +549,7 @@ int CCBLaser::openPort ( const char * portName, int baud )
     return 0;
   }
 
+printf("A\n");
   mFd = fileno ( mLaserPort );
   PRT_MSG0 ( 1,"Trying to connect at 115200" );
   if ( changeBaud ( B115200, baud, 100 ) == 0 ) {
@@ -562,6 +563,7 @@ int CCBLaser::openPort ( const char * portName, int baud )
       }
     }
   }
+printf("B\n");
   switch ( baud ) {
     case B115200:
       PRT_MSG0 ( 1,"Successfully changed baud rate to 115200" );
@@ -573,6 +575,7 @@ int CCBLaser::openPort ( const char * portName, int baud )
       PRT_MSG0 ( 1,"Successfully changed baud rate to 19200" );
       break;
   } // switch
+printf("C\n");
   return 1; // success
 }
 
