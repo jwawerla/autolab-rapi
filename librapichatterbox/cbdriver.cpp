@@ -619,22 +619,23 @@ int CCBDriver::setLowSideDriver ( unsigned char id, bool on )
       if ( on )
         mLowSideDriverStatus = mLowSideDriverStatus | 0x01;
       else
-        mLowSideDriverStatus = mLowSideDriverStatus & 0xFE;
+        mLowSideDriverStatus = mLowSideDriverStatus & 0xFE; // 1110
       break;
 
     case 1:
       if ( on )
         mLowSideDriverStatus = mLowSideDriverStatus | 0x02;
       else
-        mLowSideDriverStatus = mLowSideDriverStatus & 0xFD;
+        mLowSideDriverStatus = mLowSideDriverStatus & 0xFD; // 1101
       break;
 
     case 2:
       if ( on )
         mLowSideDriverStatus = mLowSideDriverStatus | 0x04;
       else
-        mLowSideDriverStatus = mLowSideDriverStatus & 0xFB;
+        mLowSideDriverStatus = mLowSideDriverStatus & 0xFB; // 1011
       break;
+
     default:
       ERROR1 ( "Low side driver id %d out of bounds [0..2]", id );
       return 0; // failure
@@ -643,7 +644,7 @@ int CCBDriver::setLowSideDriver ( unsigned char id, bool on )
 
   cmdBuf[0] = CREATE_OPCODE_LOW_SIDE_DRIVER;
   cmdBuf[1] = mLowSideDriverStatus;
-
+  printf("mLowSideDriverStatus %d \n",mLowSideDriverStatus);
   if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
     ERROR1 ( "Failed to send low side driver command: %s", strerror ( errno ) );
     return 0; // failure

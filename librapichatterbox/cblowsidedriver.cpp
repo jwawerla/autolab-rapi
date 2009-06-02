@@ -34,6 +34,9 @@ CCBLowSideDriver::CCBLowSideDriver ( CCBDriver* driver, std::string devName )
   mNumSwitches = 3;
 
   mSwitch = new bool[mNumSwitches];
+  for (unsigned int i = 0; i < mNumSwitches; i++)
+    mSwitch[i] = false;
+
   setEnabled ( true );
 }
 //-----------------------------------------------------------------------------
