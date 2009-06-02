@@ -33,7 +33,6 @@ CCBRobot::CCBRobot()
   mUpdateInterval = CB_T;
   mName = "Chatterbox";
 
-  mFgProcessing = false;
   mCBDriver = new CCBDriver();
 
   mCBDrivetrain = NULL;
@@ -55,9 +54,7 @@ CCBRobot::CCBRobot()
 CCBRobot::~CCBRobot()
 {
   mFgRunning = false;
-  while (mFgProcessing)
-    // wait for 1 second so the main thread has enough time to terminate
-    sleep(1);
+  sleep(2);
 
   if ( mCBDrivetrain )
     delete mCBDrivetrain;
@@ -138,7 +135,7 @@ void CCBRobot::run ()
   }
 
   while ( mFgRunning ) {
-    mFgProcessing = true;
+
     // get data from ICreate
     if ( mCBDriver->readSensorData() == 1 ) {
 
@@ -170,15 +167,11 @@ void CCBRobot::run ()
     }
     // update all registered constrollers
     updateControllers();
-    mFgProcessing = false;
 
-printf("void CCBRobot::run ()\n");
     //******************************************************
     // last step - keep everything in a 100 ms loop
     synchronize ( CB_T );
   } // while
-
-  mFgProcessing = false;
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )

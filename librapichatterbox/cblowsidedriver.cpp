@@ -64,6 +64,7 @@ void CCBLowSideDriver::updateData()
     mCBDriver->setLowSideDriver(0, mSwitch[0]);
     mCBDriver->setLowSideDriver(1, mSwitch[1]);
     mCBDriver->setLowSideDriver(2, mSwitch[2]);
+    printf("LSD 1 %d \n", mSwitch[1]);
   }
 }
 //-----------------------------------------------------------------------------
