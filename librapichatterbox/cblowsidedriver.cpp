@@ -65,6 +65,7 @@ void CCBLowSideDriver::setEnabled ( bool enable )
 void CCBLowSideDriver::updateData()
 {
   // nothing to do
+  // if you implement code here, enable update calls in CBRobot::run()
 }
 //-----------------------------------------------------------------------------
 void CCBLowSideDriver::setSwitch ( unsigned int id, bool on )

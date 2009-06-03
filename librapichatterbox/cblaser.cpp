@@ -223,6 +223,8 @@ int CCBLaser::getSensorConfig ()
     return 0;
   }
 
+  getSCIPVersion ();
+
   if ( mScpiVersion == 1 ) {
     unsigned char Buffer[10];
     memset ( Buffer, 0, 10 );
@@ -301,7 +303,8 @@ int CCBLaser::getSensorConfig ()
                R2D ( minAngle ), R2D ( maxAngle ), R2D ( mBeamConeAngle ),
                mMaxRange );
     tcflush ( mFd, TCIFLUSH );
-  } else { // mScpiVersion = 2
+  }
+  else { // mScpiVersion = 2
     // ask hokuyo: PP
     unsigned char Buffer[10];
     memset ( Buffer, 0, 10 );
