@@ -223,8 +223,6 @@ int CCBLaser::getSensorConfig ()
     return 0;
   }
 
-  getSCIPVersion ();
-
   if ( mScpiVersion == 1 ) {
     unsigned char Buffer[10];
     memset ( Buffer, 0, 10 );

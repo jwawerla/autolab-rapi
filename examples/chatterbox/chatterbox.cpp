@@ -44,7 +44,7 @@ void quitSig(int signum)
 int main( int argc, char* argv[] )
 {
   // init general stuff
-  ErrorInit ( 4, false );
+  ErrorInit ( 14, false );
   initRandomNumberGenerator();
 
   if (signal(SIGINT, quitSig) == SIG_ERR) {
