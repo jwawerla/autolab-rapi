@@ -20,9 +20,12 @@
  **************************************************************************/
 
 #include "RapiLooseStage"
-#include "RapiGui"
-#include "wanderctrl.h"
 
+#ifdef RAPI_GUI
+  #include "RapiGui"
+#endif
+
+#include "wanderctrl.h"
 
 using namespace Rapi;
 

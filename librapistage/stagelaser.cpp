@@ -74,7 +74,7 @@ int CStageLaser::init()
 {
   float beamBearing;
   float beamIncrement;
-  Stg::stg_laser_cfg_t cfg;
+  Stg::ModelLaser::Config cfg;
 
   cfg = mStgLaser->GetConfig();
   mMaxRange = cfg.range_bounds.max;

@@ -60,7 +60,7 @@ int CStageSonar::init()
   mMaxRange = -INFINITY;
   mMinRange = INFINITY;
 
-  mNumSamples = mStgRanger->sensor_count;
+  mNumSamples = mStgRanger->sensors.size();
   mRangeResolution = 0;
   mFov = TWO_PI;
 
@@ -97,7 +97,7 @@ void CStageSonar::updateData()
 {
   if ( mFgEnabled ) {
     for ( unsigned int i = 0; i < mNumSamples; i++ )
-      mRangeData[i].range = mStgRanger->samples[i];
+      mRangeData[i].range = mStgRanger->sensors[i].range;
     mTimeStamp = mStgRanger->GetWorld()->SimTimeNow() / 1e6;
     notifyDataUpdateObservers();
   }
