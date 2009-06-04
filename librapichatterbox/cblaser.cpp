@@ -253,7 +253,7 @@ int CCBLaser::getSensorConfig()
       int firmware = atol(( const char* ) Buffer );
 
       if ( firmware < 3 ) {
-        printf("BUFFER %c \n" Buffer);
+        printf("BUFFER (%s) \n", Buffer);
         //ERROR1( "Wrong firmware %d", firmware );
         readUntilNthOccurence( 4, ( char ) 0xa );
         tcflush( mFd, TCIFLUSH );
