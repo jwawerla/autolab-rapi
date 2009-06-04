@@ -57,12 +57,12 @@ CChatterboxCtrl::~CChatterboxCtrl()
 void CChatterboxCtrl::updateData ( float dt )
 {
   static unsigned char c = 0;
+  int i;
 
-printf("AB\n");
   mIr->print();
-printf("AC\n");
-  printf("laser %f \n", mLaser->mRangeData[135].range);
-printf("AD\n");
+  i = mLaser->getNumSamples() / 2;
+  printf("laser beam %d = %fm \n",i, mLaser->mRangeData[i].range);
+
   mLowSideDriver->setSwitch(0, true);
   //mLowSideDriver->setSwitch(2, true);
 

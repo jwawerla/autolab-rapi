@@ -253,7 +253,9 @@ int CCBLaser::getSensorConfig()
       int firmware = atol(( const char* ) Buffer );
 
       if ( firmware < 3 ) {
-        printf("BUFFER (%s) \n", Buffer);
+        // NOTE: for some reason the laser reports firmware 0, which is an error
+        // according to the Player driver. The good news is if we exit here
+        // and do not report an error it still works :)
         //ERROR1( "Wrong firmware %d", firmware );
         readUntilNthOccurence( 4, ( char ) 0xa );
         tcflush( mFd, TCIFLUSH );
