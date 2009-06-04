@@ -95,12 +95,10 @@ int CCBLaser::init()
     ERROR1( "Failed to open port %s ", mLaserDevice );
     return 0;
   }
-  printf( "D\n" );
   if ( getSensorConfig() == 0 ) {
     ERROR0( "Failed to configure laser" );
     return 0;
   }
-  printf( "E\n" );
   return 1; // success
 }
 //-----------------------------------------------------------------------------
@@ -255,7 +253,8 @@ int CCBLaser::getSensorConfig()
       int firmware = atol(( const char* ) Buffer );
 
       if ( firmware < 3 ) {
-        ERROR1( "Wrong firmware %d", firmware );
+        printf("BUFFER %c \n" Buffer);
+        //ERROR1( "Wrong firmware %d", firmware );
         readUntilNthOccurence( 4, ( char ) 0xa );
         tcflush( mFd, TCIFLUSH );
         return 1;
@@ -568,7 +567,6 @@ int CCBLaser::openPort( const char * portName, int baud )
     return 0;
   }
 
-  printf( "A\n" );
   mFd = fileno( mLaserPort );
 
   cfmakeraw( &term );
@@ -594,7 +592,6 @@ int CCBLaser::openPort( const char * portName, int baud )
       }
     }
   }
-  printf( "B\n" );
   switch ( baud ) {
     case B115200:
       PRT_MSG0( 1,"Successfully changed baud rate to 115200" );
@@ -606,7 +603,6 @@ int CCBLaser::openPort( const char * portName, int baud )
       PRT_MSG0( 1,"Successfully changed baud rate to 19200" );
       break;
   } // switch
-  printf( "C\n" );
   return 1; // success
 }
 
