@@ -352,9 +352,9 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
 
     cmdbuf[0] = CREATE_OPCODE_DRIVE_DIRECT;
     cmdbuf[1] = (unsigned char)(vR >> 8);
-    cmdbuf[2] = (unsigned char)(vR && 0xff);
+    cmdbuf[2] = (unsigned char)(vR & 0xff);
     cmdbuf[3] = (unsigned char)(vL >> 8);
-    cmdbuf[4] = (unsigned char)(vL && 0xff);
+    cmdbuf[4] = (unsigned char)(vL & 0xff);
 #endif
 
   if ( write ( mFd, cmdbuf, 5 ) < 0 ) {
