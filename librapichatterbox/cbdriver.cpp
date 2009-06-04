@@ -294,6 +294,7 @@ int CCBDriver::setOIMode ( tOIMode mode )
 int CCBDriver::setSpeed ( CVelocity2d vel )
 {
   unsigned char cmdbuf[5];
+#if 0
   int16_t tv_mm, rad_mm;
 
   tv_mm = ( int16_t ) rint ( vel.mXDot * 1e3 );
@@ -338,6 +339,23 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
   cmdbuf[2] = ( unsigned char ) ( tv_mm & 0xFF );
   cmdbuf[3] = ( unsigned char ) ( rad_mm >> 8 );
   cmdbuf[4] = ( unsigned char ) ( rad_mm & 0xFF );
+#else
+	int16_t vL, vR;
+    double v, w, r;
+
+    v = vel.mVX * 1e3;
+    w = vel.mYawDot * 1e3;
+    r = CREATE_AXLE_LENGTH / 2;
+
+    vL = v - r * w;
+    vR = v + r * w;
+
+    cmdbuf[0] = CREATE_OPCODE_DRIVE_DIRECT;
+    cmdbuf[1] = (unsigned char)(vR >> 8);
+    cmdbuf[2] = (unsigned char)(vR && 0xff);
+    cmdbuf[3] = (unsigned char)(vL >> 8);
+    cmdbuf[4] = (unsigned char)(vL && 0xff);
+#endif
 
   if ( write ( mFd, cmdbuf, 5 ) < 0 ) {
     ERROR1 ( "IO error: %s", strerror ( errno ) );
