@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-#include "rapivar.h"
+#include "rapivarinterface.h"
 #include "pose2d.h"
 #include "point2d.h"
 #include "velocity2d.h"

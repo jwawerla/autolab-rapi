@@ -18,8 +18,11 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#include "statevariable.h"
+#include "rapivariable.h"
 #include <assert.h>
+#include "printerror.h"
+#include <sstream>
+#include <typeinfo>
 
 namespace Rapi
 {
@@ -27,30 +30,68 @@ namespace Rapi
 
 //-----------------------------------------------------------------------------
 template<class T>
-CStateVariable<T>::CStateVariable() : IRobotUpdate()
+CRapiVariable<T>::CRapiVariable() //: IRapiVar(), IRobotUpdate()
 {
-  mUpdateTimestamp = 0.0;
+  mRobot = NULL;
+
   mModificationTimestamp = 0.0;
   mFgModified = false;
 }
 //-----------------------------------------------------------------------------
 template<class T>
-CStateVariable<T>::~CStateVariable()
+CRapiVariable<T>::~CRapiVariable()
 {
 }
 //-----------------------------------------------------------------------------
 template<class T>
-void CStateVariable<T>::setRobot ( ARobot* robot )
+void CRapiVariable<T>::setRobot ( ARobot* robot )
 {
   assert ( robot );
-  robot->registerStateVariable ( this );
+  mRobot = robot;
 
-  mUpdateTimestamp = robot->getCurrentTime();
+  mRobot->registerStateVariable ( this );
+
   mModificationTimestamp = robot->getCurrentTime();
 }
 //-----------------------------------------------------------------------------
 template<class T>
-bool CStateVariable<T>::operator== ( const T value )
+std::string CRapiVariable<T>::toStr() const
+{
+  std::ostringstream strOut;
+
+  strOut << mValue;
+  return strOut.str();
+}
+//-----------------------------------------------------------------------------
+template<class T>
+std::string CRapiVariable<T>::getTypeStr() const
+{
+  std::string str;
+
+  str = typeid(T).name;
+  return "CRapiVariable<"+ str + ">";
+}
+//-----------------------------------------------------------------------------
+template<class T>
+double CRapiVariable<T>::getElapsedTimeSinceChange() const
+{
+  return mRobot->getCurrentTime() - mModificationTimestamp;
+}
+//-----------------------------------------------------------------------------
+template<class T>
+T CRapiVariable<T>::operator! ()
+{
+  return !mValue;
+}
+//-----------------------------------------------------------------------------
+template<class T>
+T CRapiVariable<T>::value()
+{
+  return mValue;
+}
+//-----------------------------------------------------------------------------
+template<class T>
+bool CRapiVariable<T>::operator== ( const T value )
 {
   if (mValue == value)
     return true;
@@ -59,7 +100,7 @@ bool CStateVariable<T>::operator== ( const T value )
 }
 //-----------------------------------------------------------------------------
 template<class T>
-bool CStateVariable<T>::operator!= ( const T value )
+bool CRapiVariable<T>::operator!= ( const T value )
 {
   if (mValue == value)
     return false;
@@ -68,10 +109,14 @@ bool CStateVariable<T>::operator!= ( const T value )
 }
 //-----------------------------------------------------------------------------
 template<class T>
-T CStateVariable<T>::operator= ( const T value )
+T CRapiVariable<T>::operator= ( const T value )
 {
+  if (not mRobot )
+    PRT_ERR0("No robot available, use setRobot()");
+  assert(mRobot);
+
   if ( mValue != value) {
-    mModificationTimestamp = mUpdateTimestamp;
+    mModificationTimestamp = mRobot->getCurrentTime();
     mFgModified = true;
     mValue = value;
   }
@@ -80,18 +125,10 @@ T CStateVariable<T>::operator= ( const T value )
 }
 //-----------------------------------------------------------------------------
 template<class T>
-T CStateVariable<T>::operator*(T value)
+void CRapiVariable<T>::updateData(float dt)
 {
-  return mValue;
-}
-//-----------------------------------------------------------------------------
-template<class T>
-void CStateVariable<T>::updateData(float dt)
-{
-  if (mUpdateTimestamp - mModificationTimestamp > dt)
+  if (mRobot->getCurrentTime() - mModificationTimestamp > dt)
     mFgModified = false;
-
-  mUpdateTimestamp += dt;
 }
 //-----------------------------------------------------------------------------
 

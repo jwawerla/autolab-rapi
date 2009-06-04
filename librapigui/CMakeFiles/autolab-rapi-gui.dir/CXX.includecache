@@ -46,6 +46,18 @@ QPlainTextEdit
 string
 -
 
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/databar.cpp
+databar.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/databar.h
+QVBoxLayout
+-
+
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/databar.h
+QProgressBar
+-
+QLabel
+-
+
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.cpp
 dataled.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
@@ -129,6 +141,8 @@ pose2dwidget.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/pose2dwidget.h
 dataled.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
+dataline.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataline.h
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/fiducialfinderwidget.cpp
 fiducialfinderwidget.h
@@ -249,6 +263,8 @@ dataline.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataline.h
 dataled.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
+databar.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/databar.h
 QGroupBox
 -
 list
@@ -1599,6 +1615,10 @@ qpolygon.h
 /usr/include/qt4/QtGui/QPrinter
 qprinter.h
 /usr/include/qt4/QtGui/qprinter.h
+
+/usr/include/qt4/QtGui/QProgressBar
+qprogressbar.h
+/usr/include/qt4/QtGui/qprogressbar.h
 
 /usr/include/qt4/QtGui/QScrollArea
 qscrollarea.h
@@ -3586,13 +3606,13 @@ librapigui/../librapicore/device.h
 
 librapigui/../librapicore/rapitypes.h
 
-librapigui/../librapicore/rapivar.h
+librapigui/../librapicore/rapivarinterface.h
 string
 -
 
 librapigui/../librapicore/rgbcolor.h
-rapivar.h
-librapigui/../librapicore/rapivar.h
+rapivarinterface.h
+librapigui/../librapicore/rapivarinterface.h
 
 librapigui/../librapicore/robot.h
 robotupdateinterface.h
@@ -3657,8 +3677,8 @@ string
 -
 vector
 -
-rapivar.h
-librapigui/../librapicore/rapivar.h
+rapivarinterface.h
+librapigui/../librapicore/rapivarinterface.h
 pose2d.h
 librapigui/../librapicore/pose2d.h
 point2d.h

@@ -22,7 +22,7 @@
 #ifndef RAPIRGBCOLOR_H
 #define RAPIRGBCOLOR_H
 
-#include "rapivar.h"
+#include "rapivarinterface.h"
 
 namespace Rapi
 {

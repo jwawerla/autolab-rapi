@@ -39,6 +39,7 @@ IF (QT_FOUND)
     powerpackwidget.cpp
     dataline.cpp
     dataled.cpp
+    databar.cpp
     variablemonitorwidget.cpp
     fiducialfinderwidget.cpp
     consolewidget.cpp

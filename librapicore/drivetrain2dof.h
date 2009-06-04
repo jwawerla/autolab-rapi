@@ -69,12 +69,12 @@ class ADrivetrain2dof : public ADevice
      * Sets a rotational speed for the robot
      * @param turnrate positve counterclockwise, negative clockwise [rad/s]
      */
-    virtual void setRotationalSpeedCmd( float turnrate);
+    virtual void setRotationalVelocityCmd( float turnrate);
     /**
      * Sets a translational speed for the robot
      * @param velocity forward positive, backward negative [m/s]
      */
-    virtual void setTranslationalSpeedCmd( float velocity);
+    virtual void setTranslationalVelocityCmd( float velocity);
     /**
      * Stops the robot by setting all velocities to zero
      */

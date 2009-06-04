@@ -10,6 +10,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o"
   "CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o"
   "CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o"
+  "CMakeFiles/autolab-rapi-gui.dir/databar.cpp.o"
   "CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o"
   "CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o"
   "CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o"

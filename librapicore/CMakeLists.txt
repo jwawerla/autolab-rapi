@@ -31,11 +31,11 @@ SET( HEADERS
   rgbcolor.h
   limit.h
   robotupdateinterface.h
-  statevariable.h
+  rapivariable.h
   #booleanstatevariable.h
   variablemonitor.h
   timer.h
-  rapivar.h
+  rapivarinterface.h
 )
 
 SET( SOURCES
@@ -63,7 +63,7 @@ SET( SOURCES
   waypoint2d.cpp
   rgbcolor.cpp
   limit.cpp
-  statevariable.cpp
+  #rapivariable.cpp
   #booleanstatevariable.cpp
   variablemonitor.cpp
   timer.cpp

@@ -37,7 +37,7 @@ CVariableMonitorWidget::CVariableMonitorWidget ( CVariableMonitor* monitor,
   mTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
   mTableWidget->setEditTriggers( QAbstractItemView::NoEditTriggers );
   mTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-  mTableWidget->setSortingEnabled(true);
+  mTableWidget->setSortingEnabled(false);
   mTableWidget->setHorizontalHeaderItem ( 0, new QTableWidgetItem ( "Type" ) );
   mTableWidget->setHorizontalHeaderItem ( 1, new QTableWidgetItem ( "Variable" ) );
   mTableWidget->setHorizontalHeaderItem ( 2, new QTableWidgetItem ( "Value" ) );
@@ -58,7 +58,7 @@ void CVariableMonitorWidget::updateData()
   if ( isChecked() ) {
     mTableWidget->setHidden ( false );
 
-    mTableWidget->setSortingEnabled(false);
+    //mTableWidget->setSortingEnabled(false);
     for ( unsigned int i = 0; i < mVariableMonitor->getNumOfVariables(); i++ ) {
       mVariableMonitor->getVariableString ( i, varType, name, value );
       tableItem = mTableWidget->item ( i, 0 );
@@ -92,7 +92,7 @@ void CVariableMonitorWidget::updateData()
       }
       tableItem->setText ( value.c_str() );
     } // for
-    mTableWidget->setSortingEnabled(true);
+    //mTableWidget->setSortingEnabled(false);
   }
   else {
     mTableWidget->setHidden ( true );

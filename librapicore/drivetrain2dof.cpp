@@ -51,12 +51,12 @@ float ADrivetrain2dof::stalledSince() const
   return mStalledTimer;
 }
 //-----------------------------------------------------------------------------
-void ADrivetrain2dof::setRotationalSpeedCmd ( float turnrate )
+void ADrivetrain2dof::setRotationalVelocityCmd ( float turnrate )
 {
   setVelocityCmd ( CVelocity2d ( mVelocityCmd.mXDot, 0.0, turnrate ) );
 }
 //-----------------------------------------------------------------------------
-void ADrivetrain2dof::setTranslationalSpeedCmd ( float velocity )
+void ADrivetrain2dof::setTranslationalVelocityCmd ( float velocity )
 {
   setVelocityCmd ( CVelocity2d ( velocity, 0.0,  mVelocityCmd.mYawDot ) );
 }

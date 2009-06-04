@@ -69,6 +69,8 @@ class CChatterboxCtrl : public ARobotCtrl
     ARangeFinder* mLaser;
     /** Some limit */
     CLimit mLimit;
+    /** Some rapi variable */
+    CRapiVariable<bool> mFg;
 };
 
 #endif

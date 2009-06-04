@@ -95,7 +95,7 @@ void CWanderCtrl::updateData ( float dt )
   if ( obstruction || stop || ( mAvoidcount>0 ) ) {
     PRT_MSG1 ( 4, "Avoid %d\n", mAvoidcount );
 
-    mDrivetrain->setTranslationalSpeedCmd ( stop ? 0.0 : AVOIDSPEED );
+    mDrivetrain->setTranslationalVelocityCmd ( stop ? 0.0 : AVOIDSPEED );
 
     /* once we start avoiding, select a turn direction and stick
     with it for a few iterations */
@@ -104,10 +104,10 @@ void CWanderCtrl::updateData ( float dt )
       mAvoidcount = random() % AVOIDDURATION + AVOIDDURATION;
 
       if ( minleft < minright ) {
-        mDrivetrain->setRotationalSpeedCmd ( -AVOIDTURN );
+        mDrivetrain->setRotationalVelocityCmd ( -AVOIDTURN );
         PRT_MSG1 ( 4,"turning right %.2f\n", -AVOIDTURN );
       } else {
-        mDrivetrain->setRotationalSpeedCmd ( +AVOIDTURN );
+        mDrivetrain->setRotationalVelocityCmd ( +AVOIDTURN );
         PRT_MSG1 ( 4, "turning left %2f\n", +AVOIDTURN );
       }
     }

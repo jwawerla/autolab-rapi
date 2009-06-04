@@ -26,6 +26,7 @@
 #include "velocity2dwidget.h"
 #include "pose2dwidget.h"
 #include "dataled.h"
+#include "dataline.h"
 
 
 namespace Rapi {
@@ -59,6 +60,8 @@ class CDrivetrain2dofWidget : public ADeviceWidget
     CPose2dWidget* mOdometryWidget;
     /** Stalled led */
     CDataLed* mStalledLed;
+    /** Stalled time */
+    CDataLine* mStalledTime;
 };
 
 } // namespace

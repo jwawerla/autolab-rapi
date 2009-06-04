@@ -25,6 +25,7 @@
 #include "powerpack.h"
 #include "dataline.h"
 #include "dataled.h"
+#include "databar.h"
 #include <QGroupBox>
 #include <list>
 
@@ -53,6 +54,8 @@ class CPowerPackWidget : public ADeviceWidget
   private:
     /** Power pack device to visualize */
     APowerPack* mPowerPack;
+    /** Battery level */
+    CDataBar* mBatteryLevelBar;
     /** Battery capacity display */
     CDataLine* mBatCapacity;
     /** Maximal Battery capacity display */

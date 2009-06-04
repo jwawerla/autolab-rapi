@@ -41,8 +41,8 @@
 #include "waypoint2d.h"
 #include "rgbcolor.h"
 #include "timer.h"
-#include "statevariable.h"
+#include "rapivariable.h"
 #include "limit.h"
-#include "rapivar.h"
+#include "rapivarinterface.h"
 #include "switcharray.h"
 
