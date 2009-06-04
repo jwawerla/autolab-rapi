@@ -433,7 +433,7 @@ int CCBLaser::changeBaud( int currBaud, int newBaud, int timeout )
     close( mFd );
     return 0;
   }
-  cfmakeraw( &newtio );
+  //cfmakeraw( &newtio );
   cfsetispeed( &newtio, currBaud );
   cfsetospeed( &newtio, currBaud );
 
@@ -572,6 +572,10 @@ int CCBLaser::openPort( const char * portName, int baud )
   mFd = fileno( mLaserPort );
 
   cfmakeraw( &term );
+  term.c_cflag &= ~CSTOPB;
+  term.c_cflag |= CS8;
+  term.c_cflag &= ~PARENB;
+  term.c_cflag &= ~CRTSCTS;
 
   if ( tcsetattr( mFd, TCSAFLUSH, &term ) < 0 ) {
     ERROR1( "IO error: %s", strerror( errno ) );
