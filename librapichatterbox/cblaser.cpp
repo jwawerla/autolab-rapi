@@ -258,7 +258,7 @@ int CCBLaser::getSensorConfig()
         ERROR1( "Wrong firmware %d", firmware );
         readUntilNthOccurence( 4, ( char ) 0xa );
         tcflush( mFd, TCIFLUSH );
-        return 0;
+        return 1;
       }
     }
 
