@@ -85,9 +85,8 @@ void CCBDrivetrain2dof::updateData()
   static int noProgressCount = 0;
 
 
-if (getenv("DEBUG_DRIVETRAIN_UPDATEDATA"))
-printf("Requested velocity: (%5.1f, %5.1f).  ",
-mVelocityCmd.mXDot, mVelocityCmd.mYawDot);
+/* FIXME: some problems measuring velocities mess up driving */
+#if 0
   if ( mFgEnabled == true ) {
 
     // read current velocities from chatterbox
@@ -119,14 +118,12 @@ mVelocityCmd.mXDot, mVelocityCmd.mYawDot);
     mPrevVelocityCmd = mVelocityCmd;
     // limit speeds
     applyVelocityLimits();
+#endif
 
     // set OpenInterface Mode
     if ( mCBDriver->mCreateSensorPackage.oiMode != mOIMode )
       mCBDriver->setOIMode ( mOIMode );
 
-if (getenv("DEBUG_DRIVETRAIN_UPDATEDATA"))
-printf("Calling setSpeed(%5.1f, %5.1f).  ",
-mVelocityCmd.mXDot, mVelocityCmd.mYawDot);
     // set speeds
     if ( mCBDriver->setSpeed ( mVelocityCmd ) == 0 ) {
       ERROR2 ( "Failed to set speed command v=%f w=%f", mVelocityCmd.mXDot,

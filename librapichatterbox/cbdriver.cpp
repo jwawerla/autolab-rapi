@@ -343,7 +343,7 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
 	int16_t vL, vR;
     double v, w, r;
 
-    v = vel.mVX * 1e3;
+    v = vel.mXDot * 1e3;
     w = vel.mYawDot * 1e3;
     r = CREATE_AXLE_LENGTH / 2;
 
