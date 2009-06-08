@@ -26,53 +26,58 @@
 namespace Rapi
 {
 
-/** Only instance of this class */
-CGui* cguiInstance = NULL;
 /** Qt Application */
 QApplication* mQtApp = NULL;
-/** Main window */
-CMainWindow* mMainWindow = NULL;
+
 
 //-----------------------------------------------------------------------------
-CGui::CGui ( int argc, char* argv[] )
+CGui::CGui( int argc, char* argv[] )
 {
   mArgc = argc;
   mArgv = mArgv;
-  pthread_create ( &mPThread, NULL, &threadMain, this );
+  pthread_create( &mPThread, NULL, &threadMain, this );
 
-  sleep(2);  // need to wait for thread to finish creating the Qt App
+  sleep( 2 );  // need to wait for thread to finish creating the Qt App
 }
 //-----------------------------------------------------------------------------
 CGui::~CGui()
 {
 }
 //-----------------------------------------------------------------------------
-CGui* CGui::getInstance ( int argc, char* argv[] )
+CGui* CGui::getInstance( int argc, char* argv[] )
 {
+  static CGui* cguiInstance = NULL;
+
   if ( cguiInstance == NULL )
-    cguiInstance = new CGui ( argc, argv );
+    cguiInstance = new CGui( argc, argv );
 
   return cguiInstance;
 }
 //-----------------------------------------------------------------------------
-void* CGui::threadMain ( void* arg )
+void* CGui::threadMain( void* arg )
 {
-  CGui* gui = (CGui*)arg;
-  mQtApp =  new QApplication ( gui->mArgc, gui->mArgv );
-  mQtApp->setStyle("plastique");
-  mQtApp->setOrganizationName("Autolab");
-  mQtApp->setOrganizationDomain("autolab.cmpt.sfu.ca");
-  mQtApp->setApplicationName("RapiGui");
-  mMainWindow = new CMainWindow();
-  mMainWindow->show();
+  CGui* gui = ( CGui* )arg;
+  mQtApp =  new QApplication( gui->mArgc, gui->mArgv );
+  mQtApp->setStyle( "plastique" );
+  mQtApp->setOrganizationName( "Autolab" );
+  mQtApp->setOrganizationDomain( "autolab.cmpt.sfu.ca" );
+  mQtApp->setApplicationName( "RapiGui" );
+  gui->mMainWindow = new CMainWindow();
+  gui->mMainWindow->show();
+  gui->init();
   mQtApp->exec();
 
   return NULL;
 }
 //-----------------------------------------------------------------------------
-void CGui::registerRobot(ARobot* robot)
+void CGui::registerRobot( ARobot* robot )
 {
-  mMainWindow->addRobot(robot);
+  mMainWindow->addRobot( robot );
+}
+//-----------------------------------------------------------------------------
+void CGui::init()
+{
+  // nothing to do here, this is for overwriting in custom gui classes
 }
 //-----------------------------------------------------------------------------
 

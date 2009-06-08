@@ -40,6 +40,9 @@ CMainWindow::CMainWindow()
 
   setWindowTitle( "RapiGui" );
 
+  for (unsigned int i = 1; i < MAX_CUSTOMDIALOGS; i++)
+    mDialogList.push_back(new CCustomDialog(this));
+
   mStatusBarLabel = new QLabel( this, Qt::FramelessWindowHint );
   mStatusBarLabel->setAutoFillBackground( true );
 
@@ -130,6 +133,10 @@ void CMainWindow::closeEvent( QCloseEvent* event )
   mTextDisplayWidgetList->writeSettings();
   mPowerPackWidgetList->writeSettings();
   mBinarySensorArrayWidgetList->writeSettings();
+
+  for ( unsigned int i = 0; i < mDialogList.size(); i++ ) {
+    mDialogList[i]->close();
+  }
 }
 //-----------------------------------------------------------------------------
 void CMainWindow::update()
@@ -145,6 +152,7 @@ void CMainWindow::update()
     mTimer->start( 100 );  // msec
     return;
   }
+
   // add additional robots if necessary
   while ( mNumRobots != mRobotVector.size() ) {
     robot = mRobotVector[mNumRobots];
@@ -168,6 +176,9 @@ void CMainWindow::update()
 
   mConsoleWidgetList->updateData();
 
+  for ( unsigned int i = 0; i < mDialogList.size(); i++ )
+    mDialogList[i]->update();
+
   QMainWindow::update();
 }
 //-----------------------------------------------------------------------------
@@ -177,4 +188,12 @@ void CMainWindow::addRobot( ARobot* robot )
   mRobotVector.push_back( robot );
 }
 //-----------------------------------------------------------------------------
+void CMainWindow::addCustomDialog(CCustomDialog* dialog )
+{
+  if (dialog)
+    mDialogList.push_back(dialog);
+}
+//-----------------------------------------------------------------------------
+
 } // namespace
+

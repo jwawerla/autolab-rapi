@@ -22,9 +22,10 @@
 #define RAPIGUI_H
 
 #include "robot.h"
+#include "customdialog.h"
 #include <pthread.h>
 #include <QtGui>
-
+#include "mainwindow.h"
 
 namespace Rapi
 {
@@ -42,22 +43,29 @@ class CGui
      * Gets the only instance of this class
      * @return class instance
      */
-    static CGui* getInstance ( int argc, char* argv[] );
+    static CGui* getInstance( int argc, char* argv[] );
     /**
      * Registers a robot with this gui, so it can be visualized
      * @param robot to visualize
      */
-    void registerRobot(ARobot* robot);
+    void registerRobot( ARobot* robot );
+    /**
+     * Overwrite this method and initialize custom stuff here, this is called
+     * by the base class before QApplication::exec()
+     */
+    virtual void init();
 
   protected:
     /** Default constructor */
-    CGui ( int argc=0, char* argv[]=NULL );
+    CGui( int argc=0, char* argv[]=NULL );
     /** Main for the thread */
-    static void* threadMain(void* arg);
+    static void* threadMain( void* arg );
 
   private:
     /** Thread structure */
     pthread_t mPThread;
+    /** Main window */
+    CMainWindow* mMainWindow;
     /** Command line parameters for QT */
     int mArgc;
     char** mArgv;
