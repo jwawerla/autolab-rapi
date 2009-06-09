@@ -32,7 +32,7 @@ namespace Rapi
 
 /**
  * Main entrance point for the gui
- * @author
+ * @author Jens Wawerla
  */
 class CGui
 {
@@ -49,31 +49,23 @@ class CGui
      * @param robot to visualize
      */
     void registerRobot( ARobot* robot );
-    /**
-     * Overwrite this method and initialize custom stuff here, this is called
-     * by the base class before QApplication::exec()
-     */
-    virtual void init();
 
   protected:
     /** Default constructor */
     CGui( int argc=0, char* argv[]=NULL );
     /** Main for the thread */
     static void* threadMain( void* arg );
+    /** Main window */
+    CMainWindow* mMainWindow;
 
   private:
     /** Thread structure */
     pthread_t mPThread;
-    /** Main window */
-    CMainWindow* mMainWindow;
     /** Command line parameters for QT */
     int mArgc;
     char** mArgv;
-
-
-
 };
 
-} // namespace
+}  // namespace
 
 #endif

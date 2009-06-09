@@ -79,6 +79,7 @@ void CStageFiducialFinder::setFiducialSignal(int id)
 //-----------------------------------------------------------------------------
 void CStageFiducialFinder::updateData()
 {
+  Stg::ModelFiducial::Fiducial* fiducial;
 
   if ( mFgEnabled ) {
     // clear old data
@@ -89,7 +90,9 @@ void CStageFiducialFinder::updateData()
 
     mOwnFiducialId = mStgFiducial->GetFiducialReturn();
 
-    mNumReadings = mStgFiducial->fiducial_count;
+    // get fiducial data from stage
+    fiducial = mStgFiducial->GetFiducials( &mNumReadings );
+
     // do we have fiducial data ?
     if ( mNumReadings == 0 ) {
       return; // no data
@@ -98,9 +101,9 @@ void CStageFiducialFinder::updateData()
     mFiducialData = new tFiducialData[mNumReadings];
     // copy data
     for ( unsigned int i = 0; i < mNumReadings; i++ ) {
-      mFiducialData[i].id = mStgFiducial->fiducials[i].id;
-      mFiducialData[i].range = mStgFiducial->fiducials[i].range;
-      mFiducialData[i].bearing = mStgFiducial->fiducials[i].bearing;
+      mFiducialData[i].id = fiducial[i].id;
+      mFiducialData[i].range = fiducial[i].range;
+      mFiducialData[i].bearing = fiducial[i].bearing;
     }
     mTimeStamp = mStgFiducial->GetWorld()->SimTimeNow() / 1e6;
     notifyDataUpdateObservers();

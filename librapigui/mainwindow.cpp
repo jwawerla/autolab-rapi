@@ -40,9 +40,6 @@ CMainWindow::CMainWindow()
 
   setWindowTitle( "RapiGui" );
 
-  for (unsigned int i = 1; i < MAX_CUSTOMDIALOGS; i++)
-    mDialogList.push_back(new CCustomDialog(this));
-
   mStatusBarLabel = new QLabel( this, Qt::FramelessWindowHint );
   mStatusBarLabel->setAutoFillBackground( true );
 
@@ -118,10 +115,9 @@ void CMainWindow::startStop( bool checked )
 //-----------------------------------------------------------------------------
 void CMainWindow::closeEvent( QCloseEvent* event )
 {
-  printf( "CMainWindow::closeEvent()\n" );
-  event->accept();
-
   QSettings settings;
+
+  event->accept();
 
   settings.setValue( "mainWindow/size", size() );
   settings.setValue( "mainWindow/pos", pos() );

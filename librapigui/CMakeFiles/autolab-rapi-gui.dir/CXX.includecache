@@ -177,10 +177,6 @@ QTableWidget
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/gui.cpp
 gui.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/gui.h
-mainwindow.h
-/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/mainwindow.h
-stdio.h
--
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/gui.h
 robot.h
