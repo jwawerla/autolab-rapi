@@ -25,24 +25,24 @@ namespace Rapi
 
 // Callback for stage, stage calls this function if the corresponding model
 // is updated
-int fiducialUpdate ( Stg::ModelFiducial* mod, CStageFiducialFinder* fiducal )
+int fiducialUpdate( Stg::ModelFiducial* mod, CStageFiducialFinder* fiducal )
 {
   fiducal->updateData();
   return 0; // ok
 }
 
 //-----------------------------------------------------------------------------
-CStageFiducialFinder::CStageFiducialFinder ( Stg::ModelFiducial* stgModel,
+CStageFiducialFinder::CStageFiducialFinder( Stg::ModelFiducial* stgModel,
     std::string devName )
-    : AFiducialFinder ( devName )
+    : AFiducialFinder( devName )
 {
   assert( stgModel );
   mStgFiducial = stgModel;
   mFgEnabled = false;
 
-  mStgFiducial->AddUpdateCallback ( ( Stg::stg_model_callback_t )
-                                    fiducialUpdate,
-                                    this );
+  mStgFiducial->AddUpdateCallback(( Stg::stg_model_callback_t )
+                                  fiducialUpdate,
+                                  this );
   setEnabled( true );
 }
 //-----------------------------------------------------------------------------
@@ -54,12 +54,12 @@ int CStageFiducialFinder::init()
 {
   mFov = mStgFiducial->fov;
   mMinRange = mStgFiducial->min_range;
-  mMaxRange = MAX ( mStgFiducial->max_range_anon, mStgFiducial->max_range_id );
+  mMaxRange = MAX( mStgFiducial->max_range_anon, mStgFiducial->max_range_id );
 
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-void CStageFiducialFinder::setEnabled ( bool enable )
+void CStageFiducialFinder::setEnabled( bool enable )
 {
   if ( mFgEnabled == enable )
     return;  // we are really have the correct status
@@ -72,14 +72,14 @@ void CStageFiducialFinder::setEnabled ( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-void CStageFiducialFinder::setFiducialSignal(int id)
+void CStageFiducialFinder::setFiducialSignal( int id )
 {
-  mStgFiducial->SetFiducialReturn(id);
+  mStgFiducial->SetFiducialReturn( id );
 }
 //-----------------------------------------------------------------------------
 void CStageFiducialFinder::updateData()
 {
-  Stg::ModelFiducial::Fiducial* fiducial;
+
 
   if ( mFgEnabled ) {
     // clear old data
@@ -89,9 +89,11 @@ void CStageFiducialFinder::updateData()
     }
 
     mOwnFiducialId = mStgFiducial->GetFiducialReturn();
+    std::vector<Stg::ModelFiducial::Fiducial>& fiducial =
+      mStgFiducial->GetFiducials();
 
-    // get fiducial data from stage
-    fiducial = mStgFiducial->GetFiducials( &mNumReadings );
+    mNumReadings = fiducial.size();
+
 
     // do we have fiducial data ?
     if ( mNumReadings == 0 ) {
@@ -101,9 +103,11 @@ void CStageFiducialFinder::updateData()
     mFiducialData = new tFiducialData[mNumReadings];
     // copy data
     for ( unsigned int i = 0; i < mNumReadings; i++ ) {
+
       mFiducialData[i].id = fiducial[i].id;
       mFiducialData[i].range = fiducial[i].range;
       mFiducialData[i].bearing = fiducial[i].bearing;
+
     }
     mTimeStamp = mStgFiducial->GetWorld()->SimTimeNow() / 1e6;
     notifyDataUpdateObservers();
