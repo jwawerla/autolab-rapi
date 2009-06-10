@@ -1,0 +1,17 @@
+##Installation preliminaries
+Before you start building and installing this project, make sure you have the following packages are installed and configured:
+
+* git
+* cmake
+* Stage 3.1
+* OpenGL 
+
+Make sure that Stage is configured properly and `$PKG_CONFIG_PATH` variable contains the path to the Stage directory.
+
+##Building and installing
+If you downloaded the project in zip or tar formats, unpack the archives. Change into the project directory and execute following commands:
+
+	$ cmake .
+	$ make  
+
+
