@@ -48,7 +48,7 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
     */
     CCBDrivetrain2dof ( CCBDriver* driver, std::string devName );
     /** Default destructor */
-    ~CCBDrivetrain2dof();
+    virtual ~CCBDrivetrain2dof();
     /**
       * Initializes the device
       * @param return 1 if success 0 otherwise

@@ -18,54 +18,36 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#ifndef RAPIGUI_H
-#define RAPIGUI_H
+#ifndef RAPIDIALOG_H
+#define RAPIDIALOG_H
 
-#include "robot.h"
-#include "customdialog.h"
-#include <pthread.h>
-#include <QtGui>
-#include "mainwindow.h"
+#include <qdialog.h>
 
 namespace Rapi
 {
 
 /**
- * Main entrance point for the gui
+ * Base class for custom dialogs
  * @author Jens Wawerla
  */
-class CGui
+class CCustomDialog : public QDialog
 {
   public:
+    /**
+     * Default constructor
+     * @param parent Qt parent object
+     */
+    CCustomDialog( QWidget* parent = NULL );
     /** Default destructor */
-    ~CGui();
+    virtual ~CCustomDialog();
     /**
-     * Gets the only instance of this class
-     * @return class instance
+     * Update the dialog
      */
-    static CGui* getInstance( int argc, char* argv[] );
-    /**
-     * Registers a robot with this gui, so it can be visualized
-     * @param robot to visualize
-     */
-    void registerRobot( ARobot* robot );
-
-  protected:
-    /** Default constructor */
-    CGui( int argc=0, char* argv[]=NULL );
-    /** Main for the thread */
-    static void* threadMain( void* arg );
-    /** Main window */
-    CMainWindow* mMainWindow;
-
-  private:
-    /** Thread structure */
-    pthread_t mPThread;
-    /** Command line parameters for QT */
-    int mArgc;
-    char** mArgv;
+    virtual void update() {};
+    /** Close the dialog */
+    virtual void quit();
 };
 
-}  // namespace
+} // namespace
 
 #endif

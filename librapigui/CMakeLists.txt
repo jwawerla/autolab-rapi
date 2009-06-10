@@ -24,11 +24,19 @@ IF (QT_FOUND)
   SET( HEADERS
     RapiGui
     gui.h
+    customdialog.h
+    dataline.h
+    dataled.h
+    databar.h
+    mainwindow.h
+    devicewidgetlist.h
+    devicewidget.h
     #ndinterface.h
   )
 
   SET( SOURCES
     gui.cpp
+    customdialog.cpp
     mainwindow.cpp
     robotwidget.cpp
     devicewidget.cpp

@@ -46,6 +46,14 @@ QPlainTextEdit
 string
 -
 
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/customdialog.cpp
+customdialog.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/customdialog.h
+
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/customdialog.h
+qdialog.h
+-
+
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/databar.cpp
 databar.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/databar.h
@@ -169,18 +177,18 @@ QTableWidget
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/gui.cpp
 gui.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/gui.h
-mainwindow.h
-/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/mainwindow.h
-stdio.h
--
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/gui.h
 robot.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/robot.h
+customdialog.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/customdialog.h
 pthread.h
 -
 QtGui
 -
+mainwindow.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/mainwindow.h
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/mainwindow.cpp
 mainwindow.h
@@ -201,6 +209,8 @@ robot.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/robot.h
 devicewidgetlist.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidgetlist.h
+customdialog.h
+/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/customdialog.h
 
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/moc_dataled.cxx
 dataled.h

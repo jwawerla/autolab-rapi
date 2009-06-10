@@ -115,10 +115,9 @@ void CMainWindow::startStop( bool checked )
 //-----------------------------------------------------------------------------
 void CMainWindow::closeEvent( QCloseEvent* event )
 {
-  printf( "CMainWindow::closeEvent()\n" );
-  event->accept();
-
   QSettings settings;
+
+  event->accept();
 
   settings.setValue( "mainWindow/size", size() );
   settings.setValue( "mainWindow/pos", pos() );
@@ -130,6 +129,10 @@ void CMainWindow::closeEvent( QCloseEvent* event )
   mTextDisplayWidgetList->writeSettings();
   mPowerPackWidgetList->writeSettings();
   mBinarySensorArrayWidgetList->writeSettings();
+
+  for ( unsigned int i = 0; i < mDialogList.size(); i++ ) {
+    mDialogList[i]->close();
+  }
 }
 //-----------------------------------------------------------------------------
 void CMainWindow::update()
@@ -145,6 +148,7 @@ void CMainWindow::update()
     mTimer->start( 100 );  // msec
     return;
   }
+
   // add additional robots if necessary
   while ( mNumRobots != mRobotVector.size() ) {
     robot = mRobotVector[mNumRobots];
@@ -168,6 +172,9 @@ void CMainWindow::update()
 
   mConsoleWidgetList->updateData();
 
+  for ( unsigned int i = 0; i < mDialogList.size(); i++ )
+    mDialogList[i]->update();
+
   QMainWindow::update();
 }
 //-----------------------------------------------------------------------------
@@ -177,4 +184,12 @@ void CMainWindow::addRobot( ARobot* robot )
   mRobotVector.push_back( robot );
 }
 //-----------------------------------------------------------------------------
+void CMainWindow::addCustomDialog(CCustomDialog* dialog )
+{
+  if (dialog)
+    mDialogList.push_back(dialog);
+}
+//-----------------------------------------------------------------------------
+
 } // namespace
+

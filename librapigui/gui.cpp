@@ -19,61 +19,56 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 #include "gui.h"
-#include "mainwindow.h"
-#include <stdio.h>
+
+namespace Rapi {
 
 
-namespace Rapi
-{
-
-/** Only instance of this class */
-CGui* cguiInstance = NULL;
 /** Qt Application */
 QApplication* mQtApp = NULL;
-/** Main window */
-CMainWindow* mMainWindow = NULL;
+
 
 //-----------------------------------------------------------------------------
-CGui::CGui ( int argc, char* argv[] )
+CGui::CGui( int argc, char* argv[])
 {
   mArgc = argc;
-  mArgv = mArgv;
-  pthread_create ( &mPThread, NULL, &threadMain, this );
+  mArgv = argv;
+  pthread_create( &mPThread, NULL, &threadMain, this );
 
-  sleep(2);  // need to wait for thread to finish creating the Qt App
+  sleep( 2 );  // need to wait for thread to finish creating the Qt App
 }
 //-----------------------------------------------------------------------------
 CGui::~CGui()
 {
 }
 //-----------------------------------------------------------------------------
-CGui* CGui::getInstance ( int argc, char* argv[] )
+CGui* CGui::getInstance( int argc, char* argv[] )
 {
-  if ( cguiInstance == NULL )
-    cguiInstance = new CGui ( argc, argv );
+  static CGui* instance = NULL;
 
-  return cguiInstance;
+  if (instance == NULL)
+    instance = new CGui(argc, argv);
+
+  return instance;
 }
 //-----------------------------------------------------------------------------
-void* CGui::threadMain ( void* arg )
+void CGui::registerRobot( ARobot* robot )
 {
-  CGui* gui = (CGui*)arg;
-  mQtApp =  new QApplication ( gui->mArgc, gui->mArgv );
-  mQtApp->setStyle("plastique");
-  mQtApp->setOrganizationName("Autolab");
-  mQtApp->setOrganizationDomain("autolab.cmpt.sfu.ca");
-  mQtApp->setApplicationName("RapiGui");
-  mMainWindow = new CMainWindow();
-  mMainWindow->show();
+  mMainWindow->addRobot( robot );
+}
+//-----------------------------------------------------------------------------
+void* CGui::threadMain( void* arg )
+{
+  CGui* gui = ( CGui* )arg;
+  mQtApp = new QApplication( gui->mArgc, gui->mArgv );
+  mQtApp->setStyle( "plastique" );
+  mQtApp->setOrganizationName( "Autolab" );
+  mQtApp->setOrganizationDomain( "autolab.cmpt.sfu.ca" );
+  mQtApp->setApplicationName( "RapiGui" );
+  gui->mMainWindow = new CMainWindow();
+  gui->mMainWindow->show();
   mQtApp->exec();
 
   return NULL;
 }
 //-----------------------------------------------------------------------------
-void CGui::registerRobot(ARobot* robot)
-{
-  mMainWindow->addRobot(robot);
-}
-//-----------------------------------------------------------------------------
-
 } // namespace

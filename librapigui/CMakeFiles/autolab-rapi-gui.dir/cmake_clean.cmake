@@ -1,5 +1,6 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o"
+  "CMakeFiles/autolab-rapi-gui.dir/customdialog.cpp.o"
   "CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o"
   "CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o"
   "CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o"

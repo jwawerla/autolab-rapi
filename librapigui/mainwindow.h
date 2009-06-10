@@ -25,6 +25,7 @@
 #include <list>
 #include "robot.h"
 #include "devicewidgetlist.h"
+#include "customdialog.h"
 
 namespace Rapi
 {
@@ -36,7 +37,7 @@ namespace Rapi
 class CMainWindow : public QMainWindow
 {
 
-  Q_OBJECT
+    Q_OBJECT
 
   public:
     /** Default constructor */
@@ -47,7 +48,13 @@ class CMainWindow : public QMainWindow
      * Adds a robot to be displayed
      * @param robot to be added
      */
-    void addRobot ( ARobot* robot );
+    void addRobot( ARobot* robot );
+    /**
+     * Adds a new custom dialog the gui
+     * param dialog to add
+     */
+   void addCustomDialog(CCustomDialog* dialog );
+
     /** Rangefinder list */
     CDeviceWidgetList* mRangeFinderWidgetList;
     /** Drivetrain list */
@@ -65,15 +72,18 @@ class CMainWindow : public QMainWindow
     /** Binary sensor array list */
     CDeviceWidgetList* mBinarySensorArrayWidgetList;
 
+
   protected slots:
     void update();
-    void startStop(bool checked);
+    void startStop( bool checked );
 
   protected:
     /** Qt close event */
-    void closeEvent(QCloseEvent* event);
+    void closeEvent( QCloseEvent* event );
     /** List of robots to be displayed */
     std::vector<ARobot*> mRobotVector;
+    /** List of dialogs */
+    std::vector<CCustomDialog*> mDialogList;
     /** Tab widget for robot */
     QTabWidget* mTabWidget;
     /** Timer to update the gui */
