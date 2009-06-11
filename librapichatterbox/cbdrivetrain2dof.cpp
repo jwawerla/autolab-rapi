@@ -84,7 +84,7 @@ void CCBDrivetrain2dof::updateData()
   static int count = 0;
   static int noProgressCount = 0;
 
-
+  mOdometry->updateData();
 
   if ( mFgEnabled == true ) {
   /* FIXME: some problems measuring velocities mess up driving */
@@ -156,7 +156,7 @@ void CCBDrivetrain2dof::updateData()
   } // enabled
 }
 //-----------------------------------------------------------------------------
-void CCBDrivetrain2dof::print()
+void CCBDrivetrain2dof::print() const
 {
   printf( "Drive: v=%01.3f m/s, w=%03.3f deg/s ",
           mVelocityCmd.mXDot,

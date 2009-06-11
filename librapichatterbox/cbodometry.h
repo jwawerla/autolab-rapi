@@ -34,6 +34,8 @@ namespace Rapi
  */
 class CCBOdometry : public COdometry
 {
+friend class CCBDrivetrain2dof;
+
   public:
     /**
     * Default constructor

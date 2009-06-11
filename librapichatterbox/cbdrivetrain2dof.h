@@ -74,7 +74,7 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
     /**
      * Prints the devices main information
      */
-    virtual void print();
+    virtual void print() const;
     /**
      * Sets the default OI mode, this mode gets selected when ever a speed command
      * is set.
