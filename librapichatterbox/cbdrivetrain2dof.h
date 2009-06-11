@@ -126,6 +126,8 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
     float mMaxTurnRateDelta;
     /** Velocity command from previous time step */
     CVelocity2d mPrevVelocityCmd;
+	/** Odometry */
+	CCBOdometry *mOdometry;
 };
 
 } // namespace
