@@ -24,6 +24,7 @@
 
 #include "drivetrain2dof.h"
 #include "cbdriver.h"
+#include "cbodometry.h"
 
 namespace Rapi
 {
