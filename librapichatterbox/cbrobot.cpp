@@ -303,7 +303,7 @@ int CCBRobot::findDevice ( AFiducialFinder* &device, std::string devName )
 
   // check if device already exists
   if ( mCBFiducial == NULL ) {
-    mCBFiducial = new CCBFiducial ( mCBDriver, "CB:fiducial" );
+    mCBFiducial = new CCBFiducialFinder ( mCBDriver, "CB:fiducial" );
     device = mCBFiducial;
     return mCBFiducial->init();
   }
