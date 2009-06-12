@@ -36,7 +36,7 @@
 #include "cbwheeldropsensor.h"
 #include "cbovercurrentsensor.h"
 #include "cblowsidedriver.h"
-#include "fiducialfinder.h"
+#include "cbfiducialfinder.h"
 
 
 namespace Rapi
@@ -132,6 +132,8 @@ class CCBRobot : public ARobot
     CCBOverCurrentSensor* mCBOverCurrentSensor;
     /** Low side driver */
     CCBLowSideDriver* mCBLowSideDriver;
+	/** Omnidirectional IR */
+	CCBFiducialFinder *mCBFiducial;
     /** Last time synchronize was called */
     double mLastSynchronizeTime;
 };

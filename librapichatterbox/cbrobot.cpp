@@ -301,9 +301,17 @@ int CCBRobot::findDevice ( AFiducialFinder* &device, std::string devName )
     return 0; // error
   }
 
-  ERROR0 ( "Fiducial finder not available for Chatterbox" );
-  device = NULL;
-  return 0; // error
+  // check if device already exists
+  if ( mCBFiducial == NULL ) {
+    mCBFiducial = new CCBFiducial ( mCBDriver, "CB:fiducial" );
+    device = mCBFiducial;
+    return mCBFiducial->init();
+  }
+
+  // return already existing device
+  device = mCBFiducial;
+
+  return 1;
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ALights* &device, std::string devName )
