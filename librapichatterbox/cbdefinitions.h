@@ -105,15 +105,6 @@
 #define CB_LEFT_WHEEL_DROP             0x08
 #define CB_CASTER_WHEEL_DROP           0x10
 
-#define CB_RED_BUOY                    248
-#define CB_GREEN_BUOY                  244
-#define CB_FORCE_FIELD                 242
-#define CB_RED_GREEN_BUOY              252
-#define CB_RED_BUOY_FORCE_FIELD        250
-#define CB_GREEN_BUOY_FORCE_FIELD      246
-#define CB_RED_GREEN_BUOY_FORCE_FIELD  254
-#define CB_NO_IR_DATA                  255
-
 #define CB_INT_CHARGER                 0x01
 #define CB_HOME_BASE                   0x02
 
