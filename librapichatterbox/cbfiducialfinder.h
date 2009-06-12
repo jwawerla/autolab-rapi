@@ -24,6 +24,35 @@
 #include "fiducialfinder.h"
 #include "cbdriver.h"
 
+/* Remote control bytes */
+#define CBFIDUCIAL_LEFT							129
+#define CBFIDUCIAL_FORWARD						130
+#define CBFIDUCIAL_RIGHT						131
+#define CBFIDUCIAL_SPOT							132
+#define CBFIDUCIAL_MAX							133
+#define CBFIDUCIAL_SMALL						134
+#define CBFIDUCIAL_MEDIUM						135
+#define CBFIDUCIAL_LARGE_CLEAN					136
+#define CBFIDUCIAL_PAUSE						137
+#define CBFIDUCIAL_POWER						138
+#define CBFIDUCIAL_ARC_FORWARD_LEFT				139
+#define CBFIDUCIAL_ARC_FORWARD_RIGHT			140
+#define CBFIDUCIAL_DRIVE_STOP					141
+
+/* Scheduling remote bytes */
+#define CBFIDUCIAL_SEND_ALL						142
+#define CBFIDUCIAL_SEEK_DOCK					143
+
+/* Home base bytes */
+#define CBFIDUCIAL_RESERVED						240
+#define CBFIDUCIAL_RED_BUOY						248
+#define CBFIDUCIAL_GREEN_BUOY					244
+#define CBFIDUCIAL_FORCE_FIELD					242
+#define CBFIDUCIAL_RED_AND_GREEN_BUOYS			252
+#define CBFIDUCIAL_RED_AND_FORCE_FIELD			250
+#define CBFIDUCIAL_GREEN_AND_FORCE_FIELD		246
+#define CBFIDUCIAL_RED_GREEN_AND_FORCE_FIELD	254
+
 namespace Rapi
 {
 
