@@ -23,6 +23,7 @@ SET( HEADERS
   cbovercurrentsensor.h
   cblowsidedriver.h
   cbtypes.h
+  cbfiducialfinder.h
 )
 
 SET( SOURCES
@@ -41,6 +42,7 @@ SET( SOURCES
   cbcliffsensor.cpp
   cblowsidedriver.cpp
   cbovercurrentsensor.cpp
+  cbfiducialfinder.cpp
 )
 
 INCLUDE_DIRECTORIES(

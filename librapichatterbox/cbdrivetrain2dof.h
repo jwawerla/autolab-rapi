@@ -24,6 +24,7 @@
 
 #include "drivetrain2dof.h"
 #include "cbdriver.h"
+#include "cbodometry.h"
 
 namespace Rapi
 {
@@ -74,7 +75,7 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
     /**
      * Prints the devices main information
      */
-    virtual void print();
+    virtual void print() const;
     /**
      * Sets the default OI mode, this mode gets selected when ever a speed command
      * is set.
@@ -126,6 +127,8 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
     float mMaxTurnRateDelta;
     /** Velocity command from previous time step */
     CVelocity2d mPrevVelocityCmd;
+	/** Odometry */
+	CCBOdometry *mOdometry;
 };
 
 } // namespace

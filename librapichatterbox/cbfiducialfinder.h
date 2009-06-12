@@ -1,6 +1,6 @@
 /***************************************************************************
  * Project: RAPI                                                           *
- * Author:  Jens Wawerla (jwawerla@sfu.ca)                                 *
+ * Author:  Jens Wawerla (jwawerla@sfu.ca), Adam Lein (alein@sfu.ca)       *
  * $Id: $
  ***************************************************************************
  *   This program is free software; you can redistribute it and/or modify  *
@@ -18,33 +18,54 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#ifndef RAPICBFIDUCIALFINDER_H
+#define RAPICBFIDUCIALFINDER_H
 
-#ifndef RAPICBODOMETRY_H
-#define RAPICBODOMETRY_H
-
-#include "odometry.h"
+#include "fiducialfinder.h"
 #include "cbdriver.h"
 
 namespace Rapi
 {
 
 /**
- * Chatterbox odometry
- * @author Jens Wawerla <jwawerla@sfu.ca>
- */
-class CCBOdometry : public COdometry
+ * Wall sensor of chatterbox
+ * @author Jens Wawerla
+*/
+class CCBFiducialFinder : public AFiducialFinder
 {
-friend class CCBDrivetrain2dof;
+    /** We are friends with our robot, so we get updated */
+    friend class CCBRobot;
 
   public:
     /**
-    * Default constructor
-    * @param driver chatterbox driver
-    * @param devName name of device
-    */
-    CCBOdometry ( CCBDriver* driver, std::string devName );
+     * Default constructor
+     * @param cbDriver HAL of the chatterbox
+     * @param devName name of this device
+     */
+    CCBFiducialFinder ( CCBDriver* driver, std::string devName );
     /** Default destructor */
-    ~CCBOdometry();
+    ~CCBFiducialFinder();
+    /**
+     * Enables or disables the device
+     * @param enable = true to enable, false to disable 
+     */
+    virtual void setEnabled(bool enable);
+    /**
+     * Initializes the device
+     * @param return 1 if success -1 otherwise
+     */
+    virtual int init();
+
+	/**
+	 * Sets this robot's fiducial ID.
+	 * @param id the robot's new id in the range 0...255.
+	 */
+	virtual void setFiducialSignal(int id);
+
+	/**
+	 * Prints info and state about this device.
+	 */
+	virtual void print(void) const;
 
   protected:
     /**
@@ -54,7 +75,7 @@ friend class CCBDrivetrain2dof;
     virtual void updateData();
 
   private:
-    /** Hardware driver of chatterbox */
+    /** HAL of the chatterbox */
     CCBDriver* mCBDriver;
 };
 
