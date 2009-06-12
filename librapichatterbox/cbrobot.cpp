@@ -161,6 +161,8 @@ void CCBRobot::run ()
         mCBCliffSensor->updateData();
       if ( mCBOverCurrentSensor )
         mCBOverCurrentSensor->updateData();
+      if ( mCBFiducial )
+        mCBFiducial->updateData();
 
       // Low side drivers updateData() is empty, no need to call it here
       //if ( mCBLowSideDriver )
