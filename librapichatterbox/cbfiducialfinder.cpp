@@ -87,33 +87,33 @@ print(void) const
     
 	/* Remote control bytes */
 	switch(mFiducialData->id) {
-	case CBFIDUCIAL_LEFT: printf("LEFT"); break;
-	case CBFIDUCIAL_FORWARD: printf("FORWARD"); break;
-	case CBFIDUCIAL_RIGHT: printf("RIGHT"); break;
-	case CBFIDUCIAL_SPOT: printf("SPOT"); break;
-	case CBFIDUCIAL_MAX: printf("MAX"); break;
-	case CBFIDUCIAL_SMALL: printf("SMALL"); break;
-	case CBFIDUCIAL_MEDIUM: printf("MEDIUM"); break;
-	case CBFIDUCIAL_LARGE_CLEAN: printf("LARGE_CLEAN"); break;
-	case CBFIDUCIAL_PAUSE: printf("PAUSE"); break;
-	case CBFIDUCIAL_POWER: printf("POWER"); break;
-	case CBFIDUCIAL_ARC_FORWARD_LEFT: printf("ARC_FORWARD_LEFT"); break;
-	case CBFIDUCIAL_ARC_FORWARD_RIGHT: printf("ARC_FORWARD_RIGHT"); break;
-	case CBFIDUCIAL_DRIVE_STOP: printf("DRIVE_STOP"); break;
+	case CB_FIDUCIAL_LEFT: printf("LEFT"); break;
+	case CB_FIDUCIAL_FORWARD: printf("FORWARD"); break;
+	case CB_FIDUCIAL_RIGHT: printf("RIGHT"); break;
+	case CB_FIDUCIAL_SPOT: printf("SPOT"); break;
+	case CB_FIDUCIAL_MAX: printf("MAX"); break;
+	case CB_FIDUCIAL_SMALL: printf("SMALL"); break;
+	case CB_FIDUCIAL_MEDIUM: printf("MEDIUM"); break;
+	case CB_FIDUCIAL_LARGE_CLEAN: printf("LARGE_CLEAN"); break;
+	case CB_FIDUCIAL_PAUSE: printf("PAUSE"); break;
+	case CB_FIDUCIAL_POWER: printf("POWER"); break;
+	case CB_FIDUCIAL_ARC_FORWARD_LEFT: printf("ARC_FORWARD_LEFT"); break;
+	case CB_FIDUCIAL_ARC_FORWARD_RIGHT: printf("ARC_FORWARD_RIGHT"); break;
+	case CB_FIDUCIAL_DRIVE_STOP: printf("DRIVE_STOP"); break;
 
 	/* Scheduling remote bytes */
-	case CBFIDUCIAL_SEND_ALL: printf("SEND_ALL"); break;
-	case CBFIDUCIAL_SEEK_DOCK: printf("SEEK_DOCK"); break;
+	case CB_FIDUCIAL_SEND_ALL: printf("SEND_ALL"); break;
+	case CB_FIDUCIAL_SEEK_DOCK: printf("SEEK_DOCK"); break;
 
 	/* Home base bytes */
-	case CBFIDUCIAL_RESERVED: printf("RESERVED"); break;
-	case CBFIDUCIAL_RED_BUOY: printf("RED_BUOY"); break;
-	case CBFIDUCIAL_GREEN_BUOY: printf("GREEN_BUOY"); break;
-	case CBFIDUCIAL_FORCE_FIELD: printf("FORCE_FIELD"); break;
-	case CBFIDUCIAL_RED_AND_GREEN_BUOYS: printf("RED_AND_GREEN_BUOYS"); break;
-	case CBFIDUCIAL_RED_AND_FORCE_FIELD: printf("RED_AND_FORCE_FIELD"); break;
-	case CBFIDUCIAL_GREEN_AND_FORCE_FIELD: printf("GREEN_AND_FORCE_FIELD"); break;
-	case CBFIDUCIAL_RED_GREEN_AND_FORCE_FIELD: printf("RED_GREEN_AND_FORCE_FIELD"); break;
+	case CB_FIDUCIAL_RESERVED: printf("RESERVED"); break;
+	case CB_FIDUCIAL_RED_BUOY: printf("RED_BUOY"); break;
+	case CB_FIDUCIAL_GREEN_BUOY: printf("GREEN_BUOY"); break;
+	case CB_FIDUCIAL_FORCE_FIELD: printf("FORCE_FIELD"); break;
+	case CB_FIDUCIAL_RED_AND_GREEN_BUOYS: printf("RED_AND_GREEN_BUOYS"); break;
+	case CB_FIDUCIAL_RED_AND_FORCE_FIELD: printf("RED_AND_FORCE_FIELD"); break;
+	case CB_FIDUCIAL_GREEN_AND_FORCE_FIELD: printf("GREEN_AND_FORCE_FIELD"); break;
+	case CB_FIDUCIAL_RED_GREEN_AND_FORCE_FIELD: printf("RED_GREEN_AND_FORCE_FIELD"); break;
 
 	/* something else */
 	default: printf("(unknown)\n"); break;
