@@ -109,6 +109,11 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
      */
     tOIMode getOIMode();
 
+	/**
+	 * Get this robot's CB odometry
+	 */
+	virtual COdometry *getOdometry() const { return mOdometry; }
+
   protected:
     /**
      * This method gets called by the framework every step to update
