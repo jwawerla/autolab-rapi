@@ -23,7 +23,8 @@
 #define POSE2D_H
 
 #include "point2d.h"
-#include <string>
+#include "rapivarinterface.h"
+
 namespace Rapi
 {
 
@@ -32,7 +33,7 @@ namespace Rapi
  * @author Jens Wawerla <jwawerla@sfu.ca>
  */
 
-class CPose2d
+class CPose2d : public IRapiVar
 {
   public:
     /**
@@ -40,18 +41,20 @@ class CPose2d
     * @param x
     * @param y
     * @param yaw
+    * @param name of variable
     */
-    CPose2d ( double x = 0.0, double y = 0.0, double yaw = 0.0 );
+    CPose2d( double x = 0.0, double y = 0.0, double yaw = 0.0,
+             std::string name = "Pose2d" );
     /**
     * Constructor
     * @param pose to copy pose from
     */
-    CPose2d ( CPose2d const& pose );
+    CPose2d( CPose2d const& pose );
     /**
     * Constructor
     * @param point to copy x and y from, sets yaw to 0
     */
-    CPose2d ( CPoint2d const& point );
+    CPose2d( CPoint2d const& point );
     /** Default destructor */
     ~CPose2d();
     /**
@@ -59,18 +62,18 @@ class CPose2d
      * @param pose to get distance to
      * @return distance [m]
      */
-    double distance ( const CPose2d pose ) const;
+    double distance( const CPose2d pose ) const;
     /**
      * Gets the angular difference between this pose and the given pose
      * @return [rad]
      */
-    double angleDifference ( const CPose2d pose ) const;
+    double angleDifference( const CPose2d pose ) const;
     /**
      * Calculates the bearing from this pose to a given pose
      * @param pose to get bearing to
      * @return [rad]
      */
-    double bearingTo(const CPose2d pose) const;
+    double bearingTo( const CPose2d pose ) const;
     /**
      * Prints the pose data to std out
      */
@@ -80,6 +83,21 @@ class CPose2d
      * @return string
      */
     std::string toStr() const;
+    /**
+     * Gets the variable type string
+     * @return variable type name
+     */
+    std::string getTypeStr() const { return "CVelocity2d"; };
+    /**
+     * Gets the data of the variable as a comma separated value string
+     * @return comma separated value string
+     */
+    std::string toCSV() const;
+    /**
+     * Gets a header for the variable
+     * @return header
+     */
+    std::string getCVSHeader() const;
     /** Overloaded = operator */
     CPose2d& operator= ( const CPose2d& pose );
     /** Overloaded = operator */

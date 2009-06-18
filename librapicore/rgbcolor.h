@@ -62,6 +62,17 @@ class CRgbColor : public IRapiVar
      * @return variable type name
      */
     std::string getTypeStr() const { return "CRgbColor"; };
+    /**
+     * Gets the data of the variable as a comma separated value string
+     * @return comma separated value string
+     */
+    std::string toCSV() const;
+    /**
+     * Gets a header for the variable 
+     * @return header
+     */
+    std::string getCVSHeader() const;
+
     /** Assignment operator */
     CRgbColor& operator = ( const CRgbColor &color );
     /** Overloaded == operator */

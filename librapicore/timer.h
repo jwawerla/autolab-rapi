@@ -37,8 +37,9 @@ class CTimer : public IRobotUpdate, public IRapiVar
     /**
      * Default constructor
      * @param robot this timer is attached to
+     * @param name of variable
      */
-    CTimer(ARobot* robot);
+    CTimer(ARobot* robot, std::string name = "timer");
     /** Default destructor */
     virtual ~CTimer();
     /**
@@ -81,6 +82,16 @@ class CTimer : public IRobotUpdate, public IRapiVar
      * @return variable type name
      */
     std::string getTypeStr() const { return "CTimer"; };
+    /**
+     * Gets the data of the variable as a comma separated value string
+     * @return comma separated value string
+     */
+    std::string toCSV() const;
+    /**
+     * Gets a header for the variable 
+     * @return header
+     */
+    virtual std::string getCVSHeader() const;
 
   protected:
     /**

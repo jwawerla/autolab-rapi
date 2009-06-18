@@ -20,6 +20,7 @@
  **************************************************************************/
 #include "device.h"
 #include <string.h>
+#include "printerror.h"
 
 namespace Rapi
 {
@@ -29,10 +30,21 @@ ADevice::ADevice ( std::string devName )
 {
   mDeviceName = devName;
   mFgEnabled = false;
+  mDataLogger = NULL;
 }
 //-----------------------------------------------------------------------------
 ADevice::~ADevice()
 {
+}
+//-----------------------------------------------------------------------------
+void ADevice::startLogging(std::string filename)
+{
+  PRT_WARN0("This device does not implement logging");
+}
+//-----------------------------------------------------------------------------
+void ADevice::startLogging()
+{
+  startLogging( "rapi.log");
 }
 //-----------------------------------------------------------------------------
 bool ADevice::isEnabled() const

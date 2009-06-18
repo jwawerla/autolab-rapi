@@ -30,6 +30,8 @@ ADrivetrain2dof::ADrivetrain2dof ( std::string devName )
 {
   mFgStalled = false;
   mStalledTimer = 0.0;
+  mVelocityCmd.setName("velocityCmd");
+  mVelocityMeas.setName("velocityMeas");
 }
 //-----------------------------------------------------------------------------
 ADrivetrain2dof::~ADrivetrain2dof()
@@ -38,7 +40,7 @@ ADrivetrain2dof::~ADrivetrain2dof()
 //-----------------------------------------------------------------------------
 void ADrivetrain2dof::stop()
 {
-  setVelocityCmd ( CVelocity2d ( 0.0, 0.0 ) );
+  setVelocityCmd ( CVelocity2d ( 0.0, 0.0, 0.0) );
 }
 //-----------------------------------------------------------------------------
 CVelocity2d ADrivetrain2dof::getVelocity() const
@@ -117,5 +119,14 @@ COdometry* ADrivetrain2dof::getOdometry() const
   return mOdometry;
 }
 //-----------------------------------------------------------------------------
+void ADrivetrain2dof::startLogging(std::string filename)
+{
+  mDataLogger = CDataLogger::getInstance(filename);
+  mDataLogger->addVar( &mVelocityCmd, "velocity cmd");
+  mOdometry->startLogging( filename );
+
+}
+//-----------------------------------------------------------------------------
+
 
 } // namespace

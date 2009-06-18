@@ -45,4 +45,5 @@
 #include "limit.h"
 #include "rapivarinterface.h"
 #include "switcharray.h"
+#include "analogsensorarray.h"
 

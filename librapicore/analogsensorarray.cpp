@@ -18,72 +18,37 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-
-#include "velocity2d.h"
-#include <stdio.h>
-#include <sstream>
-#include "utilities.h"
+#include "analogsensorarray.h"
 
 namespace Rapi
 {
 
 //-----------------------------------------------------------------------------
-CVelocity2d::CVelocity2d( double xDot, double yDot, double yawDot,
-                          std::string name ) : IRapiVar()
+AAnalogSensorArray::AAnalogSensorArray( std::string devName )
+    : ADevice( devName )
 {
-  mXDot = xDot;
-  mYDot = yDot;
-  mYawDot = yawDot;
-  mName = name;
+  mData = NULL;
+  mNumSamples = 0;
 }
 //-----------------------------------------------------------------------------
-CVelocity2d::~CVelocity2d()
+AAnalogSensorArray::~AAnalogSensorArray()
 {
+  if (mData)
+    delete mData;
 }
 //-----------------------------------------------------------------------------
-void CVelocity2d::print() const
+unsigned int AAnalogSensorArray::getNumSamples() const
 {
-  printf( "CVelocity2d: xDot=%f yDot=%f yawDot=%f\n",
-          mXDot, mYDot, R2D( mYawDot ) );
+  return mNumSamples;
 }
 //-----------------------------------------------------------------------------
-std::string CVelocity2d::toStr() const
+void AAnalogSensorArray::print() const
 {
-  std::ostringstream strOut;
-
-  strOut << "Xdot=" << mXDot << " Ydot=" << mYDot << " Yawdot=" << R2D( mYawDot );
-  return strOut.str();
+  printf("AAnalogSensorArray: ");
+  for (unsigned int i = 0; i < mNumSamples; i++) {
+    printf("%f ", mData[i]);
+  }
+  printf("\n");
 }
 //-----------------------------------------------------------------------------
-std::string CVelocity2d::toCSV() const
-{
-  char str[30];
-
-  snprintf(str, 30, "%0.3f,%0.3f,%0.3f",mXDot, mYDot, mYawDot);
-  return str;
-}
-//-----------------------------------------------------------------------------
-std::string CVelocity2d::getCVSHeader() const
-{
-   std::ostringstream strOut;
-
-  strOut << mName << "::Xdot," << mName << "::Ydot," << mName << "::Yawdot";
-  return strOut.str();
-}
-//-----------------------------------------------------------------------------
-void CVelocity2d::operator = ( CVelocity2d const &vel )
-{
-  mXDot = vel.mXDot;
-  mYDot = vel.mYDot;
-  mYawDot = vel.mYawDot;
-}
-//-----------------------------------------------------------------------------
-void CVelocity2d::setZero()
-{
-  mXDot = 0.0;
-  mYDot = 0.0;
-  mYawDot = 0.0;
-}
-//-----------------------------------------------------------------------------
-
 } // namespace

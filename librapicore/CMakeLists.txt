@@ -15,6 +15,7 @@ SET( HEADERS
   textdisplay.h
   binarysensorarray.h
   switcharray.h
+  analogsensorarray.h
   pose2d.h
   pose3d.h
   point2d.h
@@ -36,6 +37,8 @@ SET( HEADERS
   variablemonitor.h
   timer.h
   rapivarinterface.h
+  datalogger.h
+  rapitypesystem.h
 )
 
 SET( SOURCES
@@ -50,6 +53,7 @@ SET( SOURCES
   lights.cpp
   textdisplay.cpp
   binarysensorarray.cpp
+  analogsensorarray.cpp
   switcharray.cpp
   pose2d.cpp
   pose3d.cpp
@@ -67,6 +71,8 @@ SET( SOURCES
   #booleanstatevariable.cpp
   variablemonitor.cpp
   timer.cpp
+  datalogger.cpp
+  rapitypesystem.cpp
 )
 
 # build a shared library

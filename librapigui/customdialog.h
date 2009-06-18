@@ -30,7 +30,7 @@ namespace Rapi
  * Base class for custom dialogs
  * @author Jens Wawerla
  */
-class CCustomDialog : public QDialog
+class CCustomDialog : public QWidget
 {
   public:
     /**

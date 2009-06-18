@@ -21,7 +21,7 @@
 #ifndef RAPIVELOCITY2D_H
 #define RAPIVELOCITY2D_H
 
-#include <string>
+#include "rapivarinterface.h"
 
 namespace Rapi
 {
@@ -31,7 +31,7 @@ namespace Rapi
  * @author Jens Wawerla <jwawerla@sfu.ca>
  * @version 0.1
  */
-class CVelocity2d
+class CVelocity2d : public IRapiVar
 {
   public:
     /** Default constructor
@@ -39,7 +39,8 @@ class CVelocity2d
      * @param vY translational speed [m/s]
      * @param yawData rotational speed [rad/s]
      */
-    CVelocity2d ( double vX = 0.0, double vY = 0.0, double yawDot = 0.0 );
+    CVelocity2d( double vX = 0.0, double vY = 0.0, double yawDot = 0.0,
+                 std::string name = "velocity" );
     /** Default destructor */
     ~CVelocity2d();
     /**
@@ -51,6 +52,21 @@ class CVelocity2d
      * @return string
      */
     std::string toStr() const;
+    /**
+     * Gets the variable type string
+     * @return variable type name
+     */
+    std::string getTypeStr() const { return "CVelocity2d"; };
+    /**
+     * Gets the data of the variable as a comma separated value string
+     * @return comma separated value string
+     */
+    std::string toCSV() const;
+    /**
+     * Gets a header for the variable 
+     * @return header
+     */
+    std::string getCVSHeader() const;
     /** Assignment operator */
     void operator = ( CVelocity2d const &vel );
     /**

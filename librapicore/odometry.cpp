@@ -27,6 +27,7 @@ namespace Rapi
 COdometry::COdometry ( std::string devName )
     : ALocalizer2d ( devName )
 {
+  mPose.setName("odometry");
 }
 //-----------------------------------------------------------------------------
 COdometry::~COdometry()
@@ -54,6 +55,11 @@ void COdometry::updateData()
   // nothing to do right now
 }
 //-----------------------------------------------------------------------------
-
+void COdometry::startLogging(std::string filename)
+{
+  mDataLogger = CDataLogger::getInstance(filename);
+  mDataLogger->addVar( &mPose, "odomentry");
+}
+//-----------------------------------------------------------------------------
 
 } // namespace

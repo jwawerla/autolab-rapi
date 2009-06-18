@@ -3534,11 +3534,23 @@ QtGui/qmatrix.h
 QtGui/qwidget.h
 -
 
+librapigui/../librapicore/analogsensorarray.h
+device.h
+librapigui/../librapicore/device.h
+
 librapigui/../librapicore/binarysensorarray.h
 device.h
 librapigui/../librapicore/device.h
 pose2d.h
 librapigui/../librapicore/pose2d.h
+
+librapigui/../librapicore/datalogger.h
+rapitypesystem.h
+librapigui/../librapicore/rapitypesystem.h
+rapitypes.h
+librapigui/../librapicore/rapitypes.h
+stdio.h
+-
 
 librapigui/../librapicore/dataupdateobserver.h
 
@@ -3555,6 +3567,8 @@ pose3d.h
 librapigui/../librapicore/pose3d.h
 dataupdateobserver.h
 librapigui/../librapicore/dataupdateobserver.h
+datalogger.h
+librapigui/../librapicore/datalogger.h
 
 librapigui/../librapicore/drivetrain2dof.h
 device.h
@@ -3591,8 +3605,8 @@ string
 librapigui/../librapicore/pose2d.h
 point2d.h
 librapigui/../librapicore/point2d.h
-string
--
+rapivarinterface.h
+librapigui/../librapicore/rapivarinterface.h
 
 librapigui/../librapicore/pose3d.h
 
@@ -3615,6 +3629,22 @@ device.h
 librapigui/../librapicore/device.h
 
 librapigui/../librapicore/rapitypes.h
+
+librapigui/../librapicore/rapitypesystem.h
+string
+-
+vector
+-
+rapivarinterface.h
+librapigui/../librapicore/rapivarinterface.h
+pose2d.h
+librapigui/../librapicore/pose2d.h
+point2d.h
+librapigui/../librapicore/point2d.h
+velocity2d.h
+librapigui/../librapicore/velocity2d.h
+waypoint2d.h
+librapigui/../librapicore/waypoint2d.h
 
 librapigui/../librapicore/rapivarinterface.h
 string
@@ -3643,6 +3673,8 @@ binarysensorarray.h
 librapigui/../librapicore/binarysensorarray.h
 switcharray.h
 librapigui/../librapicore/switcharray.h
+analogsensorarray.h
+librapigui/../librapicore/analogsensorarray.h
 variablemonitor.h
 librapigui/../librapicore/variablemonitor.h
 list
@@ -3683,24 +3715,12 @@ stdlib.h
 -
 
 librapigui/../librapicore/variablemonitor.h
-string
--
-vector
--
-rapivarinterface.h
-librapigui/../librapicore/rapivarinterface.h
-pose2d.h
-librapigui/../librapicore/pose2d.h
-point2d.h
-librapigui/../librapicore/point2d.h
-velocity2d.h
-librapigui/../librapicore/velocity2d.h
-waypoint2d.h
-librapigui/../librapicore/waypoint2d.h
+rapitypesystem.h
+librapigui/../librapicore/rapitypesystem.h
 
 librapigui/../librapicore/velocity2d.h
-string
--
+rapivarinterface.h
+librapigui/../librapicore/rapivarinterface.h
 
 librapigui/../librapicore/waypoint2d.h
 pose2d.h

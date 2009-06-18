@@ -58,6 +58,19 @@ std::string CRgbColor::toStr() const
   return strOut.str();
 }
 //---------------------------------------------------------------------------
+std::string CRgbColor::toCSV() const
+{
+  std::ostringstream strOut;
+
+  strOut << mRed << "," << mGreen << "," << mBlue;
+  return strOut.str();
+}
+//---------------------------------------------------------------------------
+std::string CRgbColor::getCVSHeader() const
+{
+  return "red, green, blue";
+}
+//---------------------------------------------------------------------------
 void CRgbColor::print() const
 {
   printf ( "CRgbColor %d %d %d \n", mRed, mGreen, mBlue );

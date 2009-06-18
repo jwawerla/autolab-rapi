@@ -272,6 +272,13 @@ int CStageRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
   return 0;
 }
 //-----------------------------------------------------------------------------
+int CStageRobot::findDevice( AAnalogSensorArray* &device, std::string devName )
+{
+  device = NULL;
+  ERROR0 ( "Device not implementated for stage" );
+  return 0;
+}
+//-----------------------------------------------------------------------------
 int CStageRobot::findDevice ( ATextDisplay* &device, std::string devName )
 {
   CStageTextDisplay* textDisplay;

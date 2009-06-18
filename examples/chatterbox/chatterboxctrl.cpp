@@ -32,7 +32,10 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mRobot->findDevice ( mLights, "CB:lights" );
   mRobot->findDevice ( mWheelDrop, "CB:wheeldrop" );
   mRobot->findDevice ( mLowSideDriver, "CB:lowsidedriver");
-  mRobot->findDevice ( mLaser, "CB:laser" );
+  mRobot->findDevice ( mFrontFiducial, "CB:front_fiducial");
+  mRobot->findDevice ( mTopFiducial, "CB:top_fiducial");
+  mRobot->findDevice ( mPhoto, "CB:photosensor");
+  //mRobot->findDevice ( mLaser, "CB:laser" );
 
   mFg.setRobot(mRobot);
   if ( rapiError->hasError() ) {
@@ -57,11 +60,14 @@ CChatterboxCtrl::~CChatterboxCtrl()
 void CChatterboxCtrl::updateData ( float dt )
 {
   static unsigned char c = 0;
-  int i;
+  //int i;
 
   mIr->print();
-  i = mLaser->getNumSamples() / 2;
-  printf("laser beam %d = %fm \n",i, mLaser->mRangeData[i].range);
+  mPhoto->print();
+  mTopFiducial->print();
+  mFrontFiducial->print();
+  //i = mLaser->getNumSamples() / 2;
+  //printf("laser beam %d = %fm \n",i, mLaser->mRangeData[i].range);
 
   mLowSideDriver->setSwitch(0, true);
   //mLowSideDriver->setSwitch(2, true);

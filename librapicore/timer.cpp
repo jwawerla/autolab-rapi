@@ -28,11 +28,12 @@ namespace Rapi
 
 
 //-----------------------------------------------------------------------------
-CTimer::CTimer ( ARobot* robot )
+CTimer::CTimer ( ARobot* robot, std::string name )
     : IRobotUpdate()
 {
   assert ( robot );
   mRobot = robot;
+  mName = name;
   robot->registerStateVariable ( this );
   mStartTime = mRobot->getCurrentTime();
   mFgExpired = false;
@@ -60,6 +61,21 @@ std::string CTimer::toStr() const
   strOut << "start " << mStartTime << " timeout " << mTimeout << " now "
   << mRobot->getCurrentTime();
   return  strOut.str();
+}
+//---------------------------------------------------------------------------
+std::string CTimer::toCSV() const
+{
+  std::ostringstream strOut;
+
+  strOut << mStartTime << "," << mTimeout << "," << mRobot->getCurrentTime();
+  return strOut.str();
+}
+//-----------------------------------------------------------------------------
+std::string CTimer::getCVSHeader() const
+{
+  std::ostringstream strOut;
+  strOut << mName << "::start, " << mName << "::timeout," << mName << "::now";
+  return strOut.str();
 }
 //-----------------------------------------------------------------------------
 float CTimer::getRemainingTime() const

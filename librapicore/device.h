@@ -28,6 +28,7 @@
 #include "rapitypes.h"
 #include "pose3d.h"
 #include "dataupdateobserver.h"
+#include "datalogger.h"
 
 namespace Rapi
 {
@@ -92,6 +93,16 @@ class ADevice
      * @param observer to be added
      */
     void addDataUpdateObserver(ADataUpdateObserver* observer);
+    /**
+     * This is just a dumy implementation of the enable logging method. Each
+     * concret device has to reimplement this method for logging.
+     * Starts logging of the devices data to a file. Note there can only be
+     * one log file for all devices, hence the first device to enable logging
+     * determines the name of the log file.
+     * @param filename to log to
+     */
+    virtual void startLogging(std::string filename);
+    void startLogging();
 
   protected:
     /**
@@ -107,6 +118,8 @@ class ADevice
      * Updates the data of the device
      */
     virtual void updateData() = 0;
+    /** Data logger for logging the devices internal data */
+    CDataLogger* mDataLogger;
     /** Flags if device is enabled or not */
     bool mFgEnabled;
     /** Name of device */

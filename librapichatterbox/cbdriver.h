@@ -220,6 +220,12 @@ class CCBDriver
      */
     int setRgbLed(unsigned char id, CRgbColor color);
     /**
+     * Set the intensity of the top IR led
+     * @param intensity of led [0..255]
+     * @return 1 successfull, 0 error
+     */
+    int setIrLed(unsigned char intensity);
+    /**
      * Sets the 7 segment display to show a given decimal and the dot
      * @param h hexadecimal to display [0..F]
      * @param dot true display dot otherwise do not display dot
@@ -271,6 +277,11 @@ class CCBDriver
      * @return distance [m] or 0 in case of an error
      */
     float readDistance(unsigned char id);
+    /**
+     * Reads the photo sensor
+     * @return [0..1024]
+     */
+    float readPhotoSensor();
     /**
      * Set the time constant for the adc low pass filter
      * @param tau [s]

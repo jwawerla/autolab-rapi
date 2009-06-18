@@ -67,6 +67,12 @@ class CChatterboxCtrl : public ARobotCtrl
     ASwitchArray* mLowSideDriver;
     /** Laser range finder */
     ARangeFinder* mLaser;
+    /** Top fiducial */
+    AFiducialFinder* mTopFiducial;
+    /** Front fiducial */
+    AFiducialFinder* mFrontFiducial;
+    /** Photo sensor */
+    AAnalogSensorArray* mPhoto;
     /** Some limit */
     CLimit mLimit;
     /** Some rapi variable */

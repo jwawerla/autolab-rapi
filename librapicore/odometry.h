@@ -55,6 +55,13 @@ class COdometry : public ALocalizer2d
     * Prints the devices main information
     */
     virtual void print() const;
+    /**
+     * Start logging of the devices data to a file. Note there can only be
+     * one log file for all devices, hence the first device to enable logging
+     * determines the name of the log file.
+     * @param filename to log to
+     */
+    virtual void startLogging(std::string filename);
 
   protected:
     /**

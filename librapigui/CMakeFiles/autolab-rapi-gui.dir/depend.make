@@ -102,12 +102,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: /usr/i
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/binarysensorarray.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/device.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/point2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/rgbcolor.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/consolewidget.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/consolewidget.h
@@ -221,10 +227,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/device.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/point2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/rgbcolor.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/customdialog.cpp.o: librapigui/customdialog.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/customdialog.cpp.o: librapigui/customdialog.h
@@ -685,10 +699,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtGui/qwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/device.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/point2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/rgbcolor.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/devicewidget.h
@@ -1053,10 +1075,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qwizard.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtGui/qworkspace.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/device.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/point2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/rgbcolor.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/dataline.h
@@ -1163,6 +1193,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtGui/qwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/device.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/drivetrain2dof.h
@@ -1172,7 +1203,11 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigu
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/dataline.h
@@ -1297,12 +1332,20 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtGui/qwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/device.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/fiducialfinder.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/point2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/utilities.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/customdialog.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/dataled.h
@@ -1670,7 +1713,9 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qwi
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qwizard.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtGui/qworkspace.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/analogsensorarray.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/binarysensorarray.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/device.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/drivetrain2dof.h
@@ -1684,6 +1729,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/powerpack.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/rangefinder.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/rapitypesystem.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/rapivarinterface.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/../librapicore/robot.h
@@ -2065,7 +2111,9 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/Qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qwizard.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtGui/qworkspace.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/analogsensorarray.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/binarysensorarray.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/device.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/drivetrain2dof.h
@@ -2079,6 +2127,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../libra
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/powerpack.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/rangefinder.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/rapitypesystem.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/rapivarinterface.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../librapicore/robot.h
@@ -2361,10 +2410,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtGui/qwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtGui/qwmatrix.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/device.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/point2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/rgbcolor.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/devicewidget.h
@@ -2729,10 +2786,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/incl
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qwizard.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qwmatrix.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtGui/qworkspace.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/device.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/point2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/rgbcolor.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/dataline.h
@@ -2856,11 +2921,19 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtGui/qwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtGui/qwmatrix.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/device.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/fiducialfinder.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/point2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/rgbcolor.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/customdialog.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/dataled.h
@@ -3227,7 +3300,9 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qwizard.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qwmatrix.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtGui/qworkspace.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/analogsensorarray.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/binarysensorarray.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/device.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/drivetrain2dof.h
@@ -3241,6 +3316,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../l
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/powerpack.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/rangefinder.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/rapitypesystem.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/rapivarinterface.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/../librapicore/robot.h
@@ -3348,6 +3424,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: librapigui/../librapicore/point2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: librapigui/../librapicore/pose2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: librapigui/../librapicore/utilities.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/databar.h
@@ -3457,11 +3534,19 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtGui/qwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/device.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/point2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/powerpack.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/rgbcolor.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/devicewidget.h
@@ -3576,6 +3661,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtGui/qwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/device.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/point2d.h
@@ -3583,6 +3669,11 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/.
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/rangefinder.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/rgbcolor.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/binarysensorarraywidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/consolewidget.h
@@ -3970,7 +4061,9 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Q
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qwizard.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtGui/qworkspace.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/analogsensorarray.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/binarysensorarray.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/device.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/drivetrain2dof.h
@@ -3985,6 +4078,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../libr
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/printerror.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/rangefinder.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/rapitypesystem.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/../librapicore/robot.h
@@ -4099,11 +4193,19 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtGui/qwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/device.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/point2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/rapitypesystem.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/textdisplay.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/velocity2d.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/../librapicore/waypoint2d.h
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/devicewidget.h
@@ -4223,12 +4325,14 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/inc
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtGui/qwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/datalogger.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/dataupdateobserver.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/device.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/point2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/pose2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/pose3d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/rapitypes.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/rapitypesystem.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/rgbcolor.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/../librapicore/variablemonitor.h
@@ -4330,6 +4434,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtGui/qwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtGui/qwindowdefs.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
+librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: librapigui/../librapicore/rapivarinterface.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: librapigui/../librapicore/utilities.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: librapigui/../librapicore/velocity2d.h
 

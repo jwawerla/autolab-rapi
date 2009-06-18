@@ -18,71 +18,45 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-
-#include "velocity2d.h"
-#include <stdio.h>
-#include <sstream>
-#include "utilities.h"
-
+#include "cbphotosensor.h"
+#include "assert.h"
 namespace Rapi
 {
 
 //-----------------------------------------------------------------------------
-CVelocity2d::CVelocity2d( double xDot, double yDot, double yawDot,
-                          std::string name ) : IRapiVar()
+CCBPhotoSensor::CCBPhotoSensor( CCBDriver* cbDriver, std::string devName )
+    : AAnalogSensorArray( devName )
 {
-  mXDot = xDot;
-  mYDot = yDot;
-  mYawDot = yawDot;
-  mName = name;
+  assert( cbDriver );
+  mCBDriver = cbDriver;
+  mNumSamples = 1;
+  mData = new double[1];
+  setEnabled( true );
 }
 //-----------------------------------------------------------------------------
-CVelocity2d::~CVelocity2d()
+CCBPhotoSensor::~CCBPhotoSensor()
 {
+  if ( mData ) {
+    delete[] mData;
+    mData = NULL;
+  }
 }
 //-----------------------------------------------------------------------------
-void CVelocity2d::print() const
+void CCBPhotoSensor::setEnabled( bool enable )
 {
-  printf( "CVelocity2d: xDot=%f yDot=%f yawDot=%f\n",
-          mXDot, mYDot, R2D( mYawDot ) );
+  mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-std::string CVelocity2d::toStr() const
+int CCBPhotoSensor::init()
 {
-  std::ostringstream strOut;
-
-  strOut << "Xdot=" << mXDot << " Ydot=" << mYDot << " Yawdot=" << R2D( mYawDot );
-  return strOut.str();
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
-std::string CVelocity2d::toCSV() const
+void CCBPhotoSensor::updateData()
 {
-  char str[30];
-
-  snprintf(str, 30, "%0.3f,%0.3f,%0.3f",mXDot, mYDot, mYawDot);
-  return str;
-}
-//-----------------------------------------------------------------------------
-std::string CVelocity2d::getCVSHeader() const
-{
-   std::ostringstream strOut;
-
-  strOut << mName << "::Xdot," << mName << "::Ydot," << mName << "::Yawdot";
-  return strOut.str();
-}
-//-----------------------------------------------------------------------------
-void CVelocity2d::operator = ( CVelocity2d const &vel )
-{
-  mXDot = vel.mXDot;
-  mYDot = vel.mYDot;
-  mYawDot = vel.mYawDot;
-}
-//-----------------------------------------------------------------------------
-void CVelocity2d::setZero()
-{
-  mXDot = 0.0;
-  mYDot = 0.0;
-  mYawDot = 0.0;
+  if ( mFgEnabled ) {
+    mData[0] = mCBDriver->readPhotoSensor();
+  }
 }
 //-----------------------------------------------------------------------------
 

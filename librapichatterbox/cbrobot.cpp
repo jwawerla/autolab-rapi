@@ -47,6 +47,9 @@ CCBRobot::CCBRobot()
   mCBCliffSensor = NULL;
   mCBOverCurrentSensor = NULL;
   mCBLowSideDriver = NULL;
+  mCBTopFiducial = NULL;
+  mCBFrontFiducial = NULL;
+  mCBPhotoSensor = NULL;
 
   mFgRunning = true;
 }
@@ -54,7 +57,7 @@ CCBRobot::CCBRobot()
 CCBRobot::~CCBRobot()
 {
   mFgRunning = false;
-  sleep(2);
+  sleep( 2 );
 
   if ( mCBDrivetrain )
     delete mCBDrivetrain;
@@ -86,8 +89,17 @@ CCBRobot::~CCBRobot()
   if ( mCBOverCurrentSensor )
     delete mCBOverCurrentSensor;
 
-  if (mCBLowSideDriver);
-    delete mCBLowSideDriver;
+  if ( mCBLowSideDriver );
+  delete mCBLowSideDriver;
+
+  if ( mCBFrontFiducial )
+    delete mCBFrontFiducial;
+
+  if ( mCBTopFiducial )
+    delete mCBTopFiducial;
+
+  if ( mCBPhotoSensor )
+    delete mCBPhotoSensor;
 
   if ( mCBDriver )
     delete mCBDriver;
@@ -96,14 +108,14 @@ CCBRobot::~CCBRobot()
 int CCBRobot::init()
 {
   if ( mFgInitialized ) {
-    PRT_WARN0 ( "Robot already initialized" );
+    PRT_WARN0( "Robot already initialized" );
     return 1;
   }
   if ( mCBDriver->init() == 0 ) {
     return 0; // failure
   }
-  if ( mCBDriver->openPort ( "/dev/ttyS2" ) == 0 ) {
-    ERROR0 ( "Failed to open create port: /dev/ttyS2" );
+  if ( mCBDriver->openPort( "/dev/ttyS2" ) == 0 ) {
+    ERROR0( "Failed to open create port: /dev/ttyS2" );
     return 0; // failure
   }
 
@@ -116,21 +128,21 @@ double CCBRobot::getCurrentTime() const
   double timeNow;
 
   struct timeval tv;
-  gettimeofday ( &tv, 0 );
+  gettimeofday( &tv, 0 );
   timeNow = tv.tv_sec + tv.tv_usec * 1e-6;
   return timeNow;
 }
 //-----------------------------------------------------------------------------
 void CCBRobot::terminate()
 {
-  printf(" CCBRobot::terminate() \n");
+  printf( " CCBRobot::terminate() \n" );
   mFgRunning = false;
 }
 //-----------------------------------------------------------------------------
-void CCBRobot::run ()
+void CCBRobot::run()
 {
   if ( not mFgInitialized ) {
-    PRT_WARN0 ( "Robot is not initialized, call init() first" );
+    PRT_WARN0( "Robot is not initialized, call init() first" );
     return;
   }
 
@@ -161,9 +173,12 @@ void CCBRobot::run ()
         mCBCliffSensor->updateData();
       if ( mCBOverCurrentSensor )
         mCBOverCurrentSensor->updateData();
-      if ( mCBFiducial )
-        mCBFiducial->updateData();
-
+      if ( mCBFrontFiducial )
+        mCBFrontFiducial->updateData();
+      if ( mCBTopFiducial )
+        mCBTopFiducial->updateData();
+      if ( mCBPhotoSensor )
+        mCBPhotoSensor->updateData();
       // Low side drivers updateData() is empty, no need to call it here
       //if ( mCBLowSideDriver )
       //  mCBLowSideDriver->updateData();
@@ -173,23 +188,23 @@ void CCBRobot::run ()
 
     //******************************************************
     // last step - keep everything in a 100 ms loop
-    synchronize ( CB_T );
+    synchronize( CB_T );
   } // while
- printf("DONE\n");
+  printf( "DONE\n" );
 }
 //-----------------------------------------------------------------------------
-int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
+int CCBRobot::findDevice( ARangeFinder* &device, std::string devName )
 {
   if ( not mFgInitialized ) {
-    PRT_WARN0 ( "Robot is not initialized, call init() first" );
+    PRT_WARN0( "Robot is not initialized, call init() first" );
     device = NULL;
     return 0; // error
   }
 
-  if ( ( devName != "CB:laser" ) &&
-       ( devName != "CB:wall" ) &&
-       ( devName != "CB:ir" ) ) {
-    ERROR1 ( "No such device: %s", devName.c_str() );
+  if (( devName != "CB:laser" ) &&
+      ( devName != "CB:wall" ) &&
+      ( devName != "CB:ir" ) ) {
+    ERROR1( "No such device: %s", devName.c_str() );
     device = NULL;
     return 0; // error
   }
@@ -200,7 +215,7 @@ int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
   if ( devName == "CB:laser" ) {
     // check if device already exists
     if ( mCBLaser == NULL ) {
-      mCBLaser = new CCBLaser ( mCBDriver, "CB:laser" );
+      mCBLaser = new CCBLaser( mCBDriver, "CB:laser" );
       device = mCBLaser;
       return mCBLaser->init();
     }
@@ -215,7 +230,7 @@ int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
   if ( devName == "CB:ir" ) {
     // check if device already exists
     if ( mCBIrSensor == NULL ) {
-      mCBIrSensor = new CCBIrSensor ( mCBDriver, "CB:ir" );
+      mCBIrSensor = new CCBIrSensor( mCBDriver, "CB:ir" );
       device = mCBIrSensor;
       return mCBIrSensor->init();
     }
@@ -230,7 +245,7 @@ int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
   if ( devName == "CB:wall" ) {
     // check if device already exists
     if ( mCBWallSensor == NULL ) {
-      mCBWallSensor = new CCBWallSensor ( mCBDriver, "CB:wall" );
+      mCBWallSensor = new CCBWallSensor( mCBDriver, "CB:wall" );
       device = mCBWallSensor;
       return mCBWallSensor->init();
     }
@@ -243,23 +258,23 @@ int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
   return 0; // should not be able to reach this, but silences compiler
 }
 //-----------------------------------------------------------------------------
-int CCBRobot::findDevice ( ADrivetrain2dof* &device, std::string devName )
+int CCBRobot::findDevice( ADrivetrain2dof* &device, std::string devName )
 {
   if ( not mFgInitialized ) {
-    PRT_WARN0 ( "Robot is not initialized, call init() first" );
+    PRT_WARN0( "Robot is not initialized, call init() first" );
     device = NULL;
     return 0; // error
   }
 
   if ( devName != "CB:drivetrain" ) {
-    ERROR1 ( "No such device: %s", devName.c_str() );
+    ERROR1( "No such device: %s", devName.c_str() );
     device = NULL;
     return 0; // error
   }
 
   // check if device already exists
   if ( mCBDrivetrain == NULL ) {
-    mCBDrivetrain = new CCBDrivetrain2dof ( mCBDriver, "CB:drivetrain" );
+    mCBDrivetrain = new CCBDrivetrain2dof( mCBDriver, "CB:drivetrain" );
     device = mCBDrivetrain;
     return mCBDrivetrain->init();
   }
@@ -269,23 +284,23 @@ int CCBRobot::findDevice ( ADrivetrain2dof* &device, std::string devName )
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-int CCBRobot::findDevice ( APowerPack* &device, std::string devName )
+int CCBRobot::findDevice( APowerPack* &device, std::string devName )
 {
   if ( not mFgInitialized ) {
-    PRT_WARN0 ( "Robot is not initialized, call init() first" );
+    PRT_WARN0( "Robot is not initialized, call init() first" );
     device = NULL;
     return 0; // error
   }
 
   if ( devName != "CB:powerpack" ) {
-    ERROR1 ( "No such device: %s", devName.c_str() );
+    ERROR1( "No such device: %s", devName.c_str() );
     device = NULL;
     return 0; // error
   }
 
   // check if device already exists
   if ( mCBPowerPack == NULL ) {
-    mCBPowerPack = new CCBPowerPack ( mCBDriver, "CB:powerpack" );
+    mCBPowerPack = new CCBPowerPack( mCBDriver, "CB:powerpack" );
     device = mCBPowerPack;
     return mCBPowerPack->init();
   }
@@ -295,44 +310,71 @@ int CCBRobot::findDevice ( APowerPack* &device, std::string devName )
   return 1;
 }
 //-----------------------------------------------------------------------------
-int CCBRobot::findDevice ( AFiducialFinder* &device, std::string devName )
+int CCBRobot::findDevice( AFiducialFinder* &device, std::string devName )
 {
   if ( not mFgInitialized ) {
-    PRT_WARN0 ( "Robot is not initialized, call init() first" );
+    PRT_WARN0( "Robot is not initialized, call init() first" );
     device = NULL;
     return 0; // error
   }
 
-  // check if device already exists
-  if ( mCBFiducial == NULL ) {
-    mCBFiducial = new CCBFiducialFinder ( mCBDriver, "CB:fiducial" );
-    device = mCBFiducial;
-    return mCBFiducial->init();
+  if (( devName != "CB:front_fiducial" ) &&
+      ( devName != "CB:top_fiducial" ) ) {
+    ERROR1( "No such device: %s", devName.c_str() );
+    device = NULL;
+    return 0; // error
   }
 
-  // return already existing device
-  device = mCBFiducial;
+  //************************************
+  // Front fiducial finder
+  if ( devName == "CB:front_fiducial" ) {
+    // check if device already exists
+    if ( mCBFrontFiducial == NULL ) {
+      mCBFrontFiducial = new CCBFrontFiducialFinder( mCBDriver, "CB:front_fiducial" );
+      device = mCBFrontFiducial;
+      return mCBFrontFiducial->init();
+    }
 
-  return 1;
+    // return already existing device
+    device = mCBFrontFiducial;
+    return 1; // success
+  }
+
+  //************************************
+  // Top fiducial finder
+  if ( devName == "CB:top_fiducial" ) {
+    // check if device already exists
+    if ( mCBTopFiducial == NULL ) {
+      mCBTopFiducial = new CCBTopFiducialFinder( mCBDriver, "CB:top_fiducial" );
+      device = mCBTopFiducial;
+      return mCBTopFiducial->init();
+    }
+
+    // return already existing device
+    device = mCBTopFiducial;
+    return 1; // success
+  }
+
+  return 0; // error
 }
 //-----------------------------------------------------------------------------
-int CCBRobot::findDevice ( ALights* &device, std::string devName )
+int CCBRobot::findDevice( ALights* &device, std::string devName )
 {
   if ( not mFgInitialized ) {
-    PRT_WARN0 ( "Robot is not initialized, call init() first" );
+    PRT_WARN0( "Robot is not initialized, call init() first" );
     device = NULL;
     return 0; // error
   }
 
   if ( devName != "CB:lights" ) {
-    ERROR1 ( "No such device: %s", devName.c_str() );
+    ERROR1( "No such device: %s", devName.c_str() );
     device = NULL;
     return 0; // error
   }
 
   // check if device already exists
   if ( mCBLights == NULL ) {
-    mCBLights = new CCBLights ( mCBDriver, "CB:lights" );
+    mCBLights = new CCBLights( mCBDriver, "CB:lights" );
     device = mCBLights;
     return mCBLights->init();
   }
@@ -342,23 +384,23 @@ int CCBRobot::findDevice ( ALights* &device, std::string devName )
   return 1;
 }
 //-----------------------------------------------------------------------------
-int CCBRobot::findDevice ( ATextDisplay* &device, std::string devName )
+int CCBRobot::findDevice( ATextDisplay* &device, std::string devName )
 {
   if ( not mFgInitialized ) {
-    PRT_WARN0 ( "Robot is not initialized, call init() first" );
+    PRT_WARN0( "Robot is not initialized, call init() first" );
     device = NULL;
     return 0; // error
   }
 
   if ( devName != "CB:textdisplay" ) {
-    ERROR1 ( "No such device: %s", devName.c_str() );
+    ERROR1( "No such device: %s", devName.c_str() );
     device = NULL;
     return 0; // error
   }
 
   // check if device already exists
   if ( mCBTextDisplay == NULL ) {
-    mCBTextDisplay = new CCBTextDisplay ( mCBDriver, "CB:textdisplay" );
+    mCBTextDisplay = new CCBTextDisplay( mCBDriver, "CB:textdisplay" );
     device = mCBTextDisplay;
     return mCBTextDisplay->init();
   }
@@ -368,23 +410,23 @@ int CCBRobot::findDevice ( ATextDisplay* &device, std::string devName )
   return 1;
 }
 //-----------------------------------------------------------------------------
-int  CCBRobot::findDevice ( ASwitchArray* &device, std::string devName )
+int  CCBRobot::findDevice( ASwitchArray* &device, std::string devName )
 {
   if ( not mFgInitialized ) {
-    PRT_WARN0 ( "Robot is not initialized, call init() first" );
+    PRT_WARN0( "Robot is not initialized, call init() first" );
     device = NULL;
     return 0; // error
   }
 
   if ( devName != "CB:lowsidedriver" ) {
-    ERROR1 ( "No such device: %s", devName.c_str() );
+    ERROR1( "No such device: %s", devName.c_str() );
     device = NULL;
     return 0; // error
   }
 
   // check if device already exists
   if ( mCBLowSideDriver == NULL ) {
-    mCBLowSideDriver = new CCBLowSideDriver ( mCBDriver, "CB:lowsidedriver" );
+    mCBLowSideDriver = new CCBLowSideDriver( mCBDriver, "CB:lowsidedriver" );
     device = mCBLowSideDriver;
     return mCBLowSideDriver->init();
   }
@@ -394,19 +436,45 @@ int  CCBRobot::findDevice ( ASwitchArray* &device, std::string devName )
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
+int CCBRobot::findDevice( AAnalogSensorArray* &device, std::string devName )
 {
   if ( not mFgInitialized ) {
-    PRT_WARN0 ( "Robot is not initialized, call init() first" );
+    PRT_WARN0( "Robot is not initialized, call init() first" );
     device = NULL;
     return 0; // error
   }
 
-  if ( ( devName != "CB:bumper" ) &&
-       ( devName != "CB:cliff" ) &&
-       ( devName != "CB:overcurrent" ) &&
-       ( devName != "CB:wheeldrop" ) ) {
-    ERROR1 ( "No such device: %s", devName.c_str() );
+  if ( devName != "CB:photosensor" ) {
+    ERROR1( "No such device: %s", devName.c_str() );
+    device = NULL;
+    return 0; // error
+  }
+
+  // check if device already exists
+  if ( mCBPhotoSensor == NULL ) {
+    mCBPhotoSensor = new CCBPhotoSensor( mCBDriver, "CB:photosensor" );
+    device = mCBPhotoSensor;
+    return mCBPhotoSensor->init();
+  }
+
+  // return already existing device
+  device = mCBPhotoSensor;
+  return 1; // success
+}
+//-----------------------------------------------------------------------------
+int CCBRobot::findDevice( ABinarySensorArray* &device, std::string devName )
+{
+  if ( not mFgInitialized ) {
+    PRT_WARN0( "Robot is not initialized, call init() first" );
+    device = NULL;
+    return 0; // error
+  }
+
+  if (( devName != "CB:bumper" ) &&
+      ( devName != "CB:cliff" ) &&
+      ( devName != "CB:overcurrent" ) &&
+      ( devName != "CB:wheeldrop" ) ) {
+    ERROR1( "No such device: %s", devName.c_str() );
     device = NULL;
     return 0; // error
   }
@@ -416,7 +484,7 @@ int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
   if ( devName == "CB:bumper" ) {
     // check if device already exists
     if ( mCBBumper == NULL ) {
-      mCBBumper = new CCBBumper ( mCBDriver, "CB:bumper" );
+      mCBBumper = new CCBBumper( mCBDriver, "CB:bumper" );
       device = mCBBumper;
       return mCBBumper->init();
     }
@@ -432,7 +500,7 @@ int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
     // check if device already exists
     if ( mCBWheelDropSensor == NULL ) {
       mCBWheelDropSensor =
-        new CCBWheelDropSensor ( mCBDriver, "CB:wheeldrop" );
+        new CCBWheelDropSensor( mCBDriver, "CB:wheeldrop" );
       device = mCBWheelDropSensor;
       return mCBWheelDropSensor->init();
     }
@@ -447,7 +515,7 @@ int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
   if ( devName == "CB:cliff" ) {
     // check if device already exists
     if ( mCBCliffSensor == NULL ) {
-      mCBCliffSensor = new CCBCliffSensor ( mCBDriver, "CB:cliff" );
+      mCBCliffSensor = new CCBCliffSensor( mCBDriver, "CB:cliff" );
       device = mCBCliffSensor;
       return mCBCliffSensor->init();
     }
@@ -462,7 +530,7 @@ int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
   if ( devName == "CB:overcurrent" ) {
     // check if device already exists
     if ( mCBOverCurrentSensor == NULL ) {
-      mCBOverCurrentSensor = new CCBOverCurrentSensor ( mCBDriver, "CB:overcurrent" );
+      mCBOverCurrentSensor = new CCBOverCurrentSensor( mCBDriver, "CB:overcurrent" );
       device = mCBOverCurrentSensor;
       return mCBOverCurrentSensor->init();
     }
@@ -475,17 +543,17 @@ int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
   return 0; // should never get here
 }
 //-----------------------------------------------------------------------------
-void CCBRobot::synchronize ( double interval )
+void CCBRobot::synchronize( double interval )
 {
   double timeNow;
   double duration;
 
   struct timeval tv;
-  gettimeofday ( &tv, 0 );
+  gettimeofday( &tv, 0 );
   timeNow = tv.tv_sec + tv.tv_usec * 1e-6;
   duration = timeNow - mLastSynchronizeTime;
   if ( duration < interval ) {
-    usleep ( ( int ) ( duration * 1e6 ) );
+    usleep(( int )( duration * 1e6 ) );
   }
 
   mLastSynchronizeTime = tv.tv_sec + tv.tv_usec * 1e-6;

@@ -954,13 +954,30 @@ int CCBDriver::initI2c()
   if ( resetPCA9634() == 0 )
     return 0; // failure
 
-  if ( initPCA9634 ( CHIP_A_ADDR ) == 0 )
+  if ( initPCA9634 ( PCA98634_CHIP_A_ADDR ) == 0 )
     return 0; // failure
 
-  if ( initPCA9634 ( CHIP_B_ADDR ) == 0 )
+  if ( initPCA9634 ( PCA98634_CHIP_B_ADDR ) == 0 )
     return 0; // failure
 
   return 1;  // success
+}
+//----------------------------------------------------------------------------
+int CCBDriver::setIrLed(unsigned char data)
+{
+  unsigned char buffer[2];
+
+  //*************************************
+  // send ir data
+  I2cSetSlaveAddress ( mI2cDev, PCA98634_CHIP_B_ADDR, I2C_NO_CRC );
+
+  buffer[0] = IR_LED_ADDR;
+  buffer[1] = data;
+  if ( I2cSendBytes ( mI2cDev, buffer, 2 ) != 0 ) {
+    ERROR1 ( "Failed to set data %d to top IR led", data );
+    return 0; // failure
+  }
+  return 1; // success
 }
 //----------------------------------------------------------------------------
 int CCBDriver::setRgbLed ( unsigned char id, CRgbColor color )
@@ -1147,6 +1164,11 @@ int CCBDriver::isIrEnabled()
   }
   // PC2 is 0x04
   return ( pinVal & 0x04 );
+}
+//-----------------------------------------------------------------------------
+float CCBDriver::readPhotoSensor()
+{
+  return readLpfAdc(1);
 }
 //-----------------------------------------------------------------------------
 int CCBDriver::readAdc ( unsigned char id )

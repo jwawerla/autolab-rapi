@@ -77,7 +77,7 @@ class AFiducialFinder : public ADevice
     virtual void setFiducialSignal(int id) = 0;
     /**
      * Gets the fiducial signal this device broadcasts
-     * @return own fiducial id
+     * @return own fiducial id, or -1 in case of an error
      */
     int getFiducialSignal() const;
     /**

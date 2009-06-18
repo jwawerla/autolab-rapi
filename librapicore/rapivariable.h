@@ -46,7 +46,7 @@ class CRapiVariable : public IRapiVar, public IRobotUpdate
      */
     CRapiVariable() {
       mRobot = NULL;
-
+      mName = "noname";
       mModificationTimestamp = 0.0;
       mFgModified = false;
     };
@@ -62,6 +62,13 @@ class CRapiVariable : public IRapiVar, public IRobotUpdate
       mRobot->registerStateVariable ( this );
       mModificationTimestamp = robot->getCurrentTime();
     };
+    /**
+     * Sets the name of a variable
+     * @param name to be set
+     */
+    void setName(std::string name) {
+       mName = name;
+    }
     /**
      * Checks if variable has changed since last time step
      * @return true if changed, false other wise
@@ -98,6 +105,22 @@ class CRapiVariable : public IRapiVar, public IRobotUpdate
       strOut << typeid ( T ).name();
       return "CRapiVariable<" + strOut.str() + ">";
     };
+    /**
+     * Gets the data of the variable as a comma separated value string
+     * @return comma separated value string
+     */
+    std::string toCSV() const {
+      std::ostringstream strOut;
+      strOut << mValue;
+      return strOut.str();
+    }
+    /**
+     * Gets a header for the variable 
+     * @return header
+     */
+    std::string getCVSHeader() const {
+      return mName;
+    }
     /**
      * Gets the value of the variable
      * @return value of the actual variable

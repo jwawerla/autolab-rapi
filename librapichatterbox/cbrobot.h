@@ -36,8 +36,9 @@
 #include "cbwheeldropsensor.h"
 #include "cbovercurrentsensor.h"
 #include "cblowsidedriver.h"
-#include "cbfiducialfinder.h"
-
+#include "cbtopfiducialfinder.h"
+#include "cbfrontfiducialfinder.h"
+#include "cbphotosensor.h"
 
 namespace Rapi
 {
@@ -87,21 +88,22 @@ class CCBRobot : public ARobot
      * @return device
      * @return 1 if successfull, 0 otherwise
      */
-    virtual int findDevice ( ARangeFinder* &device, std::string devName );
-    virtual int findDevice ( ADrivetrain2dof* &device, std::string devName );
-    virtual int findDevice ( APowerPack* &device, std::string devName );
-    virtual int findDevice ( AFiducialFinder* &device, std::string devName );
-    virtual int findDevice ( ALights* &device, std::string devName );
-    virtual int findDevice ( ATextDisplay* &device, std::string devName );
-    virtual int findDevice ( ABinarySensorArray* &device, std::string devName );
-    virtual int findDevice ( ASwitchArray* &device, std::string devName );
+    virtual int findDevice( ARangeFinder* &device, std::string devName );
+    virtual int findDevice( ADrivetrain2dof* &device, std::string devName );
+    virtual int findDevice( APowerPack* &device, std::string devName );
+    virtual int findDevice( AFiducialFinder* &device, std::string devName );
+    virtual int findDevice( ALights* &device, std::string devName );
+    virtual int findDevice( ATextDisplay* &device, std::string devName );
+    virtual int findDevice( ABinarySensorArray* &device, std::string devName );
+    virtual int findDevice( ASwitchArray* &device, std::string devName );
+    virtual int findDevice( AAnalogSensorArray* &device, std::string devName );
 
   protected:
     /**
      * This method sleeps for interval seconds since the last call
      * @param interval [s]
      */
-    void synchronize ( double interval );
+    void synchronize( double interval );
     /** Flag if main loop is running or not */
     bool mFgRunning;
 
@@ -132,8 +134,12 @@ class CCBRobot : public ARobot
     CCBOverCurrentSensor* mCBOverCurrentSensor;
     /** Low side driver */
     CCBLowSideDriver* mCBLowSideDriver;
-	/** Omnidirectional IR */
-	CCBFiducialFinder *mCBFiducial;
+    /** Omnidirectional front side IR fiducial */
+    CCBFrontFiducialFinder *mCBFrontFiducial;
+    /** Top side IR fiducial */
+    CCBTopFiducialFinder *mCBTopFiducial;
+    /** Photo sensor */
+    CCBPhotoSensor* mCBPhotoSensor;
     /** Last time synchronize was called */
     double mLastSynchronizeTime;
 };

@@ -103,12 +103,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
  librapigui/../librapicore/binarysensorarray.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
  librapigui/../librapicore/point2d.h
  librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
+ librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/consolewidget.cpp
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/consolewidget.h
@@ -222,10 +228,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o
  /usr/include/qt4/QtGui/qwidget.h
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
+ librapigui/../librapicore/point2d.h
+ librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
+ librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/customdialog.cpp.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/customdialog.cpp
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/customdialog.h
@@ -686,10 +700,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o
  /usr/include/qt4/QtGui/qwidget.h
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
+ librapigui/../librapicore/point2d.h
+ librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
+ librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.h
@@ -1054,10 +1076,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o
  /usr/include/qt4/QtGui/qwizard.h
  /usr/include/qt4/QtGui/qwmatrix.h
  /usr/include/qt4/QtGui/qworkspace.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
+ librapigui/../librapicore/point2d.h
+ librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
+ librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataline.h
@@ -1164,6 +1194,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o
  /usr/include/qt4/QtGui/qwidget.h
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
  librapigui/../librapicore/drivetrain2dof.h
@@ -1173,7 +1204,11 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o
  librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataline.h
@@ -1298,12 +1333,20 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o
  /usr/include/qt4/QtGui/qwidget.h
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
  librapigui/../librapicore/fiducialfinder.h
+ librapigui/../librapicore/point2d.h
+ librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/utilities.h
+ librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/customdialog.h
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
@@ -1671,7 +1714,9 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  /usr/include/qt4/QtGui/qwizard.h
  /usr/include/qt4/QtGui/qwmatrix.h
  /usr/include/qt4/QtGui/qworkspace.h
+ librapigui/../librapicore/analogsensorarray.h
  librapigui/../librapicore/binarysensorarray.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
  librapigui/../librapicore/drivetrain2dof.h
@@ -1685,6 +1730,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  librapigui/../librapicore/powerpack.h
  librapigui/../librapicore/rangefinder.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
  librapigui/../librapicore/rapivarinterface.h
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/robot.h
@@ -2066,7 +2112,9 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o
  /usr/include/qt4/QtGui/qwizard.h
  /usr/include/qt4/QtGui/qwmatrix.h
  /usr/include/qt4/QtGui/qworkspace.h
+ librapigui/../librapicore/analogsensorarray.h
  librapigui/../librapicore/binarysensorarray.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
  librapigui/../librapicore/drivetrain2dof.h
@@ -2080,6 +2128,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o
  librapigui/../librapicore/powerpack.h
  librapigui/../librapicore/rangefinder.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
  librapigui/../librapicore/rapivarinterface.h
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/robot.h
@@ -2362,10 +2411,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o
  /usr/include/qt4/QtGui/qwidget.h
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
+ librapigui/../librapicore/point2d.h
+ librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
+ librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.h
@@ -2730,10 +2787,18 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o
  /usr/include/qt4/QtGui/qwizard.h
  /usr/include/qt4/QtGui/qwmatrix.h
  /usr/include/qt4/QtGui/qworkspace.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
+ librapigui/../librapicore/point2d.h
+ librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
+ librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataline.h
@@ -2857,11 +2922,19 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o
  /usr/include/qt4/QtGui/qwidget.h
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
  librapigui/../librapicore/fiducialfinder.h
+ librapigui/../librapicore/point2d.h
+ librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
+ librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/customdialog.h
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
@@ -3228,7 +3301,9 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  /usr/include/qt4/QtGui/qwizard.h
  /usr/include/qt4/QtGui/qwmatrix.h
  /usr/include/qt4/QtGui/qworkspace.h
+ librapigui/../librapicore/analogsensorarray.h
  librapigui/../librapicore/binarysensorarray.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
  librapigui/../librapicore/drivetrain2dof.h
@@ -3242,6 +3317,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  librapigui/../librapicore/powerpack.h
  librapigui/../librapicore/rangefinder.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
  librapigui/../librapicore/rapivarinterface.h
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/robot.h
@@ -3349,6 +3425,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o
  /usr/include/qt4/QtGui/qwmatrix.h
  librapigui/../librapicore/point2d.h
  librapigui/../librapicore/pose2d.h
+ librapigui/../librapicore/rapivarinterface.h
  librapigui/../librapicore/utilities.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/databar.h
@@ -3458,11 +3535,19 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o
  /usr/include/qt4/QtGui/qwidget.h
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
+ librapigui/../librapicore/point2d.h
+ librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/powerpack.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
+ librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.h
@@ -3577,6 +3662,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o
  /usr/include/qt4/QtGui/qwidget.h
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
  librapigui/../librapicore/point2d.h
@@ -3584,6 +3670,11 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rangefinder.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
+ librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/binarysensorarraywidget.h
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/consolewidget.h
@@ -3971,7 +4062,9 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  /usr/include/qt4/QtGui/qwizard.h
  /usr/include/qt4/QtGui/qwmatrix.h
  /usr/include/qt4/QtGui/qworkspace.h
+ librapigui/../librapicore/analogsensorarray.h
  librapigui/../librapicore/binarysensorarray.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
  librapigui/../librapicore/drivetrain2dof.h
@@ -3986,6 +4079,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  librapigui/../librapicore/printerror.h
  librapigui/../librapicore/rangefinder.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
  librapigui/../librapicore/rapivarinterface.h
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/robot.h
@@ -4100,11 +4194,19 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o
  /usr/include/qt4/QtGui/qwidget.h
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
+ librapigui/../librapicore/point2d.h
+ librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
+ librapigui/../librapicore/rapivarinterface.h
+ librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/textdisplay.h
+ librapigui/../librapicore/velocity2d.h
+ librapigui/../librapicore/waypoint2d.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataled.h
  /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/devicewidget.h
@@ -4224,12 +4326,14 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o
  /usr/include/qt4/QtGui/qwidget.h
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ librapigui/../librapicore/datalogger.h
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
  librapigui/../librapicore/point2d.h
  librapigui/../librapicore/pose2d.h
  librapigui/../librapicore/pose3d.h
  librapigui/../librapicore/rapitypes.h
+ librapigui/../librapicore/rapitypesystem.h
  librapigui/../librapicore/rapivarinterface.h
  librapigui/../librapicore/rgbcolor.h
  librapigui/../librapicore/variablemonitor.h
@@ -4331,5 +4435,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o
  /usr/include/qt4/QtGui/qwidget.h
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ librapigui/../librapicore/rapivarinterface.h
  librapigui/../librapicore/utilities.h
  librapigui/../librapicore/velocity2d.h

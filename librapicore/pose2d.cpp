@@ -26,8 +26,9 @@
 namespace Rapi
 {
 //-----------------------------------------------------------------------------
-CPose2d::CPose2d( double x, double y, double yaw )
+CPose2d::CPose2d( double x, double y, double yaw, std::string name) : IRapiVar()
 {
+  mName = name;
   mX = x;
   mY = y;
   mYaw = normalizeAngle( yaw );
@@ -62,6 +63,22 @@ std::string CPose2d::toStr() const
   std::ostringstream strOut;
 
   strOut << "mX=" << mX << " mY=" << mY << " mYaw=" << R2D ( mYaw );
+  return strOut.str();
+}
+//-----------------------------------------------------------------------------
+std::string CPose2d::toCSV() const
+{
+  char str[30];
+
+  snprintf(str, 30, "%0.3f,%0.3f,%0.3f",mX, mY, mYaw);
+  return str;
+}
+//-----------------------------------------------------------------------------
+std::string CPose2d::getCVSHeader() const
+{
+   std::ostringstream strOut;
+
+  strOut << mName << "::x," << mName << "::y," << mName << "::yaw";
   return strOut.str();
 }
 //-----------------------------------------------------------------------------

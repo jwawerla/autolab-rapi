@@ -46,10 +46,34 @@ class IRapiVar
      * @return variable type name
      */
     virtual std::string getTypeStr() const = 0;
+    /**
+     * Gets the data of the variable as a comma separated value string
+     * @return comma separated value string
+     */
+    virtual std::string toCSV() const = 0;
+    /**
+     * Gets a header for the variable 
+     * @return header
+     */
+    virtual std::string getCVSHeader() const = 0;
+    /**
+     * Sets the name of a variable
+     * @param name to be set
+     */
+    virtual void setName(std::string name) {
+       mName = name;
+     };
+    /**
+     * Gets the name of the variable
+     * @return name
+     */
+    virtual std::string getName() const { return mName; };
 
   protected:
     /** Default constructor */
     IRapiVar() {};
+    /** Name of varible */
+    std::string mName;
 };
 
 } // namespace

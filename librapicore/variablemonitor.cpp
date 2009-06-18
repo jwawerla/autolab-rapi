@@ -26,7 +26,7 @@ namespace Rapi
 {
 
 //-----------------------------------------------------------------------------
-CVariableMonitor::CVariableMonitor()
+CVariableMonitor::CVariableMonitor() : CRapiTypeSystem()
 {
 }
 //-----------------------------------------------------------------------------
@@ -63,20 +63,6 @@ void CVariableMonitor::getVariableString ( unsigned int index,
 
   switch ( entry.varType ) {
 
-    case POSE2D:
-      varType = "CPose2d";
-      poseVar = * ( ( CPose2d* ) entry.ptr );
-      strOut << "mX=" << poseVar.mX << " mY=" << poseVar.mY << " mYaw=" <<
-      R2D ( poseVar.mYaw );
-      value = strOut.str();
-      break;
-    case VELOCITY2D:
-      varType = "CVelocity2d";
-      velocityVar = * ( ( CVelocity2d* ) entry.ptr );
-      strOut << "mXDot=" << velocityVar.mXDot << " mYDot=" << velocityVar.mYDot <<
-      " mYawDot=" <<  R2D ( velocityVar.mYawDot );
-      value = strOut.str();
-      break;
     case POINT2D:
       varType = "CPoint2d";
       pointVar = * ( ( CPoint2d* ) entry.ptr );
@@ -125,93 +111,5 @@ void CVariableMonitor::getVariableString ( unsigned int index,
   };
 }
 //-----------------------------------------------------------------------------
-void CVariableMonitor::addVar ( IRapiVar* ptr, std::string name )
-{
-  tVarEntry entry;
-  entry.ptr = ptr;
-  entry.name = name;
-  entry.varType = RAPI_VAR;
-  mVarList.push_back ( entry );
-}
-//-----------------------------------------------------------------------------
-void CVariableMonitor::addVar ( CWaypoint2d* ptr, std::string name )
-{
-  tVarEntry entry;
 
-  entry.ptr = ptr;
-  entry.name = name;
-  entry.varType = WAYPOINT2D;
-  mVarList.push_back ( entry );
-}
-//-----------------------------------------------------------------------------
-void CVariableMonitor::addVar ( CPose2d* ptr, std::string name )
-{
-  tVarEntry entry;
-
-  entry.ptr = ptr;
-  entry.name = name;
-  entry.varType = POSE2D;
-  mVarList.push_back ( entry );
-}
-//-----------------------------------------------------------------------------
-void CVariableMonitor::addVar ( CPoint2d* ptr, std::string name )
-{
-  tVarEntry entry;
-
-  entry.ptr = ptr;
-  entry.name = name;
-  entry.varType = POINT2D;
-  mVarList.push_back ( entry );
-}
-//-----------------------------------------------------------------------------
-void CVariableMonitor::addVar ( CVelocity2d* ptr, std::string name )
-{
-  tVarEntry entry;
-
-  entry.ptr = ptr;
-  entry.name = name;
-  entry.varType = VELOCITY2D;
-  mVarList.push_back ( entry );
-}
-//-----------------------------------------------------------------------------
-void CVariableMonitor::addVar ( float* ptr, std::string name )
-{
-  tVarEntry entry;
-
-  entry.ptr = ptr;
-  entry.name = name;
-  entry.varType = FLOAT;
-  mVarList.push_back ( entry );
-}
-//-----------------------------------------------------------------------------
-void CVariableMonitor::addVar ( bool* ptr, std::string name )
-{
-  tVarEntry entry;
-
-  entry.ptr = ptr;
-  entry.name = name;
-  entry.varType = BOOL;
-  mVarList.push_back ( entry );
-}
-//-----------------------------------------------------------------------------
-void CVariableMonitor::addVar ( double* ptr, std::string name )
-{
-  tVarEntry entry;
-
-  entry.ptr = ptr;
-  entry.name = name;
-  entry.varType = DOUBLE;
-  mVarList.push_back ( entry );
-}
-//-----------------------------------------------------------------------------
-void CVariableMonitor::addVar ( int* ptr, std::string name )
-{
-  tVarEntry entry;
-
-  entry.ptr = ptr;
-  entry.name = name;
-  entry.varType = INT;
-  mVarList.push_back ( entry );
-}
-//-----------------------------------------------------------------------------
 } // namespace

@@ -35,8 +35,14 @@ typedef enum  {RAPI_RANGEFINDER,
                RAPI_LIGHTS,
                RAPI_TEXTDISPLAY,
                RAPI_BINARYSENSORARRAY,
-               RAPI_SWITCHARRAY
+               RAPI_SWITCHARRAY,
+               RAPI_ANALOGSENSORARRAY
               } tRapiDeviceType;
+
+/**
+ * Mode for writing files
+ */
+typedef enum {OVERWRITE, APPEND} tWriteMode;
 
 } // namespace
 #endif

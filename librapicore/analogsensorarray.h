@@ -18,21 +18,50 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#ifndef RAPIANALOGSENSORARRAY_H
+#define RAPIANALOGSENSORARRAY_H
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
-#include "cbwallsensor.h"
-#include "cbcliffsensor.h"
-#include "cbovercurrentsensor.h"
-#include "cblowsidedriver.h"
-#include "cbdefinitions.h"
-#include "cbtopfiducialfinder.h"
-#include "cbfrontfiducialfinder.h"
-#include "cbphotosensor.h"
+#include "device.h"
+
+namespace Rapi
+{
+
+/**
+ * Abstract base class for sensor arrays with analog values
+ * @author Jens Wawerla
+ */
+class AAnalogSensorArray : public ADevice
+{
+  public:
+    /** Default destructor */
+    virtual ~AAnalogSensorArray();
+    /**
+     * Get device type
+     * @return device type
+     */
+    virtual tRapiDeviceType getDeviceType() { return RAPI_ANALOGSENSORARRAY; };
+    /**
+     * Prints the devices main information
+     */
+    virtual void print() const;
+    /**
+     * Gets the number available samples
+     * @return number of samples
+     */
+    virtual unsigned int getNumSamples() const;
+    /** Data */
+    double* mData;
+
+  protected:
+    /**
+     * Default constructor
+     * @param devName name of device
+     */
+    AAnalogSensorArray( std::string devName );
+    /** Number of samples */
+    unsigned int mNumSamples;
+};
+
+} // namespace
+
+#endif
