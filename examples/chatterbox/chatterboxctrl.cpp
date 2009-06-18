@@ -65,6 +65,8 @@ void CChatterboxCtrl::updateData ( float dt )
   mIr->print();
   mPhoto->print();
   mTopFiducial->print();
+  mTopFiducial->setFiducialSignal(255);
+  mFrontFiducial->setFiducialSignal(128);
   mFrontFiducial->print();
   //i = mLaser->getNumSamples() / 2;
   //printf("laser beam %d = %fm \n",i, mLaser->mRangeData[i].range);
