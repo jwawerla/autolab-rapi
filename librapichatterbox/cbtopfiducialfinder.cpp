@@ -74,7 +74,7 @@ int CCBTopFiducialFinder::init()
 //-----------------------------------------------------------------------------
 void CCBTopFiducialFinder::setFiducialSignal( int id )
 {
-  if ( id && ~255 ) {
+  if ( ( id < 0 ) ||  (id > 255 ) ) {
     fprintf( stderr, "Invalid fiducial ID %d; must be in [0..255].\n", id );
     return;
   }
