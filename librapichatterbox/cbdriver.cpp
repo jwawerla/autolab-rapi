@@ -340,21 +340,21 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
   cmdbuf[3] = ( unsigned char ) ( rad_mm >> 8 );
   cmdbuf[4] = ( unsigned char ) ( rad_mm & 0xFF );
 #else
-	int16_t vL, vR;
-    double v, w, r;
+  int16_t vL, vR;
+  double v, w, r;
 
-    v = vel.mXDot * 1e3;
-    w = vel.mYawDot * 1e3;
-    r = CREATE_AXLE_LENGTH / 2;
+  v = vel.mXDot * 1e3;
+  w = vel.mYawDot * 1e3;
+  r = CREATE_AXLE_LENGTH / 2;
 
-    vL = v - r * w;
-    vR = v + r * w;
+  vL = v - r * w;
+  vR = v + r * w;
 
-    cmdbuf[0] = CREATE_OPCODE_DRIVE_DIRECT;
-    cmdbuf[1] = (unsigned char)(vR >> 8);
-    cmdbuf[2] = (unsigned char)(vR & 0xff);
-    cmdbuf[3] = (unsigned char)(vL >> 8);
-    cmdbuf[4] = (unsigned char)(vL & 0xff);
+  cmdbuf[0] = CREATE_OPCODE_DRIVE_DIRECT;
+  cmdbuf[1] = ( unsigned char ) ( vR >> 8 );
+  cmdbuf[2] = ( unsigned char ) ( vR & 0xff );
+  cmdbuf[3] = ( unsigned char ) ( vL >> 8 );
+  cmdbuf[4] = ( unsigned char ) ( vL & 0xff );
 #endif
 
   if ( write ( mFd, cmdbuf, 5 ) < 0 ) {
@@ -464,6 +464,12 @@ int CCBDriver::readSensorData()
   if ( mCreateSensorPackage.overCurrents != 0 )
     PRT_WARN1 ( "OVER CURRENT -- OVER CURRENT code %d", mCreateSensorPackage.overCurrents );
 
+
+//CAVE:
+  printf ( "CLIFF %4d %4d %4d %4d \n", mCreateSensorPackage.cliffSignalLeft,
+           mCreateSensorPackage.cliffSignalFrontLeft,
+           mCreateSensorPackage.cliffSignalFrontRight,
+           mCreateSensorPackage.cliffSignalRight );
   return 1; // success
 
 }
@@ -625,10 +631,10 @@ int CCBDriver::setLowSideDriver ( unsigned char id, bool on )
 {
   unsigned char cmdBuf[2];
 
-  if ( not (( mCreateSensorPackage.oiMode == CB_MODE_SAFE ) ||
-            ( mCreateSensorPackage.oiMode == CB_MODE_FULL ) ) ) {
+  if ( not ( ( mCreateSensorPackage.oiMode == CB_MODE_SAFE ) ||
+             ( mCreateSensorPackage.oiMode == CB_MODE_FULL ) ) ) {
     PRT_WARN1 ( "Low side driver access is only available in SAFE "\
-                "or FULL mode (mode is %d)",  mCreateSensorPackage.oiMode);
+                "or FULL mode (mode is %d)",  mCreateSensorPackage.oiMode );
     return 0; // failure
   }
 
@@ -963,7 +969,7 @@ int CCBDriver::initI2c()
   return 1;  // success
 }
 //----------------------------------------------------------------------------
-int CCBDriver::setIrLed(unsigned char data)
+int CCBDriver::setIrLed ( unsigned char data )
 {
   unsigned char buffer[2];
 
@@ -1168,7 +1174,7 @@ int CCBDriver::isIrEnabled()
 //-----------------------------------------------------------------------------
 float CCBDriver::readPhotoSensor()
 {
-  return readLpfAdc(1);
+  return readLpfAdc ( 1 );
 }
 //-----------------------------------------------------------------------------
 int CCBDriver::readAdc ( unsigned char id )
