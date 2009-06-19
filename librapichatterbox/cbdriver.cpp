@@ -347,8 +347,8 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
   w = vel.mYawDot * 1e3;
   r = CREATE_AXLE_LENGTH / 2;
 
-  vL = v - r * w;
-  vR = v + r * w;
+  vL = (int16_t)( v - r * w);
+  vR = (int16_t)(v + r * w);
 
   cmdbuf[0] = CREATE_OPCODE_DRIVE_DIRECT;
   cmdbuf[1] = ( unsigned char ) ( vR >> 8 );
@@ -427,45 +427,45 @@ int CCBDriver::readSensorData()
   memcpy ( ( char* ) &mCreateSensorPackage, dataBuf, CREATE_SENSOR_PACKET_SIZE );
   // next we need to fix the byte order of data types with more then 1 byte
   mCreateSensorPackage.distance
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.distance );
+    = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.distance );
   mCreateSensorPackage.angle
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.angle );
+    = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.angle );
   mCreateSensorPackage.voltage
-  = ntohs ( mCreateSensorPackage.voltage );
+    = ntohs ( mCreateSensorPackage.voltage );
   mCreateSensorPackage.current
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.current );
+    = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.current );
   mCreateSensorPackage.batCapacity
-  = ntohs ( mCreateSensorPackage.batCapacity );
+    = ntohs ( mCreateSensorPackage.batCapacity );
   mCreateSensorPackage.batMaxCapacity
-  = ntohs ( mCreateSensorPackage.batMaxCapacity );
+    = ntohs ( mCreateSensorPackage.batMaxCapacity );
   mCreateSensorPackage.wallSignal
-  = ntohs ( mCreateSensorPackage.wallSignal );
+    = ntohs ( mCreateSensorPackage.wallSignal );
   mCreateSensorPackage.cliffSignalLeft
-  = ntohs ( mCreateSensorPackage.cliffSignalLeft );
-  mCreateSensorPackage.cliffSignalLeft
-  = ntohs ( mCreateSensorPackage.cliffSignalLeft );
+    = ntohs ( mCreateSensorPackage.cliffSignalLeft );
   mCreateSensorPackage.cliffSignalFrontLeft
-  = ntohs ( mCreateSensorPackage.cliffSignalFrontLeft );
+    = ntohs ( mCreateSensorPackage.cliffSignalFrontLeft );
   mCreateSensorPackage.cliffSignalFrontRight
-  = ntohs ( mCreateSensorPackage.cliffSignalFrontRight );
+    = ntohs ( mCreateSensorPackage.cliffSignalFrontRight );
   mCreateSensorPackage.cliffSignalRight
-  = ntohs ( mCreateSensorPackage.cliffSignalRight );
+    = ntohs ( mCreateSensorPackage.cliffSignalRight );
   mCreateSensorPackage.analogInput
-  = ntohs ( mCreateSensorPackage.analogInput );
+    = ntohs ( mCreateSensorPackage.analogInput );
   mCreateSensorPackage.velocity
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.velocity );
+    = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.velocity );
   mCreateSensorPackage.radius
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.radius );
+    = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.radius );
   mCreateSensorPackage.rightWheelVelocity
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.rightWheelVelocity );
+    = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.rightWheelVelocity );
   mCreateSensorPackage.leftWheelVelocity
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.leftWheelVelocity );
+    = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.leftWheelVelocity );
+ 
+  // mask out unused bytes and check for over current condition
+  if ( (mCreateSensorPackage.overCurrents & 0x1F) != 0 )
+    PRT_WARN1 ( "OVER CURRENT -- OVER CURRENT code %d",
+		mCreateSensorPackage.overCurrents );
 
-  if ( mCreateSensorPackage.overCurrents != 0 )
-    PRT_WARN1 ( "OVER CURRENT -- OVER CURRENT code %d", mCreateSensorPackage.overCurrents );
 
-
-//CAVE:
+  //CAVE:
   printf ( "CLIFF %4d %4d %4d %4d \n", mCreateSensorPackage.cliffSignalLeft,
            mCreateSensorPackage.cliffSignalFrontLeft,
            mCreateSensorPackage.cliffSignalFrontRight,
