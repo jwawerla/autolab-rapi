@@ -24,7 +24,7 @@
 CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
     : ARobotCtrl ( robot )
 {
-  printf("testing low side driver\n");
+  printf("testing low side 1 driver\n");
 
   mRobot->findDevice ( mPowerPack, "CB:powerpack" );
   mRobot->findDevice ( mDrivetrain, "CB:drivetrain" );
@@ -73,17 +73,17 @@ void CChatterboxCtrl::updateData ( float dt )
   //i = mLaser->getNumSamples() / 2;
   //printf("laser beam %d = %fm \n",i, mLaser->mRangeData[i].range);
 
-  mLowSideDriver->setSwitch(0, true);
+  //mLowSideDriver->setSwitch(0, true);
   //mLowSideDriver->setSwitch(2, true);
 
   if ( mWheelDrop->isAnyTriggered() ) {
     mDrivetrain->stop();
     mLights->setLight ( ALL_LIGHTS, RED );
-    //mLowSideDriver->setSwitch(1, false);
+    mLowSideDriver->setSwitch(1, false);
   }
   else {
     c++;
-    //mLowSideDriver->setSwitch(1, true);
+    mLowSideDriver->setSwitch(1, true);
     mLights->setLight ( ALL_LIGHTS, CRgbColor ( c, 125-c, 255-c ) );
     mLights->setBlink ( 5, true, 1.0 );
     mTextDisplay->setText ( "1" );
