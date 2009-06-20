@@ -31,7 +31,7 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mRobot->findDevice ( mBumper, "CB:bumper" );
   mRobot->findDevice ( mLights, "CB:lights" );
   mRobot->findDevice ( mWheelDrop, "CB:wheeldrop" );
-  mRobot->findDevice ( mLowSideDriver, "CB:lowsidedriver");
+  //mRobot->findDevice ( mLowSideDriver, "CB:lowsidedriver");
   //mRobot->findDevice ( mFrontFiducial, "CB:front_fiducial");
   //mRobot->findDevice ( mTopFiducial, "CB:top_fiducial");
   //  mRobot->findDevice ( mPhoto, "CB:photosensor");
@@ -71,17 +71,17 @@ void CChatterboxCtrl::updateData ( float dt )
   //i = mLaser->getNumSamples() / 2;
   //printf("laser beam %d = %fm \n",i, mLaser->mRangeData[i].range);
 
-  mLowSideDriver->setSwitch(0, true);
+  //mLowSideDriver->setSwitch(0, true);
   //mLowSideDriver->setSwitch(2, true);
 
   if ( mWheelDrop->isAnyTriggered() ) {
     mDrivetrain->stop();
     mLights->setLight ( ALL_LIGHTS, RED );
-    mLowSideDriver->setSwitch(1, false);
+    //mLowSideDriver->setSwitch(1, false);
   }
   else {
     c++;
-    mLowSideDriver->setSwitch(1, true);
+    //mLowSideDriver->setSwitch(1, true);
     mLights->setLight ( ALL_LIGHTS, CRgbColor ( c, 125-c, 255-c ) );
     mLights->setBlink ( 5, true, 1.0 );
     mTextDisplay->setText ( "1" );

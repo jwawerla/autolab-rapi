@@ -142,8 +142,8 @@ int CCBLights::setBlink ( int id, bool enabled, float freq )
 //----------------------------------------------------------------------------
 int CCBLights::setLight ( int id, CRgbColor color )
 {
-  if ( id == -1 ) {
-    for ( unsigned int i =0; i < mNumLights-1; i++ ) {
+  if ( id == ALL_LIGHTS ) {
+    for ( unsigned int i = 0; i < mNumLights-1; i++ ) {
       setLight ( i, color );
     }
     return 1;
