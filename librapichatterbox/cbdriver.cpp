@@ -669,6 +669,8 @@ int CCBDriver::setLowSideDriver ( unsigned char id, bool on )
   cmdBuf[0] = CREATE_OPCODE_LOW_SIDE_DRIVER;
   cmdBuf[1] = mLowSideDriverStatus;
 
+  printf("CBDriver::setLowSideDriver(%d, %d) %d\n",
+	 id, on, mLowSideDriverStatus);
   if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
     ERROR1 ( "Failed to send low side driver command: %s", strerror ( errno ) );
     return 0; // failure
