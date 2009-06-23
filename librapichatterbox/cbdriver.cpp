@@ -731,18 +731,18 @@ int CCBDriver::createPowerEnable( bool on )
   else
     toggleTime = CREATE_TOGGLE_OFF_TIME;
 
-  while (( isCreatePowerEnabled() == false ) &&
+  while (( isCreatePowerEnabled() != on ) &&
          ( i < NUM_POWER_TOGGLE_RETRY ) ) {
 
     if ( !createPowerToggle( toggleTime ) )
-      return 0;
+      return 0; // error while toggleing power line
     sleep( 4 );
     i++;
   }
 
-  if ( i == 10 ) {
+  if ( isCreatePowerEnabled() != on ) {
     ERROR0( "Can't turn Create ON/OFF!\n" );
-    return 0;
+    return 0; // error, this is not the result we wanted
   }
 
   return 1; //  success
