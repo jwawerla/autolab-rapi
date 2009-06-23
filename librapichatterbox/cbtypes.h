@@ -3,9 +3,10 @@
 #ifndef CB_TYPES_H
 #define CB_TYPES_H
 
-// Low side driver port to disable or enable laser
+/** Low side driver port to disable or enable laser */
 #define CB_LASER_POWER                   2
 
+/** IR constant for charging station */
 #define CB_RED_BUOY                    248
 #define CB_GREEN_BUOY                  244
 #define CB_FORCE_FIELD                 242
@@ -13,6 +14,13 @@
 #define CB_RED_BUOY_FORCE_FIELD        250
 #define CB_GREEN_BUOY_FORCE_FIELD      246
 #define CB_RED_GREEN_BUOY_FORCE_FIELD  254
+
+/** Time to keep the toggle line high for power on [us] */
+#define CREATE_TOGGLE_ON_TIME          400000
+/** Time to keep the toggle line high for power off [us] */
+#define CREATE_TOGGLE_OFF_TIME         25000
+/** Number of retries to toggle power, before giving up */
+#define NUM_POWER_TOGGLE_RETRY         10
 
 /**
  * Type definition of the creates sensor data package

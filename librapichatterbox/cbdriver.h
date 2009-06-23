@@ -244,8 +244,8 @@ class CCBDriver
      */
     int rotateStep();
     /**
-     * Enables or disables the create robot
-     * @param on true to turn it on, false to turn it off
+     * Enables the Create robot
+     * @param on true to enable, false to disable
      * @return 1 if successful, 0 otherwise
      */
     int createPowerEnable(bool on);
@@ -330,9 +330,10 @@ class CCBDriver
     float readLpfAdc(unsigned char id);
     /**
      * Toggles the creates power pin
+     * @param delay toggle time [ms]
      * @return 1 if successfull, 0 otherwise
      */
-    int createPowerToggle();
+    int createPowerToggle( uint delay );
     /**
      * Hardware reset of robostix atmega cpu
      * @return 1 if successfull, 0 otherwise
