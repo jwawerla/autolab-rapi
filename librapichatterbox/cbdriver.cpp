@@ -734,7 +734,7 @@ int CCBDriver::createPowerEnable( bool on )
   while (( isCreatePowerEnabled() != on ) &&
          ( i < NUM_POWER_TOGGLE_RETRY ) ) {
 
-    if ( !createPowerToggle( toggleTime ) )
+    if ( createPowerToggle( toggleTime ) == 0)
       return 0; // error while toggleing power line
     sleep( 4 );
     i++;
@@ -794,9 +794,11 @@ int CCBDriver::initPCA9634( unsigned char addr )
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-int CCBDriver::createPowerToggle( uint delay )
+int CCBDriver::createPowerToggle( unsigned int delay )
 {
   I2cSetSlaveAddress( mI2cDev, ROBOSTIX_ADDR, I2C_USE_CRC );
+
+  // Create: power pin toggle needs low - high transition
 
   // set power pin PC0 to "0" (port 2 pinmask 1)
   if ( I2C_IO_SetGPIO( mI2cDev, 2, 1, 0 ) == 0 ) {

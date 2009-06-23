@@ -5,7 +5,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librap
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/binarysensorarraywidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: librapigui/devicewidget.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/binarysensorarraywidget.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -120,7 +119,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/conso
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/consolewidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/devicewidget.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -244,7 +242,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/consolewidget.cpp.o: librapigui/../li
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/customdialog.cpp.o: librapigui/customdialog.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/customdialog.cpp.o: librapigui/customdialog.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/customdialog.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/customdialog.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/customdialog.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/customdialog.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -327,7 +324,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/customdialog.cpp.o: /usr/include/qt4/
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/databar.cpp.o: librapigui/databar.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/databar.cpp.o: librapigui/databar.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/databar.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/databar.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/databar.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/databar.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -423,7 +419,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: librapigui/./images/le
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: librapigui/./images/ledredon.xpm
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: librapigui/dataled.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: librapigui/dataled.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -515,7 +510,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/dataled.cpp.o: /usr/include/qt4/QtGui
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: librapigui/dataline.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: librapigui/dataline.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -610,7 +604,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/dataline.cpp.o: /usr/include/qt4/QtGu
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/devicewidget.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: librapigui/devicewidget.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidget.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -723,7 +716,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/da
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/devicewidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/devicewidgetlist.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: librapigui/devicewidgetlist.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/devicewidgetlist.cpp.o: /usr/include/qt4/QtCore/QIODevice
@@ -1103,7 +1095,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigu
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/drivetrain2dofwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/pose2dwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: librapigui/velocity2dwidget.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -1224,7 +1215,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigu
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/fiducialfinderwidget.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/fiducialfinderwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: librapigui/unicodechar.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/fiducialfinderwidget.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -1364,7 +1354,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/devicewidgetlis
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/gui.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/gui.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: librapigui/mainwindow.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o: /usr/include/qt4/QtCore/QIODevice
@@ -1760,7 +1749,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/mainwind
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/mainwindow.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/robotwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/variablemonitorwidget.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: /usr/include/qt4/QtCore/QIODevice
@@ -2152,7 +2140,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o: librapigui/../libra
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: librapigui/moc_dataled.cxx
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/QtCore/QPoint
@@ -2239,7 +2226,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataled.cxx.o: /usr/include/qt4/Q
 
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: librapigui/dataline.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: librapigui/moc_dataline.cxx
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/QtCore/QPoint
@@ -2329,7 +2315,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_dataline.cxx.o: /usr/include/qt4/
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/dataled.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/devicewidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: librapigui/moc_devicewidget.cxx
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidget.cxx.o: /usr/include/qt4/QtCore/QPoint
@@ -2442,7 +2427,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigu
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/devicewidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/devicewidgetlist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: librapigui/moc_devicewidgetlist.cxx
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_devicewidgetlist.cxx.o: /usr/include/qt4/QtCore/QIODevice
@@ -2820,7 +2804,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: libra
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/devicewidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/fiducialfinderwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: librapigui/moc_fiducialfinderwidget.cxx
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_fiducialfinderwidget.cxx.o: /usr/include/qt4/QtCore/QPoint
@@ -2958,7 +2941,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/devi
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/devicewidgetlist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/mainwindow.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: librapigui/moc_mainwindow.cxx
-librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o: /usr/include/qt4/QtCore/QIODevice
@@ -3349,7 +3331,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: librapigui/datali
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: librapigui/pose2dwidget.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: librapigui/pose2dwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: librapigui/unicodechar.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/pose2dwidget.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -3453,7 +3434,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/dev
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/powerpackwidget.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/powerpackwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: librapigui/unicodechar.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/powerpackwidget.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -3572,7 +3552,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/d
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/devicewidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/rangefinderwidget.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: librapigui/rangefinderwidget.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/rangefinderwidget.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -3715,7 +3694,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/robotwi
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/textdisplaywidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/variablemonitorwidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: librapigui/velocity2dwidget.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o: /usr/include/qt4/QtCore/QIODevice
@@ -4117,7 +4095,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/d
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/devicewidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/textdisplaywidget.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: librapigui/textdisplaywidget.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/textdisplaywidget.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -4234,7 +4211,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapig
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/devicewidget.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/variablemonitorwidget.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: librapigui/variablemonitorwidget.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/variablemonitorwidget.cpp.o: /usr/include/qt4/QtCore/QPoint
@@ -4367,7 +4343,6 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: librapigui/da
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: librapigui/unicodechar.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: librapigui/velocity2dwidget.cpp
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: librapigui/velocity2dwidget.h
-librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/Gentoo/gentoo-qconfig.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/Qt3Support/q3cstring.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/Qt3Support/q3valuelist.h
 librapigui/CMakeFiles/autolab-rapi-gui.dir/velocity2dwidget.cpp.o: /usr/include/qt4/QtCore/QPoint

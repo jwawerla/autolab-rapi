@@ -333,7 +333,7 @@ class CCBDriver
      * @param delay toggle time [ms]
      * @return 1 if successfull, 0 otherwise
      */
-    int createPowerToggle( uint delay );
+    int createPowerToggle( unsigned int delay );
     /**
      * Hardware reset of robostix atmega cpu
      * @return 1 if successfull, 0 otherwise
