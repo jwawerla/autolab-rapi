@@ -126,8 +126,16 @@
 #define VREF 5.0
 
 // ports for 7 segment display
-#define DDRA 58
+
+#define DDRC  52
+#define PORTC 53
+
+#define DDRB  55
+#define PORTB 56
+
+#define DDRA  58   // 0x3A
 #define PORTA 59
+
 
 // Coefficients for IR voltage to distance conversion
 #define K0 -0.033305

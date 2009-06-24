@@ -87,18 +87,18 @@ int CCBDriver::init()
   PRT_STATUS( "Initializing IRobot Create..." );
 
   // lets reset robotstix, just in case
-  if ( resetRobotStix() == 0 ) {
+  if ( resetRobostix() == 0 ) {
     ERROR0( "Failed to reset robotstix" );
     return 0; // failure
   }
-  sleep( 1 );
-
+  sleep( 2 ); // give robostix time to boot
+ 
   // init all the robostix and PCA9634 stuff
   if ( initI2c() == 0 )
     return 0; // failure
 
   // power create up
-  if ( createPowerEnable (true ) == 0 ) {
+  if ( createPowerEnable ( true ) == 0 ) {
     ERROR0( "Failed to power up Create" );
     return 0; // failure
   }
@@ -115,11 +115,11 @@ int CCBDriver::openPort( const char* port )
   PRT_STATUS( "Opening port..." );
 
   if (( mFd = open( port, O_RDWR | O_NONBLOCK, S_IRUSR | S_IWUSR ) ) < 0 ) {
-    ERROR2( "Failed to open port %s: ", port, strerror( errno ) );
+    ERROR2( "Failed to open port %s: %s", port, strerror( errno ) );
     return 0; // failure
   }
 
-  if ( tcflush( mFd, TCIFLUSH ) < 0 ) {
+  if ( tcflush( mFd, TCIOFLUSH ) < 0 ) {
     ERROR1( "IO error: %s", strerror( errno ) );
     return 0; // failure
   }
@@ -194,23 +194,24 @@ int CCBDriver::startCreate()
     ERROR1( "IO error: %s", strerror( errno ) );
     return 0;
   }
-  //sleep(3);
+  sleep(1);
 
   do {
+    loopCount ++;
+
     // set mode to SAFE
     if ( setOIMode( CB_MODE_SAFE ) == 0 ) {
       ERROR0( "Failed to set SAFE mode" );
       return 0;
     }
-    usleep( CREATE_DELAY_MODECHANGE_MS * 1000 );
-
+    //usleep( CREATE_DELAY_MODECHANGE_MS * 1000 );
+    sleep(2);
     // try to read data
     if ( readSensorData() == 0 ) {
       ERROR0( "Connected but failed to read 1. data package" );
       return 0;
     }
-    loopCount ++;
-    if ( loopCount > 10 ) {
+    if ( loopCount > 10 ) {      
       ERROR0( "Failed to enable SAFE mode on Create" );
       return 0;
     }
@@ -257,7 +258,7 @@ int CCBDriver::setOIMode( tOIMode mode )
 
   switch ( mode ) {
     case CB_MODE_OFF:
-      PRT_WARN0( "This mode is currently not implemented, switching to passive" );
+      PRT_WARN0( "This mode is not implemented, switching to passive" );
       PRT_MSG0( 7, "Mode changed to OFF" );
       cmdbuf[0] = CREATE_OPCODE_START;
       break;
@@ -726,6 +727,9 @@ int CCBDriver::createPowerEnable( bool on )
   int i = 0;
   unsigned int toggleTime;
 
+  if ( on == isCreatePowerEnabled() )
+    return 1; // success, we are already in the correct power state
+
   if ( on )
     toggleTime = CREATE_TOGGLE_ON_TIME;
   else
@@ -736,7 +740,7 @@ int CCBDriver::createPowerEnable( bool on )
 
     if ( createPowerToggle( toggleTime ) == 0)
       return 0; // error while toggleing power line
-    sleep( 4 );
+    sleep( 2 ); 
     i++;
   }
 
@@ -745,7 +749,8 @@ int CCBDriver::createPowerEnable( bool on )
     return 0; // error, this is not the result we wanted
   }
 
-  return 1; //  success
+  sleep(4); // wait for power change to take effect 
+  return 1; // success
 }
 //---------------------------------------------------------------------------
 bool CCBDriver::isCreatePowerEnabled()
@@ -807,7 +812,7 @@ int CCBDriver::createPowerToggle( unsigned int delay )
   }
   usleep( delay );
   /// set power pin PC0 to "1" (port 2 pinmask 1)
-  if ( I2C_IO_SetGPIO( mI2cDev, 2, 1, 1 ) == 0 ) {
+  if ( I2C_IO_SetGPIO( mI2cDev, 2, 1, 0xFF ) == 0 ) {
     ERROR0( "failed to toggle Create power pin (off)" );
     return 0; // failure
   }
@@ -874,18 +879,30 @@ int CCBDriver::initI2c()
     return 0; // failure
   }
 
-  // configure DDRA port as output
+  // configure DDRA port as output (0xFF)
   if ( I2C_IO_WriteReg8( mI2cDev, DDRA, 0xFF ) == 0 ) {
-    ERROR0( "Faile to setup 7 seg display" );
+    ERROR0( "Failed to setup 7 seg display" );
     return 0; // failure
   }
 
   // clear 7 seg display
   set7SegDisplay( 0 );
 
+
+  // initializing PORT[A, C]  to 0
+  if ( I2C_IO_WriteReg8( mI2cDev, PORTA, 0x00 ) == 0 ) {
+    ERROR0( "Failed to reset PORTA" );
+    return 0; // failure
+  }
+  if ( I2C_IO_WriteReg8( mI2cDev, PORTC, 0x00 ) == 0 ) {
+    ERROR0( "Failed to reset PORTC" );
+    return 0; // failure
+  }
+  
+
   //*********************************************************
   // configure ir enable pin as output (PC2 = port 2 pinmask 4)
-  if ( I2C_IO_SetGPIODir( mI2cDev, 2, 4, 4 ) == 0 ) {
+  if ( I2C_IO_SetGPIODir( mI2cDev, 2, 4, 0xff ) == 0 ) {
     ERROR0( "Failed to setup IR enable pin" );
     return 0; // failure
   }
@@ -906,17 +923,23 @@ int CCBDriver::initI2c()
 
   //*********************************************************
   // configure create power toggle pin as output (PC0 = port 2 pinmask 1)
-  if ( I2C_IO_SetGPIODir( mI2cDev, 2, 1, 1 ) == 0 ) {
+  if ( I2C_IO_SetGPIODir( mI2cDev, 2, 1, 0xff ) == 0 ) {
     ERROR0( "Failed to setup power toggle pin" );
     return 0; // failure
   }
 
-  // set power pin "0" (PC0 = port 2 pinmask 1)
-  if ( I2C_IO_SetGPIO( mI2cDev, 2, 1, 0 ) == 0 ) {
-    ERROR0( "Failed to clear Create power pin" );
+  //*********************************************************
+  // configure create baud rate toggle pin as output 
+  // (PC4 = port 2 pinmask 16)
+  if ( I2C_IO_SetGPIODir( mI2cDev, 2, 16, 0xff ) == 0 ) {
+    ERROR0( "Failed to setup baud rate toggle pin" );
     return 0; // failure
   }
-
+  // set baud rate pin "1" (PC0 = port 2 pinmask 16)
+  if ( I2C_IO_SetGPIO( mI2cDev, 2, 16, 0xff ) == 0 ) {
+    ERROR0( "Failed to set Create baud rate pin" );
+    return 0; // failure
+  }
 
   //****************************************
   // RGB stuff
@@ -1273,7 +1296,7 @@ float CCBDriver::readDistance( unsigned char id )
   return distance;
 }
 //---------------------------------------------------------------------------
-int CCBDriver::resetRobotStix()
+int CCBDriver::resetRobostix()
 {
   int fd;
 
@@ -1287,7 +1310,8 @@ int CCBDriver::resetRobotStix()
     ERROR1( "Failed to reset robotstix: %s", strerror( errno ) );
     return 0;
   }
-  sleep( 1 );
+  usleep( (int)(500 * 1e3) ); 
+
   // power on
   if ( ioctl( fd, ROBOSTIX_IOCTL_POWER_VCC5, 1 ) != 0 ) {
     ERROR1( "Failed to reset robotstix: %s", strerror( errno ) );

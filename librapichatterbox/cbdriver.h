@@ -338,7 +338,7 @@ class CCBDriver
      * Hardware reset of robostix atmega cpu
      * @return 1 if successfull, 0 otherwise
      */
-    int resetRobotStix();
+    int resetRobostix();
 
     /** Type definition for led data address stucture */
     typedef struct  {
