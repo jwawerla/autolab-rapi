@@ -60,7 +60,7 @@ void CCBCliffSensor::updateData()
 
   // any triggers ?
   for ( unsigned int i =0; i < mNumSamples; i++ ) {
-    if ( mBitData[0] )
+    if ( mBitData[i] )
       mFgAnyTriggered = true;
   }
 }
