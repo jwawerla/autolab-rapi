@@ -25,6 +25,8 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
     : ARobotCtrl ( robot )
 {
   mTime = 0.0;
+  mMaxPhoto = 0.0;
+  mRedLedId = 0;
   mFgRunDemo = false;
 
   mRobot->findDevice ( mPowerPack, "CB:powerpack" );
@@ -51,7 +53,7 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mTextDisplay->setText ( "1" );
 
   // set up a heart beat with 1Hz
-  mLights->setBlink ( 5, true, 1.0 );
+  mLights->setBlink ( DOT, true, 1.0 );
 
   mLimit.setLimit ( 0.0, 0.5 );
 }
@@ -96,6 +98,33 @@ void CChatterboxCtrl::updateData ( float dt )
 //-----------------------------------------------------------------------------
 void CChatterboxCtrl::demo()
 {
+  char green;
+
+  //***************************************************
+  // Demo for RGB leds
+  for (unsigned int i = 0; i < mIr->getNumSamples(); i++) {
+    if (mIr->mRangeData[i].range < 0.7)
+      mLights->setLight(i, RED);
+    else {
+      green = 255 * (1 - mIr->mRangeData[i].range / mIr->getMaxRange() );
+      mLights->setLight(i, 0, green, 0);
+    }
+  }
+
+
+  //***************************************************
+  // Demo for photo sensor
+  mMaxPhoto = max( mMaxPhoto, mPhoto->mData[0] );
+
+  if (mPhoto->mData[0] < 0.5 * mMaxPhoto) {
+    if ( isModAboutZero( mTime, 2.0) ) {
+      mRedLedId ++;
+      if (mRedLedId > 4)
+        mRedLedId = 0;
+      mLights->setLight(mRedLedId, BLUE);
+    }
+  }
+
 }
 //-----------------------------------------------------------------------------
 void CChatterboxCtrl::obstacleAvoid()

@@ -28,6 +28,8 @@
 namespace Rapi
 {
 
+const int DOT = 5;
+
 /**
  * This class implements control for the rgb leds and the display of chatterbox
  * The rgb led are addressed by id 0..4 and id 5 can be used to address the dot
@@ -80,7 +82,6 @@ class CCBLights : public ALights
      * @param freq to be set [Hz]
      */
     virtual int setBlink(int id, bool enabled, float freq);
-
 
   protected:
     typedef struct  {

@@ -81,11 +81,16 @@ class CChatterboxCtrl : public ARobotCtrl
     ABinarySensorArray* mButton;
     /** Some limit */
     CLimit mLimit;
+
+  private:
     /** Time since start of controller [s] */
     float mTime;
     /** Flag if we should run the demo or not */
     bool mFgRunDemo;
-
+    /** Max photo value */
+    float mMaxPhoto;
+    /** Red Led index */
+    unsigned int mRedLedId;
 };
 
 #endif

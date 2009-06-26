@@ -27,11 +27,11 @@
 namespace Rapi
 {
 
-const int DOT = 5;
+
 
 //---------------------------------------------------------------------------
 CCBLights::CCBLights ( CCBDriver* cbDriver, std::string devName )
-    : ALights ( devName )
+  : ALights ( devName )
 {
   mCBDriver = cbDriver;
 
