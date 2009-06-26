@@ -235,7 +235,7 @@ int CCBDriver::startCreate()
   return 1;
 }
 //--------------------------------------------------------------------------
-const char* CCBDriver::getOiModeString()
+const char* CCBDriver::getOiModeString() const
 {
   switch ( mCreateSensorPackage.oiMode ) {
     case CB_MODE_OFF:     return "OFF";
@@ -247,7 +247,7 @@ const char* CCBDriver::getOiModeString()
   return "Unknown";
 }
 //--------------------------------------------------------------------------
-tOIMode CCBDriver::getOIMode()
+tOIMode CCBDriver::getOIMode()  const
 {
   return ( tOIMode ) mCreateSensorPackage.oiMode;
 }
@@ -461,7 +461,7 @@ int CCBDriver::readSensorData()
 
 }
 //---------------------------------------------------------------------------
-bool CCBDriver::getCliffSensor( tCliffSensor id )
+bool CCBDriver::getCliffSensor( tCliffSensor id )  const
 {
   switch ( id ) {
     case CB_ALL_CLIFF:
@@ -531,23 +531,23 @@ int CCBDriver::resetCreate()
   return 1;
 }
 //----------------------------------------------------------------------------
-bool CCBDriver::bumper()
+bool CCBDriver::bumper()  const
 {
   return ( mCreateSensorPackage.bumpsWheel & CB_LEFT_BUMPER ) ||
          ( mCreateSensorPackage.bumpsWheel & CB_RIGHT_BUMPER );
 }
 //----------------------------------------------------------------------------
-bool CCBDriver::leftBumper()
+bool CCBDriver::leftBumper() const
 {
   return ( mCreateSensorPackage.bumpsWheel & CB_LEFT_BUMPER );
 }
 //----------------------------------------------------------------------------
-bool CCBDriver::rightBumper()
+bool CCBDriver::rightBumper() const
 {
   return ( mCreateSensorPackage.bumpsWheel & CB_RIGHT_BUMPER );
 }
 //----------------------------------------------------------------------------
-bool CCBDriver::wheelDrop()
+bool CCBDriver::wheelDrop() const
 {
   if ( mCreateSensorPackage.bumpsWheel >= 4 )
     return true;
@@ -555,32 +555,32 @@ bool CCBDriver::wheelDrop()
   return false;
 }
 //----------------------------------------------------------------------------
-bool CCBDriver::leftWheelDrop()
+bool CCBDriver::leftWheelDrop() const
 {
   return ( mCreateSensorPackage.bumpsWheel & CB_LEFT_WHEEL_DROP );
 }
 //----------------------------------------------------------------------------
-bool CCBDriver::rightWheelDrop()
+bool CCBDriver::rightWheelDrop() const
 {
   return ( mCreateSensorPackage.bumpsWheel & CB_RIGHT_WHEEL_DROP );
 }
 //----------------------------------------------------------------------------
-bool CCBDriver::casterWheelDrop()
+bool CCBDriver::casterWheelDrop() const
 {
   return ( mCreateSensorPackage.bumpsWheel & CB_CASTER_WHEEL_DROP );
 }
 //----------------------------------------------------------------------------
-bool CCBDriver::leftWheelOverCurrent()
+bool CCBDriver::leftWheelOverCurrent() const
 {
   return ( mCreateSensorPackage.overCurrents & CB_OVERCURRENT_LEFT_WHEEL );
 }
 //----------------------------------------------------------------------------
-bool CCBDriver::rightWheelOverCurrent()
+bool CCBDriver::rightWheelOverCurrent() const
 {
   return ( mCreateSensorPackage.overCurrents & CB_OVERCURRENT_RIGHT_WHEEL );
 }
 //----------------------------------------------------------------------------
-bool CCBDriver::lowSideDriverOverCurrent( unsigned char id )
+bool CCBDriver::lowSideDriverOverCurrent( unsigned char id ) const
 {
   switch ( id ) {
     case 0:
@@ -592,6 +592,22 @@ bool CCBDriver::lowSideDriverOverCurrent( unsigned char id )
     default:
       ERROR1( "Low side driver id %d out of bounds [0..2]", id );
   } // switch
+  return false;
+}
+//---------------------------------------------------------------------------
+bool CCBDriver::isPlayButtonPressed() const
+{
+  if ( mCreateSensorPackage.button & CB_PLAY_BUTTON_MASK)
+    return true;
+
+  return false;
+}
+//---------------------------------------------------------------------------
+bool CCBDriver::isAdvanceButtonPressed() const
+{
+  if ( mCreateSensorPackage.button & CB_ADVACNE_BUTTON_MASK)
+    return true;
+
   return false;
 }
 //---------------------------------------------------------------------------

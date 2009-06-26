@@ -19,6 +19,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 #include "cbovercurrentsensor.h"
+#include "utilities.h"
 #include <assert.h>
 
 namespace Rapi
@@ -48,21 +49,24 @@ CCBOverCurrentSensor::~CCBOverCurrentSensor()
   }
 }
 //-----------------------------------------------------------------------------
-void CCBOverCurrentSensor::updateData()
+void CCBOverCurrentSensor::updateData( )
 {
-  mFgAnyTriggered = false;
+  if ( mFgEnabled ) {
+    mFgAnyTriggered = false;
 
-  // fill data structures
-  mBitData[0] = mCBDriver->leftWheelOverCurrent();
-  mBitData[1] = mCBDriver->rightWheelOverCurrent();
-  mBitData[2] = mCBDriver->lowSideDriverOverCurrent(0);
-  mBitData[3] = mCBDriver->lowSideDriverOverCurrent(1);
-  mBitData[4] = mCBDriver->lowSideDriverOverCurrent(2);
+    // fill data structures
+    mBitData[0] = mCBDriver->leftWheelOverCurrent();
+    mBitData[1] = mCBDriver->rightWheelOverCurrent();
+    mBitData[2] = mCBDriver->lowSideDriverOverCurrent ( 0 );
+    mBitData[3] = mCBDriver->lowSideDriverOverCurrent ( 1 );
+    mBitData[4] = mCBDriver->lowSideDriverOverCurrent ( 2 );
 
-  // any triggers ?
-  for (unsigned int i = 0; i < mNumSamples; i++) {
-    if (mBitData[i] )
-     mFgAnyTriggered = true;
+    // any triggers ?
+    for ( unsigned int i = 0; i < mNumSamples; i++ ) {
+      if ( mBitData[i] )
+        mFgAnyTriggered = true;
+    }
+    mTimeStamp = timeStamp();
   }
 }
 //-----------------------------------------------------------------------------

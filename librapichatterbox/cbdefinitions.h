@@ -115,6 +115,9 @@
 #define CB_WAITING                     0x04
 #define CB_CHARGING_FAULT              0x05
 
+#define CB_PLAY_BUTTON_MASK            0x01
+#define CB_ADVACNE_BUTTON_MASK         0x04
+
 //---------------------------------------------------------------------------
 // CB mainboard definitions
 //---------------------------------------------------------------------------

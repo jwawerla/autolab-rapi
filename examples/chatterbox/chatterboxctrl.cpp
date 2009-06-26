@@ -34,12 +34,12 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mRobot->findDevice ( mLights, "CB:lights" );
   mRobot->findDevice ( mWheelDrop, "CB:wheeldrop" );
   mRobot->findDevice ( mLowSideDriver, "CB:lowsidedriver");
+  mRobot->findDevice ( mButton, "CB:button");
   //mRobot->findDevice ( mFrontFiducial, "CB:front_fiducial");
   //mRobot->findDevice ( mTopFiducial, "CB:top_fiducial");
-  //  mRobot->findDevice ( mPhoto, "CB:photosensor");
+  //mRobot->findDevice ( mPhoto, "CB:photosensor");
   //mRobot->findDevice ( mLaser, "CB:laser" );
 
-  mFg.setRobot(mRobot);
   if ( rapiError->hasError() ) {
     rapiError->print();
     exit ( -1 );
@@ -64,6 +64,7 @@ void CChatterboxCtrl::updateData ( float dt )
   static unsigned char c = 0;
   //int i;
 
+  mButton->print();
   mIr->print();
   //mPhoto->print();
   //mTopFiducial->print();

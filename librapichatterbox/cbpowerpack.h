@@ -86,7 +86,7 @@ class CCBPowerPack : public APowerPack
      * This method gets called by the framework every step to update
      * the sensor data
      */
-    virtual void updateData();
+    virtual void updateData ( );
     /** HAL of the chatterbox */
     CCBDriver* mCBDriver;
 

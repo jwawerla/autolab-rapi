@@ -43,10 +43,10 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
 
   public:
     /**
-    * Default constructor
-    * @param driver chatterbox driver
-    * @param devName name of device
-    */
+     * Default constructor
+     * @param driver chatterbox driver
+     * @param devName name of device
+     */
     CCBDrivetrain2dof ( CCBDriver* driver, std::string devName );
     /** Default destructor */
     virtual ~CCBDrivetrain2dof();
@@ -71,7 +71,7 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
      * @param velocity forward positive, backward negative [m/s]
      * @param turnrate positve counterclockwise, negative clockwise [rad/s]
      */
-    virtual void setVelocityCmd( const float velocity, const float turnrate );
+    virtual void setVelocityCmd ( const float velocity, const float turnrate );
     /**
      * Prints the devices main information
      */
@@ -86,7 +86,7 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
      * </STRONG>
      * @param mode to be used as the default
      */
-    void setDefaultOIMode(tOIMode mode);
+    void setDefaultOIMode ( tOIMode mode );
     /**
      * Actives one of the preprogrammed demos of the Create
      * <STRONG>
@@ -97,7 +97,7 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
      * @param demo to activate
      * @return 1 if successfull, 0 otherwise
      */
-    int activateDemo(tDemo demo);
+    int activateDemo ( tDemo demo );
     /**
      * Gets the open interface mode of the Create
      * <STRONG>
@@ -108,11 +108,10 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
      * @return mode
      */
     tOIMode getOIMode();
-
-	/**
-	 * Get this robot's CB odometry
-	 */
-	virtual COdometry *getOdometry() const { return mOdometry; }
+    /**
+     * Get this robot's CB odometry
+     */
+    virtual COdometry *getOdometry() const { return mOdometry; }
 
   protected:
     /**
@@ -132,8 +131,8 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
     float mMaxTurnRateDelta;
     /** Velocity command from previous time step */
     CVelocity2d mPrevVelocityCmd;
-	/** Odometry */
-	CCBOdometry *mOdometry;
+    /** Odometry */
+    CCBOdometry *mOdometry;
 };
 
 } // namespace

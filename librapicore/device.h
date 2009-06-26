@@ -76,17 +76,17 @@ class ADevice
      * Gets the name of a gui this device can be visualized
      * @return name of gui
      */
-    virtual std::string getGuiName() { return "nogui";};
+    virtual std::string getGuiName() { return "nogui"; };
     /**
      * Gets the time stamp of the last data set
      * @return time stamp
      */
-    double getTimeStamp();
+    double getTimeStamp() const;
     /**
      * Gets the pose of the device relative to its parent
      * @return pose
      */
-    CPose3d getRelativePose();
+    CPose3d getRelativePose() const;
     /**
      * Adds an data update observer to this device. All connected observers
      * are notified in case of newly available data

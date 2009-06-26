@@ -107,7 +107,7 @@ void CStageDrivetrain2dof::updateData()
     // so we simply assume it is the commanded velocity
     mVelocityMeas = mVelocityCmd;
     time = mTimeStamp;
-    mTimeStamp = mStgPosition->GetWorld()->SimTimeNow() / 1e6;
+    mTimeStamp = mStgPosition->GetWorld()->GetSimInterval() / 1e6;
     mFgStalled = mStgPosition->Stalled();
 
     if (mFgStalled)

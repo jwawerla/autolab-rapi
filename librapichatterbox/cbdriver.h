@@ -74,12 +74,12 @@ class CCBDriver
      * Gets the open interface mode of create as a string
      * @return mode in text form
      */
-    const char* getOiModeString();
+    const char* getOiModeString() const;
     /**
      * Gets the open interface mode of create
      * @return mode
      */
-    tOIMode getOIMode();
+    tOIMode getOIMode() const;
     /**
      * Closes the conection to the create
      * @return 1 successfull, 0 otherwise
@@ -115,60 +115,70 @@ class CCBDriver
      * @param id of cliff sensor
      * @return reading true if cliff false otherwise
      */
-    bool getCliffSensor(tCliffSensor id);
+    bool getCliffSensor(tCliffSensor id) const;
+    /**
+     * Checks if the Creates play button is pressed
+     * @return true if pressed, false otherwise
+     */
+    bool isPlayButtonPressed() const;
+    /**
+     * Checks if the Creates advance button is pressed
+     * @return true if pressed, false otherwise
+     */
+    bool isAdvanceButtonPressed() const;
     /**
      * Checks if any wheel was dropped
      * @return true if any wheel was dropped
      */
-    bool wheelDrop();
+    bool wheelDrop() const;
     /**
      * Checks if the left wheel was dropped
      * @return true if the left wheel was dropped
      */
-    bool leftWheelDrop();
+    bool leftWheelDrop() const;
     /**
      * Checks if the right wheel was dropped
      * @return true if the right wheel was dropped
      */
-    bool rightWheelDrop();
+    bool rightWheelDrop() const;
     /**
      * Checks if the caster wheel was dropped
      * @return true if the caster wheel was dropped
      */
-    bool casterWheelDrop();
+    bool casterWheelDrop() const;
     /**
      * Checks if any bumper was hit
      * @return true if bumper activated
      */
-    bool bumper();
+    bool bumper() const;
     /**
      * Checks if left bumper was hit
      * @return true if left bumper activated
      */
-    bool leftBumper();
+    bool leftBumper() const;
     /**
      * Checks if right bumper was hit
      * @return true if right bumper activated
      */
-    bool rightBumper();
+    bool rightBumper() const;
     /**
      * Checks if the left wheel has an over current condition. Note
      * the result is based on the last call of readSensorData()
      * @return true if over current, false other wise
      */
-    bool leftWheelOverCurrent();
+    bool leftWheelOverCurrent() const;
     /**
      * Checks if the right wheel has an over current condition. Note
      * the result is based on the last call of readSensorData()
      * @return true if over current, false other wise
      */
-    bool rightWheelOverCurrent();
+    bool rightWheelOverCurrent() const;
     /**
      * Checks if the id low side driver an over current condition. Note
      * the result is based on the last call of readSensorData()
      * @return true if over current, false other wise
      */
-    bool lowSideDriverOverCurrent(unsigned char id);
+    bool lowSideDriverOverCurrent(unsigned char id) const;
     /**
      * Sets the Create leds
      * @param advance true = on, false = off

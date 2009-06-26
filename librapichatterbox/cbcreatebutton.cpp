@@ -18,18 +18,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-#include "cbbumper.h"
+#include "cbcreatebutton.h"
 #include "utilities.h"
 #include "assert.h"
 
 namespace Rapi {
 
 //-----------------------------------------------------------------------------
-CCBBumper::CCBBumper(CCBDriver* cbDriver, std::string devName)
+CCBCreateButton::CCBCreateButton(CCBDriver* driver, std::string devName )
  : ABinarySensorArray(devName)
 {
-  assert(cbDriver);
-  mCBDriver = cbDriver;
+  assert(driver);
+  mCBDriver = driver;
 
   mNumSamples = 2;
   mBitData = new bool[mNumSamples];
@@ -40,7 +40,7 @@ CCBBumper::CCBBumper(CCBDriver* cbDriver, std::string devName)
   setEnabled(true);
 }
 //-----------------------------------------------------------------------------
-CCBBumper::~CCBBumper()
+CCBCreateButton::~CCBCreateButton()
 {
   if ( mBitData ) {
     delete[] mBitData;
@@ -52,32 +52,38 @@ CCBBumper::~CCBBumper()
   }
 }
 //-----------------------------------------------------------------------------
-void CCBBumper::setEnabled ( bool enable )
+int CCBCreateButton::init()
+{
+  // nothing to do
+  return 1; // success
+}
+//-----------------------------------------------------------------------------
+void CCBCreateButton::setEnabled ( bool enable )
 {
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-int CCBBumper::init()
-{
-  return 1; // success
-}
-//-----------------------------------------------------------------------------
-void CCBBumper::updateData()
+void CCBCreateButton::updateData()
 {
   mFgAnyTriggered = false;
 
   if ( mFgEnabled == true ) {
-     mBitData[0] = mCBDriver->rightBumper();
+     mBitData[0] = mCBDriver->isPlayButtonPressed();
      if (mBitData[0])
        mFgAnyTriggered = true;
 
-     mBitData[1] = mCBDriver->leftBumper();
+     mBitData[1] = mCBDriver->isAdvanceButtonPressed();
      if (mBitData[1])
        mFgAnyTriggered = true;
 
     // update time stamp of this measurement
     mTimeStamp = timeStamp();
   }
+}
+//-----------------------------------------------------------------------------
+void CCBCreateButton::print() const
+{
+  printf("CCBCreateButton: play=%d advance=%d \n", mBitData[0], mBitData[1]);
 }
 //-----------------------------------------------------------------------------
 

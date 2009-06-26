@@ -18,22 +18,61 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#ifndef RAPICBCREATEBUTTON_H
+#define RAPICBCREATEBUTTON_H
 
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
-#include "cbwallsensor.h"
-#include "cbcliffsensor.h"
-#include "cbovercurrentsensor.h"
-#include "cblowsidedriver.h"
-#include "cbdefinitions.h"
-#include "cbtopfiducialfinder.h"
-#include "cbfrontfiducialfinder.h"
-#include "cbphotosensor.h"
-#include "cbcreatebutton.h"
+#include "binarysensorarray.h"
+#include "cbdriver.h"
+namespace Rapi
+{
+
+/**
+ * Class for accessing the creates buttons
+ * 0 - play button
+ * 1 - advance button
+ * @author Jens Wawerla
+ */
+class CCBCreateButton : public ABinarySensorArray
+{
+    /** We are friends with our robot, so we get updated */
+    friend class CCBRobot;
+
+  public:
+    /**
+     * Default constructor
+     * @param driver chatterbox driver
+     * @param devName name of device
+     */
+    CCBCreateButton ( CCBDriver* driver, std::string devName );
+    /** Default destructor */
+    ~CCBCreateButton();
+    /**
+      * Initializes the device
+      * @param return 1 if success 0 otherwise
+      */
+    virtual int init();
+    /**
+     * Enables or disables the device
+     * @param enable = true to enable, false to disable
+     */
+    virtual void setEnabled ( bool enable );
+    /**
+    * Prints the devices main information
+    */
+    virtual void print() const;
+
+  protected:
+    /**
+     * This method gets called by the framework every step to update
+     * the sensor data
+     */
+    virtual void updateData();
+
+  private:
+    /** Hardware driver of chatterbox */
+    CCBDriver* mCBDriver;
+};
+
+} // namespace
+
+#endif

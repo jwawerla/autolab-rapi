@@ -73,10 +73,11 @@ class CChatterboxCtrl : public ARobotCtrl
     AFiducialFinder* mFrontFiducial;
     /** Photo sensor */
     AAnalogSensorArray* mPhoto;
+    /** Create button */
+    ABinarySensorArray* mButton;
     /** Some limit */
     CLimit mLimit;
-    /** Some rapi variable */
-    CRapiVariable<bool> mFg;
+
 };
 
 #endif

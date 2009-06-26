@@ -57,12 +57,12 @@ std::string ADevice::getName() const
   return mDeviceName;
 }
 //-----------------------------------------------------------------------------
-double ADevice::getTimeStamp()
+double ADevice::getTimeStamp() const
 {
   return mTimeStamp;
 }
 //-----------------------------------------------------------------------------
-CPose3d ADevice::getRelativePose()
+CPose3d ADevice::getRelativePose() const
 {
   return mRelativePose;
 }

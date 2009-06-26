@@ -39,6 +39,7 @@
 #include "cbtopfiducialfinder.h"
 #include "cbfrontfiducialfinder.h"
 #include "cbphotosensor.h"
+#include "cbcreatebutton.h"
 
 namespace Rapi
 {
@@ -140,6 +141,8 @@ class CCBRobot : public ARobot
     CCBTopFiducialFinder *mCBTopFiducial;
     /** Photo sensor */
     CCBPhotoSensor* mCBPhotoSensor;
+    /** Creates buttons */
+    CCBCreateButton* mCBCreateButton;
     /** Last time synchronize was called */
     double mLastSynchronizeTime;
 };
