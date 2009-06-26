@@ -87,10 +87,14 @@ class CChatterboxCtrl : public ARobotCtrl
     float mTime;
     /** Flag if we should run the demo or not */
     bool mFgRunDemo;
-    /** Max photo value */
-    float mMaxPhoto;
+    /** Min photo value */
+    float mMinPhoto;
     /** Red Led index */
     unsigned int mRedLedId;
+    /** Text for 7seg display */
+    int mText;
+    /** Flags if motors are enabled */
+    bool mFgMotor;
 };
 
 #endif

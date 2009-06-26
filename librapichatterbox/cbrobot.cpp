@@ -139,7 +139,9 @@ double CCBRobot::getCurrentTime() const
 //-----------------------------------------------------------------------------
 void CCBRobot::quit()
 {
-  printf ( " CCBRobot::quit() \n" );
+  if (mCBDrivetrain)
+    mCBDrivetrain->stop();
+
   mFgRunning = false;
 }
 //-----------------------------------------------------------------------------

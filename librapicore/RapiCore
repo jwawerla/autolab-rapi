@@ -19,6 +19,13 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 
+#ifndef RAPICORE
+#define RAPICORE
+
+const char RAPI_VERSION[] = "0.1.0";
+
+#endif
+
 #include "printerror.h"
 #include "rapierror.h"
 #include "pose2d.h"

@@ -47,6 +47,15 @@ int main( int argc, char* argv[] )
   ErrorInit ( 14, false );
   initRandomNumberGenerator();
 
+  printf("-----------------------------------\n");
+  printf("Chatterbox RAPI demo \n");
+  printf("  build %s %s \n", __DATE__, __TIME__);
+  printf("  compiled against RAPI version %s\n", RAPI_VERSION);
+  printf("\n");
+  printf("Press PLAY to start demo programm\n");
+  printf("Once demo is running, enable motors with ADVANCE button\n");
+  printf("lifting the robot up disables motors");
+
   if (signal(SIGINT, quitSig) == SIG_ERR) {
      PRT_ERR1("Error resetting signal handler %s", strerror(errno));
   }
