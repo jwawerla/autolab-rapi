@@ -55,6 +55,10 @@ class CStageRobot : public ARobot
      */
     virtual double getCurrentTime() const;
     /**
+     * Terminates the execution of the main thread
+     */
+    void quit();
+    /**
      * Gets a device with a given device index
      * @param devName name of device
      * @return device

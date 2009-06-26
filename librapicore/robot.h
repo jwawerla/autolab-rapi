@@ -94,7 +94,11 @@ class ARobot
      * Checks if the robot is initialized
      * @return true if initialized false otherwise
      */
-    bool isInitialized() { return mFgInitialized; };
+    bool isInitialized() const { return mFgInitialized; };
+    /**
+     * Terminates the execution of the main thread
+     */
+    virtual void quit() = 0;
     /**
      * Gets the robot controller
      * @return controller

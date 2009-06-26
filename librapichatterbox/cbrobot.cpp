@@ -137,9 +137,9 @@ double CCBRobot::getCurrentTime() const
   return timeNow;
 }
 //-----------------------------------------------------------------------------
-void CCBRobot::terminate()
+void CCBRobot::quit()
 {
-  printf ( " CCBRobot::terminate() \n" );
+  printf ( " CCBRobot::quit() \n" );
   mFgRunning = false;
 }
 //-----------------------------------------------------------------------------

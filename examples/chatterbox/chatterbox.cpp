@@ -37,8 +37,8 @@ void quitSig(int signum)
      PRT_ERR1("Error resetting signal handler %s", strerror(errno));
   }
 
-  // terminate main thread
-  robot->terminate();
+  // quit main thread
+  robot->quit();
 }
 //------------------------------------------------------------------------------
 int main( int argc, char* argv[] )

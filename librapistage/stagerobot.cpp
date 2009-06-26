@@ -66,6 +66,11 @@ int CStageRobot::init()
   return 1; // success
 }
 //-----------------------------------------------------------------------------
+void CStageRobot::quit()
+{
+  mStageModel->GetWorld()->Quit();
+}
+//-----------------------------------------------------------------------------
 double CStageRobot::getCurrentTime() const
 {
   return mStageModel->GetWorld()->SimTimeNow() * 1e-6;
@@ -272,7 +277,7 @@ int CStageRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
   return 0;
 }
 //-----------------------------------------------------------------------------
-int CStageRobot::findDevice( AAnalogSensorArray* &device, std::string devName )
+int CStageRobot::findDevice ( AAnalogSensorArray* &device, std::string devName )
 {
   device = NULL;
   ERROR0 ( "Device not implementated for stage" );

@@ -77,7 +77,7 @@ class CCBRobot : public ARobot
     /**
      * Terminates the execution of the main thread
      */
-    void terminate();
+    void quit();
     /**
      * Checks if the main thread is running or not
      * @return true if running, false otherwise

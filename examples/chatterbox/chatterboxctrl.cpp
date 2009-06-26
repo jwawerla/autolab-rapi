@@ -24,7 +24,8 @@
 CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
     : ARobotCtrl ( robot )
 {
-  printf("testing low side 1 driver\n");
+  mTime = 0.0;
+  mFgRunDemo = false;
 
   mRobot->findDevice ( mPowerPack, "CB:powerpack" );
   mRobot->findDevice ( mDrivetrain, "CB:drivetrain" );
@@ -33,8 +34,8 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mRobot->findDevice ( mBumper, "CB:bumper" );
   mRobot->findDevice ( mLights, "CB:lights" );
   mRobot->findDevice ( mWheelDrop, "CB:wheeldrop" );
-  mRobot->findDevice ( mLowSideDriver, "CB:lowsidedriver");
-  mRobot->findDevice ( mButton, "CB:button");
+  mRobot->findDevice ( mLowSideDriver, "CB:lowsidedriver" );
+  mRobot->findDevice ( mButton, "CB:button" );
   //mRobot->findDevice ( mFrontFiducial, "CB:front_fiducial");
   //mRobot->findDevice ( mTopFiducial, "CB:top_fiducial");
   //mRobot->findDevice ( mPhoto, "CB:photosensor");
@@ -45,14 +46,14 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
     exit ( -1 );
   }
 
-  ((CCBDrivetrain2dof*)mDrivetrain)->setDefaultOIMode(CB_MODE_FULL);
+  ( ( CCBDrivetrain2dof* ) mDrivetrain )->setDefaultOIMode ( CB_MODE_FULL );
   // show some text, just for fun
   mTextDisplay->setText ( "1" );
 
   // set up a heart beat with 1Hz
   mLights->setBlink ( 5, true, 1.0 );
 
-  mLimit.setLimit(0.0, 0.5);
+  mLimit.setLimit ( 0.0, 0.5 );
 }
 //-----------------------------------------------------------------------------
 CChatterboxCtrl::~CChatterboxCtrl()
@@ -61,40 +62,40 @@ CChatterboxCtrl::~CChatterboxCtrl()
 //-----------------------------------------------------------------------------
 void CChatterboxCtrl::updateData ( float dt )
 {
-  static unsigned char c = 0;
-  //int i;
 
-  mButton->print();
-  mIr->print();
-  //mPhoto->print();
-  //mTopFiducial->print();
-  //mTopFiducial->setFiducialSignal(255);
-  //mFrontFiducial->setFiducialSignal(128);
-  //mFrontFiducial->print();
-  //i = mLaser->getNumSamples() / 2;
-  //printf("laser beam %d = %fm \n",i, mLaser->mRangeData[i].range);
+  char c[1];
 
-  //mLowSideDriver->setSwitch(0, true);
-  //mLowSideDriver->setSwitch(2, true);
+  mTime += dt;
+
+  if ( not mFgRunDemo ) {
+    if ( mTime < 10.0 ) {
+      c[0] = 57 - ( int ) mTime;
+      mTextDisplay->setText ( c );
+      if ( mButton->mBitData[0] )
+        mFgRunDemo = true;
+    }
+    else {
+      mRobot->quit();
+    }
+  }
+  else {
+    demo();
+  }
 
   if ( mWheelDrop->isAnyTriggered() ) {
     mDrivetrain->stop();
     mLights->setLight ( ALL_LIGHTS, RED );
-    mLowSideDriver->setSwitch(1, false);
+    mLowSideDriver->setSwitch ( 1, false );
   }
-  else {
-    c++;
-    mLowSideDriver->setSwitch(1, true);
-    mLights->setLight ( ALL_LIGHTS, CRgbColor ( c, 125-c, 255-c ) );
-    mLights->setBlink ( 5, true, 1.0 );
-    mTextDisplay->setText ( "1" );
 
-    //mDrivetrain->setSpeedCmd(0.3, 0.0);
-    //obstacleAvoid();
-  }
+
   if ( rapiError->hasError() ) {
     rapiError->print();
   }
+}
+//-----------------------------------------------------------------------------
+void CChatterboxCtrl::demo()
+{
 }
 //-----------------------------------------------------------------------------
 void CChatterboxCtrl::obstacleAvoid()
@@ -135,7 +136,7 @@ void CChatterboxCtrl::obstacleAvoid()
     velocity = ( 1.0 -fabs ( turnRate ) / D2R ( 30.0 ) ) * 0.3;
     //printf("speed %f turnrate %f \n", velocity, turnRate);
   }
-  velocity = mLimit.limit(velocity);
+  velocity = mLimit.limit ( velocity );
   mDrivetrain->setVelocityCmd ( velocity, turnRate );
 }
 //-----------------------------------------------------------------------------

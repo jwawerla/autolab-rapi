@@ -47,6 +47,10 @@ class CChatterboxCtrl : public ARobotCtrl
      * @param dt time since last upate [s]
      */
     void updateData(float dt);
+    /**
+     * Runs the demo controller
+     */
+    void demo();
     /** Obstacle avoidance routine */
     void obstacleAvoid();
     /** Drivetrain */
@@ -77,6 +81,10 @@ class CChatterboxCtrl : public ARobotCtrl
     ABinarySensorArray* mButton;
     /** Some limit */
     CLimit mLimit;
+    /** Time since start of controller [s] */
+    float mTime;
+    /** Flag if we should run the demo or not */
+    bool mFgRunDemo;
 
 };
 
