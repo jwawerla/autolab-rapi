@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# Demo Program starter 
+#
+
+start() {
+        echo "Starting demo..."
+	/usr/bin/chatterbox > /home/demo.log
+}
+
+# Nothing to stop
+stop() {
+        echo "Stopping demo..."
+}
+restart() {
+        stop
+        start
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart)
+        restart
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?
+
