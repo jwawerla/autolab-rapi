@@ -99,6 +99,14 @@ class CCBRobot : public ARobot
     virtual int findDevice( ASwitchArray* &device, std::string devName );
     virtual int findDevice( AAnalogSensorArray* &device, std::string devName );
 
+	/**
+	 * Runs one of the create demos.  This is actually just a wrapper for
+	 * the same-named function in CBDriver.
+	 * @param demoNum number of the demo.  -1 for none.
+	 * @return nonzero if successful.
+	 */
+	int activateDemo(tDemo demoNum);
+
   protected:
     /**
      * This method sleeps for interval seconds since the last call

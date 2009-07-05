@@ -584,4 +584,9 @@ void CCBRobot::synchronize ( double interval )
 }
 //-----------------------------------------------------------------------------
 
+int CCBRobot::activateDemo(tDemo demoNum)
+{
+	return mCBDriver->activateDemo(demoNum);
+}
+
 } // namespace
