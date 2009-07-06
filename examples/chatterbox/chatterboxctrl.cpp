@@ -30,6 +30,7 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mMinPhoto = INFINITY;
   mRedLedId = 0;
   mText = 0;
+  mState = RUN;
   mFgRunDemo = false;
   mFgMotor = false;
 
@@ -42,7 +43,7 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mRobot->findDevice ( mWheelDrop, "CB:wheeldrop" );
   mRobot->findDevice ( mLowSideDriver, "CB:lowsidedriver" );
   mRobot->findDevice ( mButton, "CB:button" );
-  //mRobot->findDevice ( mFrontFiducial, "CB:front_fiducial");
+  mRobot->findDevice ( mFrontFiducial, "CB:front_fiducial");
   //mRobot->findDevice ( mTopFiducial, "CB:top_fiducial");
   mRobot->findDevice ( mPhoto, "CB:photosensor" );
   //mRobot->findDevice ( mLaser, "CB:laser" );
