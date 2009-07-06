@@ -47,7 +47,7 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mRobot->findDevice ( mPhoto, "CB:photosensor" );
   //mRobot->findDevice ( mLaser, "CB:laser" );
 
-  mDrivetrain = (CCBDrivetrain2dof*)drivetrain;
+  mDrivetrain = ( CCBDrivetrain2dof* ) drivetrain;
 
   if ( rapiError->hasError() ) {
     rapiError->print();
@@ -196,31 +196,34 @@ void CChatterboxCtrl::demo()
 
   switch ( mState ) {
     case DOCKING:
-      if (mDrivetrain->getOIMode() != CB_MODE_PASSIVE) {
-        mDrivetrain->activateDemo(CB_DEMO_DOCK);
+      if ( mDrivetrain->getOIMode() != CB_MODE_PASSIVE ) {
+        mDrivetrain->activateDemo ( CB_DEMO_DOCK );
       }
-      if (mTimer > 120) {
+      if ( mTimer > 120 ) {
         mState = UNDOCKING;
         mTimer = 0;
       }
       break;
 
     case CHARGING:
-      mLights->setLight(ALL_LIGHTS, GREEN);
-      if (mTimer > 60) {
+      mLights->setLight ( ALL_LIGHTS, GREEN );
+      if ( mTimer > 60 ) {
         mState = UNDOCKING;
         mTimer = 0;
       }
       break;
 
     case UNDOCKING:
-      mDrivetrain->setVelocityCmd(-0.1, 0.0);
-      if (mTimer > 10)
+      if ( mDrivetrain->getOIMode() != CB_MODE_FULL ) {
+        mDrivetrain->setDefaultOIMode ( CB_MODE_FULL );
+      }
+      mDrivetrain->setVelocityCmd ( -0.1, 0.0 );
+      if ( mTimer > 10 )
         mState = RUN;
       break;
 
     case RUN:
-      if (homeBaseDetected() ) {
+      if ( homeBaseDetected() ) {
         mState = DOCKING;
         mTimer = 0;
       }
