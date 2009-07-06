@@ -25,6 +25,8 @@
 
 using namespace Rapi;
 
+typedef enum {RUN, CHARGING, DOCKING, UNDOCKING} tState;
+
 /**
  * An example controller for chatterbox
  * @author Jens Wawerla
@@ -51,10 +53,15 @@ class CChatterboxCtrl : public ARobotCtrl
      * Runs the demo controller
      */
     void demo();
+    /**
+     * Checks if home base is detected or not
+     * @return true if detected, false otherwise
+     */
+    bool homeBaseDetected();
     /** Obstacle avoidance routine */
     void obstacleAvoid();
     /** Drivetrain */
-    ADrivetrain2dof* mDrivetrain;
+    CCBDrivetrain2dof* mDrivetrain;
     /** Infrared sesnors */
     ARangeFinder* mIr;
     /** Power pack */
@@ -83,6 +90,8 @@ class CChatterboxCtrl : public ARobotCtrl
     CLimit mLimit;
 
   private:
+    /** State machine */
+    tState mState;
     /** Time since start of controller [s] */
     float mTime;
     /** Flag if we should run the demo or not */
@@ -95,6 +104,8 @@ class CChatterboxCtrl : public ARobotCtrl
     int mText;
     /** Flags if motors are enabled */
     bool mFgMotor;
+    /** General purpose timer */
+    int mTimer;
 };
 
 #endif

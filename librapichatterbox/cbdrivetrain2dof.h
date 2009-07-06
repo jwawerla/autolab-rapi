@@ -29,8 +29,6 @@
 namespace Rapi
 {
 
-// Forward declaration for friendship
-class CCBRobot;
 
 /**
  * Chatterbox implementation of a 2dof drivetrain

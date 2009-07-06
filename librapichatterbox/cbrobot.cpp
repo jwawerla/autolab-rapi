@@ -139,7 +139,7 @@ double CCBRobot::getCurrentTime() const
 //-----------------------------------------------------------------------------
 void CCBRobot::quit()
 {
-  if (mCBDrivetrain)
+  if ( mCBDrivetrain )
     mCBDrivetrain->stop();
 
   mFgRunning = false;
@@ -583,10 +583,5 @@ void CCBRobot::synchronize ( double interval )
   mLastSynchronizeTime = tv.tv_sec + tv.tv_usec * 1e-6;
 }
 //-----------------------------------------------------------------------------
-
-int CCBRobot::activateDemo(tDemo demoNum)
-{
-	return mCBDriver->activateDemo(demoNum);
-}
 
 } // namespace

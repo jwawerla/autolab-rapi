@@ -89,30 +89,22 @@ class CCBRobot : public ARobot
      * @return device
      * @return 1 if successfull, 0 otherwise
      */
-    virtual int findDevice( ARangeFinder* &device, std::string devName );
-    virtual int findDevice( ADrivetrain2dof* &device, std::string devName );
-    virtual int findDevice( APowerPack* &device, std::string devName );
-    virtual int findDevice( AFiducialFinder* &device, std::string devName );
-    virtual int findDevice( ALights* &device, std::string devName );
-    virtual int findDevice( ATextDisplay* &device, std::string devName );
-    virtual int findDevice( ABinarySensorArray* &device, std::string devName );
-    virtual int findDevice( ASwitchArray* &device, std::string devName );
-    virtual int findDevice( AAnalogSensorArray* &device, std::string devName );
-
-	/**
-	 * Runs one of the create demos.  This is actually just a wrapper for
-	 * the same-named function in CBDriver.
-	 * @param demoNum number of the demo.  -1 for none.
-	 * @return nonzero if successful.
-	 */
-	int activateDemo(tDemo demoNum);
+    virtual int findDevice ( ARangeFinder* &device, std::string devName );
+    virtual int findDevice ( ADrivetrain2dof* &device, std::string devName );
+    virtual int findDevice ( APowerPack* &device, std::string devName );
+    virtual int findDevice ( AFiducialFinder* &device, std::string devName );
+    virtual int findDevice ( ALights* &device, std::string devName );
+    virtual int findDevice ( ATextDisplay* &device, std::string devName );
+    virtual int findDevice ( ABinarySensorArray* &device, std::string devName );
+    virtual int findDevice ( ASwitchArray* &device, std::string devName );
+    virtual int findDevice ( AAnalogSensorArray* &device, std::string devName );
 
   protected:
     /**
      * This method sleeps for interval seconds since the last call
      * @param interval [s]
      */
-    void synchronize( double interval );
+    void synchronize ( double interval );
     /** Flag if main loop is running or not */
     bool mFgRunning;
 
