@@ -24,13 +24,17 @@
 
 #include "device.h"
 #include "velocity2d.h"
+#include "limit.h"
 #include "odometry.h"
 
 namespace Rapi
 {
 
 /**
- * Abstract base for a drivetrain with 2 DOF
+ * Abstract base for a drivetrain with 2 DOF. Note all velocity commands are
+ * limited in terms of absolute value and in acceleration. The user has free
+ * access to these limits and thereby can disable them at her own risk.
+ * The only execption to the limits is emergencyStop().
  * @author Jens Wawerla <jwawerla@sfu.ca>
  */
 class ADrivetrain2dof : public ADevice
@@ -58,27 +62,33 @@ class ADrivetrain2dof : public ADevice
      * @param velocity forward positive, backward negative [m/s]
      * @param turnrate positve counterclockwise, negative clockwise [rad/s]
      */
-    virtual void setVelocityCmd( const float velocity, const float turnrate ) = 0;
+    virtual void setVelocityCmd( const float velocity, const float turnrate );
     /**
      * Sets the velocity and turn rate of the robot
      * @param velocity forward positive, backward negative [m/s]
      *                 positve counterclockwise, negative clockwise [rad/s]
      */
-    virtual void setVelocityCmd( CVelocity2d velocity ) = 0;
+    virtual void setVelocityCmd( const CVelocity2d velocity );
     /**
      * Sets a rotational speed for the robot
      * @param turnrate positve counterclockwise, negative clockwise [rad/s]
      */
-    virtual void setRotationalVelocityCmd( float turnrate);
+    virtual void setRotationalVelocityCmd( const float turnrate);
     /**
      * Sets a translational speed for the robot
      * @param velocity forward positive, backward negative [m/s]
      */
-    virtual void setTranslationalVelocityCmd( float velocity);
+    virtual void setTranslationalVelocityCmd( const float velocity);
     /**
-     * Stops the robot by setting all velocities to zero
+     * Stops the robot by setting the user command velocities to zero, but
+     * obeys the acceleration limits.
      */
     virtual void stop();
+    /**
+     * Emergency stop the drivetrain, stop at all costs, not obeying any
+     * acceleration limits
+     */
+    virtual void emergencyStop();
     /**
      * Checks if robot is stopped or not
      * @return true if stopped, false otherwise
@@ -107,12 +117,12 @@ class ADrivetrain2dof : public ADevice
      * Gets the upper velocity limits
      * @return limits
      */
-    virtual CVelocity2d getUppererVelocityLimit() { return mUpperVelocityLimit; };
+    virtual CVelocity2d getUppererVelocityLimit() const { return mUpperVelocityLimit; };
     /**
      * Gets the lower velocity limits
      * @return limits
      */
-    virtual CVelocity2d getLowerVelocityLimit() { return mLowerVelocityLimit; };
+    virtual CVelocity2d getLowerVelocityLimit() const { return mLowerVelocityLimit; };
     /**
      * Sets the upper velocity limits
      * @param limits
@@ -123,6 +133,27 @@ class ADrivetrain2dof : public ADevice
      * @param limits
      */
     virtual void setLowerVelocityLimit(CVelocity2d limit);
+    /**
+     * Sets the limit for translational acceleration
+     * @param limit [m/s^2]
+     */
+    virtual void setTranslationalAccelerationLimit(CLimit limit);
+    /**
+     * Sets the limit for rotational acceleration
+     * @param limit [m/s^2]
+     */
+    virtual void setRotationalAccelerationLimit(CLimit limit);
+    /**
+     * Gets the limit for translational acceleration
+     * @return [m/s^2]
+     */
+    virtual CLimit getTranslationalAccelerationLimit() const { return mTransAccelLimit; };
+    /**
+     * Gets the limit for rotational acceleration
+     * @return [m/s^2]
+     */
+    virtual CLimit getRotationalAccelerationLimit() const { return mRotatAccelLimit; };
+
     /**
      * Gets the name of a gui this device can be visualized
      * @return name of gui
@@ -145,16 +176,27 @@ class ADrivetrain2dof : public ADevice
      * Limits mVelocityCmd to be within mLowerVelocityLimit and mUpperVelocityLimit
      */
     void applyVelocityLimits();
+    /**
+     * Limits velocity commands to obey acceleration limits
+     * @param dt step size [s]
+     */
+    void applyAccelerationLimits(float dt);
     /** Odometry */
     COdometry* mOdometry;
-    /** Velocity command */
-    CVelocity2d mVelocityCmd;
+    /** Velocity command as set by the user */
+    CVelocity2d mVelocityUserCmd;
+    /** Velocity command after acceleration limits, as send to the robot */
+    CVelocity2d mVelocityLimitedCmd;
     /** Velocity measurement */
     CVelocity2d mVelocityMeas;
     /** Upper velocity limit */
     CVelocity2d mUpperVelocityLimit;
     /** Lower velocity limit */
     CVelocity2d mLowerVelocityLimit;
+    /** Translational acceleration limit [m/s^2] */
+    CLimit mTransAccelLimit;
+    /** Rotational acceleration limit [m/s^2] */
+    CLimit mRotatAccelLimit;
     /** Flags if robot is stalled somewhere */
     bool mFgStalled;
     /** Stalled timer */

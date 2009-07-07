@@ -3577,6 +3577,8 @@ device.h
 librapigui/../librapicore/device.h
 velocity2d.h
 librapigui/../librapicore/velocity2d.h
+limit.h
+librapigui/../librapicore/limit.h
 odometry.h
 librapigui/../librapicore/odometry.h
 
@@ -3589,6 +3591,10 @@ device.h
 librapigui/../librapicore/device.h
 rgbcolor.h
 librapigui/../librapicore/rgbcolor.h
+
+librapigui/../librapicore/limit.h
+rapivarinterface.h
+librapigui/../librapicore/rapivarinterface.h
 
 librapigui/../librapicore/localizer2d.h
 device.h

@@ -1198,6 +1198,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/drivetrain2dofwidget.cpp.o
  librapigui/../librapicore/dataupdateobserver.h
  librapigui/../librapicore/device.h
  librapigui/../librapicore/drivetrain2dof.h
+ librapigui/../librapicore/limit.h
  librapigui/../librapicore/localizer2d.h
  librapigui/../librapicore/odometry.h
  librapigui/../librapicore/point2d.h
@@ -1722,6 +1723,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/gui.cpp.o
  librapigui/../librapicore/drivetrain2dof.h
  librapigui/../librapicore/fiducialfinder.h
  librapigui/../librapicore/lights.h
+ librapigui/../librapicore/limit.h
  librapigui/../librapicore/localizer2d.h
  librapigui/../librapicore/odometry.h
  librapigui/../librapicore/point2d.h
@@ -2120,6 +2122,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/mainwindow.cpp.o
  librapigui/../librapicore/drivetrain2dof.h
  librapigui/../librapicore/fiducialfinder.h
  librapigui/../librapicore/lights.h
+ librapigui/../librapicore/limit.h
  librapigui/../librapicore/localizer2d.h
  librapigui/../librapicore/odometry.h
  librapigui/../librapicore/point2d.h
@@ -3309,6 +3312,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/moc_mainwindow.cxx.o
  librapigui/../librapicore/drivetrain2dof.h
  librapigui/../librapicore/fiducialfinder.h
  librapigui/../librapicore/lights.h
+ librapigui/../librapicore/limit.h
  librapigui/../librapicore/localizer2d.h
  librapigui/../librapicore/odometry.h
  librapigui/../librapicore/point2d.h
@@ -4070,6 +4074,7 @@ librapigui/CMakeFiles/autolab-rapi-gui.dir/robotwidget.cpp.o
  librapigui/../librapicore/drivetrain2dof.h
  librapigui/../librapicore/fiducialfinder.h
  librapigui/../librapicore/lights.h
+ librapigui/../librapicore/limit.h
  librapigui/../librapicore/localizer2d.h
  librapigui/../librapicore/odometry.h
  librapigui/../librapicore/point2d.h

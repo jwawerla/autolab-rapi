@@ -41,6 +41,10 @@ CCBDrivetrain2dof::CCBDrivetrain2dof( CCBDriver* driver, std::string devName )
   mUpperVelocityLimit = CVelocity2d( 0.5, 0.0,  D2R( 30.0 ) );
   mLowerVelocityLimit = CVelocity2d( -0.5, 0.0, -D2R( 30.0 ) );
 
+  // acceleration limits
+  mTransAccelLimit.setLimit(-0.5, 0.1);
+  mRotatAccelLimit.setLimit(-D2R(15.0), D2R(15.0));
+
   mOdometry = new CCBOdometry( mCBDriver, devName+":Odometry" );
 
   setEnabled( true );
@@ -64,17 +68,6 @@ int CCBDrivetrain2dof::init()
 void CCBDrivetrain2dof::setEnabled( bool enable )
 {
   mFgEnabled = enable;
-}
-//-----------------------------------------------------------------------------
-void CCBDrivetrain2dof::setVelocityCmd( const float velocity,
-                                        const float turnrate )
-{
-  mVelocityCmd = CVelocity2d( velocity, 0.0, turnrate );
-}
-//-----------------------------------------------------------------------------
-void CCBDrivetrain2dof::setVelocityCmd( CVelocity2d velocity )
-{
-  mVelocityCmd = velocity;
 }
 //-----------------------------------------------------------------------------
 void CCBDrivetrain2dof::updateData()
@@ -120,14 +113,20 @@ void CCBDrivetrain2dof::updateData()
     applyVelocityLimits();
 #endif
 
+    // HACK: velocity measurement doesn't seem to work properly right now, instead we
+    //       use the commanded velocity as our measurement
+    mVelocityMeas = mVelocityLimitedCmd;
+
     // set OpenInterface Mode
     if ( mCBDriver->mCreateSensorPackage.oiMode != mOIMode )
       mCBDriver->setOIMode( mOIMode );
 
     // set speeds
-    if ( mCBDriver->setSpeed( mVelocityCmd ) == 0 ) {
-      ERROR2( "Failed to set speed command v=%f w=%f", mVelocityCmd.mXDot,
-              mVelocityCmd.mYawDot );
+    applyVelocityLimits();
+    applyAccelerationLimits(CB_T);
+    if ( mCBDriver->setSpeed( mVelocityLimitedCmd ) == 0 ) {
+      ERROR2( "Failed to set speed command v=%f w=%f", mVelocityLimitedCmd.mXDot,
+              mVelocityLimitedCmd.mYawDot );
     }
 
     // check if we are stuck
@@ -159,8 +158,8 @@ void CCBDrivetrain2dof::updateData()
 void CCBDrivetrain2dof::print() const
 {
   printf( "Drive: v=%01.3f m/s, w=%03.3f deg/s ",
-          mVelocityCmd.mXDot,
-          R2D( mVelocityCmd.mYawDot ) );
+          mVelocityLimitedCmd.mXDot,
+          R2D( mVelocityLimitedCmd.mYawDot ) );
   mOdometry->print();
 
   switch ( mCBDriver->mCreateSensorPackage.oiMode ) {

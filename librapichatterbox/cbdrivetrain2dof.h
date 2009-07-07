@@ -59,18 +59,6 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
      */
     virtual void setEnabled ( bool enable );
     /**
-     * Sets the velocity and turn rate of the robot
-     * @param velocity forward positive, backward negative [m/s]
-     *                 positve counterclockwise, negative clockwise [rad/s]
-     */
-    virtual void setVelocityCmd ( CVelocity2d velocity );
-    /**
-     * Sets the velocity and turn rate of the robot
-     * @param velocity forward positive, backward negative [m/s]
-     * @param turnrate positve counterclockwise, negative clockwise [rad/s]
-     */
-    virtual void setVelocityCmd ( const float velocity, const float turnrate );
-    /**
      * Prints the devices main information
      */
     virtual void print() const;

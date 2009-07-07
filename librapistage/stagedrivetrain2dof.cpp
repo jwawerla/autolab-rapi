@@ -47,8 +47,13 @@ CStageDrivetrain2dof::CStageDrivetrain2dof ( Stg::ModelPosition* stgModel,
   mOdometry = new CStageOdometry ( mStgPosition, devName + ":odometry" );
   assert ( mOdometry );
 
+  // velocity limits
   mUpperVelocityLimit = CVelocity2d( 1.0, 0.0,  D2R(60.0) );
   mLowerVelocityLimit = CVelocity2d(-1.0, 0.0, -D2R(60.0) );
+
+  // acceleration limits
+  mTransAccelLimit.setLimit(-1.0, 1.0);
+  mRotatAccelLimit.setLimit(-D2R(30.0), D2R(30.0));
 
   setEnabled ( true );
 }
@@ -77,37 +82,23 @@ void CStageDrivetrain2dof::setEnabled ( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-void CStageDrivetrain2dof::setVelocityCmd ( const float velocity,
-    const float turnrate )
-{
-  setVelocityCmd ( CVelocity2d ( velocity, 0.0, turnrate ) );
-}
-//-----------------------------------------------------------------------------
-void CStageDrivetrain2dof::setVelocityCmd ( CVelocity2d velocity )
-{
-  if ( mFgEnabled ) {
-    mVelocityCmd = velocity;
-    applyVelocityLimits();
-  } else {
-    mVelocityCmd.setZero();
-  }
-
-  mStgPosition->SetXSpeed ( mVelocityCmd.mXDot );
-  mStgPosition->SetTurnSpeed ( mVelocityCmd.mYawDot );
-}
-//-----------------------------------------------------------------------------
 void CStageDrivetrain2dof::updateData()
 {
   float time;
   if ( mFgEnabled ) {
+    applyVelocityLimits();
+    applyAccelerationLimits( mStgPosition->GetWorld()->GetSimInterval() / 1e6);
+    mStgPosition->SetXSpeed ( mVelocityLimitedCmd.mXDot );
+    mStgPosition->SetTurnSpeed ( mVelocityLimitedCmd.mYawDot );
+
     // update odometry
     ( ( CStageOdometry* ) mOdometry )->updateData();
 
     // stage doesn't seem to allow us access to the sensed speed of the robot
     // so we simply assume it is the commanded velocity
-    mVelocityMeas = mVelocityCmd;
+    mVelocityMeas = mVelocityLimitedCmd;
     time = mTimeStamp;
-    mTimeStamp = mStgPosition->GetWorld()->GetSimInterval() / 1e6;
+    mTimeStamp = mStgPosition->GetWorld()->SimTimeNow() / 1e6;
     mFgStalled = mStgPosition->Stalled();
 
     if (mFgStalled)

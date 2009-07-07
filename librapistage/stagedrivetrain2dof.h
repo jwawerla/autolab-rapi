@@ -56,18 +56,6 @@ class CStageDrivetrain2dof : public ADrivetrain2dof
      * @param enable = true to enable, false to disable
      */
     virtual void setEnabled ( bool enable );
-    /**
-     * Sets the velocity and turn rate of the robot
-     * @param velocity forward positive, backward negative [m/s]
-     *                 positve counterclockwise, negative clockwise [rad/s]
-     */
-    virtual void setVelocityCmd ( CVelocity2d velocity );
-    /**
-     * Sets the velocity and turn rate of the robot
-     * @param velocity forward positive, backward negative [m/s]
-     * @param turnrate positve counterclockwise, negative clockwise [rad/s]
-     */
-    virtual void setVelocityCmd( const float velocity, const float turnrate );
 
   protected:
     /**

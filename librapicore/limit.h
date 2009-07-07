@@ -21,6 +21,8 @@
 #ifndef RAPILIMITS_H
 #define RAPILIMITS_H
 
+#include "rapivarinterface.h"
+
 namespace Rapi
 {
 
@@ -28,7 +30,7 @@ namespace Rapi
  * This class provides limits, a max and min value
  * @author Jens Wawerla
  */
-class CLimit
+class CLimit : public IRapiVar
 {
   public:
     /**
@@ -36,7 +38,9 @@ class CLimit
      * @param lower limit
      * @param upper limit
      */
-    CLimit( const double lower = 0.0, const double upper = 0.0 );
+    CLimit( const double lower = 0.0, const double upper = 0.0, std::string name = "Limit" );
+    /** Copy constructor */
+    CLimit(const CLimit& limit);
     /** Default destructor */
     ~CLimit();
     /**
@@ -61,7 +65,32 @@ class CLimit
      * @return upper limit
      */
     double getUpperLimit() const;
-
+    /** Overloaded = operator */
+    CLimit& operator= ( const CLimit& limt );
+    /**
+     * Prints the values to std out
+     */
+    void print() const;
+    /**
+     * Converts the limit data to a string
+     * @return string
+     */
+    std::string toStr() const;
+    /**
+     * Gets the variable type string
+     * @return variable type name
+     */
+    std::string getTypeStr() const { return "CVelocity2d"; };
+    /**
+     * Gets the data of the variable as a comma separated value string
+     * @return comma separated value string
+     */
+    std::string toCSV() const;
+    /**
+     * Gets a header for the variable
+     * @return header
+     */
+    std::string getCVSHeader() const;
   protected:
     /** Lower limit */
     double mLower;
