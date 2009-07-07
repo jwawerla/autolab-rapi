@@ -1,6 +1,9 @@
 
 SET( TARGET ${PROJECT_NAME} )
 
+# for config.h
+INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR})
+
 SET( HEADERS
   RapiCore
   robot.h
@@ -81,6 +84,7 @@ ADD_LIBRARY( ${TARGET} SHARED ${SOURCES} )
 # give the shared library a version number
 SET_TARGET_PROPERTIES( ${TARGET} PROPERTIES
                         VERSION ${VERSION}
+                        #BUILD ${GIT_VERSION}
 )
 
 INSTALL(TARGETS ${TARGET}

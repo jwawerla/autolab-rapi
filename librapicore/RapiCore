@@ -22,8 +22,20 @@
 #ifndef RAPICORE
 #define RAPICORE
 
-const char RAPI_VERSION[] = "0.1.0";
-const char RAPI_BUILD[] = GIT_VERSION;
+#include "../config.h"
+
+/** Get library version number */
+inline const char* RAPI_VERSION()
+{
+  return VERSION;
+}
+
+/** Get git build number */
+inline const char* RAPI_BUILD()
+{
+  return BUILD_NUMBER;
+}
+
 #endif
 
 #include "printerror.h"

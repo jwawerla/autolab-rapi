@@ -35,6 +35,12 @@ extern "C" int Init ( Stg::Model* mod )
   CGui* gui = CGui::getInstance(0, NULL);
 #endif
 
+  printf("-----------------------------------\n");
+  printf("Wander RAPI demo \n");
+  printf("  build %s %s \n", __DATE__, __TIME__);
+  printf("  compiled against RAPI version %s (%s)\n", RAPI_VERSION(), RAPI_BUILD());
+  printf("\n");
+
   CLooseStageRobot* robot;
   ARobotCtrl* robotCtrl;
 

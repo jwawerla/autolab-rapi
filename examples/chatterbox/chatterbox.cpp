@@ -50,7 +50,7 @@ int main( int argc, char* argv[] )
   printf("-----------------------------------\n");
   printf("Chatterbox RAPI demo \n");
   printf("  build %s %s \n", __DATE__, __TIME__);
-  printf("  compiled against RAPI version %s\n", RAPI_VERSION);
+  printf("  compiled against RAPI version %s (%s)\n", RAPI_VERSION(), RAPI_BUILD());
   printf("\n");
   printf("Press PLAY to start demo programm\n");
   printf("Once demo is running, enable motors with ADVANCE button\n");

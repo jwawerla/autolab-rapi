@@ -4,5 +4,5 @@
 # compile CXX with /usr/bin/c++
 CXX_FLAGS = -Dautolab_rapi_gui_EXPORTS -fPIC -I/usr/include/qt4 -I/usr/include/qt4/QtGui -I/usr/include/qt4/QtCore -I/home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/../librapicore   -g -Wall -O2
 
-CXX_DEFINES = -DGIT_VERSION -DQT_DLL -DQT_GUI_LIB -DQT_CORE_LIB -DQT_DLL
+CXX_DEFINES = -DQT_DLL -DQT_GUI_LIB -DQT_CORE_LIB -DQT_DLL
 
