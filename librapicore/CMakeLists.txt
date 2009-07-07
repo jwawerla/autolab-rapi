@@ -45,6 +45,7 @@ SET( HEADERS
 )
 
 SET( SOURCES
+  rapi.cpp
   robot.cpp
   device.cpp
   rangefinder.cpp
