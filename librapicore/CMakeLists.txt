@@ -85,7 +85,6 @@ ADD_LIBRARY( ${TARGET} SHARED ${SOURCES} )
 # give the shared library a version number
 SET_TARGET_PROPERTIES( ${TARGET} PROPERTIES
                         VERSION ${VERSION}
-                        #BUILD ${GIT_VERSION}
 )
 
 INSTALL(TARGETS ${TARGET}
