@@ -238,10 +238,10 @@ class CCBDriver
     /**
      * Sets the 7 segment display to show a given decimal and the dot
      * @param h hexadecimal to display [0..F]
-     * @param dot true display dot otherwise do not display dot
+     * @param dot on, off don't care
      * @return 1 if successful, 0 in case of an error
      */
-    int set7SegHexNumber(unsigned char h, bool dot);
+    int set7SegHexNumber(unsigned char h, tTriState dot = CB_DONT_CARE);
     /**
      * Sets just the dot
      * @param dot enable/disable

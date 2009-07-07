@@ -103,5 +103,14 @@ typedef enum {
   CB_MODE_FULL
 } tOIMode;
 
+/**
+ * Enumeration for tri-state
+ */
+typedef enum {
+  CB_OFF = 0,
+  CB_ON,
+  CB_DONT_CARE
+} tTriState;
+
 //----------------------------------------------------------------------------
 #endif

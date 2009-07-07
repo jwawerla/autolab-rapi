@@ -59,10 +59,10 @@ int CCBTextDisplay::setText ( std::string text )
   if ( mFgEnabled ) {
     mText = text;
     if ( mText.empty() ) {
-      return mCBDriver->set7SegHexNumber ( 0, false );
+      return mCBDriver->set7SegDisplay ( 0 );
     }
 
-    return mCBDriver->set7SegHexNumber ( text[0], true );
+    return mCBDriver->set7SegHexNumber ( text[0], CB_DONT_CARE );
   }
   return 1; // success
 }
