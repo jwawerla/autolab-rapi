@@ -1,0 +1,4 @@
+#!/bin/bash
+read BUILD_NUM < build
+echo $((BUILD_NUM+1)) > build
+echo "SET(BUILD_NUM " $((BUILD_NUM+1)) ")" >> GIT-VERSION-FILE

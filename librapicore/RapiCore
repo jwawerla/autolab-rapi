@@ -24,6 +24,9 @@
 
 const char* RAPI_BUILD();
 const char* RAPI_VERSION();
+const char* RAPI_GIT_VERSION();
+const char* RAPI_BUILD_TIME();
+const char* RAPI_BUILD_DATE();
 
 #endif
 

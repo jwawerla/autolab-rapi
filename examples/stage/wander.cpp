@@ -22,7 +22,7 @@
 #include "RapiLooseStage"
 
 #ifdef RAPI_GUI
-  #include "RapiGui"
+#include "RapiGui"
 #endif
 
 #include "wanderctrl.h"
@@ -32,14 +32,15 @@ using namespace Rapi;
 extern "C" int Init ( Stg::Model* mod )
 {
 #ifdef RAPI_GUI
-  CGui* gui = CGui::getInstance(0, NULL);
+  CGui* gui = CGui::getInstance ( 0, NULL );
 #endif
 
-  printf("-----------------------------------\n");
-  printf("Wander RAPI demo \n");
-  printf("  build %s %s \n", __DATE__, __TIME__);
-  printf("  compiled against RAPI version %s (%s)\n", RAPI_VERSION(), RAPI_BUILD());
-  printf("\n");
+  printf ( "-----------------------------------\n" );
+  printf ( "Wander RAPI demo \n" );
+  printf ( "  build %s %s \n", __DATE__, __TIME__ );
+  printf ( "  compiled against RAPI version %s (%s) build %s\n", RAPI_VERSION(),
+           RAPI_GIT_VERSION(), RAPI_BUILD() );
+  printf ( "\n" );
 
   CLooseStageRobot* robot;
   ARobotCtrl* robotCtrl;
@@ -53,7 +54,7 @@ extern "C" int Init ( Stg::Model* mod )
   robotCtrl = new CWanderCtrl ( robot );
 
 #ifdef RAPI_GUI
-  gui->registerRobot(robot);
+  gui->registerRobot ( robot );
 #endif
   return 0; // ok
 }
