@@ -83,9 +83,17 @@ void CStagePowerPack::updateData()
   double prevBatteryCapacity;
 
   if ( ( mFgEnabled ) && ( mStgPowerPack ) ) {
+
     prevBatteryCapacity = mBatteryCapacity;
-    mBatteryCapacity =  JOULES_TO_WATTHOURS ( mStgPowerPack->GetStored() );
-    mMaxBatteryCapacity = JOULES_TO_WATTHOURS ( mStgPowerPack->GetCapacity() );
+    if (mStgPowerPack->GetStored() < 0) {
+      mBatteryCapacity = INFINITY;
+      mMaxBatteryCapacity = INFINITY;
+    }
+    else {
+      mBatteryCapacity =  JOULES_TO_WATTHOURS ( mStgPowerPack->GetStored() );
+      mMaxBatteryCapacity = JOULES_TO_WATTHOURS ( mStgPowerPack->GetCapacity() );
+    }
+
     mTotalEnergyDissipated = JOULES_TO_WATTHOURS (
                                mStgPowerPack->GetDissipated() );
 

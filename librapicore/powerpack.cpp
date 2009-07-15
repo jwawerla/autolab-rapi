@@ -19,6 +19,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 #include "powerpack.h"
+#include "utilities.h"
 
 namespace Rapi
 {
@@ -71,7 +72,10 @@ int APowerPack::getChargingSource() const
 //-----------------------------------------------------------------------------
 double APowerPack::getBatteryLevel() const
 {
-  return mBatteryCapacity/ mMaxBatteryCapacity;
+  if ( isInf(mBatteryCapacity) )
+    return 1.0;
+
+  return mBatteryCapacity / mMaxBatteryCapacity;
 }
 //-----------------------------------------------------------------------------
 double APowerPack::getTotalEnergyDissipated() const

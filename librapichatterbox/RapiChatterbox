@@ -32,7 +32,7 @@
 #include "cbcliffsensor.h"
 #include "cbovercurrentsensor.h"
 #include "cblowsidedriver.h"
-#include "cbdefinitions.h"
+//#include "cbdefinitions.h"
 #include "cbtopfiducialfinder.h"
 #include "cbfrontfiducialfinder.h"
 #include "cbphotosensor.h"
