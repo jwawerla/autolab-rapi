@@ -57,6 +57,17 @@ class CCBCliffSensor : public ABinarySensorArray
      * @param return 1 if success -1 otherwise
      */
     virtual int init();
+    /**
+     * Gets the raw cliff sensor data
+     * <STRONG>
+     * This method is Create specific and not supported by other implementations
+     * of this device. The use of this method will make your code not portable
+     * to other plattforms.
+     * </STRONG>
+     * @param id of sensor
+     * @return raw data [0..4095]
+     */
+    float getRawSensorData(unsigned int id);
 
   protected:
     /**

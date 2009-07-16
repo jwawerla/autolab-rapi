@@ -390,6 +390,8 @@ velocity2d.h
 dataline.h
 /home/jwawerla/projects/autolab-fasr/local/src/autolab-rapi/librapigui/dataline.h
 
+/usr/include/qt4/Gentoo/gentoo-qconfig.h
+
 /usr/include/qt4/Qt3Support/q3cstring.h
 QtCore/qbytearray.h
 -

@@ -117,6 +117,12 @@ class CCBDriver
      */
     bool getCliffSensor(tCliffSensor id) const;
     /**
+     * Gets the raw reading of a cliff sensor with a given id
+     * @param id of cliff sensor
+     * @return [0..4095]
+     */
+    unsigned char getRawCliffSensor(tCliffSensor id) const;
+    /**
      * Checks if the Creates play button is pressed
      * @return true if pressed, false otherwise
      */
