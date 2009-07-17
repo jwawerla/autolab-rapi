@@ -24,7 +24,7 @@ namespace Rapi {
 
 //-----------------------------------------------------------------------------
 CCustomDialog::CCustomDialog(QWidget* parent)
- : QWidget(parent, Qt::Dialog)
+ : QDialog(parent)
 {
 }
 //-----------------------------------------------------------------------------

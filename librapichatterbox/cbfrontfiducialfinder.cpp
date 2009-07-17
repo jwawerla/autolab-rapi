@@ -60,6 +60,8 @@ CCBFrontFiducialFinder::~CCBFrontFiducialFinder()
 void CCBFrontFiducialFinder::updateData()
 {
   mFiducialData->id = mCBDriver->mCreateSensorPackage.ir;
+  if (mCBDriver->mCreateSensorPackage.virtualWall )
+    mFiducialData->id |= 0x0100;
   mCBDriver->sendIr( mOwnFiducialId );
 }
 //-----------------------------------------------------------------------------
