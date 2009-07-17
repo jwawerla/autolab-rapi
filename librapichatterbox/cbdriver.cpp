@@ -461,6 +461,32 @@ int CCBDriver::readSensorData()
 
 }
 //---------------------------------------------------------------------------
+unsigned char CCBDriver::getRawCliffSensor(tCliffSensor id) const
+{
+  switch ( id ) {
+    case CB_ALL_CLIFF:
+      return 0;
+      break;
+    case CB_LEFT_CLIFF:
+      return mCreateSensorPackage.cliffSignalLeft;
+      break;
+    case CB_FRONT_LEFT_CLIFF:
+      return mCreateSensorPackage.cliffSignalFrontLeft;
+      break;
+    case CB_FRONT_RIGHT_CLIFF:
+      return mCreateSensorPackage.cliffSignalFrontRight;
+      break;
+    case CB_RIGHT_CLIFF:
+      return mCreateSensorPackage.cliffSignalRight;
+      break;
+
+    default:
+      ERROR1 ( "Unknown cliff sensor requested %d", id );
+      return 0;
+      break;
+  }  // switch
+}
+//---------------------------------------------------------------------------
 bool CCBDriver::getCliffSensor ( tCliffSensor id )  const
 {
   switch ( id ) {

@@ -20,7 +20,7 @@
  **************************************************************************/
 #include "cbcliffsensor.h"
 #include <assert.h>
-
+#include "printerror.h"
 namespace Rapi
 {
 
@@ -75,5 +75,21 @@ int CCBCliffSensor::init()
   return 1; // success
 }
 //-----------------------------------------------------------------------------
+float CCBCliffSensor::getRawSensorData(unsigned int id)
+{
+  if ( id > 3) {
+    PRT_WARN1("Sensor id %d out of range [0..3]", id);
+    return 0;
+  }
 
+  switch(id) {
+    case 0: return mCBDriver->getRawCliffSensor(CB_LEFT_CLIFF);
+    case 1: return mCBDriver->getRawCliffSensor(CB_FRONT_LEFT_CLIFF);
+    case 2: return mCBDriver->getRawCliffSensor(CB_FRONT_RIGHT_CLIFF);
+    case 3: return mCBDriver->getRawCliffSensor(CB_RIGHT_CLIFF);
+  } // switch
+
+  return 0;
+}
+//-----------------------------------------------------------------------------
 } // namespace
