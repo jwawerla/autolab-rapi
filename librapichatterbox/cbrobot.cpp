@@ -51,6 +51,7 @@ CCBRobot::CCBRobot()
   mCBFrontFiducial = NULL;
   mCBPhotoSensor = NULL;
   mCBCreateButton = NULL;
+  mCBVirtualWall = NULL;
 
   mFgRunning = true;
 }
@@ -107,6 +108,9 @@ CCBRobot::~CCBRobot()
 
   if ( mCBCreateButton )
     delete mCBCreateButton;
+
+  if ( mCBVirtualWall )
+    delete mCBVirtualWall;
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::init()
@@ -187,6 +191,8 @@ void CCBRobot::run()
         mCBPhotoSensor->updateData();
       if ( mCBCreateButton )
         mCBCreateButton->updateData();
+      if ( mCBVirtualWall )
+        mCBVirtualWall->updateData();
       // Low side drivers updateData() is empty, no need to call it here
       //if ( mCBLowSideDriver )
       //  mCBLowSideDriver->updateData();
@@ -198,7 +204,6 @@ void CCBRobot::run()
     // last step - keep everything in a 100 ms loop
     synchronize ( CB_T );
   } // while
-  printf ( "DONE\n" );
 }
 //-----------------------------------------------------------------------------
 int CCBRobot::findDevice ( ARangeFinder* &device, std::string devName )
@@ -479,6 +484,7 @@ int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
   }
 
   if ( ( devName != "CB:bumper" ) &&
+       ( devName != "CB:virtualwall" ) &&
        ( devName != "CB:cliff" ) &&
        ( devName != "CB:overcurrent" ) &&
        ( devName != "CB:button" ) &&
@@ -504,7 +510,22 @@ int CCBRobot::findDevice ( ABinarySensorArray* &device, std::string devName )
   }
 
   //************************************
-  // Bumper
+  // Virtual wall
+  if ( devName == "CB:virtualwall" ) {
+    // check if device already exists
+    if ( mCBVirtualWall == NULL ) {
+      mCBVirtualWall = new CCBVirtualWallSensor ( mCBDriver, "CB:virtualwall" );
+      device = mCBVirtualWall;
+      return mCBVirtualWall->init();
+    }
+
+    // return already existing device
+    device = mCBVirtualWall;
+    return 1;
+  }
+
+  //************************************
+  // Button
   if ( devName == "CB:button" ) {
     // check if device already exists
     if ( mCBCreateButton == NULL ) {

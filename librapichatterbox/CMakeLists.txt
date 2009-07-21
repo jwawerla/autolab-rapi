@@ -27,6 +27,7 @@ SET( HEADERS
   cbtopfiducialfinder.h
   cbphotosensor.h
   cbcreatebutton.h
+  cbvirtualwallsensor.h
 )
 
 SET( SOURCES
@@ -49,6 +50,7 @@ SET( SOURCES
   cbtopfiducialfinder.cpp
   cbphotosensor.cpp
   cbcreatebutton.cpp
+  cbvirtualwallsensor.cpp
 )
 
 INCLUDE_DIRECTORIES(

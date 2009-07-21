@@ -18,23 +18,63 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-
-#include "RapiCore"
-#include "cbrobot.h"
-#include "cbdrivetrain2dof.h"
-#include "cbpowerpack.h"
-#include "cblaser.h"
-#include "cbirsensor.h"
-#include "cblights.h"
-#include "cbtextdisplay.h"
-#include "cbbumper.h"
-#include "cbwallsensor.h"
-#include "cbcliffsensor.h"
-#include "cbovercurrentsensor.h"
-#include "cblowsidedriver.h"
-//#include "cbdefinitions.h"
-#include "cbtopfiducialfinder.h"
-#include "cbfrontfiducialfinder.h"
-#include "cbphotosensor.h"
-#include "cbcreatebutton.h"
 #include "cbvirtualwallsensor.h"
+#include "assert.h"
+#include "utilities.h"
+
+namespace Rapi {
+
+//-----------------------------------------------------------------------------
+CCBVirtualWallSensor::CCBVirtualWallSensor(CCBDriver* cbDriver,
+ std::string devName)
+ : ABinarySensorArray(devName)
+{
+  assert(cbDriver);
+  mCBDriver = cbDriver;
+
+  mNumSamples = 1;
+  mBitData = new bool[mNumSamples];
+  mBitPose = new CPose2d[mNumSamples];
+
+  mFgEnabled = false;
+
+  setEnabled(true);
+}
+//-----------------------------------------------------------------------------
+CCBVirtualWallSensor::~CCBVirtualWallSensor()
+{
+  if ( mBitData ) {
+    delete[] mBitData;
+    mBitData = NULL;
+  }
+  if ( mBitPose ) {
+    delete[] mBitPose;
+    mBitPose = NULL;
+  }
+}
+//-----------------------------------------------------------------------------
+void CCBVirtualWallSensor::setEnabled ( bool enable )
+{
+  mFgEnabled = enable;
+}
+//-----------------------------------------------------------------------------
+int CCBVirtualWallSensor::init()
+{
+  return 1; // success
+}
+//-----------------------------------------------------------------------------
+void CCBVirtualWallSensor::updateData()
+{
+  mFgAnyTriggered = false;
+
+  if ( mFgEnabled == true ) {
+     mBitData[0] = mCBDriver->mCreateSensorPackage.virtualWall;
+     if (mBitData[0])
+       mFgAnyTriggered = true;
+
+    // update time stamp of this measurement
+    mTimeStamp = timeStamp();
+  }
+}
+//-----------------------------------------------------------------------------
+}

@@ -28,9 +28,10 @@ namespace Rapi
 {
 
 /**
- * Wall sensor of chatterbox
+ * Wall sensor of chatterbox. The sensor is mounted on the right front side of
+ * the Create.
  * @author Jens Wawerla
-*/
+ */
 class CCBWallSensor : public ARangeFinder
 {
     /** We are friends with our robot, so we get updated */
