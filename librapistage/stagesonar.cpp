@@ -72,8 +72,8 @@ int CStageSonar::init()
     mRelativeBeamPose[i].mX = mStgRanger->sensors[i].pose.y;
     mRelativeBeamPose[i].mY = mStgRanger->sensors[i].pose.y;
     mRelativeBeamPose[i].mYaw =   mStgRanger->sensors[i].pose.a;
-    mMaxRange = MAX( mMaxRange, mStgRanger->sensors[i].bounds_range.max );
-    mMinRange = MAX( mMinRange, mStgRanger->sensors[i].bounds_range.min );
+    mMaxRange = max( mMaxRange, mStgRanger->sensors[i].bounds_range.max );
+    mMinRange = max( mMinRange, mStgRanger->sensors[i].bounds_range.min );
     mBeamConeAngle =  mStgRanger->sensors[i].fov;
   }
 

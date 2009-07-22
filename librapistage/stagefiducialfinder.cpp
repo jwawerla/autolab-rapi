@@ -18,6 +18,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#include "utilities.h"
 #include "stagefiducialfinder.h"
 
 namespace Rapi
@@ -54,7 +55,7 @@ int CStageFiducialFinder::init()
 {
   mFov = mStgFiducial->fov;
   mMinRange = mStgFiducial->min_range;
-  mMaxRange = MAX( mStgFiducial->max_range_anon, mStgFiducial->max_range_id );
+  mMaxRange = max( mStgFiducial->max_range_anon, mStgFiducial->max_range_id );
 
   return 1; // success
 }
