@@ -84,9 +84,9 @@ void CWanderCtrl::updateData ( float dt )
     }
 
     if ( i > mLaser->getNumSamples() /2 )
-      minleft = MIN ( minleft, mLaser->mRangeData[i].range );
+      minleft = min ( minleft, mLaser->mRangeData[i].range );
     else
-      minright = MIN ( minright, mLaser->mRangeData[i].range );
+      minright = min ( minright, mLaser->mRangeData[i].range );
   }
   PRT_MSG1 ( 4, "minleft %.3f \n", minleft );
   PRT_MSG1 ( 4, "minright %.3f\n ", minright );
