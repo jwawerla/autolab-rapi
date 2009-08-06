@@ -41,6 +41,7 @@ void CVariableMonitor::getVariableString ( unsigned int index,
 {
   tVarEntry entry;
   int intVar;
+  unsigned int uintVar;
   bool boolVar;
   float floatVar;
   double doubleVar;
@@ -102,6 +103,12 @@ void CVariableMonitor::getVariableString ( unsigned int index,
       varType = "int";
       intVar = * ( ( int* ) entry.ptr );
       strOut << intVar;
+      value = strOut.str();
+      break;
+    case UINT:
+      varType = "uint";
+      uintVar = * ( (unsigned int* ) entry.ptr );
+      strOut << uintVar;
       value = strOut.str();
       break;
     case RAPI_VAR:
