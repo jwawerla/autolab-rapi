@@ -94,10 +94,6 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
      * @return mode
      */
     tOIMode getOIMode();
-    /**
-     * Get this robot's CB odometry
-     */
-    virtual COdometry *getOdometry() const { return mOdometry; }
 
   protected:
     /**
@@ -117,8 +113,6 @@ class CCBDrivetrain2dof : public ADrivetrain2dof
     float mMaxTurnRateDelta;
     /** Velocity command from previous time step */
     CVelocity2d mPrevVelocityCmd;
-    /** Odometry */
-    CCBOdometry *mOdometry;
 };
 
 } // namespace
