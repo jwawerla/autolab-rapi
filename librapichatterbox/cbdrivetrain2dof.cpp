@@ -77,7 +77,8 @@ void CCBDrivetrain2dof::updateData()
   static int count = 0;
   static int noProgressCount = 0;
 
-  mOdometry->updateData();
+  // update odometry
+  ( ( CCBOdometry* ) mOdometry )->updateData();
 
   if ( mFgEnabled == true ) {
   /* FIXME: some problems measuring velocities mess up driving */

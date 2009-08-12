@@ -123,6 +123,17 @@ void CRapiTypeSystem::addVar( double* ptr, std::string name,
   mVarList.push_back( entry );
 }
 //-----------------------------------------------------------------------------
+void CRapiTypeSystem::addVar ( unsigned int* ptr, std::string name )
+{
+  tVarEntry entry;
+
+  entry.ptr = ptr;
+  entry.name = name;
+  entry.decimalPlaces = 0;
+  entry.varType = UINT;
+  mVarList.push_back( entry );
+}
+//-----------------------------------------------------------------------------
 void CRapiTypeSystem::addVar( int* ptr, std::string name )
 {
   tVarEntry entry;

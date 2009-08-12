@@ -73,6 +73,7 @@ void CDataLogger::write( float timestamp )
 {
   tVarEntry entry;
   int intVar;
+  unsigned int uintVar;
   bool boolVar;
   float floatVar;
   double doubleVar;
@@ -117,6 +118,10 @@ void CDataLogger::write( float timestamp )
       case DOUBLE:
         doubleVar = * (( double* ) entry.ptr );
         fprintf( mFp, ",%s", toDoubleToStr( doubleVar, entry.decimalPlaces ).c_str() );
+        break;
+      case UINT:
+        uintVar = * (( unsigned int* ) entry.ptr );
+        fprintf( mFp, ",%d", uintVar );
         break;
       case INT:
         intVar = * (( int* ) entry.ptr );
