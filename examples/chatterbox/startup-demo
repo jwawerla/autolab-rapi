@@ -1,16 +1,16 @@
 #!/bin/sh
 #
 # Demo Program starter 
-#
+# (currently commented out as it is a bit annoying)
 
 start() {
-        echo "Starting demo..."
-	/usr/bin/chatterbox > /home/demo.log
+#        echo "Starting demo..."
+#	/usr/bin/chatterbox
 }
 
 # Nothing to stop
 stop() {
-        echo "Stopping demo..."
+#        echo "Stopping demo..."
 }
 restart() {
         stop
