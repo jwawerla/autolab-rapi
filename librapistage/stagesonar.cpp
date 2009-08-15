@@ -69,9 +69,9 @@ int CStageSonar::init()
   mRangeData = new tRangeData[mNumSamples];
 
   for ( unsigned int i = 0; i < mNumSamples; i++ ) {
-    mRelativeBeamPose[i].mX = mStgRanger->sensors[i].pose.y;
+    mRelativeBeamPose[i].mX = mStgRanger->sensors[i].pose.x;
     mRelativeBeamPose[i].mY = mStgRanger->sensors[i].pose.y;
-    mRelativeBeamPose[i].mYaw =   mStgRanger->sensors[i].pose.a;
+    mRelativeBeamPose[i].mYaw =  mStgRanger->sensors[i].pose.a;
     mMaxRange = max( mMaxRange, mStgRanger->sensors[i].bounds_range.max );
     mMinRange = max( mMinRange, mStgRanger->sensors[i].bounds_range.min );
     mBeamConeAngle =  mStgRanger->sensors[i].fov;
