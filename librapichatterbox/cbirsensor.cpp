@@ -39,33 +39,34 @@ CCBIrSensor::CCBIrSensor ( CCBDriver* cbDriver, std::string devName )
   mRangeData = new tRangeData[mNumSamples];
   mRelativeBeamPose = new CPose2d[mNumSamples];
 
+  // front
   mRelativeBeamPose[0].mX = 0.0;
   mRelativeBeamPose[0].mY = 0.0;
   mRelativeBeamPose[0].mYaw = D2R ( 0.0 );
   mRangeData[0].range = 0.0;
-
+  // front left
   mRelativeBeamPose[1].mX = 0.0;
-  mRelativeBeamPose[1].mY = 0.0;
+  mRelativeBeamPose[1].mY = 0.080;
   mRelativeBeamPose[1].mYaw = D2R ( 30.0 );
   mRangeData[1].range = 0.0;
-
-  mRelativeBeamPose[2].mX = 0.0;
-  mRelativeBeamPose[2].mY = 0.0;
+  // left
+  mRelativeBeamPose[2].mX = -0.054;
+  mRelativeBeamPose[2].mY = 0.086;
   mRelativeBeamPose[2].mYaw = D2R ( 90.0 );
   mRangeData[2].range = 0.0;
-
-  mRelativeBeamPose[3].mX = 0.0;
+  // rear
+  mRelativeBeamPose[3].mX = -0.115;
   mRelativeBeamPose[3].mY = 0.0;
   mRelativeBeamPose[3].mYaw = D2R ( 180.0 );
   mRangeData[3].range = 0.0;
-
-  mRelativeBeamPose[4].mX = 0.0;
-  mRelativeBeamPose[4].mY = 0.0;
+  // right
+  mRelativeBeamPose[4].mX = -0.054;
+  mRelativeBeamPose[4].mY = -0.086;
   mRelativeBeamPose[4].mYaw = D2R ( -90.0 );
   mRangeData[4].range = 0.0;
-
+  // front right
   mRelativeBeamPose[5].mX = 0.0;
-  mRelativeBeamPose[5].mY = 0.0;
+  mRelativeBeamPose[5].mY = -0.080;
   mRelativeBeamPose[5].mYaw = D2R ( -30.0 );
   mRangeData[5].range = 0.0;
 
