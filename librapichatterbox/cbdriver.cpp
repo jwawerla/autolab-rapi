@@ -454,7 +454,7 @@ int CCBDriver::readSensorData()
 
   // mask out unused bytes and check for over current condition
   if ( ( mCreateSensorPackage.overCurrents & 0x1F ) != 0 )
-    PRT_WARN1 ( "OVER CURRENT -- OVER CURRENT code %d",
+    PRT_MSG1 ( 8, "OVER CURRENT -- OVER CURRENT code %d",
                 mCreateSensorPackage.overCurrents );
 
   return 1; // success
