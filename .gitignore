@@ -1,0 +1,12 @@
+*.pc
+Makefile
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+*.so*
+*.a
+/doc/html/
+GIT-VERSION-FILE
+*.cxx
+config.h
+examples/chatterbox/chatterbox
