@@ -41,7 +41,7 @@ CStagePowerPack::CStagePowerPack ( Stg::ModelPosition* stgModel,
   mStgModel = stgModel;
   mFgEnabled = false;
   mStgPowerPack = stgModel->FindPowerPack();
-  mSimInterval = stgModel->GetWorld()->GetSimInterval() / 1e6;
+  mSimInterval = stgModel->GetEnergyInterval() / 1e6;
 
   stgModel->AddUpdateCallback ( ( Stg::stg_model_callback_t )
                                 powerUpdate,

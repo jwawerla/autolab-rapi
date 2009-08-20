@@ -87,7 +87,7 @@ void CStageDrivetrain2dof::updateData()
   float time;
   if ( mFgEnabled ) {
     applyVelocityLimits();
-    applyAccelerationLimits( mStgPosition->GetWorld()->GetSimInterval() / 1e6);
+    applyAccelerationLimits( mStgPosition->GetPoseInterval() / 1e6);
     mStgPosition->SetXSpeed ( mVelocityLimitedCmd.mXDot );
     mStgPosition->SetTurnSpeed ( mVelocityLimitedCmd.mYawDot );
 

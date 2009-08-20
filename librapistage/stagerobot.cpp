@@ -47,7 +47,7 @@ CStageRobot::CStageRobot ( Stg::Model* mod )
   mStageModel = mod;
   mName = mStageModel->Token();
   // update interval [s]
-  mUpdateInterval = mStageModel->GetWorld()->GetSimInterval() * 1e-6;
+  mUpdateInterval = mStageModel->GetUpdateInterval() * 1e-6;
 
   mStageModel->GetWorld()->AddUpdateCallback ( ( Stg::stg_world_callback_t )
       ctrlUpdate,
