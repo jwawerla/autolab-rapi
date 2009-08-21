@@ -32,6 +32,16 @@ CRapiTypeSystem::~CRapiTypeSystem()
 {
 }
 //-----------------------------------------------------------------------------
+void CRapiTypeSystem::addVar( std::string* ptr, std::string name )
+{
+  tVarEntry entry;
+  entry.ptr = ptr;
+  entry.name = name;
+  entry.decimalPlaces = 0;
+  entry.varType = STRING;
+  mVarList.push_back( entry );
+}
+//-----------------------------------------------------------------------------
 void CRapiTypeSystem::addVar( IRapiVar* ptr, std::string name )
 {
   tVarEntry entry;

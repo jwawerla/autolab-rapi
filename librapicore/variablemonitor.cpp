@@ -115,6 +115,10 @@ void CVariableMonitor::getVariableString ( unsigned int index,
       varType = ((IRapiVar*) entry.ptr)->getTypeStr();
       value = ((IRapiVar*) entry.ptr)->toStr();
       break;
+    case STRING:
+      varType = "string";
+      value = * ( ( std::string* ) entry.ptr );
+      break;
   };
 }
 //-----------------------------------------------------------------------------

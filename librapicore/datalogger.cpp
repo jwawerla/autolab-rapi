@@ -130,6 +130,9 @@ void CDataLogger::write( float timestamp )
       case RAPI_VAR:
         fprintf( mFp, ",%s", (( IRapiVar* ) entry.ptr )->toCSV().c_str() );
         break;
+      case STRING:
+		fprintf( mFp, ",%s", ((std::string *) entry.ptr )->c_str() );
+		break;
     } // switch
 
   }

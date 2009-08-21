@@ -58,10 +58,11 @@ class CRapiTypeSystem {
     void addVar ( CPoint2d* ptr, std::string name );
     void addVar ( CWaypoint2d* ptr, std::string name );
     void addVar ( IRapiVar* ptr, std::string name );
+    void addVar ( std::string* ptr, std::string name );
 
   protected:
     typedef enum {FLOAT, DOUBLE, INT, UINT, BOOL, POINT2D,
-                  WAYPOINT2D, RAPI_VAR
+                  WAYPOINT2D, RAPI_VAR, STRING
                } tVar;
     typedef struct {
       void* ptr;
