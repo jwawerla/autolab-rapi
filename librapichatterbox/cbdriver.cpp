@@ -420,9 +420,9 @@ int CCBDriver::readSensorData()
   memcpy ( ( char* ) &mCreateSensorPackage, dataBuf, CREATE_SENSOR_PACKET_SIZE );
   // next we need to fix the byte order of data types with more then 1 byte
   mCreateSensorPackage.distance
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.distance );
+  = ( short ) ntohs ( ( short ) mCreateSensorPackage.distance );
   mCreateSensorPackage.angle
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.angle );
+  = ( short ) ntohs ( ( short ) mCreateSensorPackage.angle );
   mCreateSensorPackage.voltage
   = ntohs ( mCreateSensorPackage.voltage );
   mCreateSensorPackage.current
