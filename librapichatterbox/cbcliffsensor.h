@@ -58,7 +58,8 @@ class CCBCliffSensor : public ABinarySensorArray
      */
     virtual int init();
     /**
-     * Gets the raw cliff sensor data
+     * Gets the raw cliff sensor data. If argument is 0 (CB_ALL_CLIFF), the sum
+     * of the raw data from all the sensors is returned.
      * <STRONG>
      * This method is Create specific and not supported by other implementations
      * of this device. The use of this method will make your code not portable

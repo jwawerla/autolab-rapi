@@ -461,11 +461,14 @@ int CCBDriver::readSensorData()
 
 }
 //---------------------------------------------------------------------------
-unsigned char CCBDriver::getRawCliffSensor(tCliffSensor id) const
+unsigned short CCBDriver::getRawCliffSensor(tCliffSensor id) const
 {
   switch ( id ) {
     case CB_ALL_CLIFF:
-      return 0;
+      return (mCreateSensorPackage.cliffSignalLeft +
+              mCreateSensorPackage.cliffSignalFrontLeft +
+              mCreateSensorPackage.cliffSignalFrontRight +
+              mCreateSensorPackage.cliffSignalRight);
       break;
     case CB_LEFT_CLIFF:
       return mCreateSensorPackage.cliffSignalLeft;
