@@ -64,7 +64,9 @@ class CCBIrSensor : public ARangeFinder
     virtual void print() const;
     /**
      * Set the time constant for the low pass filter on robostix
-     * to filter the the sensor readings
+     * to filter the the sensor readings.
+     * <STRONG>Note that this affects the filtering of photo sensor data
+     * as well </STRONG>.
      * @param tau [s]
      */
     void setLpfTau(float tau);
