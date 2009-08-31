@@ -62,6 +62,12 @@ class CCBIrSensor : public ARangeFinder
      * Prints the devices main information
      */
     virtual void print() const;
+    /**
+     * Set the time constant for the low pass filter on robostix
+     * to filter the the sensor readings
+     * @param tau [s]
+     */
+    void setLpfTau(float tau);
 
   private:
     /** HAL of the chatterbox */

@@ -82,6 +82,11 @@ CCBIrSensor::~CCBIrSensor()
   delete[] mRangeData;
 }
 //---------------------------------------------------------------------------
+void CCBIrSensor::setLpfTau(float tau)
+{
+  mCBDriver->setLpfAdcTau(tau);
+}
+//---------------------------------------------------------------------------
 void CCBIrSensor::setEnabled ( bool enable )
 {
   if ( enable == true ) {
