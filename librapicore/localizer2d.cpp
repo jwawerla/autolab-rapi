@@ -43,6 +43,11 @@ CPose2d ALocalizer2d::getPose() const
   return mPose;
 }
 //-----------------------------------------------------------------------------
+void ALocalizer2d::setPose( CPose2d pose)
+{
+  mPose = pose;
+}
+//-----------------------------------------------------------------------------
 void ALocalizer2d::setToZero()
 {
   mPose = CPose2d(0.0, 0.0, 0.0);

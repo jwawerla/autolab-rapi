@@ -48,6 +48,11 @@ class ALocalizer2d : public ADevice
      */
     void setCoordinateSystemOffset( CPose2d offset );
     /**
+     * Sets the current pose
+     * @param pose
+     */
+    void setPose( CPose2d pose );
+    /**
      * Sets the pose to (0,0,0)
      */
     void setToZero();
