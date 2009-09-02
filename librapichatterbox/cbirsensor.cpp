@@ -82,9 +82,14 @@ CCBIrSensor::~CCBIrSensor()
   delete[] mRangeData;
 }
 //---------------------------------------------------------------------------
-void CCBIrSensor::setLpfTau(float tau)
+void CCBIrSensor::setLpfTau( float tau )
 {
-  mCBDriver->setLpfAdcTau(tau);
+  mCBDriver->setLpfAdcTau(tau, 2 ); // right
+  mCBDriver->setLpfAdcTau(tau, 3 ); // left
+  mCBDriver->setLpfAdcTau(tau, 4 ); // front left
+  mCBDriver->setLpfAdcTau(tau, 5 ); // front right
+  mCBDriver->setLpfAdcTau(tau, 6 ); // back
+  mCBDriver->setLpfAdcTau(tau, 7 ); // front
 }
 //---------------------------------------------------------------------------
 void CCBIrSensor::setEnabled ( bool enable )

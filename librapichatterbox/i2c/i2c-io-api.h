@@ -43,7 +43,7 @@ int I2C_IO_GetGPIODir( int i2cDev, uint8_t portNum, uint8_t *pinVal );
 int I2C_IO_SetGPIODir( int i2cDev, uint8_t portNum, uint8_t pinMask, uint8_t pinVal );
 int I2C_IO_GetADC( int i2cDev, uint8_t mux, uint16_t *adcVal );
 int I2C_IO_GetLpfADC( int i2cDev, uint8_t mux, float *adcVal );
-int I2C_IO_SetTauLpf( int i2cDev, float tau);
+int I2C_IO_SetTauLpf( int i2cDev, float tau, unsigned char channel );
 int I2C_IO_ReadReg8( int i2cDev, uint8_t reg, uint8_t *regVal );
 int I2C_IO_ReadReg16( int i2cDev, uint8_t reg, uint16_t *regVal );
 int I2C_IO_WriteReg8( int i2cDev, uint8_t reg, uint8_t regVal );

@@ -42,6 +42,11 @@ CCBPhotoSensor::~CCBPhotoSensor()
   }
 }
 //-----------------------------------------------------------------------------
+void CCBPhotoSensor::setLpfTau( float tau )
+{
+	mCBDriver->setLpfAdcTau( tau, 1 );
+}
+//-----------------------------------------------------------------------------
 void CCBPhotoSensor::setEnabled( bool enable )
 {
   mFgEnabled = enable;

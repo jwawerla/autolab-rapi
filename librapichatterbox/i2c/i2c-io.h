@@ -226,6 +226,7 @@ typedef struct
 typedef struct
 {
     float     tau;    ///< time constant for low pass filter
+    unsigned char channel; ///< channel for which to modify the tau value
 
 } I2C_IO_SetTau_t;
 

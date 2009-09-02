@@ -1290,11 +1290,11 @@ float CCBDriver::readLpfAdc ( unsigned char id )
   return adcVal;
 }
 //-----------------------------------------------------------------------------
-int CCBDriver::setLpfAdcTau ( float tau )
+int CCBDriver::setLpfAdcTau ( float tau, unsigned char channel )
 {
   I2cSetSlaveAddress ( mI2cDev, ROBOSTIX_ADDR, I2C_USE_CRC );
 
-  if ( I2C_IO_SetTauLpf ( mI2cDev, tau ) == 0 ) {
+  if ( I2C_IO_SetTauLpf ( mI2cDev, tau, channel ) == 0 ) {
     ERROR0 ( "Failed to set time constant for ADC low pass filter" );
     return 0; // failure
   }

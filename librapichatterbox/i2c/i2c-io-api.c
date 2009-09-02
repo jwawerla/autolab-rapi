@@ -322,11 +322,12 @@ int I2C_IO_WriteReg16( int i2cDev, uint8_t reg, uint16_t regVal )
 *   Write time constant for low pass filter
 */
 
-int I2C_IO_SetTauLpf( int i2cDev, float tau)
+int I2C_IO_SetTauLpf( int i2cDev, float tau, unsigned char channel )
 {
     I2C_IO_SetTau_t   writeData;
 
     writeData.tau = tau;
+    writeData.channel = channel;
 
     if ( I2cWriteBlock( i2cDev, I2C_IO_SET_LPF_TAU, &writeData, sizeof( writeData )) != 0 )
     {

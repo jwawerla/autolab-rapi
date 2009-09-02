@@ -54,6 +54,12 @@ class CCBPhotoSensor : public AAnalogSensorArray
      * @param return 1 if success 0 otherwise
      */
     virtual int init();
+    /**
+     * Set the time constant for the low pass filter on robostix
+     * to filter the photo sensor readings.
+     * @param tau [s]
+     */
+     void setLpfTau( float tau );
 
   protected:
     /**

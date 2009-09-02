@@ -300,11 +300,12 @@ class CCBDriver
      */
     float readPhotoSensor();
     /**
-     * Set the time constant for the adc low pass filter
+     * Set the time constant for a channel of the adc low pass filter
      * @param tau [s]
+     * @param channel [0-7]
      * @return 1 if successful, 0 in case of an error
      */
-    int setLpfAdcTau(float tau);
+    int setLpfAdcTau( float tau, unsigned char channel );
     /**
      * Package with the latest data from Create
      */
