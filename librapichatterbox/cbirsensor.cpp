@@ -69,7 +69,8 @@ CCBIrSensor::CCBIrSensor ( CCBDriver* cbDriver, std::string devName )
   mRelativeBeamPose[5].mY = -0.080;
   mRelativeBeamPose[5].mYaw = D2R ( -30.0 );
   mRangeData[5].range = 0.0;
-
+  
+  this->setLpfTau( 0.05 ); // set a reasonable default LPF value 
   setEnabled ( true );
 }
 //---------------------------------------------------------------------------

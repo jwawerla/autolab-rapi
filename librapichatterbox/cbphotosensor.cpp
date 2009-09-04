@@ -31,6 +31,7 @@ CCBPhotoSensor::CCBPhotoSensor( CCBDriver* cbDriver, std::string devName )
   mCBDriver = cbDriver;
   mNumSamples = 1;
   mData = new double[1];
+  this->setLpfTau ( 1.0 ); // set a reasonable default LPF value
   setEnabled( true );
 }
 //-----------------------------------------------------------------------------
