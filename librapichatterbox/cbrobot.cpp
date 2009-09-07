@@ -598,9 +598,12 @@ void CCBRobot::synchronize ( double interval )
   timeNow = tv.tv_sec + tv.tv_usec * 1e-6;
   duration = timeNow - mLastSynchronizeTime;
   if ( duration < interval ) {
-    usleep ( ( int ) ( duration * 1e6 ) );
+    usleep ( ( int ) ( (interval - duration) * 1e6 ) );
   }
-
+  else {
+    PRT_WARN0( "Control loop running too slowly\n" );
+  }
+  gettimeofday( &tv, 0 );
   mLastSynchronizeTime = tv.tv_sec + tv.tv_usec * 1e-6;
 }
 //-----------------------------------------------------------------------------
