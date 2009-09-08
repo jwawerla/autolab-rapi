@@ -121,6 +121,16 @@ class ARobot
     virtual int findDevice( AAnalogSensorArray* &device, std::string devName ) = 0;
     /** Monitor for variables */
     CVariableMonitor mVariableMonitor;
+    /**
+     * Set the update period
+     * @param update period [s]
+     */
+    void setUpdateInterval ( double interval );
+    /**
+     * Get the current update period
+     * @return update period [s]
+     */
+    double getUpdateInterval();
 
   protected:
     /** Default constructor */

@@ -30,7 +30,7 @@ namespace Rapi
 CCBRobot::CCBRobot()
     : ARobot()
 {
-  mUpdateInterval = CB_T;
+  mUpdateInterval = 0.1; // default update frequency is 10Hz
   mName = "Chatterbox";
 
   mCBDriver = new CCBDriver();
@@ -201,8 +201,8 @@ void CCBRobot::run()
     updateControllers();
 
     //******************************************************
-    // last step - keep everything in a 100 ms loop
-    synchronize ( CB_T );
+    // last step - keep everything in sync 
+    synchronize ( mUpdateInterval );
   } // while
 }
 //-----------------------------------------------------------------------------
@@ -607,5 +607,4 @@ void CCBRobot::synchronize ( double interval )
   mLastSynchronizeTime = tv.tv_sec + tv.tv_usec * 1e-6;
 }
 //-----------------------------------------------------------------------------
-
 } // namespace

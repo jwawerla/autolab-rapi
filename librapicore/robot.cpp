@@ -84,5 +84,15 @@ void ARobot::updateStateVariable()
   }
 }
 //-----------------------------------------------------------------------------
+void ARobot::setUpdateInterval ( double interval )
+{
+  mUpdateInterval = interval;
+}
+//-----------------------------------------------------------------------------
+double ARobot::getUpdateInterval()
+{
+  return mUpdateInterval;
+}
+//-----------------------------------------------------------------------------
 } // namespace
 

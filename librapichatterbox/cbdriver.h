@@ -29,7 +29,8 @@
 namespace Rapi
 {
 
-/** Update interval [s] */
+/** Update interval [s]. <STRONG>This variable is deprecated. Please use
+ * mRobot->getUpdateInterval() instead.</STRONG> */
 const double CB_T =  0.1;
 
 /**
