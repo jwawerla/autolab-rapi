@@ -22,7 +22,7 @@
 #include <sys/time.h>
 #include "rapierror.h"
 #include "printerror.h"
-
+#include <assert.h>
 namespace Rapi
 {
 
@@ -34,6 +34,7 @@ CCBRobot::CCBRobot()
   mName = "Chatterbox";
 
   mCBDriver = new CCBDriver();
+  assert(mCBDriver);
 
   mCBDrivetrain = NULL;
   mCBPowerPack = NULL;
