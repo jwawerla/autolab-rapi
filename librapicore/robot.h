@@ -130,7 +130,7 @@ class ARobot
      * Get the current update period
      * @return update period [s]
      */
-    double getUpdateInterval();
+    double getUpdateInterval() const;
 
   protected:
     /** Default constructor */

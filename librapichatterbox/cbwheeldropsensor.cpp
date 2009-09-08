@@ -48,7 +48,7 @@ CCBWheelDropSensor::~CCBWheelDropSensor()
   }
 }
 //-----------------------------------------------------------------------------
-void CCBWheelDropSensor::updateData()
+void CCBWheelDropSensor::updateData( const double dt)
 {
   mFgAnyTriggered = false;
 

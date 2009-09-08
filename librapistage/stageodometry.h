@@ -47,8 +47,9 @@ class CStageOdometry : public COdometry
     /**
      * This method gets called by the framework every step to update
      * the sensor data
+     * @param dt size of time step [s]
      */
-    virtual void updateData();
+    virtual void updateData( const double dt);
     /** We are friends with stage drivetrain */
     friend class CStageDrivetrain2dof;
 

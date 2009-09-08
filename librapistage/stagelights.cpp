@@ -26,7 +26,7 @@ namespace Rapi
 // is updated
 int lightUpdate ( Stg::ModelBlinkenlight* mod, CStageLights* lights )
 {
-  lights->updateData();
+  lights->updateData( mod->GetUpdateInterval() );
   return 0; // ok
 }
 
@@ -53,7 +53,7 @@ void CStageLights::setEnabled ( bool enable )
 {
 }
 //-----------------------------------------------------------------------------
-void CStageLights::updateData()
+void CStageLights::updateData( const double dt)
 {
   mTimeStamp = mStgLights->GetWorld()->SimTimeNow() / 1e6;
 }

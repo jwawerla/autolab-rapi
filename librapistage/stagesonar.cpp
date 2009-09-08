@@ -29,7 +29,7 @@ namespace Rapi
 // is updated
 int sonarUpdate ( Stg::ModelRanger* ranger, CStageSonar* sonar )
 {
-  sonar->updateData();
+  sonar->updateData( ranger->GetUpdateInterval() );
   return 0; // ok
 }
 //---------------------------------------------------------------------------
@@ -93,7 +93,7 @@ void CStageSonar::setEnabled( bool enable )
   mFgEnabled = enable;
 }
 //---------------------------------------------------------------------------
-void CStageSonar::updateData()
+void CStageSonar::updateData( const double dt)
 {
   if ( mFgEnabled ) {
     for ( unsigned int i = 0; i < mNumSamples; i++ )

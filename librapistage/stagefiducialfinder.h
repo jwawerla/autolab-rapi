@@ -65,8 +65,9 @@ class CStageFiducialFinder : public AFiducialFinder
     /**
      * This method gets called by the framework every step to update
      * the sensor data
+     * @param dt size of time step [s]
      */
-    virtual void updateData();
+    virtual void updateData( const double dt);
     /** Friend function of stage model updates */
     friend int fiducialUpdate ( Stg::ModelFiducial* mod,
                                 CStageFiducialFinder* fiducial );

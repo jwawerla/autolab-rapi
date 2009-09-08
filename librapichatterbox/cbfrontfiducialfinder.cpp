@@ -57,7 +57,7 @@ CCBFrontFiducialFinder::~CCBFrontFiducialFinder()
   mFiducialData = NULL;
 }
 //-----------------------------------------------------------------------------
-void CCBFrontFiducialFinder::updateData()
+void CCBFrontFiducialFinder::updateData( const double dt)
 {
   mFiducialData->id = mCBDriver->mCreateSensorPackage.ir;
   mCBDriver->sendIr( mOwnFiducialId );

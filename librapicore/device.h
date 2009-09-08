@@ -116,8 +116,9 @@ class ADevice
     void notifyDataUpdateObservers();
     /**
      * Updates the data of the device
+     * @param dt size of time step [s]
      */
-    virtual void updateData() = 0;
+    virtual void updateData( const double dt ) = 0;
     /** Data logger for logging the devices internal data */
     CDataLogger* mDataLogger;
     /** Flags if device is enabled or not */

@@ -63,7 +63,7 @@ int CCBVirtualWallSensor::init()
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-void CCBVirtualWallSensor::updateData()
+void CCBVirtualWallSensor::updateData( const double dt)
 {
   mFgAnyTriggered = false;
 

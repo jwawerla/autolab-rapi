@@ -48,7 +48,7 @@ CCBCliffSensor::~CCBCliffSensor()
   }
 }
 //-----------------------------------------------------------------------------
-void CCBCliffSensor::updateData()
+void CCBCliffSensor::updateData(  const double dt )
 {
   mFgAnyTriggered = false;
 

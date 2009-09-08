@@ -125,7 +125,7 @@ int CStageRobot::findDevice ( ARangeFinder* &device, std::string devName )
     }
     device->setEnabled ( true );
     // enforce one update step, to fill the data structures with valid data
-    laser->updateData();
+    laser->updateData(modLaser->GetUpdateInterval() );
     return 1; // success
   }
 
@@ -151,7 +151,7 @@ int CStageRobot::findDevice ( ARangeFinder* &device, std::string devName )
     }
     device->setEnabled ( true );
     // enforce one update step, to fill the data structures with valid data
-    sonar->updateData();
+    sonar->updateData(modRanger->GetUpdateInterval() );
     return 1; // success
   }
 
@@ -186,7 +186,7 @@ int CStageRobot::findDevice ( ADrivetrain2dof* &device, std::string devName )
   }
   device->setEnabled ( true );
   // enforce one update step, to fill the data structures with valid data
-  drivetrain2of->updateData();
+  drivetrain2of->updateData( modPosition->GetUpdateInterval() );
   return 1; // success
 }
 //-----------------------------------------------------------------------------
@@ -215,7 +215,7 @@ int CStageRobot::findDevice ( APowerPack* &device, std::string devName )
   }
   device->setEnabled ( true );
   // enforce one update step, to fill the data structures with valid data
-  powerPack->updateData();
+  powerPack->updateData( modPosition->GetUpdateInterval() );
 
   return 1; // success
 }
@@ -251,7 +251,7 @@ int CStageRobot::findDevice ( AFiducialFinder* &device, std::string devName )
   }
   device->setEnabled ( true );
   // enforce one update step, to fill the data structures with valid data
-  fiducialFinder->updateData();
+  fiducialFinder->updateData(modFiducial->GetUpdateInterval() );
 
   return 1; // success
 }
@@ -311,7 +311,7 @@ int CStageRobot::findDevice ( ATextDisplay* &device, std::string devName )
   }
   device->setEnabled ( true );
   // enforce one update step, to fill the data structures with valid data
-  textDisplay->updateData();
+  textDisplay->updateData(modPosition->GetUpdateInterval() );
 
   return 1; // success
 }

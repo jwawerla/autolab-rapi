@@ -29,10 +29,6 @@
 namespace Rapi
 {
 
-/** Update interval [s]. <STRONG>This variable is deprecated. Please use
- * mRobot->getUpdateInterval() instead.</STRONG> */
-const double CB_T =  0.1;
-
 /**
  * Driver class for the chatterbox hardware
  * @author Jens Wawerla <jwawerla@sfu.ca>

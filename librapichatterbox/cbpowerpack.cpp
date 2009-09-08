@@ -61,7 +61,7 @@ bool CCBPowerPack::isCharging()
   return false;
 }
 //-----------------------------------------------------------------------------
-void CCBPowerPack::updateData()
+void CCBPowerPack::updateData( const double dt)
 {
   if ( mFgEnabled == true ) {
     // convert from [mAh] to [Ah]

@@ -30,7 +30,7 @@ namespace Rapi
 ARobot::ARobot()
 {
   mName = "ARobot";
-  mUpdateInterval = 0.0;
+  mUpdateInterval = 0.1; // 10 Hz
   mRobotCtrl = NULL;
   mFgInitialized = false;
 }
@@ -89,7 +89,7 @@ void ARobot::setUpdateInterval ( double interval )
   mUpdateInterval = interval;
 }
 //-----------------------------------------------------------------------------
-double ARobot::getUpdateInterval()
+double ARobot::getUpdateInterval() const
 {
   return mUpdateInterval;
 }

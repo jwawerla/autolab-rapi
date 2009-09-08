@@ -29,7 +29,7 @@ namespace Rapi
 // is updated
 int positionUpdate ( Stg::ModelPosition* pos, CStageDrivetrain2dof* drivetrain )
 {
-  drivetrain->updateData();
+  drivetrain->updateData(pos->GetUpdateInterval() );
   return 0; // ok
 }
 
@@ -82,7 +82,7 @@ void CStageDrivetrain2dof::setEnabled ( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-void CStageDrivetrain2dof::updateData()
+void CStageDrivetrain2dof::updateData( const double dt)
 {
   float time;
   if ( mFgEnabled ) {
@@ -92,7 +92,7 @@ void CStageDrivetrain2dof::updateData()
     mStgPosition->SetTurnSpeed ( mVelocityLimitedCmd.mYawDot );
 
     // update odometry
-    ( ( CStageOdometry* ) mOdometry )->updateData();
+    ( ( CStageOdometry* ) mOdometry )->updateData(dt);
 
     // stage doesn't seem to allow us access to the sensed speed of the robot
     // so we simply assume it is the commanded velocity

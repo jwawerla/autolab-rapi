@@ -39,6 +39,9 @@ const int DOT = 5;
  */
 class CCBLights : public ALights
 {
+    /** We are friends with our robot, so we get updated */
+    friend class CCBRobot;
+
   public:
     /**
      * Default constructor
@@ -58,11 +61,7 @@ class CCBLights : public ALights
      * @param return 1 if success -1 otherwise
      */
     virtual int init();
-    /**
-     * This method gets called by the framework every step to update
-     * the sensor data
-     */
-    virtual void updateData();
+
     /**
      * Sets a given rgb value for a light, note for none rgb lights
      * just set the red channel and leave the remaining open
@@ -84,6 +83,13 @@ class CCBLights : public ALights
     virtual int setBlink(int id, bool enabled, float freq);
 
   protected:
+    /**
+     * This method gets called by the framework every step to update
+     * the sensor data
+     * @param dt size of time step [s]
+     */
+    virtual void updateData(const double dt);
+
     typedef struct  {
       float freq;
       int tick;
@@ -97,6 +103,8 @@ class CCBLights : public ALights
     CCBDriver* mCBDriver;
     /** Blink setting for led */
     tBlink mBlink[6];
+    /** Update interval [s] */
+    double mUpdateInterval;
 
 };
 

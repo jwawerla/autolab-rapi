@@ -49,7 +49,7 @@ void CStageTextDisplay::setEnabled ( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-void CStageTextDisplay::updateData()
+void CStageTextDisplay::updateData( const double dt )
 {
   mTimeStamp = mStgPosition->GetWorld()->SimTimeNow() / 1e6;
 }

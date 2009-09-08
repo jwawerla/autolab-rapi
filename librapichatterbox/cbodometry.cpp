@@ -34,7 +34,7 @@ CCBOdometry::~CCBOdometry()
 {
 }
 //-----------------------------------------------------------------------------
-void CCBOdometry::updateData()
+void CCBOdometry::updateData( const double dt)
 {
   float angle;
   float distance;

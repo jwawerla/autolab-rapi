@@ -31,7 +31,7 @@ namespace Rapi
 // is updated
 int laserUpdate ( Stg::ModelLaser* mod, CStageLaser* laser )
 {
-  laser->updateData();
+  laser->updateData( mod->GetUpdateInterval() );
   return 0; // ok
 }
 
@@ -105,7 +105,7 @@ int CStageLaser::init()
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-void CStageLaser::updateData()
+void CStageLaser::updateData( const double dt)
 {
   tRangeData* temp;
   uint32_t sampleCount;

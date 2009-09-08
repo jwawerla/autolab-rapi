@@ -63,7 +63,7 @@ void CCBCreateButton::setEnabled ( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-void CCBCreateButton::updateData()
+void CCBCreateButton::updateData(  const double dt )
 {
   mFgAnyTriggered = false;
 

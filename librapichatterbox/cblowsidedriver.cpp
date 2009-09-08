@@ -25,62 +25,62 @@
 namespace Rapi
 {
 
-  //-----------------------------------------------------------------------------
-  CCBLowSideDriver::CCBLowSideDriver ( CCBDriver* driver, std::string devName )
-    : ASwitchArray ( devName )
-  {
-    assert ( driver );
-    mCBDriver = driver;
-    mNumSwitches = 3;
+//-----------------------------------------------------------------------------
+CCBLowSideDriver::CCBLowSideDriver( CCBDriver* driver, std::string devName )
+    : ASwitchArray( devName )
+{
+  assert( driver );
+  mCBDriver = driver;
+  mNumSwitches = 3;
 
-    mSwitch = new bool[mNumSwitches];
-    for (unsigned int i = 0; i < mNumSwitches; i++)
-      mSwitch[i] = false;
+  mSwitch = new bool[mNumSwitches];
+  for ( unsigned int i = 0; i < mNumSwitches; i++ )
+    mSwitch[i] = false;
 
-    setEnabled ( true );
-  }
-  //-----------------------------------------------------------------------------
-  CCBLowSideDriver::~CCBLowSideDriver()
-  {
-    mCBDriver->setLowSideDriver ( 0, false );
-    mCBDriver->setLowSideDriver ( 1, false );
-    mCBDriver->setLowSideDriver ( 2, false );
+  setEnabled( true );
+}
+//-----------------------------------------------------------------------------
+CCBLowSideDriver::~CCBLowSideDriver()
+{
+  mCBDriver->setLowSideDriver( 0, false );
+  mCBDriver->setLowSideDriver( 1, false );
+  mCBDriver->setLowSideDriver( 2, false );
 
-    if ( mSwitch ) {
-      delete[] mSwitch;
-      mSwitch = NULL;
-    }
+  if ( mSwitch ) {
+    delete[] mSwitch;
+    mSwitch = NULL;
   }
-  //-----------------------------------------------------------------------------
-  int CCBLowSideDriver::init()
-  {
-    return 1; // nothing to do
-  }
-  //-----------------------------------------------------------------------------
-  void CCBLowSideDriver::setEnabled ( bool enable )
-  {
-    mFgEnabled = enable;
-  }
-  //-----------------------------------------------------------------------------
-  void CCBLowSideDriver::updateData()
-  {
-    // nothing to do
-    // if you implement code here, enable update calls in CBRobot::run()
-  }
-  //-----------------------------------------------------------------------------
-  void CCBLowSideDriver::setSwitch ( unsigned int id, bool on )
-  {
-    if ( mFgEnabled ) {
-      if ( id < mNumSwitches ) {
-	if (mSwitch[id] != on) {
-	  mSwitch[id] = on;
-	  mCBDriver->setLowSideDriver ( id, on );
-	}
+}
+//-----------------------------------------------------------------------------
+int CCBLowSideDriver::init()
+{
+  return 1; // nothing to do
+}
+//-----------------------------------------------------------------------------
+void CCBLowSideDriver::setEnabled( bool enable )
+{
+  mFgEnabled = enable;
+}
+//-----------------------------------------------------------------------------
+void CCBLowSideDriver::updateData( const double dt )
+{
+  // nothing to do
+  // if you implement code here, enable update calls in CBRobot::run()
+}
+//-----------------------------------------------------------------------------
+void CCBLowSideDriver::setSwitch( unsigned int id, bool on )
+{
+  if ( mFgEnabled ) {
+    if ( id < mNumSwitches ) {
+      if ( mSwitch[id] != on ) {
+        mSwitch[id] = on;
+        mCBDriver->setLowSideDriver( id, on );
       }
-      else
-	PRT_WARN2 ( "Switch %d requested but only have %d switches", id,
-		    mNumSwitches );
     }
+    else
+      PRT_WARN2( "Switch %d requested but only have %d switches", id,
+                 mNumSwitches );
   }
-  //-----------------------------------------------------------------------------
+}
+//-----------------------------------------------------------------------------
 } // namespace

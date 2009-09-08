@@ -54,7 +54,7 @@ CCBDrivetrain2dof::~CCBDrivetrain2dof()
 {
   // make sure robot is stopped
   stop();
-  updateData();
+  updateData(0.1);
 
   if ( mOdometry )
     delete mOdometry;
@@ -70,7 +70,7 @@ void CCBDrivetrain2dof::setEnabled( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-void CCBDrivetrain2dof::updateData()
+void CCBDrivetrain2dof::updateData( const double dt)
 {
   CPose2d pose;
   static CPose2d lastPose;
@@ -78,7 +78,7 @@ void CCBDrivetrain2dof::updateData()
   static int noProgressCount = 0;
 
   // update odometry
-  ( ( CCBOdometry* ) mOdometry )->updateData();
+  ( ( CCBOdometry* ) mOdometry )->updateData( dt );
 
   if ( mFgEnabled == true ) {
   /* FIXME: some problems measuring velocities mess up driving */
@@ -124,7 +124,7 @@ void CCBDrivetrain2dof::updateData()
 
     // set speeds
     applyVelocityLimits();
-    applyAccelerationLimits(CB_T);
+    applyAccelerationLimits(dt);
     if ( mCBDriver->setSpeed( mVelocityLimitedCmd ) == 0 ) {
       ERROR2( "Failed to set speed command v=%f w=%f", mVelocityLimitedCmd.mXDot,
               mVelocityLimitedCmd.mYawDot );
@@ -150,7 +150,7 @@ void CCBDrivetrain2dof::updateData()
     count ++;
     mTimeStamp = timeStamp();
     if ( mFgStalled )
-      mStalledTimer += CB_T;
+      mStalledTimer += dt;
     else
       mStalledTimer =0.0;
   } // enabled

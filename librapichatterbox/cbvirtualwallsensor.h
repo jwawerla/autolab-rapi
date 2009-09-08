@@ -34,7 +34,7 @@ class CCBVirtualWallSensor : public ABinarySensorArray
 {
     /** We are friends with our robot, so we get updated */
     friend class CCBRobot;
-public:
+  public:
     /**
      * Default constructor
      * @param cbDriver HAL of the chatterbox
@@ -58,8 +58,9 @@ public:
     /**
      * This method gets called by the framework every step to update
      * the sensor data
+     * @param dt size of time step [s]
      */
-    virtual void updateData();
+    virtual void updateData( const double dt);
     /** HAL of the chatterbox */
     CCBDriver* mCBDriver;
 };

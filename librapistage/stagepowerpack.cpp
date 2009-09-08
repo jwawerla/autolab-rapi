@@ -27,9 +27,9 @@ namespace Rapi
 //---------------------------------------------------------------------------
 // Callback for stage, stage calls this function if the corresponding model
 // is updated
-int powerUpdate ( Stg::ModelPosition* model, CStagePowerPack* power )
+int powerUpdate ( Stg::ModelPosition* mod, CStagePowerPack* power )
 {
-  power->updateData();
+  power->updateData(mod->GetUpdateInterval() );
   return 0; // ok
 }
 //-----------------------------------------------------------------------------
@@ -78,7 +78,7 @@ void CStagePowerPack::setEnabled ( bool enable )
   mFgEnabled = enable;
 }
 //-----------------------------------------------------------------------------
-void CStagePowerPack::updateData()
+void CStagePowerPack::updateData( const double dt)
 {
   double prevBatteryCapacity;
 

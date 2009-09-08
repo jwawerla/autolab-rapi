@@ -58,7 +58,7 @@ int CCBPhotoSensor::init()
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-void CCBPhotoSensor::updateData()
+void CCBPhotoSensor::updateData( const double dt)
 {
   if ( mFgEnabled ) {
     mData[0] = mCBDriver->readPhotoSensor();

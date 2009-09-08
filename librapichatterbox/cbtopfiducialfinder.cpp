@@ -56,7 +56,7 @@ CCBTopFiducialFinder::~CCBTopFiducialFinder()
   mFiducialData = NULL;
 }
 //-----------------------------------------------------------------------------
-void CCBTopFiducialFinder::updateData()
+void CCBTopFiducialFinder::updateData( const double dt)
 {
   mFiducialData->id = 0;
   mCBDriver->setIrLed( mOwnFiducialId );

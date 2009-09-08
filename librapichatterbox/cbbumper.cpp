@@ -62,7 +62,7 @@ int CCBBumper::init()
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-void CCBBumper::updateData()
+void CCBBumper::updateData( const double dt)
 {
   mFgAnyTriggered = false;
 

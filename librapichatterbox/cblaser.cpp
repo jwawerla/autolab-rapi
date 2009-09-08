@@ -102,7 +102,7 @@ int CCBLaser::init()
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-void CCBLaser::updateData()
+void CCBLaser::updateData( const double dt)
 {
   if ( mFgEnabled ) {
     if ( readData() == 0 )

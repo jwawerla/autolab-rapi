@@ -61,8 +61,9 @@ class CStageDrivetrain2dof : public ADrivetrain2dof
     /**
      * This method gets called by the framework every step to update
      * the sensor data
+     * @param dt size of time step [s]
      */
-    virtual void updateData();
+    virtual void updateData( const double dt);
     /** Friend function of stage model updates */
     friend int positionUpdate ( Stg::ModelPosition* pos,
                                 CStageDrivetrain2dof* drivetrain );

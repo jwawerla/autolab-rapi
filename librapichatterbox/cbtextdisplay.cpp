@@ -67,7 +67,7 @@ int CCBTextDisplay::setText ( std::string text )
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-void CCBTextDisplay::updateData()
+void CCBTextDisplay::updateData( const double dt)
 {
 }
 //-----------------------------------------------------------------------------

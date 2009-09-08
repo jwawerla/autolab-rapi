@@ -70,8 +70,9 @@ class CStagePowerPack : public APowerPack
     /**
      * This method gets called by the framework every step to refresh
      * the sensor data
+     * @param dt size of time step [s]
      */
-    virtual void updateData();
+    virtual void updateData( const double dt);
     /** Friend function of stage model updates */
     friend int powerUpdate ( Stg::ModelPosition* mod, CStagePowerPack* power );
     /** Stage power pack */

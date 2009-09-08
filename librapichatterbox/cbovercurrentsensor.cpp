@@ -49,7 +49,7 @@ CCBOverCurrentSensor::~CCBOverCurrentSensor()
   }
 }
 //-----------------------------------------------------------------------------
-void CCBOverCurrentSensor::updateData( )
+void CCBOverCurrentSensor::updateData( const double dt )
 {
   if ( mFgEnabled ) {
     mFgAnyTriggered = false;

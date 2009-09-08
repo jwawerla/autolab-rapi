@@ -115,7 +115,7 @@ int CCBIrSensor::init()
   return 1; // nothing to do right now
 }
 //---------------------------------------------------------------------------
-void CCBIrSensor::updateData()
+void CCBIrSensor::updateData( const double dt)
 {
   for ( unsigned int i = 0; i < mNumSamples; i++ ) {
     mRangeData[i].range = mCBDriver->readDistance ( i );

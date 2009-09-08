@@ -62,8 +62,9 @@ class CCBWheelDropSensor : public ABinarySensorArray
     /**
      * This method gets called by the framework every step to update
      * the sensor data
+     * @param dt size of time step [s]
      */
-    virtual void updateData();
+    virtual void updateData( const double dt);
 
   private:
     /** HAL of the chatterbox */

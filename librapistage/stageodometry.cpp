@@ -38,7 +38,7 @@ CStageOdometry::~CStageOdometry()
 {
 }
 //-----------------------------------------------------------------------------
-void CStageOdometry::updateData()
+void CStageOdometry::updateData( const double dt)
 {
   Stg::Pose pose;
 

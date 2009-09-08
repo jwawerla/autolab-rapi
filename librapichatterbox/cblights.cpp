@@ -72,15 +72,17 @@ int CCBLights::init()
   return 1;
 }
 //----------------------------------------------------------------------------
-void CCBLights::updateData()
+void CCBLights::updateData( const double dt)
 {
+  mUpdateInterval = dt;
+
   if ( mFgEnabled ) {
     for ( unsigned int i = 0; i < mNumLights-1; i++ ) {
       if ( mBlink[i].enabled ) {
         mBlink[i].tick = mBlink[i].tick - 1;
         if ( mBlink[i].tick <= 0 ) {
 
-          mBlink[i].tick = ( int ) ( 0.5/ ( mBlink[i].freq * CB_T ) );
+          mBlink[i].tick = ( int ) ( 0.5/ ( mBlink[i].freq * dt ) );
           if ( mBlink[i].on == true ) {
             mBlink[i].on = false;
             mCBDriver->setRgbLed ( i, mBlink[i].color );
@@ -96,7 +98,7 @@ void CCBLights::updateData()
     mBlink[DOT].tick = mBlink[DOT].tick - 1;
     if ( mBlink[DOT].tick <= 0 ) {
 
-      mBlink[DOT].tick = ( int ) ( 0.5/ ( mBlink[DOT].freq * CB_T ) );
+      mBlink[DOT].tick = ( int ) ( 0.5/ ( mBlink[DOT].freq * dt ) );
       if ( mBlink[DOT].on == true ) {
         mBlink[DOT].on = false;
         mCBDriver->set7SegDot ( false );
@@ -134,7 +136,7 @@ int CCBLights::setBlink ( int id, bool enabled, float freq )
   mBlink[id].enabled = enabled;
   if ( mBlink[id].freq != freq ) {
     mBlink[id].freq = freq;
-    mBlink[id].tick = ( int ) ( 1.0 / ( mBlink[id].freq * CB_T ) );
+    mBlink[id].tick = ( int ) ( 1.0 / ( mBlink[id].freq * mUpdateInterval ) );
   }
 
   return 1;

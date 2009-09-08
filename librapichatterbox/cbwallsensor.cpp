@@ -56,7 +56,7 @@ CCBWallSensor::~CCBWallSensor()
   }
 }
 //-----------------------------------------------------------------------------
-void CCBWallSensor::updateData()
+void CCBWallSensor::updateData( const double dt)
 {
   mRangeData[0].range = mCBDriver->mCreateSensorPackage.wallSignal;
 }

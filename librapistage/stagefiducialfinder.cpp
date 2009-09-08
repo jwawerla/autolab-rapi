@@ -28,7 +28,7 @@ namespace Rapi
 // is updated
 int fiducialUpdate( Stg::ModelFiducial* mod, CStageFiducialFinder* fiducal )
 {
-  fiducal->updateData();
+  fiducal->updateData( mod->GetUpdateInterval() );
   return 0; // ok
 }
 
@@ -78,10 +78,8 @@ void CStageFiducialFinder::setFiducialSignal( int id )
   mStgFiducial->SetFiducialReturn( id );
 }
 //-----------------------------------------------------------------------------
-void CStageFiducialFinder::updateData()
+void CStageFiducialFinder::updateData( const double dt)
 {
-
-
   if ( mFgEnabled ) {
     // clear old data
     if ( mFiducialData ) {
