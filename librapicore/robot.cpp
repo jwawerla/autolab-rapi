@@ -33,6 +33,7 @@ ARobot::ARobot()
   mUpdateInterval = 0.1; // 10 Hz
   mRobotCtrl = NULL;
   mFgInitialized = false;
+  mFgRunningSlowly = false;
 }
 //-----------------------------------------------------------------------------
 ARobot::~ARobot()
@@ -92,6 +93,15 @@ void ARobot::setUpdateInterval ( double interval )
 double ARobot::getUpdateInterval() const
 {
   return mUpdateInterval;
+}
+//-----------------------------------------------------------------------------
+bool ARobot::isSlow()
+{
+  if( mFgRunningSlowly ) {
+    mFgRunningSlowly = false;
+    return true;
+  }
+  return false;
 }
 //-----------------------------------------------------------------------------
 } // namespace

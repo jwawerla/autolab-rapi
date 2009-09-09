@@ -131,6 +131,13 @@ class ARobot
      * @return update period [s]
      */
     double getUpdateInterval() const;
+    /**
+     * Checks if the main control loop has run consistently slowly.
+     * Calling this function resets the status of the slow loop.
+     * @return True if consistently slow
+     */
+     bool isSlow();
+  
 
   protected:
     /** Default constructor */
@@ -155,6 +162,12 @@ class ARobot
     std::vector<ADevice*> mDeviceList;
     /** Flags if the robot is initialized or not */
     bool mFgInitialized;
+    /** Flag if the robot control loop is running slowly */
+    bool mFgRunningSlowly;
+    /** Counts how often control loop has failed to complete on time */
+    unsigned int mSlowRunCount;
+    /** Threshold before slow runs are reported */
+    unsigned int mSlowRunThreshold;
 };
 
 } // namespace

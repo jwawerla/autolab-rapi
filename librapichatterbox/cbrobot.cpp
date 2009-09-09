@@ -54,6 +54,8 @@ CCBRobot::CCBRobot()
   mCBCreateButton = NULL;
   mCBVirtualWall = NULL;
 
+  mSlowRunCount = 0;
+  mSlowRunThreshold = 10;
   mFgRunning = true;
 }
 //-----------------------------------------------------------------------------
@@ -599,10 +601,18 @@ void CCBRobot::synchronize( double interval )
   timeNow = tv.tv_sec + tv.tv_usec * 1e-6;
   duration = timeNow - mLastSynchronizeTime;
   if ( duration < interval ) {
+    mSlowRunCount = (mSlowRunCount > 0 ) ? mSlowRunCount - 1 : 0;
     usleep(( int )(( interval - duration ) * 1e6 ) );
   }
   else {
-    PRT_WARN0( "Control loop running too slowly\n" );
+    mSlowRunCount = (mSlowRunCount < mSlowRunThreshold) ? mSlowRunCount + 1 :
+                    mSlowRunCount;
+    if( mSlowRunCount > mSlowRunThreshold ) {
+      mSlowRunCount = 0;
+      mFgRunningSlowly = true;
+      PRT_WARN0( "Control loop running consistently slowly\n" );
+    }
+    PRT_MSG0( 8, "Control loop ran slowly\n" );
   }
   gettimeofday( &tv, 0 );
   mLastSynchronizeTime = tv.tv_sec + tv.tv_usec * 1e-6;

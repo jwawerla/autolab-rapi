@@ -10,3 +10,8 @@ GIT-VERSION-FILE
 *.cxx
 config.h
 examples/chatterbox/chatterbox
+Doxyfile
+*kdevelop*
+install_manifest.txt
+autolab-rapi.kdevses
+include/
