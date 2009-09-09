@@ -607,7 +607,7 @@ void CCBRobot::synchronize( double interval )
   else {
     mSlowRunCount = (mSlowRunCount < mSlowRunThreshold) ? mSlowRunCount + 1 :
                     mSlowRunCount;
-    if( mSlowRunCount > mSlowRunThreshold ) {
+    if( mSlowRunCount >= mSlowRunThreshold ) {
       mSlowRunCount = 0;
       mFgRunningSlowly = true;
       PRT_WARN0( "Control loop running consistently slowly\n" );
