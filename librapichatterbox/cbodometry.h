@@ -45,6 +45,10 @@ friend class CCBDrivetrain2dof;
     CCBOdometry ( CCBDriver* driver, std::string devName );
     /** Default destructor */
     ~CCBOdometry();
+    /** Fetch change in angle since last update */
+    inline float getDeltaAngle() const { return mAngle; }
+    /** Fetch change in distance since last update */
+    inline float getDeltaDistance() const { return mDistance; }
 
   protected:
     /**
@@ -57,6 +61,8 @@ friend class CCBDrivetrain2dof;
   private:
     /** Hardware driver of chatterbox */
     CCBDriver* mCBDriver;
+    float mAngle;
+    float mDistance;
 };
 
 } // namespace
