@@ -59,6 +59,7 @@ int CStageTextDisplay::setText ( std::string text )
   mText = text;
 
   if ( mStgPosition ) {
+    mTimeStamp = mStgPosition->GetWorld()->SimTimeNow() / 1e6;
     mStgPosition->Say ( mText.c_str() );
     return 1; // success;
   }
