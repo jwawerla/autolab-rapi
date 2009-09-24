@@ -26,7 +26,7 @@ namespace Rapi
 // is updated
 int lightUpdate ( Stg::ModelBlinkenlight* mod, CStageLights* lights )
 {
-  lights->updateData( mod->GetUpdateInterval() );
+  lights->updateData( mod->GetUpdateInterval() / 1e6 );
   return 0; // ok
 }
 

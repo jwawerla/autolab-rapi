@@ -29,7 +29,7 @@ namespace Rapi
 // is updated
 int powerUpdate ( Stg::ModelPosition* mod, CStagePowerPack* power )
 {
-  power->updateData(mod->GetUpdateInterval() );
+  power->updateData(mod->GetUpdateInterval() / 1e6 );
   return 0; // ok
 }
 //-----------------------------------------------------------------------------

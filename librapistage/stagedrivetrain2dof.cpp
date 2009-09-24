@@ -29,7 +29,7 @@ namespace Rapi
 // is updated
 int positionUpdate ( Stg::ModelPosition* pos, CStageDrivetrain2dof* drivetrain )
 {
-  drivetrain->updateData(pos->GetUpdateInterval() );
+  drivetrain->updateData(pos->GetUpdateInterval() / 1e6 );
   return 0; // ok
 }
 

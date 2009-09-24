@@ -28,7 +28,7 @@ namespace Rapi
 // is updated
 int fiducialUpdate( Stg::ModelFiducial* mod, CStageFiducialFinder* fiducal )
 {
-  fiducal->updateData( mod->GetUpdateInterval() );
+  fiducal->updateData( mod->GetUpdateInterval() / 1e6 );
   return 0; // ok
 }
 

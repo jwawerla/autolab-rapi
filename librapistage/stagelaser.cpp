@@ -31,7 +31,7 @@ namespace Rapi
 // is updated
 int laserUpdate ( Stg::ModelLaser* mod, CStageLaser* laser )
 {
-  laser->updateData( mod->GetUpdateInterval() );
+  laser->updateData( mod->GetUpdateInterval() / 1e6 );
   return 0; // ok
 }
 

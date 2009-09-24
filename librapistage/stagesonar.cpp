@@ -29,7 +29,7 @@ namespace Rapi
 // is updated
 int sonarUpdate ( Stg::ModelRanger* ranger, CStageSonar* sonar )
 {
-  sonar->updateData( ranger->GetUpdateInterval() );
+  sonar->updateData( ranger->GetUpdateInterval() / 1e6 );
   return 0; // ok
 }
 //---------------------------------------------------------------------------
