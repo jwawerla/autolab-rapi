@@ -47,7 +47,8 @@ int CLooseStageRobot::findDevice( CLooseStageLaser* &device,
   }
 
   // no device created yet, so do it now
-  modLaser = ( Stg::ModelLaser* ) mStageModel->GetModel( devName.c_str() );
+  //modLaser = ( Stg::ModelLaser* ) mStageModel->GetModel( devName.c_str() );
+  modLaser = ( Stg::ModelLaser* ) mStageModel->GetChild( devName.c_str() );
   if ( modLaser == NULL ) {
     ERROR2( "Stage model %s has no device named %s",
             mStageModel->Token(), devName.c_str() );
@@ -82,7 +83,8 @@ int CLooseStageRobot::findDevice( CLooseStageSonar* &device,
   }
 
   // no device created yet, so do it now
-  modRanger = ( Stg::ModelRanger* ) mStageModel->GetModel( devName.c_str() );
+  //modRanger = ( Stg::ModelRanger* ) mStageModel->GetModel( devName.c_str() );
+  modRanger = ( Stg::ModelRanger* ) mStageModel->GetChild( devName.c_str() );
   if ( modRanger == NULL )  {
     ERROR2( "Stage model %s has no device named %s",
             mStageModel->Token(), devName.c_str() );
@@ -174,7 +176,8 @@ int CLooseStageRobot::findDevice( CLooseStageFiducialFinder* &device,
   }
 
   // no device created yet, so do it now
-  modFiducial = ( Stg::ModelFiducial* ) mStageModel->GetModel( devName.c_str() );
+  //modFiducial = ( Stg::ModelFiducial* ) mStageModel->GetModel( devName.c_str() );
+  modFiducial = ( Stg::ModelFiducial* ) mStageModel->GetChild( devName.c_str() );
   if ( modFiducial == NULL ) {
     ERROR2( "Stage model %s has no device named %s",
             mStageModel->Token(), devName.c_str() );

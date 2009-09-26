@@ -109,7 +109,8 @@ int CStageRobot::findDevice( ARangeFinder* &device, std::string devName )
   // Handle Stage's Laser Models
   if ( devName.find( LASER_MODEL_NAME ) != std::string::npos ) {
     // no device created yet, so do it now
-    modLaser = ( Stg::ModelLaser* ) mStageModel->GetModel( devName.c_str() );
+    //modLaser = ( Stg::ModelLaser* ) mStageModel->GetModel( devName.c_str() );
+    modLaser = ( Stg::ModelLaser* ) mStageModel->GetChild( devName.c_str() );
     if ( modLaser == NULL ) {
       ERROR2( "Stage model %s has no device named %s",
               mStageModel->Token(), devName.c_str() );
@@ -135,7 +136,8 @@ int CStageRobot::findDevice( ARangeFinder* &device, std::string devName )
   // Handle Stage's Ranger Models
   if ( devName.find( RANGER_MODEL_NAME ) != std::string::npos ) {
     // no device created yet, so do it now
-    modRanger = ( Stg::ModelRanger* ) mStageModel->GetModel( devName.c_str() );
+    //modRanger = ( Stg::ModelRanger* ) mStageModel->GetModel( devName.c_str() );
+    modRanger = ( Stg::ModelRanger* ) mStageModel->GetChild( devName.c_str() );
     if ( modRanger == NULL ) {
       ERROR2( "Stage model %s has no device named %s",
               mStageModel->Token(), devName.c_str() );
@@ -234,7 +236,8 @@ int CStageRobot::findDevice( AFiducialFinder* &device, std::string devName )
   }
 
   // no device created yet, so do it now
-  modFiducial = ( Stg::ModelFiducial* ) mStageModel->GetModel( devName.c_str() );
+  //modFiducial = ( Stg::ModelFiducial* ) mStageModel->GetModel( devName.c_str() );
+  modFiducial = ( Stg::ModelFiducial* ) mStageModel->GetChild( devName.c_str() );
   if ( modFiducial == NULL ) {
     ERROR2( "Stage model %s has no device named %s",
             mStageModel->Token(), devName.c_str() );
