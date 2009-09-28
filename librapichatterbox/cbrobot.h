@@ -116,7 +116,8 @@ class CCBRobot : public ARobot
     virtual int findDevice ( ABinarySensorArray* &device, std::string devName );
     virtual int findDevice ( ASwitchArray* &device, std::string devName );
     virtual int findDevice ( AAnalogSensorArray* &device, std::string devName );
-
+    virtual int findDevice ( ABlobFinder* &device, std::string devName );
+    
   protected:
     /**
      * This method sleeps for interval seconds since the last call

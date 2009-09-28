@@ -19,6 +19,7 @@ SET( HEADERS
   binarysensorarray.h
   switcharray.h
   analogsensorarray.h
+  blobfinder.h
   pose2d.h
   pose3d.h
   point2d.h
@@ -58,6 +59,7 @@ SET( SOURCES
   textdisplay.cpp
   binarysensorarray.cpp
   analogsensorarray.cpp
+  blobfinder.cpp
   switcharray.cpp
   pose2d.cpp
   pose3d.cpp

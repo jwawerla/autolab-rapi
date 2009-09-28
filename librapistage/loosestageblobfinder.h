@@ -18,15 +18,40 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#ifndef RAPILOOSESTAGEBLOBFINDER_H
+#define RAPILOOSESTAGEBLOBFINDER_H
 
-#include "RapiCore"
+#include "stageblobfinder.h"
 #include "stage.hh"
-#include "loosestagerobot.h"
-#include "loosestagelaser.h"
-#include "loosestagesonar.h"
-#include "loosestagedrivetrain2dof.h"
-#include "loosestagepowerpack.h"
-#include "loosestagefiducialfinder.h"
-#include "loosestagelights.h"
-#include "loosestagetextdisplay.h"
-#include "loosestageblobfinder.h"
+
+namespace Rapi
+{
+
+/**
+ * Stage implementation of a blob finder
+ * @author Jens Wawerla <jwawerla@sfu.ca>
+ */
+class CLooseStageBlobFinder : public CStageBlobFinder
+{
+  // we are now friends with our robot
+  friend class CLooseStageRobot;
+
+  public:
+    /**
+     * Default constructor
+     * @param stgMod stage model of a blob finder
+     * @param devName name of device
+     */
+    CLooseStageBlobFinder ( Stg::ModelBlobfinder* stgMod, std::string devName );
+    /** Default destructor */
+    ~CLooseStageBlobFinder();
+    /**
+     * Gets the underlying stage model
+     * @return stage model
+     */
+    Stg::ModelBlobfinder* getStageModel ();
+};
+
+} // namespace
+
+#endif

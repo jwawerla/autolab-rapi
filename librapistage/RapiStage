@@ -29,3 +29,4 @@
 #include "stagefiducialfinder.h"
 #include "stagelights.h"
 #include "stagetextdisplay.h"
+#include "stageblobfinder.h"

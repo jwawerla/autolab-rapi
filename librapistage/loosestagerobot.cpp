@@ -236,6 +236,36 @@ int CLooseStageRobot::findDevice( CLooseStageTextDisplay* &device,
   return 1;  // success
 }
 //-----------------------------------------------------------------------------
+int CLooseStageRobot::findDevice ( CLooseStageBlobFinder* &device, std::string devName )
+{
+  Stg::ModelBlobfinder* modBlobFinder;
+
+  // check if we already created such a device
+  device = ( CLooseStageBlobFinder* ) findDeviceByName( devName );
+  if ( device ) {
+    return 1; // success
+  }
+
+  // no device created yet, so do it now
+  modBlobFinder = ( Stg::ModelBlobfinder* ) mStageModel->GetChild( devName.c_str() );
+
+  device = new CLooseStageBlobFinder( modBlobFinder, devName );
+
+  // add device to the list
+  mDeviceList.push_back( device );
+
+  // now initialize the device
+  if ( device->init() != 1 ) {
+    ERROR1( "Failed to initialize device %s", devName.c_str() );
+    return 0; // error
+  }
+  device->setEnabled( true );
+  // enforce one update step, to fill the data structures with valid data
+  device->updateData( modBlobFinder->GetUpdateInterval() / 1e6 );
+
+  return 1; // success
+}
+//-----------------------------------------------------------------------------
 
 } // namespace
 

@@ -31,6 +31,7 @@
 #include "loosestagefiducialfinder.h"
 #include "loosestagetextdisplay.h"
 #include "loosestagelights.h"
+#include "loosestageblobfinder.h"
 
 namespace Rapi
 {
@@ -74,7 +75,7 @@ class CLooseStageRobot : public CStageRobot
     int findDevice ( CLooseStageFiducialFinder* &device, std::string devName );
     int findDevice ( CLooseStageLights* &device, std::string devName );
     int findDevice ( CLooseStageTextDisplay* &device, std::string devName );
-
+    int findDevice ( CLooseStageBlobFinder* &device, std::string devName );
 };
 
 } // namespace

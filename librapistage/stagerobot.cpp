@@ -25,6 +25,7 @@
 #include "stagepowerpack.h"
 #include "stagefiducialfinder.h"
 #include "stagetextdisplay.h"
+#include "stageblobfinder.h"
 #include "stagesonar.h"
 #include "rapierror.h"
 
@@ -287,6 +288,38 @@ int CStageRobot::findDevice( AAnalogSensorArray* &device, std::string devName )
   device = NULL;
   ERROR0( "Device not implementated for stage" );
   return 0;
+}
+//-----------------------------------------------------------------------------
+int CStageRobot::findDevice ( ABlobFinder* &device, std::string devName )
+{
+  CStageBlobFinder* blobFinder;
+  Stg::ModelBlobfinder* modBlobFinder;
+
+  // check if we already created such a device
+  device = ( ABlobFinder* ) findDeviceByName( devName );
+  if ( device ) {
+    return 1; // success
+  }
+
+  // no device created yet, so do it now
+  modBlobFinder = ( Stg::ModelBlobfinder* ) mStageModel->GetChild( devName.c_str() );
+
+  blobFinder = new CStageBlobFinder( modBlobFinder, devName );
+  device = ( ABlobFinder* ) blobFinder;
+
+  // add device to the list
+  mDeviceList.push_back( device );
+
+  // now initialize the device
+  if ( device->init() != 1 ) {
+    ERROR1( "Failed to initialize device %s", devName.c_str() );
+    return 0; // error
+  }
+  device->setEnabled( true );
+  // enforce one update step, to fill the data structures with valid data
+  blobFinder->updateData( modBlobFinder->GetUpdateInterval() / 1e6 );
+
+  return 1; // success
 }
 //-----------------------------------------------------------------------------
 int CStageRobot::findDevice( ATextDisplay* &device, std::string devName )

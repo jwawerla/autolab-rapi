@@ -18,15 +18,26 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
-
-#include "RapiCore"
-#include "stage.hh"
-#include "loosestagerobot.h"
-#include "loosestagelaser.h"
-#include "loosestagesonar.h"
-#include "loosestagedrivetrain2dof.h"
-#include "loosestagepowerpack.h"
-#include "loosestagefiducialfinder.h"
-#include "loosestagelights.h"
-#include "loosestagetextdisplay.h"
 #include "loosestageblobfinder.h"
+
+namespace Rapi
+{
+
+//-----------------------------------------------------------------------------
+CLooseStageBlobFinder::CLooseStageBlobFinder (
+ Stg::ModelBlobfinder* stgMod, std::string devName )
+    : CStageBlobFinder (stgMod, devName )
+{
+}
+//-----------------------------------------------------------------------------
+CLooseStageBlobFinder::~CLooseStageBlobFinder()
+{
+}
+//-----------------------------------------------------------------------------
+Stg::ModelBlobfinder* CLooseStageBlobFinder::getStageModel ()
+{
+  return mStgBlobFinder;
+}
+//-----------------------------------------------------------------------------
+
+} // namespace

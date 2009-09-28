@@ -36,7 +36,8 @@ typedef enum  {RAPI_RANGEFINDER,
                RAPI_TEXTDISPLAY,
                RAPI_BINARYSENSORARRAY,
                RAPI_SWITCHARRAY,
-               RAPI_ANALOGSENSORARRAY
+               RAPI_ANALOGSENSORARRAY,
+               RAPI_BLOBFINDER
               } tRapiDeviceType;
 
 /**

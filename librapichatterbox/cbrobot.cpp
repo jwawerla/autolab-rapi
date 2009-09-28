@@ -452,6 +452,13 @@ int  CCBRobot::findDevice( ASwitchArray* &device, std::string devName )
   return 1; // success
 }
 //-----------------------------------------------------------------------------
+int CCBRobot::findDevice( ABlobFinder* &device, std::string devName )
+{
+  device = NULL;
+  ERROR0( "Device not implementated for chatterbox" );
+  return 0;
+}
+//-----------------------------------------------------------------------------
 int CCBRobot::findDevice( AAnalogSensorArray* &device, std::string devName )
 {
   if ( not mFgInitialized ) {

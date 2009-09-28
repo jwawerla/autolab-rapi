@@ -31,6 +31,7 @@ IF (STAGE_FOUND)
     stagefiducialfinder.h
     stagelights.h
     stagetextdisplay.h
+    stageblobfinder.h
     loosestagerobot.h
     loosestagelaser.h
     loosestagelights.h
@@ -39,6 +40,7 @@ IF (STAGE_FOUND)
     loosestagefiducialfinder.h
     loosestagetextdisplay.h
     loosestagesonar.h
+    loosestageblobfinder.h
     RapiStage
     RapiLooseStage
   )
@@ -53,6 +55,7 @@ IF (STAGE_FOUND)
     stagefiducialfinder.cpp
     stagelights.cpp
     stagetextdisplay.cpp
+    stageblobfinder.cpp
     loosestagerobot.cpp
     loosestagelaser.cpp
     loosestagelights.cpp
@@ -61,6 +64,7 @@ IF (STAGE_FOUND)
     loosestagefiducialfinder.cpp
     loosestagetextdisplay.cpp
     loosestagesonar.cpp
+    loosestageblobfinder.cpp
   )
 
   # build a shared library

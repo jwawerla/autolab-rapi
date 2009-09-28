@@ -18,15 +18,59 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
+#ifndef RAPISTAGEBLOBFINDER_H
+#define RAPISTAGEBLOBFINDER_H
 
-#include "RapiCore"
+#include "blobfinder.h"
 #include "stage.hh"
-#include "loosestagerobot.h"
-#include "loosestagelaser.h"
-#include "loosestagesonar.h"
-#include "loosestagedrivetrain2dof.h"
-#include "loosestagepowerpack.h"
-#include "loosestagefiducialfinder.h"
-#include "loosestagelights.h"
-#include "loosestagetextdisplay.h"
-#include "loosestageblobfinder.h"
+
+namespace Rapi
+{
+
+/**
+ * Stage implementation of a blob finder
+ * @author Jens Wawerla <jwawerla@sfu.ca>
+ */
+class CStageBlobFinder : public ABlobFinder
+{
+  // we are now friends with our robot
+  friend class CStageRobot;
+
+  public:
+    /**
+     * Default constructor
+     * @param stgMod stage model of a blob finder
+     * @param devName name of device
+     */
+    CStageBlobFinder ( Stg::ModelBlobfinder* stgMod, std::string devName );
+    /** Default destructor */
+    ~CStageBlobFinder();
+    /**
+      * Initializes the device
+      * @param return 1 if success 0 otherwise
+      */
+    virtual int init();
+    /**
+     * Enables or disables the device
+     * @param enable = true to enable, false to disable
+     */
+    virtual void setEnabled ( bool enable );
+
+
+  protected:
+    /**
+     * This method gets called by the framework every step to update
+     * the sensor data
+     * @param dt size of time step [s]
+     */
+    virtual void updateData( const double dt);
+    /** Friend function of stage model updates */
+    friend int blobUpdate ( Stg::ModelBlobfinder* mod,
+                                CStageBlobFinder* blobfinder );
+    /** Stage blob finder model */
+    Stg::ModelBlobfinder* mStgBlobFinder;
+};
+
+} // namespace
+
+#endif

@@ -32,6 +32,7 @@
 #include "binarysensorarray.h"
 #include "switcharray.h"
 #include "analogsensorarray.h"
+#include "blobfinder.h"
 #include "variablemonitor.h"
 #include <list>
 #include <vector>
@@ -118,7 +119,8 @@ class ARobot
     virtual int findDevice ( ATextDisplay* &device, std::string devName ) = 0;
     virtual int findDevice ( ABinarySensorArray* &device, std::string devName ) = 0;
     virtual int findDevice ( ASwitchArray* &device, std::string devName ) = 0;
-    virtual int findDevice( AAnalogSensorArray* &device, std::string devName ) = 0;
+    virtual int findDevice ( AAnalogSensorArray* &device, std::string devName ) = 0;
+    virtual int findDevice ( ABlobFinder* &device, std::string devName ) = 0;
     /** Monitor for variables */
     CVariableMonitor mVariableMonitor;
     /**
