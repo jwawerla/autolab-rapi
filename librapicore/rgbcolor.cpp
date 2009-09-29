@@ -54,7 +54,7 @@ std::string CRgbColor::toStr() const
 {
   std::ostringstream strOut;
 
-  strOut << "r=" << mRed << " g=" << mGreen << " b=" << mBlue;
+  strOut << "r=" << (int)mRed << " g=" << (int)mGreen << " b=" << (int)mBlue;
   return strOut.str();
 }
 //---------------------------------------------------------------------------
@@ -62,7 +62,7 @@ std::string CRgbColor::toCSV() const
 {
   std::ostringstream strOut;
 
-  strOut << mRed << "," << mGreen << "," << mBlue;
+  strOut << (int)mRed << "," << (int)mGreen << "," << (int)mBlue;
   return strOut.str();
 }
 //---------------------------------------------------------------------------

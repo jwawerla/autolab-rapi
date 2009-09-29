@@ -266,6 +266,10 @@ int CLooseStageRobot::findDevice ( CLooseStageBlobFinder* &device, std::string d
   return 1; // success
 }
 //-----------------------------------------------------------------------------
-
+Stg::Model* CLooseStageRobot::getStageModel()
+{
+  return mStageModel;
+}
+//-----------------------------------------------------------------------------
 } // namespace
 

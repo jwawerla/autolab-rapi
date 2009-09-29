@@ -76,6 +76,12 @@ class CLooseStageRobot : public CStageRobot
     int findDevice ( CLooseStageLights* &device, std::string devName );
     int findDevice ( CLooseStageTextDisplay* &device, std::string devName );
     int findDevice ( CLooseStageBlobFinder* &device, std::string devName );
+    
+    /**
+     * Gets the underlying stage model
+     * @return stage model
+     */
+    Stg::Model* getStageModel();
 };
 
 } // namespace
