@@ -20,6 +20,7 @@
  **************************************************************************/
 #include "robotwidget.h"
 #include "drivetrain2dofwidget.h"
+#include "locationwidget.h"
 #include "rangefinderwidget.h"
 #include "fiducialfinderwidget.h"
 #include "powerpackwidget.h"
@@ -52,6 +53,11 @@ CRobotWidget::CRobotWidget(ARobot* robot, CMainWindow* mw, QWidget* parent)
       widget = new CDrivetrain2dofWidget((ADrivetrain2dof*)device, this);
       mMainWindow->mDrivetrainWidgetList->addWidget(widget);
       layout->addWidget( widget);
+      mWidgetList.push_back(widget);
+      // add location widget as well
+      widget = new CLocationWidget((ADrivetrain2dof*)device, this);
+      mMainWindow->mLocationWidgetList->addWidget(widget);
+      layout->addWidget( widget );
       mWidgetList.push_back(widget);
     }
     else if ( device->getGuiName() == "RangeFinderWidget" ) {

@@ -49,6 +49,8 @@ class CGui
      * @param robot to visualize
      */
     void registerRobot( ARobot* robot );
+    /* GUI thread: needs to be public to shut down RPC controller correctly */
+    pthread_t mPThread;
 
   protected:
     /** Default constructor */
@@ -59,8 +61,6 @@ class CGui
     CMainWindow* mMainWindow;
 
   private:
-    /** Thread structure */
-    pthread_t mPThread;
     /** Command line parameters for QT */
     int mArgc;
     char** mArgv;

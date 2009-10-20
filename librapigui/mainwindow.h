@@ -71,6 +71,8 @@ class CMainWindow : public QMainWindow
     CDeviceWidgetList* mConsoleWidgetList;
     /** Binary sensor array list */
     CDeviceWidgetList* mBinarySensorArrayWidgetList;
+    /** Location viz list */
+    CDeviceWidgetList* mLocationWidgetList;
 
 
   protected slots:

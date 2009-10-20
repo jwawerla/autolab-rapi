@@ -30,7 +30,7 @@ const int MAX_CHARACTERS = 10000;
 CConsoleWidget::CConsoleWidget ( std::string* str, QWidget* parent )
     : ADeviceWidget ( parent )
 {
-  QFont font("Currier", 10);
+  QFont font("Courier", 10);
   setTitle ( "Console" );
   mGeneralInfoBox->setHidden ( true );
 

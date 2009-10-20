@@ -71,6 +71,7 @@ CMainWindow::CMainWindow()
       "Console", this );
   mBinarySensorArrayWidgetList = new CDeviceWidgetList ( mDeviceMenu,
       "Binary Sensor", this );
+  mLocationWidgetList = new CDeviceWidgetList ( mDeviceMenu, "Location", this );
 
   mTabWidget = new QTabWidget ( this );
   layout = new QVBoxLayout ( mTabWidget );
@@ -129,6 +130,7 @@ void CMainWindow::closeEvent ( QCloseEvent* event )
   mTextDisplayWidgetList->writeSettings();
   mPowerPackWidgetList->writeSettings();
   mBinarySensorArrayWidgetList->writeSettings();
+  mLocationWidgetList->writeSettings();
 
   for ( unsigned int i = 0; i < mDialogList.size(); i++ ) {
     mDialogList[i]->close();

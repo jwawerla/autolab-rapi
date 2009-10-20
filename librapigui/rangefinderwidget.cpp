@@ -198,7 +198,8 @@ void CRangeFinderWidget::updateData()
                                    halfConeAngle ) );
       y = ( int ) ( sY + r * sin ( mRangeFinder->mRelativeBeamPose[i].mYaw +
                                    halfConeAngle ) );
-      polygon << QPointF ( x, -y );
+      //polygon << QPointF ( x, -y );
+      polygon << QPointF ( x, y );
       polygon << QPointF ( sX, sY );
       mPolygonItem[i]->setPolygon ( polygon );
     }
