@@ -185,7 +185,7 @@ void CRangeFinderWidget::updateData()
       sY = ( int ) ( mRangeFinder->mRelativeBeamPose[i].mY * pixelPerMeter );
       polygon = mPolygonItem[i]->polygon();
       polygon.clear();
-      polygon << QPointF ( sX, sY );
+      polygon << QPointF ( sX, -sY );
       // insert range reading
       r = mRangeFinder->mRangeData[i].range * pixelPerMeter;
 
@@ -193,14 +193,13 @@ void CRangeFinderWidget::updateData()
                                    halfConeAngle ) );
       y = ( int ) ( sY + r * sin ( mRangeFinder->mRelativeBeamPose[i].mYaw -
                                    halfConeAngle ) );
-      polygon << QPointF ( x, y );
+      polygon << QPointF ( x, -y );
       x = ( int ) ( sX + r * cos ( mRangeFinder->mRelativeBeamPose[i].mYaw +
                                    halfConeAngle ) );
       y = ( int ) ( sY + r * sin ( mRangeFinder->mRelativeBeamPose[i].mYaw +
                                    halfConeAngle ) );
-      //polygon << QPointF ( x, -y );
-      polygon << QPointF ( x, y );
-      polygon << QPointF ( sX, sY );
+      polygon << QPointF ( x, -y );
+      polygon << QPointF ( sX, -sY );
       mPolygonItem[i]->setPolygon ( polygon );
     }
   }

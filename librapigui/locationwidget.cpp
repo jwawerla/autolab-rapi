@@ -35,6 +35,8 @@ CLocationWidget::CLocationWidget ( ADrivetrain2dof* drivetrain,
   mScene = new QGraphicsScene( this );
   mView = new View( mScene, this );
   mView->setDragMode( QGraphicsView::ScrollHandDrag );
+  mView->setMinimumSize( 202, 202);
+
   mView->scale( 1.0, -1.0 ); // Coord orgin: Rapi = bottom left, Qt = top left
   // let's use a 2[m] wide arena to start
   mRes = mView->width() / 2.0;
@@ -92,14 +94,18 @@ void CLocationWidget::updateData ( void )
   mRobot->setPos( currPoint );
   mRobot->rotate( R2D( pose.mYaw ) );
   // draw new trail segment
-  int h, s, v;
-  mColor.getHsv( &h, &s, &v );
-  mColor.setHsv( (h+1) % 360, s, v );
-  mTrail.push_back( mScene->addLine( QLineF(mPrevPoint, currPoint),
-                      QPen( mColor, 2 ) ) );
+  //int h, s, v;
+  //mColor.getHsv( &h, &s, &v );
+  //mColor.setHsv( (h+1) % 360, s, v );
+  mTrail.push_front( mScene->addLine( QLineF(mPrevPoint, currPoint),
+                      QPen( QColor( "Red" ), 2 ) ) );
   if( mTrail.size() > HISTORY_LENGTH ) {
-    mScene->removeItem( mTrail.front() );
-    mTrail.pop_front();
+    mScene->removeItem( mTrail.back() );
+    mTrail.pop_back();
+  }
+  // fade out trail...cute but not really necessary
+  for( int i = 0; i < mTrail.size(); ++i ) {
+    mTrail[i]->setPen( QPen( QColor( 255, 0, 0, 255 - (i * 255 / HISTORY_LENGTH) ), 2 ) );
   }
   // update
   ADeviceWidget::updateData ( mDrivetrain );
