@@ -32,13 +32,19 @@ CGui::CGui( int argc, char* argv[])
 {
   mArgc = argc;
   mArgv = argv;
-  pthread_create( &mPThread, NULL, &threadMain, this );
+  if( pthread_create( &mPThread, NULL, &threadMain, this ) ) {
+    PRT_ERR0( "Couldn't create gui thread!\n" );
+    exit( EXIT_FAILURE );
+  }
 
   sleep( 2 );  // need to wait for thread to finish creating the Qt App
 }
 //-----------------------------------------------------------------------------
 CGui::~CGui()
 {
+  if( pthread_join( mPThread, NULL ) ) {
+    PRT_ERR0( "Couldn't rejoin gui thread!\n" );
+  }
 }
 //-----------------------------------------------------------------------------
 CGui* CGui::getInstance( int argc, char* argv[] )

@@ -43,6 +43,7 @@ SET( HEADERS
   rapivarinterface.h
   datalogger.h
   rapitypesystem.h
+  robotrpcserver.h
 )
 
 SET( SOURCES
@@ -79,7 +80,10 @@ SET( SOURCES
   timer.cpp
   datalogger.cpp
   rapitypesystem.cpp
+  robotrpcserver.cpp
 )
+
+LINK_LIBRARIES( ${TARGET} pthread )
 
 # build a shared library
 ADD_LIBRARY( ${TARGET} SHARED ${SOURCES} )

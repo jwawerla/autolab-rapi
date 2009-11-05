@@ -23,6 +23,7 @@
 
 #include "robot.h"
 #include "customdialog.h"
+#include "printerror.h"
 #include <pthread.h>
 #include <QtGui>
 #include "mainwindow.h"

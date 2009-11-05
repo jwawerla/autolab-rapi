@@ -50,7 +50,8 @@ ENDIF( APPLE )
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
                ${CMAKE_CURRENT_SOURCE_DIR}/config.h @ONLY)
 
-ADD_DEFINITIONS(-g -Wall -O2)
+# no-reorder: deal with spurious warnings from jsonrpc init.
+ADD_DEFINITIONS(-g -Wall -O2 -Wno-reorder)
 ADD_SUBDIRECTORY(librapicore)
 
 IF (WITH_STAGE)
