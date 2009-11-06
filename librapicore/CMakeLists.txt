@@ -44,6 +44,7 @@ SET( HEADERS
   datalogger.h
   rapitypesystem.h
   robotrpcserver.h
+  jsonrpc_server.h
 )
 
 SET( SOURCES

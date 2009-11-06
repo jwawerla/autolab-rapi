@@ -19,16 +19,19 @@ INCLUDE(${GIT_VERSION_FILE})
 MESSAGE(STATUS "Build " ${BUILD_NUM})
 MESSAGE(STATUS "Git version " ${GIT_VERSION})
 
-# Enable graphics: use with -DWITH_GUI:BOOL=off/on
+# Enable graphics: use with -DWITH_GUI:BOOL=off|on
 OPTION (WITH_GUI "Enable building of Rapi graphics stuff" ON)
 
-# Enable chatterbox: use with -DWITH_CB:BOOL=off/on
+# Enable chatterbox: use with -DWITH_CB:BOOL=off|on
 OPTION (WITH_CB "Enable building of chatterbox library" ON)
 
-# Enable stage: use with -DWITH_STAGE:BOOL=off/on
-OPTION (WITH_STAGE "Enable building of state library" ON)
+# Enable stage: use with -DWITH_STAGE:BOOL=off|on
+OPTION (WITH_STAGE "Enable building of stage library" ON)
 
-# Enable examples: use with -DWITH_EXAMPLES:BOOL=off/on
+# Enable rpc: use with -DWITH_RPC:BOOL=off|on
+OPTION (WITH_RPC "Enable building of RPC client" ON)
+ 
+# Enable examples: use with -DWITH_EXAMPLES:BOOL=off|on
 OPTION (WITH_EXAMPLES "Enable building of examples" ON)
 
 INCLUDE(FindPkgConfig)
@@ -70,6 +73,10 @@ ELSE(WITH_GUI)
   MESSAGE(STATUS "Graphics support disabled")
 ENDIF(WITH_GUI)
 
+IF (WITH_RPC)
+  ADD_SUBDIRECTORY(librapirpc)
+ENDIF (WITH_RPC)
+
 IF (WITH_EXAMPLES)
   ADD_SUBDIRECTORY(examples)
 ENDIF(WITH_EXAMPLES)
@@ -106,3 +113,11 @@ IF (QT_FOUND)
     MESSAGE(STATUS "lib-rapi-gui will NOT be build, enable with WITH_GUI")
   ENDIF(WITH_GUI)
 ENDIF (QT_FOUND)
+
+IF (WITH_RPC)
+  SET( PKGFILE ${CMAKE_CURRENT_SOURCE_DIR}/autolab-rapi-rpc.pc )
+  CONFIGURE_FILE( ${PKGFILE}.in ${PKGFILE} @ONLY)
+  INSTALL( FILES ${PKGFILE} DESTINATION lib/pkgconfig/)
+ELSE(WITH_RPC)
+  MESSAGE(STATUS "lib-rapi-rpc will NOT be build, enable with WITH_RPC")
+ENDIF(WITH_RPC)
