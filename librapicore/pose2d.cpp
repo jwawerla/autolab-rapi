@@ -99,7 +99,7 @@ CPose2d& CPose2d::operator= ( const CPose2d& pose )
   return *this;
 }
 //-----------------------------------------------------------------------------
-CPose2d CPose2d::operator+ ( const CPose2d pose )
+CPose2d CPose2d::operator+ ( const CPose2d pose ) const
 {
   CPose2d newPose;
 
@@ -110,13 +110,24 @@ CPose2d CPose2d::operator+ ( const CPose2d pose )
   return newPose;
 }
 //-----------------------------------------------------------------------------
-CPose2d CPose2d::operator- ( const CPose2d pose )
+CPose2d CPose2d::operator- ( const CPose2d pose ) const
 {
   CPose2d newPose;
 
   newPose.mX = mX - pose.mX;
   newPose.mY = mY - pose.mY;
   newPose.mYaw = normalizeAngle( mYaw - pose.mYaw );
+
+  return newPose;
+}
+//-----------------------------------------------------------------------------
+CPose2d CPose2d::operator- ( void ) const
+{
+  CPose2d newPose;
+
+  newPose.mX = -mX;
+  newPose.mY = -mY;
+  newPose.mYaw = normalizeAngle( -mYaw );
 
   return newPose;
 }
