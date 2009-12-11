@@ -105,7 +105,9 @@ class CPose2d : public IRapiVar
     /** Overloaded + operator */
     CPose2d operator+ ( const CPose2d pose );
     /** Overloaded - operator */
-    CPose2d operator- ( const CPose2d pose );
+    CPose2d operator- ( const CPose2d pose ) const;
+    /** Overloaded unary - operator */
+    CPose2d operator- ( void );
     /** Overloaded != operator */
     bool operator!= ( const CPose2d pose );
     /** x position [m] */

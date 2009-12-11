@@ -93,7 +93,6 @@ void CStageFiducialFinder::updateData( const double dt)
 
     mNumReadings = fiducial.size();
 
-
     // do we have fiducial data ?
     if ( mNumReadings == 0 ) {
       return; // no data

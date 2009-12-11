@@ -31,3 +31,4 @@ const char* RAPI_BUILD_DATE()
 {
   return __DATE__;
 }
+

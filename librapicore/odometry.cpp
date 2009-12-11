@@ -58,7 +58,7 @@ void COdometry::updateData()
 void COdometry::startLogging(std::string filename)
 {
   mDataLogger = CDataLogger::getInstance(filename);
-  mDataLogger->addVar( &mPose, "odomentry");
+  mDataLogger->addVar( &mPose, "odometry");
 }
 //-----------------------------------------------------------------------------
 

@@ -27,6 +27,7 @@ namespace Rapi
 ALocalizer2d::ALocalizer2d ( std::string devName )
     : ADevice ( devName )
 {
+  mCoordinateSystemOffset = CPose2d( 0.0, 0.0, 0.0 );
 }
 //-----------------------------------------------------------------------------
 ALocalizer2d::~ALocalizer2d()
@@ -40,17 +41,17 @@ void ALocalizer2d::setCoordinateSystemOffset ( CPose2d offset )
 //-----------------------------------------------------------------------------
 CPose2d ALocalizer2d::getPose() const
 {
-  return mPose;
+  return mPose - mCoordinateSystemOffset;
 }
 //-----------------------------------------------------------------------------
 void ALocalizer2d::setPose( CPose2d pose)
 {
-  mPose = pose;
+  mPose = pose + mCoordinateSystemOffset;
 }
 //-----------------------------------------------------------------------------
 void ALocalizer2d::setToZero()
 {
-  mPose = CPose2d(0.0, 0.0, 0.0);
+  mCoordinateSystemOffset = mPose;
 }
 //-----------------------------------------------------------------------------
 

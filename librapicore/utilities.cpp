@@ -20,6 +20,7 @@
  **************************************************************************/
 
 #include "utilities.h"
+#include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 #include <sys/time.h>

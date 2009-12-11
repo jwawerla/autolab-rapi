@@ -19,6 +19,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 #include "waypoint2d.h"
+#include "stdio.h"
 #include "utilities.h"
 #include <sstream>
 namespace Rapi
