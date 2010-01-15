@@ -45,6 +45,11 @@ SET( HEADERS
   rapitypesystem.h
   robotrpcserver.h
   jsonrpc_server.h
+  tinyjson.hpp
+  network_server_udp.h
+  network_server_tcp.h
+  network_client_udp.h
+  network_client_tcp.h
 )
 
 SET( SOURCES

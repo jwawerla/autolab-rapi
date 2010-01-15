@@ -16,3 +16,4 @@ install_manifest.txt
 autolab-rapi.kdevses
 include/
 *~
+librapirpc/rpcclient

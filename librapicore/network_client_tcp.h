@@ -68,10 +68,10 @@ class NetworkClientTCP {
 		}
 
 	private:
+		const std::string DST_IP;
 		struct sockaddr_in _dstaddr;
 		struct sockaddr_in _recv_from_addr;
 		int _sock, i;
 		const int PORT;
-		const std::string DST_IP;
 
 };
