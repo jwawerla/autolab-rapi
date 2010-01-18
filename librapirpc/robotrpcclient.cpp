@@ -84,7 +84,7 @@ bool RobotRpcClient::getRangeFinderDev( unsigned int &numSamples,
 {
   object result = call( "getRangeFinderDev", object() );
   // TODO: checking here
-  numSamples = fromVariant<unsigned int>( result[ "numSamples" ] );
+  numSamples = fromVariant<int>( result[ "numSamples" ] );
   minRange = fromVariant<double>( result[ "minRange" ] );
   maxRange = fromVariant<double>( result[ "maxRange" ] );
   beamConeAngle = fromVariant<double>( result[ "beamConeAngle" ] );
