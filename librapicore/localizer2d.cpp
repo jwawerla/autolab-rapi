@@ -41,17 +41,25 @@ void ALocalizer2d::setCoordinateSystemOffset ( CPose2d offset )
 //-----------------------------------------------------------------------------
 CPose2d ALocalizer2d::getPose() const
 {
-  return mPose - mCoordinateSystemOffset;
+  CPose2d localPose;
+  double angle = mCoordinateSystemOffset.mYaw;
+  localPose.mX = mPose.mX * cos( angle ) + mPose.mY * sin( angle );
+  localPose.mY = -mPose.mX * sin( angle ) + mPose.mY * cos( angle );
+  localPose.mYaw = normalizeAngle( mPose.mYaw - angle );
+  return localPose;
 }
 //-----------------------------------------------------------------------------
-void ALocalizer2d::setPose( CPose2d pose)
-{
-  mPose = pose + mCoordinateSystemOffset;
+void ALocalizer2d::setPose( CPose2d pose )
+{ // convert local pose to absolute
+  double angle = -mCoordinateSystemOffset.mYaw;
+  mPose.mX = pose.mX * cos( angle ) + pose.mY * sin( angle );
+  mPose.mY = -pose.mX * sin( angle ) + pose.mY * cos( angle );
+  mPose.mYaw = normalizeAngle( pose.mYaw - angle );
 }
 //-----------------------------------------------------------------------------
 void ALocalizer2d::setToZero()
 {
-  mCoordinateSystemOffset = mPose;
+  setPose( CPose2d( 0.0, 0.0, 0.0) );
 }
 //-----------------------------------------------------------------------------
 

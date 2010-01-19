@@ -21,6 +21,7 @@
 #ifndef RAPILOCALIZER2D_H
 #define RAPILOCALIZER2D_H
 
+#include "utilities.h"
 #include "device.h"
 #include "pose2d.h"
 
@@ -29,7 +30,8 @@ namespace Rapi
 
 /**
  * Abstract base class for 2d (x,y, yaw) localizer devices, e.g. odometry,
- * gps etc.
+ * gps etc..  Pose measurements are given in the coordinate system set by the
+ * coordinate system offset (by default, absolute).
  * @author Jens Wawerla <jwawerla@sfu.ca>
  */
 class ALocalizer2d : public ADevice
@@ -69,8 +71,8 @@ class ALocalizer2d : public ADevice
      */
     ALocalizer2d( std::string devName );
     /** Current pose */
-    CPose2d mPose;
-    /** Offset of coordinate system */
+    CPose2d mPose; // in absolute coordinate
+    /** Offset/rotation of coordinate system */
     CPose2d mCoordinateSystemOffset;
 };
 
