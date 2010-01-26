@@ -17,3 +17,6 @@ autolab-rapi.kdevses
 include/
 *~
 librapirpc/rpcclient
+.kdev4/
+autolab-rapi.kdev4
+

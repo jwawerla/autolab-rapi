@@ -361,18 +361,36 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
 //---------------------------------------------------------------------------
 int CCBDriver::readSensorData()
 {
+  static int count = 0; // read distance every time we get to zero
+  bool readOdo = ( count == 0 ) ? true : false;
+  count = readOdo ? CREATE_READ_ODO_COUNT : count - 1;
+  printf( "readOdo count %d\n", count );
+
   struct pollfd ufd[1];
-  unsigned char cmdBuf[2];
-  unsigned char dataBuf[CREATE_SENSOR_PACKET_SIZE];
+  unsigned char cmdBuf[8];
+  unsigned char dataBuf[48];
+  unsigned char cmdOdoBuf[4];
+  unsigned char dataOdoBuf[4];
   int retVal;
   int numRead;
   unsigned int totalNumRead;
 
-  // OPcode to request sensor data
-  cmdBuf[0] = CREATE_OPCODE_SENSORS;
-  cmdBuf[1] = CREATE_SENSOR_PACKAGE_ID;
+  // OPcode to request some sensor data
+  cmdBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
+  cmdBuf[1] = 6;  // six packet IDs to follow
+  cmdBuf[2] = 1;  // packets 7-16
+  cmdBuf[3] = 17; // IR byte
+  cmdBuf[4] = 18; // Buttons
+  cmdBuf[5] = 3;  // packets 21-26
+  cmdBuf[6] = 4;  // packets 27-34
+  cmdBuf[7] = 5;  // packets 35-42
+  cmdOdoBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
+  cmdOdoBuf[1] = 2; // two packets IDs to follow
+  cmdOdoBuf[2] = 19; // distance packet
+  cmdOdoBuf[3] = 20; // angle packet
 
-  if ( write ( mFd, cmdBuf, 2 ) < 0 ) {
+
+  if ( write ( mFd, cmdBuf, 8 ) < 0 ) {
     ERROR1 ( "IO error: %s", strerror ( errno ) );
     return 0;
   }
@@ -382,7 +400,7 @@ int CCBDriver::readSensorData()
 
   totalNumRead = 0;
 
-  while ( totalNumRead < CREATE_SENSOR_PACKET_SIZE ) {
+  while ( totalNumRead < 48 ) {
     retVal = poll ( ufd, 1, READ_TIMEOUT );
 
     if ( retVal < 0 ) {
@@ -393,7 +411,7 @@ int CCBDriver::readSensorData()
         return 0;
       }
     }
-    else
+    else {
       if ( retVal == 0 ) {
         ERROR1 ( "Timeout (bytes read %d)", totalNumRead );
         return 0;
@@ -408,16 +426,62 @@ int CCBDriver::readSensorData()
           totalNumRead += numRead;
         }
       }
+    }
+  }
+  // do we need to get odo stuff as well?
+  if ( readOdo ) {
+    if ( write ( mFd, cmdOdoBuf, 4 ) < 0 ) {
+      ERROR1 ( "IO error: %s", strerror ( errno ) );
+      return 0;
+    }
+    ufd[0].fd = mFd;
+    ufd[0].events = POLLIN;
+    while ( totalNumRead < CREATE_ALL_SENSOR_PACKET_SIZE ) {
+      retVal = poll ( ufd, 1, READ_TIMEOUT );
+      if ( retVal < 0 ) {
+        if ( errno == EINTR )
+          continue;
+        else {
+          ERROR1 ( "IO error: %s", strerror ( errno ) );
+          return 0;
+        }
+      }
+      else {
+        if ( retVal == 0 ) {
+          ERROR1 ( "Timeout (bytes read %d)", totalNumRead );
+          return 0;
+        }
+        else {
+          if ( ( numRead = read ( mFd, dataOdoBuf + ( totalNumRead - 48 ),
+                           sizeof ( dataOdoBuf ) - ( totalNumRead - 48 ) ) ) < 0 ) {
+            ERROR1 ( "IO error: %s", strerror ( errno ) );
+            return 0;
+          }
+          else {
+            totalNumRead += numRead;
+          }
+        }
+      }
+    }
+  }
+  else {
+    dataOdoBuf[0] = 0x0;
+    dataOdoBuf[1] = 0x0;
+    dataOdoBuf[2] = 0x0;
+    dataOdoBuf[3] = 0x0;
+    totalNumRead += 4;
   }
 
-  if ( totalNumRead != CREATE_SENSOR_PACKET_SIZE ) {
+  if ( totalNumRead != CREATE_ALL_SENSOR_PACKET_SIZE ) {
     ERROR2 ( "Wrong package size received, %d expected but got % d",
-             totalNumRead, CREATE_SENSOR_PACKET_SIZE );
+             totalNumRead, CREATE_ALL_SENSOR_PACKET_SIZE );
     return 0; // failure
   }
 
   // cast the create package into our data structure
-  memcpy ( ( char* ) &mCreateSensorPackage, dataBuf, CREATE_SENSOR_PACKET_SIZE );
+  memcpy ( (char* ) &mCreateSensorPackage, dataBuf, 12 );
+  memcpy ( (char*) (&mCreateSensorPackage + 12), dataOdoBuf, 4 );
+  memcpy ( (char*) (&mCreateSensorPackage + 16), dataBuf + 12, 36 );
   // next we need to fix the byte order of data types with more then 1 byte
   mCreateSensorPackage.distance
   = ( short ) ntohs ( ( short ) mCreateSensorPackage.distance );

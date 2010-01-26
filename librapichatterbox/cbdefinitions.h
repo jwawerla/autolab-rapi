@@ -68,6 +68,7 @@
 #define CREATE_OPCODE_PLAY_SONG        141
 #define CREATE_OPCODE_SENSORS          142
 #define CREATE_OPCODE_DRIVE_DIRECT     145
+#define CREATE_OPCODE_STREAM_SENSORS   149
 #define CREATE_OPCODE_SEND_IR          151
 
 #define CREATE_DELAY_MODECHANGE_MS     20
@@ -87,8 +88,9 @@
 //   4 -  package 27 - 34  size 14 bytes
 //   5 -  package 35 - 42  size 12 bytes
 //   6 -  package  7 - 42  size 52 bytes
-#define CREATE_SENSOR_PACKAGE_ID       6
-#define CREATE_SENSOR_PACKET_SIZE      52
+#define CREATE_ALL_SENSOR_PACKAGE_ID       6
+#define CREATE_ALL_SENSOR_PACKET_SIZE      52
+#define CREATE_READ_ODO_COUNT  10
 
 // time of for read operations [ms]
 #define READ_TIMEOUT                   5000
