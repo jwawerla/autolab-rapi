@@ -38,8 +38,6 @@ typedef struct {
   unsigned char  aux1;                    // reserved
   unsigned char  ir;                      // [0..255]
   unsigned char  button;                  // [0..15]
-  short          distance;                // [mm]
-  short          angle;                   // [deg]
   unsigned char  chargingState;           // [0..5]
   short          voltage;                 // [mV]
   short          current;                 // [mA]
@@ -62,6 +60,8 @@ typedef struct {
   short          radius;                  // [mm]
   short          rightWheelVelocity;      // [mm/s]
   short          leftWheelVelocity;       // [mm/s]
+  short          distance;                // [mm]
+  short          angle;                   // [deg]
 } __attribute__ ((packed)) tCreateSensorPacket;
 
 

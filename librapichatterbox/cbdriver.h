@@ -380,6 +380,10 @@ class CCBDriver
     tLed mLed[5][3];
     /** Byte value of 7 seg display */
     char m7SegByteValue;
+	/** accumulated distance estimate [mm] */
+	double mEstDistance;
+	/** accumulated angle estimate [deg]*/
+	double mEstAngle;
 };
 
 } // namespace

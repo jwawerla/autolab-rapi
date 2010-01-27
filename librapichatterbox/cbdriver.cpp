@@ -57,6 +57,8 @@ CCBDriver::CCBDriver()
   mFd = 0;
   mLowSideDriverStatus = 0;
   m7SegByteValue = 0;
+  mEstDistance = 0.0;
+  mEstAngle = 0.0;
 }
 //--------------------------------------------------------------------------
 CCBDriver::~CCBDriver()
@@ -364,13 +366,12 @@ int CCBDriver::readSensorData()
   static int count = 0; // read distance every time we get to zero
   bool readOdo = ( count == 0 ) ? true : false;
   count = readOdo ? CREATE_READ_ODO_COUNT : count - 1;
-  printf( "readOdo count %d\n", count );
 
   struct pollfd ufd[1];
   unsigned char cmdBuf[8];
   unsigned char dataBuf[48];
   unsigned char cmdOdoBuf[4];
-  unsigned char dataOdoBuf[4];
+  int16_t dataOdoBuf[2];
   int retVal;
   int numRead;
   unsigned int totalNumRead;
@@ -452,23 +453,33 @@ int CCBDriver::readSensorData()
           return 0;
         }
         else {
-          if ( ( numRead = read ( mFd, dataOdoBuf + ( totalNumRead - 48 ),
-                           sizeof ( dataOdoBuf ) - ( totalNumRead - 48 ) ) ) < 0 ) {
+          if ( ( numRead = read ( mFd,
+						   ( (uint8_t*) dataOdoBuf ) + ( totalNumRead - 48 ),
+						   CREATE_ALL_SENSOR_PACKET_SIZE - totalNumRead ) )
+					     < 0 ) {
             ERROR1 ( "IO error: %s", strerror ( errno ) );
             return 0;
           }
           else {
             totalNumRead += numRead;
+			dataOdoBuf[0] -= short( mEstDistance );
+			dataOdoBuf[1] -= short( mEstAngle );
+			mEstDistance = 0.0;
+			mEstAngle = 0.0;
           }
         }
       }
     }
   }
   else {
-    dataOdoBuf[0] = 0x0;
-    dataOdoBuf[1] = 0x0;
-    dataOdoBuf[2] = 0x0;
-    dataOdoBuf[3] = 0x0;
+	double dr = mCreateSensorPackage.rightWheelVelocity * 0.1; //TODO: dt here
+	double dl = mCreateSensorPackage.leftWheelVelocity * 0.1;
+    double distance = 0.5 * (dr + dl);
+	double angle = (dr - dl) / CREATE_AXLE_LENGTH;
+	dataOdoBuf[0] = short( distance );
+	dataOdoBuf[1] = short( angle );
+	mEstDistance += distance;
+	mEstAngle += angle;
     totalNumRead += 4;
   }
 
@@ -479,9 +490,9 @@ int CCBDriver::readSensorData()
   }
 
   // cast the create package into our data structure
-  memcpy ( (char* ) &mCreateSensorPackage, dataBuf, 12 );
-  memcpy ( (char*) (&mCreateSensorPackage + 12), dataOdoBuf, 4 );
-  memcpy ( (char*) (&mCreateSensorPackage + 16), dataBuf + 12, 36 );
+  uint8_t* sector2 = ((uint8_t *) &mCreateSensorPackage) + 48;
+  memcpy ( (char*) &mCreateSensorPackage, dataBuf, 48 );
+  memcpy ( sector2, dataOdoBuf, 4 );
   // next we need to fix the byte order of data types with more then 1 byte
   mCreateSensorPackage.distance
   = ( short ) ntohs ( ( short ) mCreateSensorPackage.distance );
@@ -520,7 +531,6 @@ int CCBDriver::readSensorData()
   if ( ( mCreateSensorPackage.overCurrents & 0x1F ) != 0 )
     PRT_MSG1 ( 8, "OVER CURRENT -- OVER CURRENT code %d",
                 mCreateSensorPackage.overCurrents );
-
   return 1; // success
 
 }
