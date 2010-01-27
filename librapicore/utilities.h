@@ -152,7 +152,9 @@ inline bool isAboutZero(double x)
 template<typename T>
 inline T normalizeAngle(T z)
 {
-  return atan2(sin(z), cos(z));
+  while( z < -PI ) z += TWO_PI;
+  while( z > PI ) z -= TWO_PI;
+  return z;
 }
 
 /**
