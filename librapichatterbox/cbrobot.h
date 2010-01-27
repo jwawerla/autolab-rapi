@@ -69,6 +69,8 @@ namespace Rapi
 class CCBRobot : public ARobot
 {
   public:
+    /** Chatterbox hardware driver */
+    CCBDriver* mCBDriver;
     /**
      * Default constructor
      */
@@ -128,8 +130,6 @@ class CCBRobot : public ARobot
     bool mFgRunning;
 
   private:
-    /** Chatterbox hardware driver */
-    CCBDriver* mCBDriver;
     /** Drivetrain */
     CCBDrivetrain2dof* mCBDrivetrain;
     /** Power pack */

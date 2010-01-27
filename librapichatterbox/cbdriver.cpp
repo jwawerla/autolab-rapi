@@ -462,10 +462,18 @@ int CCBDriver::readSensorData()
           }
           else {
             totalNumRead += numRead;
+            double distance = double( dataOdoBuf[0] );
+            double angle = double( dataOdoBuf[1] );
 			dataOdoBuf[0] -= short( mEstDistance );
 			dataOdoBuf[1] -= short( mEstAngle );
 			mEstDistance = 0.0;
 			mEstAngle = 0.0;
+            // pull stuff from cbodometry.cpp to create 
+            distance = distance / 1e3;
+            angle = D2R( angle );
+            mMeasured.mYaw = normalizeAngle( mMeasured.mYaw + angle );
+            mMeasured.mX += distance * cos( mMeasured.mYaw );
+            mMeasured.mY += distance * sin( mMeasured.mYaw );
           }
         }
       }
@@ -481,6 +489,12 @@ int CCBDriver::readSensorData()
 	mEstDistance += distance;
 	mEstAngle += angle;
     totalNumRead += 4;
+    // pull stuff from cbodometry.cpp to create 
+    distance = distance / 1e3;
+    angle = D2R( angle );
+    mExtrapolated.mYaw = normalizeAngle( mExtrapolated.mYaw + angle );
+    mExtrapolated.mX += distance * cos( mExtrapolated.mYaw );
+    mExtrapolated.mY += distance * sin( mExtrapolated.mYaw );
   }
 
   if ( totalNumRead != CREATE_ALL_SENSOR_PACKET_SIZE ) {
