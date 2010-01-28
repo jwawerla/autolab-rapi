@@ -466,6 +466,9 @@ int CCBDriver::readSensorData()
             double angle = double( dataOdoBuf[1] );
 			dataOdoBuf[0] -= short( mEstDistance );
 			dataOdoBuf[1] -= short( mEstAngle );
+            printf("distance = %f\tangle = %f\tmEstDistance = %f\tmEstAngle = %f\t \
+                    dataOdoBuf[0] = %hd\tdataOdoBuf[1] = %hd\n", distance, angle,
+                    mEstDistance, mEstAngle, dataOdoBuf[0], dataOdoBuf[1] );
 			mEstDistance = 0.0;
 			mEstAngle = 0.0;
             // pull stuff from cbodometry.cpp to create 
