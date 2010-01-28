@@ -462,13 +462,13 @@ int CCBDriver::readSensorData()
           }
           else {
             totalNumRead += numRead;
-            double distance = double( dataOdoBuf[0] );
-            double angle = double( dataOdoBuf[1] );
-			dataOdoBuf[0] -= short( mEstDistance );
-			dataOdoBuf[1] -= short( mEstAngle );
+            double distance = double( (short) ntohs( dataOdoBuf[0] ) );
+            double angle = double( (short) ntohs( dataOdoBuf[1] ) );
             printf("distance = %f\tangle = %f\tmEstDistance = %f\tmEstAngle = %f\t \
                     dataOdoBuf[0] = %hd\tdataOdoBuf[1] = %hd\n", distance, angle,
-                    mEstDistance, mEstAngle, dataOdoBuf[0], dataOdoBuf[1] );
+                    mEstDistance, mEstAngle, ntohs(dataOdoBuf[0]), ntohs(dataOdoBuf[1]) );
+			dataOdoBuf[0] -= htons( short( mEstDistance ) );
+			dataOdoBuf[1] -= htons( short( mEstAngle ) );
 			mEstDistance = 0.0;
 			mEstAngle = 0.0;
             // pull stuff from cbodometry.cpp to create 
@@ -486,9 +486,9 @@ int CCBDriver::readSensorData()
 	double dr = mCreateSensorPackage.rightWheelVelocity * 0.1; //TODO: dt here
 	double dl = mCreateSensorPackage.leftWheelVelocity * 0.1;
     double distance = 0.5 * (dr + dl);
-	double angle = (dr - dl) / CREATE_AXLE_LENGTH;
-	dataOdoBuf[0] = short( distance );
-	dataOdoBuf[1] = short( angle );
+	double angle = R2D( (dr - dl) / (1e3 * CREATE_AXLE_LENGTH) );
+	dataOdoBuf[0] = htons( short( distance ) );
+	dataOdoBuf[1] = htons( short( angle ) );
 	mEstDistance += distance;
 	mEstAngle += angle;
     totalNumRead += 4;
