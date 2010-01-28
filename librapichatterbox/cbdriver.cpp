@@ -429,89 +429,9 @@ int CCBDriver::readSensorData()
       }
     }
   }
-  // do we need to get odo stuff as well?
-  if ( readOdo ) {
-    if ( write ( mFd, cmdOdoBuf, 4 ) < 0 ) {
-      ERROR1 ( "IO error: %s", strerror ( errno ) );
-      return 0;
-    }
-    ufd[0].fd = mFd;
-    ufd[0].events = POLLIN;
-    while ( totalNumRead < CREATE_ALL_SENSOR_PACKET_SIZE ) {
-      retVal = poll ( ufd, 1, READ_TIMEOUT );
-      if ( retVal < 0 ) {
-        if ( errno == EINTR )
-          continue;
-        else {
-          ERROR1 ( "IO error: %s", strerror ( errno ) );
-          return 0;
-        }
-      }
-      else {
-        if ( retVal == 0 ) {
-          ERROR1 ( "Timeout (bytes read %d)", totalNumRead );
-          return 0;
-        }
-        else {
-          if ( ( numRead = read ( mFd,
-						   ( (uint8_t*) dataOdoBuf ) + ( totalNumRead - 48 ),
-						   CREATE_ALL_SENSOR_PACKET_SIZE - totalNumRead ) )
-					     < 0 ) {
-            ERROR1 ( "IO error: %s", strerror ( errno ) );
-            return 0;
-          }
-          else {
-            totalNumRead += numRead;
-            double distance = double( (short) ntohs( dataOdoBuf[0] ) );
-            double angle = double( (short) ntohs( dataOdoBuf[1] ) );
-			dataOdoBuf[0] -= htons( short( mEstDistance ) );
-			dataOdoBuf[1] -= htons( short( mEstAngle ) );
-			mEstDistance = 0.0;
-			mEstAngle = 0.0;
-            // pull stuff from cbodometry.cpp to create poses
-            distance = distance / 1e3;
-            angle = D2R( angle );
-            mMeasured.mYaw = normalizeAngle( mMeasured.mYaw + angle );
-            mMeasured.mX += distance * cos( mMeasured.mYaw );
-            mMeasured.mY += distance * sin( mMeasured.mYaw );
-          }
-        }
-      }
-    }
-  }
-  else {
-	double dr = mCreateSensorPackage.rightWheelVelocity * 0.1; //TODO: dt here
-	double dl = mCreateSensorPackage.leftWheelVelocity * 0.1;
-    double distance = 0.5 * (dr + dl);
-	double angle = R2D( (dr - dl) / (1e3 * CREATE_AXLE_LENGTH) );
-	dataOdoBuf[0] = htons( short( distance ) );
-	dataOdoBuf[1] = htons( short( angle ) );
-	mEstDistance += distance;
-	mEstAngle += angle;
-    totalNumRead += 4;
-    // pull stuff from cbodometry.cpp to create 
-    distance = distance / 1e3;
-    angle = D2R( angle );
-    mExtrapolated.mYaw = normalizeAngle( mExtrapolated.mYaw + angle );
-    mExtrapolated.mX += distance * cos( mExtrapolated.mYaw );
-    mExtrapolated.mY += distance * sin( mExtrapolated.mYaw );
-  }
-
-  if ( totalNumRead != CREATE_ALL_SENSOR_PACKET_SIZE ) {
-    ERROR2 ( "Wrong package size received, %d expected but got % d",
-             totalNumRead, CREATE_ALL_SENSOR_PACKET_SIZE );
-    return 0; // failure
-  }
-
   // cast the create package into our data structure
-  uint8_t* sector2 = ((uint8_t *) &mCreateSensorPackage) + 48;
   memcpy ( (char*) &mCreateSensorPackage, dataBuf, 48 );
-  memcpy ( sector2, dataOdoBuf, 4 );
   // next we need to fix the byte order of data types with more then 1 byte
-  mCreateSensorPackage.distance
-  = ( short ) ntohs ( ( short ) mCreateSensorPackage.distance );
-  mCreateSensorPackage.angle
-  = ( short ) ntohs ( ( short ) mCreateSensorPackage.angle );
   mCreateSensorPackage.voltage
   = ntohs ( mCreateSensorPackage.voltage );
   mCreateSensorPackage.current
@@ -540,6 +460,91 @@ int CCBDriver::readSensorData()
   = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.rightWheelVelocity );
   mCreateSensorPackage.leftWheelVelocity
   = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.leftWheelVelocity );
+
+  // let's make an estimate of our distance and angle -> pack into dataOdoBuf
+  double dr = mCreateSensorPackage.rightWheelVelocity * 0.1; //TODO: dt here
+  double dl = mCreateSensorPackage.leftWheelVelocity * 0.1;
+  double distanceEst = 0.5 * (dr + dl);
+  double angleEst = R2D( (dr - dl) / (1e3 * CREATE_AXLE_LENGTH) );
+  dataOdoBuf[0] = htons( short( distanceEst ) );
+  dataOdoBuf[1] = htons( short( angleEst ) );
+  mEstDistance += distanceEst;
+  mEstAngle += angleEst;
+  // pull stuff from cbodometry.cpp to create 
+  distanceEst = distanceEst / 1e3;
+  angleEst = D2R( angleEst );
+  mExtrapolated.mYaw = normalizeAngle( mExtrapolated.mYaw + angleEst );
+  mExtrapolated.mX += distanceEst * cos( mExtrapolated.mYaw );
+  mExtrapolated.mY += distanceEst * sin( mExtrapolated.mYaw );
+
+  // actually, let's read the odometry data this time
+  if ( readOdo ) {
+    if ( write ( mFd, cmdOdoBuf, 4 ) < 0 ) { // write getOdo cmd
+      ERROR1 ( "IO error: %s", strerror ( errno ) );
+      return 0;
+    }
+    ufd[0].fd = mFd;
+    ufd[0].events = POLLIN;
+    // poll 'til we get all four bytes
+    while ( totalNumRead < CREATE_ALL_SENSOR_PACKET_SIZE ) {
+      retVal = poll ( ufd, 1, READ_TIMEOUT );
+      if ( retVal < 0 ) { // error returned
+        if ( errno == EINTR )
+          continue;
+        else {
+          ERROR1 ( "IO error: %s", strerror ( errno ) );
+          return 0;
+        }
+      }
+      else { // good return value
+        if ( retVal == 0 ) { // timed-out
+          ERROR1 ( "Timeout (bytes read %d)", totalNumRead );
+          return 0;
+        }
+        else { // successful serial connection -> now read bytes 
+          if ( ( numRead = read ( mFd,
+						   ( (uint8_t*) dataOdoBuf ) + ( totalNumRead - 48 ),
+						   CREATE_ALL_SENSOR_PACKET_SIZE - totalNumRead ) )
+					     < 0 ) {
+            ERROR1 ( "IO error: %s", strerror ( errno ) );
+            return 0;
+          }
+          else { // got some bytes -> fuse with estimate data
+            totalNumRead += numRead;
+            double distance = double( (short) ntohs( dataOdoBuf[0] ) );
+            double angle = double( (short) ntohs( dataOdoBuf[1] ) );
+			dataOdoBuf[0] -= htons( short( mEstDistance ) );
+			dataOdoBuf[1] -= htons( short( mEstAngle ) );
+			mEstDistance = 0.0;
+			mEstAngle = 0.0;
+            // pull stuff from cbodometry.cpp to create poses
+            distance = distance / 1e3;
+            angle = D2R( angle );
+            mMeasured.mYaw = normalizeAngle( mMeasured.mYaw + angle );
+            mMeasured.mX += distance * cos( mMeasured.mYaw );
+            mMeasured.mY += distance * sin( mMeasured.mYaw );
+          }
+        }
+      }
+    }
+  }
+  else { // okay, no reading odo this time...just pretend we did
+    totalNumRead += 4;
+  }
+
+  if ( totalNumRead != CREATE_ALL_SENSOR_PACKET_SIZE ) {
+    ERROR2 ( "Wrong package size received, %d expected but got % d",
+             totalNumRead, CREATE_ALL_SENSOR_PACKET_SIZE );
+    return 0; // failure
+  }
+
+  // okay, now pack odo data (fused or estimated) for higher layers of API
+  uint8_t* sector2 = ((uint8_t *) &mCreateSensorPackage) + 48;
+  memcpy ( sector2, dataOdoBuf, 4 );
+  mCreateSensorPackage.distance
+  = ( short ) ntohs ( ( short ) mCreateSensorPackage.distance );
+  mCreateSensorPackage.angle
+  = ( short ) ntohs ( ( short ) mCreateSensorPackage.angle );
 
   // mask out unused bytes and check for over current condition
   if ( ( mCreateSensorPackage.overCurrents & 0x1F ) != 0 )
