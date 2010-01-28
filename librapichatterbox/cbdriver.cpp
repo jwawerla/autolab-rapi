@@ -464,14 +464,11 @@ int CCBDriver::readSensorData()
             totalNumRead += numRead;
             double distance = double( (short) ntohs( dataOdoBuf[0] ) );
             double angle = double( (short) ntohs( dataOdoBuf[1] ) );
-            printf("distance = %f\tangle = %f\tmEstDistance = %f\tmEstAngle = %f\t \
-                    dataOdoBuf[0] = %hd\tdataOdoBuf[1] = %hd\n", distance, angle,
-                    mEstDistance, mEstAngle, ntohs(dataOdoBuf[0]), ntohs(dataOdoBuf[1]) );
 			dataOdoBuf[0] -= htons( short( mEstDistance ) );
 			dataOdoBuf[1] -= htons( short( mEstAngle ) );
 			mEstDistance = 0.0;
 			mEstAngle = 0.0;
-            // pull stuff from cbodometry.cpp to create 
+            // pull stuff from cbodometry.cpp to create poses
             distance = distance / 1e3;
             angle = D2R( angle );
             mMeasured.mYaw = normalizeAngle( mMeasured.mYaw + angle );
