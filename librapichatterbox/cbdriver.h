@@ -39,9 +39,6 @@ namespace Rapi
 class CCBDriver
 {
   public:
-    // intermediate pose objects
-    CPose2d mExtrapolated;
-    CPose2d mMeasured;
     /**
      * Default constructor
      */
