@@ -161,7 +161,7 @@ void CCBRobot::run()
 
   while ( mFgRunning ) {
     // get data from ICreate
-    if ( mCBDriver->readSensorData() == 1 ) {
+    if ( mCBDriver->readSensorData( mUpdateInterval ) == 1 ) {
 
       // update all devices
       if ( mCBDrivetrain )

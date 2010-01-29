@@ -103,9 +103,10 @@ class CCBDriver
     /**
      * Reads sensor data from Create. This data gets stored in the data
      * structures of this class
+     * @param current loop time [s]
      * @return 1 if successful, 0 otherwise
      */
-    int readSensorData();
+    int readSensorData( double dt );
     /**
      * Causes Create to play a predefined song
      * @param id of song to play [0..15]
@@ -322,9 +323,10 @@ class CCBDriver
     /**
      * Get all sensor data from Create except odometry data. Update estimate
      * position based on commanded velocity over previous interval.
+     * @param dt it the current loop time (for odometry estimate calculation)
      * @return 1 if successful, 0 in case of an error
      */
-    int getMostData();
+    int getMostData( double dt );
     /**
      * Utility function to read arbitary sensor data from Create.
      * @return 1 if successful, 0 in case of an error

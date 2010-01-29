@@ -212,7 +212,7 @@ int CCBDriver::startCreate()
     //usleep( CREATE_DELAY_MODECHANGE_MS * 1000 );
     sleep ( 2 );
     // try to read data
-    if ( readSensorData() == 0 ) {
+    if ( readSensorData( 0.1 ) == 0 ) {
       ERROR0 ( "Connected but failed to read 1. data package" );
       return 0;
     }
@@ -399,11 +399,11 @@ int CCBDriver::getOdoData()
   return 1; // success
 }
 //---------------------------------------------------------------------------
-int CCBDriver::getMostData()
+int CCBDriver::getMostData( double dt )
 {
   // estimate odometry based on commanded velocity over previous interval
-  double distRight = mCreateSensorPackage.rightWheelVelocity * 0.1; //TODO: dt here
-  double distLeft = mCreateSensorPackage.leftWheelVelocity * 0.1; //TODO: dt here
+  double distRight = mCreateSensorPackage.rightWheelVelocity * dt;
+  double distLeft = mCreateSensorPackage.leftWheelVelocity * dt;
   double estDist = 0.5 * (distRight + distLeft);
   double estAngle = R2D( (distRight - distLeft) / (1e3 * CREATE_AXLE_LENGTH) );
   mEstDistance += estDist;
@@ -518,7 +518,7 @@ int CCBDriver::readSerialData( uint8_t * cmdBuf, int nCmdBytes,
   return 1; // success
 }
 //---------------------------------------------------------------------------
-int CCBDriver::readSensorData()
+int CCBDriver::readSensorData( double dt )
 {
   // The Create resets the odometry data (distance and angle) each time these
   // are read. This data is quite low resolution so if we read it frequently
@@ -532,7 +532,7 @@ int CCBDriver::readSensorData()
   bool readOdo = ( count == 0 ) ? true : false;
   count = readOdo ? (CREATE_READ_ODO_COUNT - 1) : count - 1;
 
-  if( getMostData() == 0 )
+  if( getMostData( dt ) == 0 )
     return 0; // pass up errors
 
   if( readOdo ) {
