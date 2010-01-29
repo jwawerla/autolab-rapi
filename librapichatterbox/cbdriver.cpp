@@ -383,8 +383,8 @@ int CCBDriver::getOdoData()
     return 0; // just pass errors up
 
   // fuse measured data with accumulated estimate data
-  double measDistance = (double) ntohs( (uint16_t) odom.distance );
-  double measAngle = (double) ntohs( (uint16_t) odom.angle );
+  double measDistance = (double) int16_t( ntohs( (uint16_t) odom.distance ) );
+  double measAngle = (double) int16_t( ntohs( (uint16_t) odom.angle ) );
   mCreateSensorPackage.distance = measDistance - mEstDistance;
   mCreateSensorPackage.angle = measAngle - mEstAngle;
   mEstDistance = 0.0;
