@@ -390,11 +390,11 @@ int CCBDriver::getOdoData()
   mEstDistance = 0.0;
   mEstAngle = 0.0;
   // TODO: this is debugging info 
-  measDistance = measDistance / 1e3;
-  measAngle = D2R( measAngle );
-  mMeasured.mYaw = normalizeAngle( mMeasured.mYaw + measAngle );
-  mMeasured.mX += measDistance * cos( mMeasured.mYaw );
-  mMeasured.mY += measDistance * sin( mMeasured.mYaw );
+  measDistanceA = measDistance / 1e3;
+  measAngleA = D2R( measAngle );
+  mMeasured.mYaw = normalizeAngle( mMeasured.mYaw + measAngleA );
+  mMeasured.mX += measDistanceA * cos( mMeasured.mYaw );
+  mMeasured.mY += measDistanceA * sin( mMeasured.mYaw );
 
   return 1; // success
 }
@@ -411,11 +411,11 @@ int CCBDriver::getMostData()
   mCreateSensorPackage.distance = estDist;
   mCreateSensorPackage.angle = estAngle;
   // TODO: this is debugging info 
-  estDist = estDist / 1e3;
-  estAngle = D2R( estAngle );
-  mExtrapolated.mYaw = normalizeAngle( mExtrapolated.mYaw + estAngle );
-  mExtrapolated.mX += estDist * cos( mExtrapolated.mYaw );
-  mExtrapolated.mY += estDist * sin( mExtrapolated.mYaw );
+  estDistA = estDist / 1e3;
+  estAngleA = D2R( estAngle );
+  mExtrapolated.mYaw = normalizeAngle( mExtrapolated.mYaw + estAngleA );
+  mExtrapolated.mX += estDistA * cos( mExtrapolated.mYaw );
+  mExtrapolated.mY += estDistA * sin( mExtrapolated.mYaw );
 
   // get the rest of the data from the Create
   const int nCmdBytes = 8, nDataBytes = 48;
