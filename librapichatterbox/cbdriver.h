@@ -329,7 +329,8 @@ class CCBDriver
      * Utility function to read arbitary sensor data from Create.
      * @return 1 if successful, 0 in case of an error
      */
-    int readSerialData( uint8_t * cmdBuf, uint8_t * dataBuf );
+    int readSerialData( uint8_t * cmdBuf, int nCmdBytes,
+                        uint8_t * dataBuf, int nDataBytes );
     /**
      * Starts the robot by sending the start opcode 128
      * @return 1 if successful, 0 otherwise

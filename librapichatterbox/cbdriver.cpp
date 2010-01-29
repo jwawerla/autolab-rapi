@@ -366,9 +366,10 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
 int CCBDriver::getOdoData()
 {
   // get odometry from Create
-  uint8_t cmdBuf[6];
+  const int nCmdBytes = 6, nDataBytes = 4;
+  uint8_t cmdBuf[nCmdBytes];
   union { // anonymous union to save type conversions
-    uint8_t dataBuf[4];
+    uint8_t dataBuf[nDataBytes];
     struct {
       int16_t distance;
       int16_t angle;
@@ -378,7 +379,7 @@ int CCBDriver::getOdoData()
   cmdBuf[1] = 2; // two packets IDs to follow
   cmdBuf[2] = 19; // distance packet
   cmdBuf[3] = 20; // angle packet
-  if( readSerialData( cmdBuf, dataBuf ) == 0 )
+  if( readSerialData( cmdBuf, nCmdBytes, dataBuf, nDataBytes ) == 0 )
     return 0; // just pass errors up
 
   // fuse measured data with accumulated estimate data
@@ -417,8 +418,9 @@ int CCBDriver::getMostData()
   mExtrapolated.mY += estDist * sin( mExtrapolated.mYaw );
 
   // get the rest of the data from the Create
-  uint8_t cmdBuf[8];
-  uint8_t dataBuf[48];
+  const int nCmdBytes = 8, nDataBytes = 48;
+  uint8_t cmdBuf[nCmdBytes];
+  uint8_t dataBuf[nDataBytes];
   cmdBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
   cmdBuf[1] = 6; // six packet IDs to follow
   cmdBuf[2] = 1;  // packets 7-16
@@ -427,9 +429,9 @@ int CCBDriver::getMostData()
   cmdBuf[5] = 3;  // packets 21-26
   cmdBuf[6] = 4;  // packets 27-34
   cmdBuf[7] = 5;  // packets 35-42
-  if( readSerialData( cmdBuf, dataBuf ) == 0 )
+  if( readSerialData( cmdBuf, nCmdBytes, dataBuf, nDataBytes ) == 0 )
     return 0; // just pass errors up
-  memcpy ( (uint8_t *) &mCreateSensorPackage, dataBuf, 48 );
+  memcpy ( (uint8_t *) &mCreateSensorPackage, dataBuf, nDataBytes );
 
   // next we need to fix the byte order of data types with more then 1 byte
   mCreateSensorPackage.voltage = ntohs ( mCreateSensorPackage.voltage );
@@ -468,11 +470,10 @@ int CCBDriver::getMostData()
   return 1; // success
 }
 //---------------------------------------------------------------------------
-int CCBDriver::readSerialData( uint8_t * cmdBuf, uint8_t * dataBuf )
+int CCBDriver::readSerialData( uint8_t * cmdBuf, int nCmdBytes,
+                               uint8_t * dataBuf, int nDataBytes )
 {
   struct pollfd ufd[1];
-  int nCmdBytes = sizeof( *cmdBuf );
-  int nDataBytes = sizeof( *dataBuf );
 
   // write command to Create
   if ( write( mFd, cmdBuf, nCmdBytes ) < 0 ) {
@@ -485,7 +486,7 @@ int CCBDriver::readSerialData( uint8_t * cmdBuf, uint8_t * dataBuf )
   ufd[0].fd = mFd;
   ufd[0].events = POLLIN;
   while ( totalNumRead < nDataBytes ) {
-    int retVal = poll ( ufd, 1, READ_TIMEOUT );
+    int retVal = poll( ufd, 1, READ_TIMEOUT );
     if ( retVal < 0 ) { // poll fails
       if ( errno == EINTR ) // interrupted - try again
         continue;
