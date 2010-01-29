@@ -36,10 +36,10 @@ CCBOdometry::~CCBOdometry()
 {
 }
 //-----------------------------------------------------------------------------
-void CCBOdometry::updateData( const double dt)
+void CCBOdometry::updateData( const double dt )
 {
   mAngle = D2R ( mCBDriver->mCreateSensorPackage.angle );
-  mDistance = ( float ) ((float) mCBDriver->mCreateSensorPackage.distance) / 1e3;
+  mDistance = ( float ) ( mCBDriver->mCreateSensorPackage.distance / 1e3 );
 
   mPose.mYaw = normalizeAngle ( mPose.mYaw + mAngle );
   mPose.mX += mDistance * cos ( mPose.mYaw );

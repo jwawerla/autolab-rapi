@@ -59,6 +59,9 @@ CCBDriver::CCBDriver()
   m7SegByteValue = 0;
   mEstDistance = 0.0;
   mEstAngle = 0.0;
+  // ensure 'commanded velocity' is zero
+  mCreateSensorPackage.rightWheelVelocity = 0;
+  mCreateSensorPackage.leftWheelVelocity = 0;
 }
 //--------------------------------------------------------------------------
 CCBDriver::~CCBDriver()
@@ -359,85 +362,81 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
 
   return 1; // success
 }
-
 //---------------------------------------------------------------------------
-int CCBDriver::readSensorData()
+int CCBDriver::getOdoData()
 {
-  static int count = 0; // read distance every time we get to zero
-  bool readOdo = ( count == 0 ) ? true : false;
-  count = readOdo ? CREATE_READ_ODO_COUNT : count - 1;
-
-  struct pollfd ufd[1];
-  unsigned char cmdBuf[8];
-  unsigned char dataBuf[48];
-  unsigned char cmdOdoBuf[4];
-  int16_t dataOdoBuf[2];
-  int retVal;
-  int numRead;
-  unsigned int totalNumRead;
-
-  // OPcode to request some sensor data
+  // get odometry from Create
+  uint8_t cmdBuf[6];
+  union { // anonymous union to save type conversions
+    uint8_t dataBuf[4];
+    struct {
+      int16_t distance;
+      int16_t angle;
+    } odom;
+  };
   cmdBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
-  cmdBuf[1] = 6;  // six packet IDs to follow
+  cmdBuf[1] = 2; // two packets IDs to follow
+  cmdBuf[2] = 19; // distance packet
+  cmdBuf[3] = 20; // angle packet
+  if( readSerialData( cmdBuf, dataBuf ) == 0 )
+    return 0; // just pass errors up
+
+  // fuse measured data with accumulated estimate data
+  double measDistance = (double) ntohs( (uint16_t) odom.distance );
+  double measAngle = (double) ntohs( (uint16_t) odom.angle );
+  mCreateSensorPackage.distance = measDistance - mEstDistance;
+  mCreateSensorPackage.angle = measAngle - mEstAngle;
+  mEstDistance = 0.0;
+  mEstAngle = 0.0;
+  // TODO: this is debugging info 
+  measDistance = measDistance / 1e3;
+  measAngle = D2R( measAngle );
+  mMeasured.mYaw = normalizeAngle( mMeasured.mYaw + measAngle );
+  mMeasured.mX += measDistance * cos( mMeasured.mYaw );
+  mMeasured.mY += measDistance * sin( mMeasured.mYaw );
+
+  return 1; // success
+}
+//---------------------------------------------------------------------------
+int CCBDriver::getMostData()
+{
+  // estimate odometry based on commanded velocity over previous interval
+  double distRight = mCreateSensorPackage.rightWheelVelocity * 0.1; //TODO: dt here
+  double distLeft = mCreateSensorPackage.leftWheelVelocity * 0.1; //TODO: dt here
+  double estDist = 0.5 * (distRight + distLeft);
+  double estAngle = R2D( (distRight - distLeft) / (1e3 * CREATE_AXLE_LENGTH) );
+  mEstDistance += estDist;
+  mEstAngle += estAngle;
+  mCreateSensorPackage.distance = estDist;
+  mCreateSensorPackage.angle = estAngle;
+  // TODO: this is debugging info 
+  estDist = estDist / 1e3;
+  estAngle = D2R( estAngle );
+  mExtrapolated.mYaw = normalizeAngle( mExtrapolated.mYaw + estAngle );
+  mExtrapolated.mX += estDist * cos( mExtrapolated.mYaw );
+  mExtrapolated.mY += estDist * sin( mExtrapolated.mYaw );
+
+  // get the rest of the data from the Create
+  uint8_t cmdBuf[8];
+  uint8_t dataBuf[48];
+  cmdBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
+  cmdBuf[1] = 6; // six packet IDs to follow
   cmdBuf[2] = 1;  // packets 7-16
   cmdBuf[3] = 17; // IR byte
   cmdBuf[4] = 18; // Buttons
   cmdBuf[5] = 3;  // packets 21-26
   cmdBuf[6] = 4;  // packets 27-34
   cmdBuf[7] = 5;  // packets 35-42
-  cmdOdoBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
-  cmdOdoBuf[1] = 2; // two packets IDs to follow
-  cmdOdoBuf[2] = 19; // distance packet
-  cmdOdoBuf[3] = 20; // angle packet
+  if( readSerialData( cmdBuf, dataBuf ) == 0 )
+    return 0; // just pass errors up
+  memcpy ( (uint8_t *) &mCreateSensorPackage, dataBuf, 48 );
 
-
-  if ( write ( mFd, cmdBuf, 8 ) < 0 ) {
-    ERROR1 ( "IO error: %s", strerror ( errno ) );
-    return 0;
-  }
-
-  ufd[0].fd = mFd;
-  ufd[0].events = POLLIN;
-
-  totalNumRead = 0;
-
-  while ( totalNumRead < 48 ) {
-    retVal = poll ( ufd, 1, READ_TIMEOUT );
-
-    if ( retVal < 0 ) {
-      if ( errno == EINTR )
-        continue;
-      else {
-        ERROR1 ( "IO error: %s", strerror ( errno ) );
-        return 0;
-      }
-    }
-    else {
-      if ( retVal == 0 ) {
-        ERROR1 ( "Timeout (bytes read %d)", totalNumRead );
-        return 0;
-      }
-      else {
-        if ( ( numRead = read ( mFd, dataBuf + totalNumRead,
-                                sizeof ( dataBuf ) - totalNumRead ) ) < 0 ) {
-          ERROR1 ( "IO error: %s", strerror ( errno ) );
-          return 0;
-        }
-        else {
-          totalNumRead += numRead;
-        }
-      }
-    }
-  }
-  // cast the create package into our data structure
-  memcpy ( (char*) &mCreateSensorPackage, dataBuf, 48 );
   // next we need to fix the byte order of data types with more then 1 byte
-  mCreateSensorPackage.voltage
-  = ntohs ( mCreateSensorPackage.voltage );
+  mCreateSensorPackage.voltage = ntohs ( mCreateSensorPackage.voltage );
   mCreateSensorPackage.current
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.current );
+  = ( short ) ntohs ( (uint16_t) mCreateSensorPackage.current );
   mCreateSensorPackage.batCapacity
-  = ntohs ( mCreateSensorPackage.batCapacity );
+  = (short) ntohs ( mCreateSensorPackage.batCapacity ); 
   mCreateSensorPackage.batMaxCapacity
   = ntohs ( mCreateSensorPackage.batMaxCapacity );
   mCreateSensorPackage.wallSignal
@@ -453,105 +452,94 @@ int CCBDriver::readSensorData()
   mCreateSensorPackage.analogInput
   = ntohs ( mCreateSensorPackage.analogInput );
   mCreateSensorPackage.velocity
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.velocity );
+  = ( short ) ntohs ( ( uint16_t ) mCreateSensorPackage.velocity );
   mCreateSensorPackage.radius
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.radius );
+  = ( short ) ntohs ( ( uint16_t ) mCreateSensorPackage.radius );
   mCreateSensorPackage.rightWheelVelocity
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.rightWheelVelocity );
+  = ( short ) ntohs ( ( uint16_t ) mCreateSensorPackage.rightWheelVelocity );
   mCreateSensorPackage.leftWheelVelocity
-  = ( short ) ntohs ( ( unsigned short ) mCreateSensorPackage.leftWheelVelocity );
-
-  // let's make an estimate of our distance and angle -> pack into dataOdoBuf
-  double dr = mCreateSensorPackage.rightWheelVelocity * 0.1; //TODO: dt here
-  double dl = mCreateSensorPackage.leftWheelVelocity * 0.1;
-  double distanceEst = 0.5 * (dr + dl);
-  double angleEst = R2D( (dr - dl) / (1e3 * CREATE_AXLE_LENGTH) );
-  dataOdoBuf[0] = htons( short( distanceEst ) );
-  dataOdoBuf[1] = htons( short( angleEst ) );
-  mEstDistance += distanceEst;
-  mEstAngle += angleEst;
-  // pull stuff from cbodometry.cpp to create 
-  distanceEst = distanceEst / 1e3;
-  angleEst = D2R( angleEst );
-  mExtrapolated.mYaw = normalizeAngle( mExtrapolated.mYaw + angleEst );
-  mExtrapolated.mX += distanceEst * cos( mExtrapolated.mYaw );
-  mExtrapolated.mY += distanceEst * sin( mExtrapolated.mYaw );
-
-  // actually, let's read the odometry data this time
-  if ( readOdo ) {
-    if ( write ( mFd, cmdOdoBuf, 4 ) < 0 ) { // write getOdo cmd
-      ERROR1 ( "IO error: %s", strerror ( errno ) );
-      return 0;
-    }
-    ufd[0].fd = mFd;
-    ufd[0].events = POLLIN;
-    // poll 'til we get all four bytes
-    while ( totalNumRead < CREATE_ALL_SENSOR_PACKET_SIZE ) {
-      retVal = poll ( ufd, 1, READ_TIMEOUT );
-      if ( retVal < 0 ) { // error returned
-        if ( errno == EINTR )
-          continue;
-        else {
-          ERROR1 ( "IO error: %s", strerror ( errno ) );
-          return 0;
-        }
-      }
-      else { // good return value
-        if ( retVal == 0 ) { // timed-out
-          ERROR1 ( "Timeout (bytes read %d)", totalNumRead );
-          return 0;
-        }
-        else { // successful serial connection -> now read bytes 
-          if ( ( numRead = read ( mFd,
-						   ( (uint8_t*) dataOdoBuf ) + ( totalNumRead - 48 ),
-						   CREATE_ALL_SENSOR_PACKET_SIZE - totalNumRead ) )
-					     < 0 ) {
-            ERROR1 ( "IO error: %s", strerror ( errno ) );
-            return 0;
-          }
-          else { // got some bytes -> fuse with estimate data
-            totalNumRead += numRead;
-            double distance = double( (short) ntohs( dataOdoBuf[0] ) );
-            double angle = double( (short) ntohs( dataOdoBuf[1] ) );
-			dataOdoBuf[0] -= htons( short( mEstDistance ) );
-			dataOdoBuf[1] -= htons( short( mEstAngle ) );
-			mEstDistance = 0.0;
-			mEstAngle = 0.0;
-            // pull stuff from cbodometry.cpp to create poses
-            distance = distance / 1e3;
-            angle = D2R( angle );
-            mMeasured.mYaw = normalizeAngle( mMeasured.mYaw + angle );
-            mMeasured.mX += distance * cos( mMeasured.mYaw );
-            mMeasured.mY += distance * sin( mMeasured.mYaw );
-          }
-        }
-      }
-    }
-  }
-  else { // okay, no reading odo this time...just pretend we did
-    totalNumRead += 4;
-  }
-
-  if ( totalNumRead != CREATE_ALL_SENSOR_PACKET_SIZE ) {
-    ERROR2 ( "Wrong package size received, %d expected but got % d",
-             totalNumRead, CREATE_ALL_SENSOR_PACKET_SIZE );
-    return 0; // failure
-  }
-
-  // okay, now pack odo data (fused or estimated) for higher layers of API
-  uint8_t* sector2 = ((uint8_t *) &mCreateSensorPackage) + 48;
-  memcpy ( sector2, dataOdoBuf, 4 );
-  mCreateSensorPackage.distance
-  = ( short ) ntohs ( ( short ) mCreateSensorPackage.distance );
-  mCreateSensorPackage.angle
-  = ( short ) ntohs ( ( short ) mCreateSensorPackage.angle );
+  = ( short ) ntohs ( ( uint16_t ) mCreateSensorPackage.leftWheelVelocity );
 
   // mask out unused bytes and check for over current condition
   if ( ( mCreateSensorPackage.overCurrents & 0x1F ) != 0 )
     PRT_MSG1 ( 8, "OVER CURRENT -- OVER CURRENT code %d",
                 mCreateSensorPackage.overCurrents );
-  return 1; // success
 
+  return 1; // success
+}
+//---------------------------------------------------------------------------
+int CCBDriver::readSerialData( uint8_t * cmdBuf, uint8_t * dataBuf )
+{
+  struct pollfd ufd[1];
+  int nCmdBytes = sizeof( *cmdBuf );
+  int nDataBytes = sizeof( *dataBuf );
+
+  // write command to Create
+  if ( write( mFd, cmdBuf, nCmdBytes ) < 0 ) {
+    ERROR1 ( "IO error: %s", strerror( errno ) );
+    return 0;
+  }
+
+  // read response from Create
+  int totalNumRead = 0;
+  ufd[0].fd = mFd;
+  ufd[0].events = POLLIN;
+  while ( totalNumRead < nDataBytes ) {
+    int retVal = poll ( ufd, 1, READ_TIMEOUT );
+    if ( retVal < 0 ) { // poll fails
+      if ( errno == EINTR ) // interrupted - try again
+        continue;
+      else {
+        ERROR1( "IO error: %s", strerror( errno ) );
+        return 0;
+      }
+    }
+    else if ( retVal == 0 ) { // timed-out
+      ERROR1( "Timeout (bytes read %d)", totalNumRead );
+      return 0;
+    }
+    else { // poll returned successfully
+      int numRead = read( mFd, dataBuf + totalNumRead, nDataBytes - totalNumRead );
+      if( numRead < 0 ) { // error reading from serial
+        ERROR1( "IO error: %s", strerror( errno ) );
+        return 0;
+      }
+      totalNumRead += numRead;
+    }
+  }
+
+  // check that we read enough bytes 
+  if ( totalNumRead != nDataBytes ) {
+    ERROR2( "Wrong package size received, %d expected but got % d",
+            nDataBytes, totalNumRead );
+    return 0;
+  }
+  return 1; // success
+}
+//---------------------------------------------------------------------------
+int CCBDriver::readSensorData()
+{
+  // The Create resets the odometry data (distance and angle) each time these
+  // are read. This data is quite low resolution so if we read it frequently
+  // we get lots of rounding error in our data; this is particularly damaging
+  // to the angular measurements where a small error can drastically affect our
+  // estimated position.  As such, we read all the other sensors frequently but
+  // only read odometry once every CREATE_READ_ODO_COUNT cycles. In the
+  // interim, we estimate our odometry by integrating the commanded velocity.
+  // We then correct this estimate with our measured values.
+  static int count = 0; // read the first time 
+  bool readOdo = ( count == 0 ) ? true : false;
+  count = readOdo ? (CREATE_READ_ODO_COUNT - 1) : count - 1;
+
+  if( getMostData() == 0 )
+    return 0; // pass up errors
+
+  if( readOdo ) {
+    if( getOdoData() == 0 )
+      return 0; // pass up errors
+  }
+
+  return 1; // success
 }
 //---------------------------------------------------------------------------
 unsigned short CCBDriver::getRawCliffSensor(tCliffSensor id) const

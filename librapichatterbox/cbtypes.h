@@ -39,11 +39,11 @@ typedef struct {
   unsigned char  ir;                      // [0..255]
   unsigned char  button;                  // [0..15]
   unsigned char  chargingState;           // [0..5]
-  short          voltage;                 // [mV]
+  unsigned short voltage;                 // [mV]
   short          current;                 // [mA]
   char           batTemp;                 // [C]
-  short          batCapacity;             // [mAh]
-  short          batMaxCapacity;          // [mAh]
+  unsigned short batCapacity;             // [mAh]
+  unsigned short batMaxCapacity;          // [mAh]
   unsigned short wallSignal;              // [0..4095]
   unsigned short cliffSignalLeft;         // [0..4095]
   unsigned short cliffSignalFrontLeft;    // [0..4095]
@@ -60,8 +60,9 @@ typedef struct {
   short          radius;                  // [mm]
   short          rightWheelVelocity;      // [mm/s]
   short          leftWheelVelocity;       // [mm/s]
-  short          distance;                // [mm]
-  short          angle;                   // [deg]
+  // use doubles for odometry and do conversion from shorts in driver code :)
+  double         distance;                // [mm]
+  double         angle;                   // [deg]
 } __attribute__ ((packed)) tCreateSensorPacket;
 
 
