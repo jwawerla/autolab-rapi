@@ -212,7 +212,7 @@ int CCBDriver::startCreate()
     //usleep( CREATE_DELAY_MODECHANGE_MS * 1000 );
     sleep ( 2 );
     // try to read data
-    if ( readSensorData( 0.1 ) == 0 ) {
+    if ( readSensorData( 0.0 ) == 0 ) {
       ERROR0 ( "Connected but failed to read 1. data package" );
       return 0;
     }
