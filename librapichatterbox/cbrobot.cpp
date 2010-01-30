@@ -30,7 +30,7 @@ namespace Rapi
 CCBRobot::CCBRobot()
     : ARobot()
 {
-  mUpdateInterval = 0.1; // default update frequency is 10Hz
+  mUpdateInterval = 0.2; // default update frequency is 5Hz (TODO: should be 10)
   mName = "Chatterbox";
 
   mCBDriver = new CCBDriver();

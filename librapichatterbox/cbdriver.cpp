@@ -212,7 +212,7 @@ int CCBDriver::startCreate()
     //usleep( CREATE_DELAY_MODECHANGE_MS * 1000 );
     sleep ( 2 );
     // try to read data
-    if ( readSensorData( 0.1 ) == 0 ) {
+    if ( readSensorData( 0.0 ) == 0 ) {
       ERROR0 ( "Connected but failed to read 1. data package" );
       return 0;
     }
@@ -389,7 +389,7 @@ int CCBDriver::getOdoData()
   mCreateSensorPackage.angle = measAngle - mEstAngle;
   mEstDistance = 0.0;
   mEstAngle = 0.0;
-  // TODO: this is debugging info 
+  // debugging info
   double measDistanceA = measDistance / 1e3;
   double measAngleA = D2R( measAngle );
   mMeasured.mYaw = normalizeAngle( mMeasured.mYaw + measAngleA );
@@ -410,7 +410,7 @@ int CCBDriver::getMostData( double dt )
   mEstAngle += estAngle;
   mCreateSensorPackage.distance = estDist;
   mCreateSensorPackage.angle = estAngle;
-  // TODO: this is debugging info 
+  // debugging info
   double estDistA = estDist / 1e3;
   double estAngleA = D2R( estAngle );
   mExtrapolated.mYaw = normalizeAngle( mExtrapolated.mYaw + estAngleA );
