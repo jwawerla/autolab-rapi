@@ -82,7 +82,6 @@ SET( SOURCES
 )
 
 IF( WITH_RPC )
-  LINK_LIBRARIES( ${TARGET} pthread )
   SET( SOURCES
        ${SOURCES}
        robotrpcserver.cpp
@@ -106,6 +105,11 @@ ADD_LIBRARY( ${TARGET} SHARED ${SOURCES} )
 SET_TARGET_PROPERTIES( ${TARGET} PROPERTIES
                         VERSION ${VERSION}
 )
+
+# now we can add target libraries as it has been initialized
+IF( WITH_RPC )
+  TARGET_LINK_LIBRARIES( ${TARGET} ${CMAKE_THREAD_LIBS_INIT} )
+ENDIF( WITH_RPC )
 
 INSTALL(TARGETS ${TARGET}
   LIBRARY DESTINATION lib )

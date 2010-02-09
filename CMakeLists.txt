@@ -53,25 +53,6 @@ ENDIF( APPLE )
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
                ${CMAKE_CURRENT_SOURCE_DIR}/config.h @ONLY)
 
-ADD_DEFINITIONS(-g -Wall -O2)
-ADD_SUBDIRECTORY(librapicore)
-
-IF (WITH_STAGE)
- ADD_SUBDIRECTORY(librapistage)
-ENDIF(WITH_STAGE)
-
-if (WITH_CB)
-  ADD_SUBDIRECTORY(librapichatterbox)
-ENDIF(WITH_CB)
-
-IF (WITH_GUI)
-  ADD_SUBDIRECTORY(librapigui)
-  ADD_DEFINITIONS(-D_RAPI_GUI)
-  MESSAGE(STATUS "Building Rapi graphics support")
-ELSE(WITH_GUI)
-  MESSAGE(STATUS "Graphics support disabled")
-ENDIF(WITH_GUI)
-
 # get >1.36 Boost libraries if we are building with RPC support (server or client)
 IF( WITH_RPC )
   find_package( Boost 1.36.0 )
@@ -87,21 +68,11 @@ ENDIF( WITH_RPC )
 # we'll also need pthread
 IF( WITH_RPC )
   find_package(Threads)
-  IF( CMAKE_USE_PTHREADS_INIT )
-    target_link_libraries( ${CMAKE_THREAD_LIBS_INIT})
-  ELSE( CMAKE_USE_PTHREADS_INIT )
+  IF( NOT CMAKE_USE_PTHREADS_INIT )
     MESSAGE( "You are lacking the pthreads library!  Building without RPC support" )
     SET( WITH_RPC OFF )
-  ENDIF( CMAKE_USE_PTHREADS_INIT )
+  ENDIF( NOT CMAKE_USE_PTHREADS_INIT )
 ENDIF( WITH_RPC)
-
-IF (WITH_RPC)
-  ADD_SUBDIRECTORY(librapirpc)
-ENDIF (WITH_RPC)
-
-IF (WITH_EXAMPLES)
-  ADD_SUBDIRECTORY(examples)
-ENDIF(WITH_EXAMPLES)
 
 # Create and install the pkgconfig file from the .in template
 SET( PKGFILE ${CMAKE_CURRENT_SOURCE_DIR}/autolab-rapi.pc )
@@ -143,3 +114,31 @@ IF (WITH_RPC)
 ELSE(WITH_RPC)
   MESSAGE(STATUS "lib-rapi-rpc will NOT be build, enable with WITH_RPC")
 ENDIF(WITH_RPC)
+
+# Add all the directories
+ADD_DEFINITIONS(-g -Wall -O2)
+ADD_SUBDIRECTORY(librapicore)
+
+IF (WITH_STAGE)
+ ADD_SUBDIRECTORY(librapistage)
+ENDIF(WITH_STAGE)
+
+if (WITH_CB)
+  ADD_SUBDIRECTORY(librapichatterbox)
+ENDIF(WITH_CB)
+
+IF (WITH_GUI)
+  ADD_SUBDIRECTORY(librapigui)
+  ADD_DEFINITIONS(-D_RAPI_GUI)
+  MESSAGE(STATUS "Building Rapi graphics support")
+ELSE(WITH_GUI)
+  MESSAGE(STATUS "Graphics support disabled")
+ENDIF(WITH_GUI)
+
+IF (WITH_RPC)
+  ADD_SUBDIRECTORY(librapirpc)
+ENDIF (WITH_RPC)
+
+IF (WITH_EXAMPLES)
+  ADD_SUBDIRECTORY(examples)
+ENDIF(WITH_EXAMPLES)
