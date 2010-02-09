@@ -43,13 +43,6 @@ SET( HEADERS
   rapivarinterface.h
   datalogger.h
   rapitypesystem.h
-  robotrpcserver.h
-  jsonrpc_server.h
-  tinyjson.hpp
-  network_server_udp.h
-  network_server_tcp.h
-  network_client_udp.h
-  network_client_tcp.h
 )
 
 SET( SOURCES
@@ -86,10 +79,25 @@ SET( SOURCES
   timer.cpp
   datalogger.cpp
   rapitypesystem.cpp
-  robotrpcserver.cpp
 )
 
-LINK_LIBRARIES( ${TARGET} pthread )
+IF( WITH_RPC )
+  LINK_LIBRARIES( ${TARGET} pthread )
+  SET( SOURCES
+       ${SOURCES}
+       robotrpcserver.cpp
+  )
+  SET( HEADERS
+       ${HEADERS}
+       robotrpcserver.h
+       jsonrpc_server.h
+       tinyjson.hpp
+       network_server_udp.h
+       network_server_tcp.h
+       network_client_udp.h
+       network_client_tcp.h
+  )
+ENDIF( WITH_RPC )
 
 # build a shared library
 ADD_LIBRARY( ${TARGET} SHARED ${SOURCES} )

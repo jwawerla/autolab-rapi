@@ -19,4 +19,4 @@ include/
 librapirpc/rpcclient
 .kdev4/
 autolab-rapi.kdev4
-
+Build/

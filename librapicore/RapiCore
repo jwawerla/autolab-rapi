@@ -58,5 +58,7 @@ const char* RAPI_BUILD_DATE();
 #include "switcharray.h"
 #include "analogsensorarray.h"
 #include "blobfinder.h"
-#include "robotrpcserver.h"
+
+//#include "robotrpcserver.h"
+
 
