@@ -86,13 +86,13 @@ ENDIF( WITH_RPC )
 
 # we'll also need pthread
 IF( WITH_RPC )
-  find_library(pthreads pthreads)
-  IF( pthreads_FOUND )
-    MESSAGE( "Got Pthreads...yipee!" )
-  ELSE( pthreads_FOUND )
+  find_package(Threads)
+  IF( CMAKE_USE_PTHREADS_INIT )
+    target_link_libraries( ${CMAKE_THREAD_LIBS_INIT})
+  ELSE( CMAKE_USE_PTHREADS_INIT )
     MESSAGE( "You are lacking the pthreads library!  Building without RPC support" )
     SET( WITH_RPC OFF )
-  ENDIF( pthreads_FOUND )
+  ENDIF( CMAKE_USE_PTHREADS_INIT )
 ENDIF( WITH_RPC)
 
 IF (WITH_RPC)
