@@ -7,7 +7,7 @@
 #define GIT_VERSION  "@GIT_VERSION@"
 #define BUILD_NUMBER "@BUILD_NUM@"
 #define INSTALL_PREFIX "@CMAKE_INSTALL_PREFIX@"
-
+#define WITH_RPC "@WITH_RPC@"
 #cmakedefine BUILD_GUI
 
 #endif
