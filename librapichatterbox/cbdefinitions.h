@@ -79,7 +79,7 @@
 #define CREATE_DIAMETER                0.33
 
 
-// which sensor package do we want ? note changing this value might require 
+// which sensor package do we want ? note changing this value might require
 // to change the message parse method.
 //   0 -  package  7 - 26  size 26 bytes
 //   1 -  package  7 - 16  size 10 bytes
@@ -150,6 +150,11 @@
 #define K4 -5.079344
 #define K5  2.983591
 
+// distance threshold to request odometry [m]
+#define REQ_DISTANCE_ODOM_THRESHOLD 1.0
+// angular threshold to request odometry [rad]
+#define REQ_ANGLE_ODOM_THRESHOLD 0.08  // ~5 deg
+
 // RGB led stuff
 #define PCA98634_CHIP_A_ADDR 0x67
 #define PCA98634_CHIP_B_ADDR 0x6f
@@ -190,6 +195,9 @@
 #define LED4_G_PORT 0x03
 #define LED4_B_ADDR PCA98634_CHIP_A_ADDR
 #define LED4_B_PORT 0x02
+
+#define CB_PACKET_DISTANCE 19
+#define CB_PACKET_ANGLE 20
 
 //----------------------------------------------------------------------------
 #endif

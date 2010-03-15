@@ -89,7 +89,7 @@ class CCBDriver
      * @param vel velocity to be set
      * @return 1 successful, 0 otherwise
      */
-    int setSpeed( CVelocity2d vel );
+    int setSpeed( CVelocity2d vel);
     /**
      * Sets the low side driver with id to on
      * @param id of low side driver [0..2]
@@ -203,7 +203,7 @@ class CCBDriver
      */
     int activateDemo( tDemo demo );
     /**
-     * Defines a sequence of sounds as a song. It is possible to define 16 
+     * Defines a sequence of sounds as a song. It is possible to define 16
      * different songs, each with a length of upto 16 tones.
      * @param id of sound to be defined [0..15]
      * @param sequence to be defined [note1][length1][note2][length2]
@@ -401,10 +401,22 @@ class CCBDriver
     tLed mLed[5][3];
     /** Byte value of 7 seg display */
     char m7SegByteValue;
-	/** accumulated distance estimate [mm] */
-	double mEstDistance;
-	/** accumulated angle estimate [deg]*/
-	double mEstAngle;
+	  /** Accumulated distance estimate [mm] */
+	  double mEstDistance;
+	  /** Accumulated angle estimate [deg]*/
+	  double mEstAngle;
+	  /**
+	   * Accumulated translational distance command since last odometry
+	   * update [m]
+	   */
+	  float mAccDistanceCmd;
+	  /** Accumulated rotational angle command since last odometry update [rad]*/
+	  float mAccAngleCmd;
+	  /** Speed command */
+    CVelocity2d mVelocityCmd;
+    /** Pose of last odometry update */
+    CPose2d mLastOdomPose;
+
 };
 
 } // namespace

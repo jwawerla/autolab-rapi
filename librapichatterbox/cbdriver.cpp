@@ -59,6 +59,8 @@ CCBDriver::CCBDriver()
   m7SegByteValue = 0;
   mEstDistance = 0.0;
   mEstAngle = 0.0;
+  mAccDistanceCmd = 0.0;
+  mAccAngleCmd = 0.0;
   // ensure 'commanded velocity' is zero
   mCreateSensorPackage.rightWheelVelocity = 0;
   mCreateSensorPackage.leftWheelVelocity = 0;
@@ -162,7 +164,6 @@ int CCBDriver::openPort ( const char* port )
 
   return 1; // success
 }
-
 //--------------------------------------------------------------------------
 int CCBDriver::closePort()
 {
@@ -186,7 +187,6 @@ int CCBDriver::closePort()
 
   return 1; // success
 }
-
 //--------------------------------------------------------------------------
 int CCBDriver::startCreate()
 {
@@ -279,7 +279,6 @@ int CCBDriver::setOIMode ( tOIMode mode )
       cmdbuf[0] = CREATE_OPCODE_FULL;
       PRT_MSG0 ( 7, "Mode changed to FULL" );
       break;
-
   } // switch
   if ( write ( mFd, cmdbuf, 1 ) < 0 ) {
     ERROR1 ( "IO error: %s", strerror ( errno ) );
@@ -294,6 +293,8 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
   unsigned char cmdbuf[5];
   int16_t vL, vR;
   double v, w, r;
+
+  mVelocityCmd = vel;
 
   v = vel.mXDot * 1e3;
   w = vel.mYawDot * 1e3;
@@ -316,32 +317,76 @@ int CCBDriver::setSpeed ( CVelocity2d vel )
   return 1; // success
 }
 //---------------------------------------------------------------------------
+//int CCBDriver::getOdoData()
+//{
+//  // get odometry from Create
+//  const int nCmdBytes = 6, nDataBytes = 4;
+//  uint8_t cmdBuf[nCmdBytes];
+//  union { // anonymous union to save type conversions
+//    uint8_t dataBuf[nDataBytes];
+//    struct {
+//      int16_t distance;
+//      int16_t angle;
+//    } odom;
+//  };
+//  cmdBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
+//  cmdBuf[1] = 2;  // two packets IDs to follow
+//  cmdBuf[2] = 19; // distance packet
+//  cmdBuf[3] = 20; // angle packet
+//  if( readSerialData( cmdBuf, nCmdBytes, dataBuf, nDataBytes ) == 0 )
+//    return 0; // just pass errors up
+//
+//  // fuse measured data with accumulated estimate data
+//  double measDistance = (double) int16_t( ntohs( (uint16_t) odom.distance ) );
+//  double measAngle = (double) int16_t( ntohs( (uint16_t) odom.angle ) );
+//  mCreateSensorPackage.distance = measDistance - mEstDistance;
+//  mCreateSensorPackage.angle = measAngle - mEstAngle;
+//  mEstDistance = 0.0;
+//  mEstAngle = 0.0;
+//
+//  return 1; // success
+//}
+//---------------------------------------------------------------------------
 int CCBDriver::getOdoData()
 {
-  // get odometry from Create
-  const int nCmdBytes = 6, nDataBytes = 4;
-  uint8_t cmdBuf[nCmdBytes];
-  union { // anonymous union to save type conversions
-    uint8_t dataBuf[nDataBytes];
-    struct {
-      int16_t distance;
-      int16_t angle;
-    } odom;
-  };
-  cmdBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
-  cmdBuf[1] = 2; // two packets IDs to follow
-  cmdBuf[2] = 19; // distance packet
-  cmdBuf[3] = 20; // angle packet
-  if( readSerialData( cmdBuf, nCmdBytes, dataBuf, nDataBytes ) == 0 )
-    return 0; // just pass errors up
+  uint8_t cmdBuf[4];
+  uint8_t dataBuf[2];
+  short value;
+  double measDistance;
+  double measAngle;
 
-  // fuse measured data with accumulated estimate data
-  double measDistance = (double) int16_t( ntohs( (uint16_t) odom.distance ) );
-  double measAngle = (double) int16_t( ntohs( (uint16_t) odom.angle ) );
-  mCreateSensorPackage.distance = measDistance - mEstDistance;
-  mCreateSensorPackage.angle = measAngle - mEstAngle;
-  mEstDistance = 0.0;
-  mEstAngle = 0.0;
+  if (mAccDistanceCmd > REQ_DISTANCE_ODOM_THRESHOLD) {
+    // read distance only
+
+    cmdBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
+    cmdBuf[1] = 1;  // one packet ID to follow
+    cmdBuf[2] = CB_PACKET_DISTANCE; // distance packet
+
+    if( readSerialData( cmdBuf, 3, dataBuf, 2 ) == 0 )
+      return 0; // just pass errors up
+
+    memcpy((char*)&value, dataBuf, 2);
+
+    measDistance = (double) int16_t( ntohs( value ) ); // [mm]
+    mCreateSensorPackage.distance = measDistance - ( mAccDistanceCmd * 1e3 );
+    mAccDistanceCmd = 0.0;
+  }
+
+  if (mAccAngleCmd > REQ_ANGLE_ODOM_THRESHOLD) {
+    // read angle only
+    cmdBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
+    cmdBuf[1] = 1;  // one packet ID to follow
+    cmdBuf[2] = CB_PACKET_ANGLE; // angle packet
+
+    if( readSerialData( cmdBuf, 3, dataBuf, 2 ) == 0 )
+      return 0; // just pass errors up
+
+    memcpy((char*)&value, dataBuf, 2);
+    measAngle = (double) int16_t( ntohs( value ) ); // [deg]
+    mCreateSensorPackage.angle = measAngle - R2D(mAccAngleCmd);
+
+    mAccAngleCmd = 0.0;
+  }
 
   return 1; // success
 }
@@ -349,21 +394,24 @@ int CCBDriver::getOdoData()
 int CCBDriver::getMostData( double dt )
 {
   // estimate odometry based on commanded velocity over previous interval
-  double distRight = mCreateSensorPackage.rightWheelVelocity * dt;
-  double distLeft = mCreateSensorPackage.leftWheelVelocity * dt;
-  double estDist = 0.5 * (distRight + distLeft);
-  double estAngle = R2D( (distRight - distLeft) / (1e3 * CREATE_AXLE_LENGTH) );
-  mEstDistance += estDist;
-  mEstAngle += estAngle;
-  mCreateSensorPackage.distance = estDist;
-  mCreateSensorPackage.angle = estAngle;
+  //double distRight = mCreateSensorPackage.rightWheelVelocity * dt;
+  //double distLeft = mCreateSensorPackage.leftWheelVelocity * dt;
+  //double estDist = 0.5 * (distRight + distLeft);
+  //double estAngle = R2D( (distRight - distLeft) / (1e3 * CREATE_AXLE_LENGTH) );
+  //mEstDistance += estDist;
+  //mEstAngle += estAngle;
+  //mCreateSensorPackage.distance = estDist;
+  //mCreateSensorPackage.angle = estAngle;
+
+  mCreateSensorPackage.distance = mAccDistanceCmd * 1e3;
+  mCreateSensorPackage.angle = R2D(mAccAngleCmd);
 
   // get the rest of the data from the Create
   const int nCmdBytes = 8, nDataBytes = 48;
   uint8_t cmdBuf[nCmdBytes];
   uint8_t dataBuf[nDataBytes];
   cmdBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
-  cmdBuf[1] = 6; // six packet IDs to follow
+  cmdBuf[1] = 6;  // six packet IDs to follow
   cmdBuf[2] = 1;  // packets 7-16
   cmdBuf[3] = 17; // IR byte
   cmdBuf[4] = 18; // Buttons
@@ -379,7 +427,7 @@ int CCBDriver::getMostData( double dt )
   mCreateSensorPackage.current
   = ( short ) ntohs ( (uint16_t) mCreateSensorPackage.current );
   mCreateSensorPackage.batCapacity
-  = (short) ntohs ( mCreateSensorPackage.batCapacity ); 
+  = (short) ntohs ( mCreateSensorPackage.batCapacity );
   mCreateSensorPackage.batMaxCapacity
   = ntohs ( mCreateSensorPackage.batMaxCapacity );
   mCreateSensorPackage.wallSignal
@@ -450,7 +498,7 @@ int CCBDriver::readSerialData( uint8_t * cmdBuf, int nCmdBytes,
     }
   }
 
-  // check that we read enough bytes 
+  // check that we read enough bytes
   if ( totalNumRead != nDataBytes ) {
     ERROR2( "Wrong package size received, %d expected but got % d",
             nDataBytes, totalNumRead );
@@ -469,17 +517,22 @@ int CCBDriver::readSensorData( double dt )
   // only read odometry once every CREATE_READ_ODO_COUNT cycles. In the
   // interim, we estimate our odometry by integrating the commanded velocity.
   // We then correct this estimate with our measured values.
-  static int count = 0; // read the first time 
-  bool readOdo = ( count == 0 ) ? true : false;
-  count = readOdo ? (CREATE_READ_ODO_COUNT - 1) : count - 1;
+  //static int count = 0; // read the first time
+  //bool fgReadOdo = ( count == 0 ) ? true : false;
+  //count = fgReadOdo ? (CREATE_READ_ODO_COUNT - 1) : count - 1;
+
+
+  // integrate speed commands for distance relative odometry updates
+  mAccDistanceCmd = mAccDistanceCmd + mVelocityCmd.mXDot * dt;
+  mAccAngleCmd = mAccAngleCmd + mVelocityCmd.mYawDot * dt;
 
   if( getMostData( dt ) == 0 )
     return 0; // pass up errors
 
-  if( readOdo ) {
+  //if( fgReadOdo ) {
     if( getOdoData() == 0 )
       return 0; // pass up errors
-  }
+  //}
 
   return 1; // success
 }
