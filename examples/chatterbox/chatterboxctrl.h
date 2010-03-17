@@ -22,6 +22,7 @@
 #define CHATTERBOXCTRL_H
 
 #include <RapiChatterbox>
+#include <RapiAutolabTracker>
 
 using namespace Rapi;
 
@@ -92,6 +93,10 @@ class CChatterboxCtrl : public ARobotCtrl
     CLimit mLimit;
     /** Data logger */
     CDataLogger* mDataLogger;
+    /** Redis client */
+    CRedisClient* mRedis;
+    /** Overhead camera tracker */
+    CAutolabTracker* mTracker;
 
   private:
     /** State machine */

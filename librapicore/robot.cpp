@@ -51,12 +51,24 @@ double ARobot::getDurationLastLoop() const
   return mLastLoopDuration;
 }
 //-----------------------------------------------------------------------------
+void ARobot::updateDevices()
+{
+  // update additional devices
+  for (unsigned int i = 0; i < mDeviceList.size(); i++)
+    mDeviceList[i]->updateData( mLastLoopDuration );
+}
+//-----------------------------------------------------------------------------
 ADevice* ARobot::getDeviceByIndex(unsigned int index) const
 {
   if ( index >= mDeviceList.size() )
     return NULL;
 
   return mDeviceList[index];
+}
+//-----------------------------------------------------------------------------
+void ARobot::addDevice(ADevice* dev)
+{
+  mDeviceList.push_back(dev);
 }
 //-----------------------------------------------------------------------------
 void ARobot::registerRobotController(IRobotUpdate* ctrl)

@@ -43,6 +43,7 @@ class Server
 		//its best to create a RPCMethod instance instead (thats why this is private)
 		class RPCMethodAbstractBase {
 			public:
+			  virtual ~RPCMethodAbstractBase() {};
 				virtual void call( variant args, object& responce, const std::string& ip, int port ) = 0;
 		};
 
@@ -293,7 +294,9 @@ class TCPServer : public Server
 		NetworkServerTCP _server;
 		class DisconnectMethodAbstractBase {
 			public:
+				virtual ~DisconnectMethodAbstractBase() {};
 				virtual void call( const std::string& ip, int port ) = 0;
+
 		};
 		DisconnectMethodAbstractBase* _disconnect_method;
 	public:

@@ -40,6 +40,8 @@ namespace Rapi
  */
 class ADevice
 {
+  friend class ARobot;
+
   public:
     /** Default destructor */
     virtual ~ADevice();

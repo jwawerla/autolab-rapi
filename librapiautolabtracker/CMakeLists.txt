@@ -1,7 +1,13 @@
-SET( PROJECT_AT autolab-rapi-tracker )
+SET( PROJECT_AT autolab-rapi-autolabtracker)
+SET( TARGET ${PROJECT_AT} )
 
-# for config.h
-INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR})
+INCLUDE_DIRECTORIES(
+  ../librapicore
+)
+
+LINK_DIRECTORIES( 
+ ../librapicore
+)
 
 SET( HEADERS
   RapiAutolabTracker

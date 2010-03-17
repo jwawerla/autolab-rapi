@@ -63,6 +63,10 @@ class ALocalizer2d : public ADevice
      * @return pose
      */
     CPose2d getPose() const;
+    /**
+     * Prints the devices main information
+     */
+    virtual void print() const;
 
   protected:
     /**

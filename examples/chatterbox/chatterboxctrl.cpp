@@ -56,6 +56,10 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mDataLogger->setInterval( 0.1 );
   mOdometry->startLogging("chatterbox.log");
 
+
+  mTracker = new CAutolabTracker("Tracker", mRobot->getName(), "192.168.1.116", 6379);
+  mRobot->addDevice(mTracker);
+
   if ( rapiError->hasError() ) {
     rapiError->print();
     exit ( -1 );
@@ -100,6 +104,9 @@ void CChatterboxCtrl::updateData ( float dt )
 
   mTime += dt;
   mTimer += dt;
+
+  //mTracker->updateData(dt);
+  mTracker->print();
 
   if ( not mFgRunDemo ) {
     if ( mTime < 10.0 ) {

@@ -20,6 +20,8 @@
  **************************************************************************/
 
 #include "localizer2d.h"
+#include "redisclient.h"
+
 
  namespace Rapi
 {
@@ -36,10 +38,41 @@ class CAutolabTracker : public ALocalizer2d
     /**
      * Default constructor
      * @param devName name of device
+     * @param robotName name of robot
+     * @param hostName of Redis server
+     * @param port of Redis server
      */
-    CAutolabTracker(std::string devName );
+    CAutolabTracker(std::string devName, std::string robotName, std::string hostName,
+                    int port );
     /** Default destructor */
     virtual ~CAutolabTracker();
+    /**
+     * Updates the data of the device
+     * @param dt size of time step [s]
+     */
+    virtual void updateData( const double dt );
+    /**
+     * Prints the devices main information
+     */
+    virtual void print() const;
+    /**
+    * Initializes the device
+    * @param return 1 if success 0 otherwise
+    */
+    virtual int init();
+    /**
+     * Enables or disables the device
+     * @param enable = true to enable, false to disable
+     */
+    virtual void setEnabled( bool enable );
+
+  private:
+    /** Redis client */
+    CRedisClient* mRedisClient;
+    /** Name of robot */
+    std::string mRobotName;
+    /** Id of camera on with the robot was last seen */
+    int mCameraId;
 };
 
 } // namespace

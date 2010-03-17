@@ -43,6 +43,8 @@ SET( HEADERS
   rapivarinterface.h
   datalogger.h
   rapitypesystem.h
+  redis/credis.h
+  redisclient.h
 )
 
 SET( SOURCES
@@ -79,6 +81,8 @@ SET( SOURCES
   timer.cpp
   datalogger.cpp
   rapitypesystem.cpp
+  redis/credis.c
+  redisclient.cpp
 )
 
 IF( WITH_RPC )

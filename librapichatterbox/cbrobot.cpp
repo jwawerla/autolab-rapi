@@ -22,6 +22,7 @@
 #include <sys/time.h>
 #include "rapierror.h"
 #include "printerror.h"
+#include <sys/utsname.h>
 #include <assert.h>
 namespace Rapi
 {
@@ -30,8 +31,15 @@ namespace Rapi
 CCBRobot::CCBRobot()
     : ARobot()
 {
+  struct utsname un;
+
   mUpdateInterval = 0.1; // default update frequency is 10Hz
-  mName = "Chatterbox";
+
+  // figure out name of robot, uname returns the full name, including
+  // the domain name, which we don't need, so lets remove it
+  uname(&un);
+  mName = un.nodename;
+  mName = mName.substr(0, mName.find(".") );
 
   mCBDriver = new CCBDriver();
   assert(mCBDriver);
@@ -161,42 +169,43 @@ void CCBRobot::run()
 
   while ( mFgRunning ) {
     // get data from ICreate
-    printf("mLastLoopDuration %f \n", mLastLoopDuration);
     if ( mCBDriver->readSensorData( mLastLoopDuration ) == 1 ) {
 
       // update all devices
       if ( mCBDrivetrain )
-        mCBDrivetrain->updateData( mUpdateInterval );
+        mCBDrivetrain->updateData( mLastLoopDuration );
       if ( mCBPowerPack )
-        mCBPowerPack->updateData( mUpdateInterval );
+        mCBPowerPack->updateData( mLastLoopDuration );
       if ( mCBLaser )
-        mCBLaser->updateData( mUpdateInterval );
+        mCBLaser->updateData( mLastLoopDuration );
       if ( mCBLights )
-        mCBLights->updateData( mUpdateInterval );
+        mCBLights->updateData( mLastLoopDuration );
       if ( mCBIrSensor )
-        mCBIrSensor->updateData( mUpdateInterval );
+        mCBIrSensor->updateData( mLastLoopDuration );
       if ( mCBTextDisplay )
-        mCBTextDisplay->updateData( mUpdateInterval );
+        mCBTextDisplay->updateData( mLastLoopDuration );
       if ( mCBBumper )
-        mCBBumper->updateData( mUpdateInterval );
+        mCBBumper->updateData( mLastLoopDuration );
       if ( mCBWallSensor )
-        mCBWallSensor->updateData( mUpdateInterval );
+        mCBWallSensor->updateData( mLastLoopDuration );
       if ( mCBWheelDropSensor )
-        mCBWheelDropSensor->updateData( mUpdateInterval );
+        mCBWheelDropSensor->updateData( mLastLoopDuration );
       if ( mCBCliffSensor )
-        mCBCliffSensor->updateData( mUpdateInterval );
+        mCBCliffSensor->updateData( mLastLoopDuration );
       if ( mCBOverCurrentSensor )
-        mCBOverCurrentSensor->updateData( mUpdateInterval );
+        mCBOverCurrentSensor->updateData( mLastLoopDuration );
       if ( mCBFrontFiducial )
-        mCBFrontFiducial->updateData( mUpdateInterval );
+        mCBFrontFiducial->updateData( mLastLoopDuration );
       if ( mCBTopFiducial )
-        mCBTopFiducial->updateData( mUpdateInterval );
+        mCBTopFiducial->updateData( mLastLoopDuration );
       if ( mCBPhotoSensor )
-        mCBPhotoSensor->updateData( mUpdateInterval );
+        mCBPhotoSensor->updateData( mLastLoopDuration );
       if ( mCBCreateButton )
-        mCBCreateButton->updateData( mUpdateInterval );
+        mCBCreateButton->updateData( mLastLoopDuration );
       if ( mCBVirtualWall )
-        mCBVirtualWall->updateData( mUpdateInterval );
+        mCBVirtualWall->updateData( mLastLoopDuration );
+
+      updateDevices();
       // Low side drivers updateData() is empty, no need to call it here
       //if ( mCBLowSideDriver )
       //  mCBLowSideDriver->updateData();

@@ -1,6 +1,6 @@
 prefix=@CMAKE_INSTALL_PREFIX@
 
-Name: autolab-rapi-stage
+Name: autolab-rapi-chatterbox
 Description: Robot Application Programming Interface
 Version: @VERSION@
 Requires: 

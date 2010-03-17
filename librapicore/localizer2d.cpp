@@ -62,6 +62,11 @@ void ALocalizer2d::setToZero()
   setPose( CPose2d( 0.0, 0.0, 0.0) );
 }
 //-----------------------------------------------------------------------------
-
+void ALocalizer2d::print() const
+{
+  printf("Localizer2d: ");
+  mPose.print();
+}
+//-----------------------------------------------------------------------------
 } // namespace
 

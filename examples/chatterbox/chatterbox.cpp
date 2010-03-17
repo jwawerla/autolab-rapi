@@ -44,7 +44,7 @@ void quitSig(int signum)
 int main( int argc, char* argv[] )
 {
   // init general stuff
-  ErrorInit ( 14, false );
+  ErrorInit ( 1, false );
   initRandomNumberGenerator();
 
   printf("-----------------------------------\n");
