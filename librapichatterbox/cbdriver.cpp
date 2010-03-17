@@ -48,6 +48,8 @@ extern "C"
 namespace Rapi
 {
 
+FILE* fpFoo = NULL;
+
 typedef enum {RED_CH, GREEN_CH, BLUE_CH} tLed;
 
 // TODO: add singleton
@@ -64,6 +66,8 @@ CCBDriver::CCBDriver()
   // ensure 'commanded velocity' is zero
   mCreateSensorPackage.rightWheelVelocity = 0;
   mCreateSensorPackage.leftWheelVelocity = 0;
+
+  fpFoo = fopen("cbdriver.log", "w");
 }
 //--------------------------------------------------------------------------
 CCBDriver::~CCBDriver()
@@ -352,10 +356,11 @@ int CCBDriver::getOdoData()
   uint8_t cmdBuf[4];
   uint8_t dataBuf[2];
   short value;
-  double measDistance;
-  double measAngle;
+  double measDistance = 0.0;
+  double measAngle = 0.0;
 
-  if (mAccDistanceCmd > REQ_DISTANCE_ODOM_THRESHOLD) {
+  if ( (mAccDistanceCmd > REQ_DISTANCE_ODOM_THRESHOLD) &&
+       (mAccDistanceCmd < -REQ_DISTANCE_ODOM_THRESHOLD) )  {
     // read distance only
 
     cmdBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
@@ -369,10 +374,13 @@ int CCBDriver::getOdoData()
 
     measDistance = (double) int16_t( ntohs( value ) ); // [mm]
     mCreateSensorPackage.distance = measDistance - ( mAccDistanceCmd * 1e3 );
+
+    printf("CCBDriver: dist meas %f  acc %f \n", measDistance, mAccDistanceCmd*1e3);
     mAccDistanceCmd = 0.0;
   }
 
-  if (mAccAngleCmd > REQ_ANGLE_ODOM_THRESHOLD) {
+  if ( (mAccAngleCmd >  REQ_ANGLE_ODOM_THRESHOLD) ||
+      (mAccAngleCmd < -REQ_ANGLE_ODOM_THRESHOLD) ) {
     // read angle only
     cmdBuf[0] = CREATE_OPCODE_STREAM_SENSORS;
     cmdBuf[1] = 1;  // one packet ID to follow
@@ -383,11 +391,12 @@ int CCBDriver::getOdoData()
 
     memcpy((char*)&value, dataBuf, 2);
     measAngle = (double) int16_t( ntohs( value ) ); // [deg]
-    mCreateSensorPackage.angle = measAngle - R2D(mAccAngleCmd);
-
+    //mCreateSensorPackage.angle = measAngle - R2D(mAccAngleCmd);
+    printf("CCBDriver: angle meas %f  acc %f \n", measAngle, R2D(mAccAngleCmd));
     mAccAngleCmd = 0.0;
   }
 
+  fprintf(fpFoo,  "%f, %f, %f, %f \n", measDistance, mAccDistanceCmd*1e3,  measAngle, R2D(mAccAngleCmd) );
   return 1; // success
 }
 //---------------------------------------------------------------------------
@@ -403,8 +412,8 @@ int CCBDriver::getMostData( double dt )
   //mCreateSensorPackage.distance = estDist;
   //mCreateSensorPackage.angle = estAngle;
 
-  mCreateSensorPackage.distance = mAccDistanceCmd * 1e3;
-  mCreateSensorPackage.angle = R2D(mAccAngleCmd);
+  mCreateSensorPackage.distance = mVelocityCmd.mXDot * dt * 1e3; // [mm]
+  mCreateSensorPackage.angle = R2D(mVelocityCmd.mYawDot * dt); // [deg]
 
   // get the rest of the data from the Create
   const int nCmdBytes = 8, nDataBytes = 48;
@@ -523,8 +532,11 @@ int CCBDriver::readSensorData( double dt )
 
 
   // integrate speed commands for distance relative odometry updates
-  mAccDistanceCmd = mAccDistanceCmd + mVelocityCmd.mXDot * dt;
-  mAccAngleCmd = mAccAngleCmd + mVelocityCmd.mYawDot * dt;
+  mAccDistanceCmd = mAccDistanceCmd + mVelocityCmd.mXDot * dt; // [m]
+  mAccAngleCmd = mAccAngleCmd + mVelocityCmd.mYawDot * dt; // [rad]
+  mAccAngleCmd = normalizeAngle(mAccAngleCmd);
+
+  printf("Acc: dist %f angle %f (cmd %f %f) \n", mAccDistanceCmd, mAccAngleCmd, mVelocityCmd.mXDot, mVelocityCmd.mYawDot);
 
   if( getMostData( dt ) == 0 )
     return 0; // pass up errors

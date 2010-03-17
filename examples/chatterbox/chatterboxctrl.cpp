@@ -49,6 +49,12 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   //mRobot->findDevice ( mLaser, "CB:laser" );
 
   mDrivetrain = ( CCBDrivetrain2dof* ) drivetrain;
+  mOdometry = mDrivetrain->getOdometry();
+
+  // enable logging
+  mDataLogger = CDataLogger::getInstance( "chatterbox.log", OVERWRITE );
+  mDataLogger->setInterval( 0.1 );
+  mOdometry->startLogging("chatterbox.log");
 
   if ( rapiError->hasError() ) {
     rapiError->print();
@@ -107,7 +113,10 @@ void CChatterboxCtrl::updateData ( float dt )
     }
   }
   else {
-    demo();
+    // CAVE:
+    //demo();
+    mDrivetrain->setVelocityCmd(0.0, -0.2);
+    mOdometry->print();
   }
 
   if ( mWheelDrop->isAnyTriggered() ) {
@@ -120,6 +129,7 @@ void CChatterboxCtrl::updateData ( float dt )
   if ( rapiError->hasError() ) {
     rapiError->print();
   }
+  mDataLogger->write( mTime );
 }
 //-----------------------------------------------------------------------------
 void CChatterboxCtrl::demo()

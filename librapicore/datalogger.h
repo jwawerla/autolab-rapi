@@ -58,7 +58,7 @@ class CDataLogger : public CRapiTypeSystem
      * Writes an entry to the log file with a given time stamp
      * @param timestamp of entry [s]
      */
-    void write( float timestamp );
+    void write( const float timestamp );
     /**
      * Writes a header line with the names of the variables to the log file
      */

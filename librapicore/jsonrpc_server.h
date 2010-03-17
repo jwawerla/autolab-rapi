@@ -19,7 +19,7 @@ namespace jsonrpc {
 
 	///helper function to quickly convert variant to value - and throws bad_cast if anything fails
 	template< typename ValueType > static ValueType fromVariant( const variant& v )
-	{ 
+	{
 		//cant be NULL (in C++ sense)
 		if( v.get() == NULL )
 			throw std::bad_cast();
@@ -40,7 +40,7 @@ class Server
 {
 	private:
 		//abstract class for callbacks - its possible to inherit this, but then the callback class can only handle one callback
-		//its best to create a RPCMethod instance instead (thats why this is private) 
+		//its best to create a RPCMethod instance instead (thats why this is private)
 		class RPCMethodAbstractBase {
 			public:
 				virtual void call( variant args, object& responce, const std::string& ip, int port ) = 0;
@@ -175,7 +175,7 @@ class Server
 
 		//wrapper for RPC callback methods
 		//usage: RPCMethod< MyClass >( &my_class_instance, &MyClass::foo )
-		template< class T > 
+		template< class T >
 		class RPCMethod : public RPCMethodAbstractBase {
 			public:
 				typedef void (T::*method)(variant, object&, const std::string&, int );
@@ -298,7 +298,7 @@ class TCPServer : public Server
 		DisconnectMethodAbstractBase* _disconnect_method;
 	public:
 
-		template< class T > 
+		template< class T >
 		class DisconnectMethod : public DisconnectMethodAbstractBase {
 			public:
 				typedef void (T::*method)(const std::string&, int );
@@ -339,7 +339,7 @@ class TCPServer : public Server
 		}
 };
 
-class UDPClient 
+class UDPClient
 {
 	private:
 		NetworkClientUDP _client;
@@ -365,7 +365,7 @@ class UDPClient
 		}
 };
 
-class TCPClient 
+class TCPClient
 {
 	private:
 		NetworkClientTCP _client;

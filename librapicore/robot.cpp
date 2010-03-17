@@ -31,6 +31,7 @@ ARobot::ARobot()
 {
   mName = "ARobot";
   mUpdateInterval = 0.1; // 10 Hz
+  mLastLoopDuration = 0.0;
   mRobotCtrl = NULL;
   mFgInitialized = false;
   mFgRunningSlowly = false;
@@ -43,6 +44,11 @@ ARobot::~ARobot()
 std::string ARobot::getName() const
 {
   return mName;
+}
+//-----------------------------------------------------------------------------
+double ARobot::getDurationLastLoop() const
+{
+  return mLastLoopDuration;
 }
 //-----------------------------------------------------------------------------
 ADevice* ARobot::getDeviceByIndex(unsigned int index) const

@@ -138,8 +138,13 @@ class ARobot
      * Calling this function resets the status of the slow loop.
      * @return True if consistently slow
      */
-     bool isSlow();
-  
+    bool isSlow();
+    /**
+     * Gets the duration of the last update loop
+     * @return duration [s]
+     */
+    double getDurationLastLoop() const;
+
 
   protected:
     /** Default constructor */
@@ -170,6 +175,8 @@ class ARobot
     unsigned int mSlowRunCount;
     /** Threshold before slow runs are reported */
     unsigned int mSlowRunThreshold;
+    /** Duration of last update loop [s] */
+    double mLastLoopDuration;
 };
 
 } // namespace

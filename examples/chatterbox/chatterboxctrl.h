@@ -86,8 +86,12 @@ class CChatterboxCtrl : public ARobotCtrl
     AAnalogSensorArray* mPhoto;
     /** Create button */
     ABinarySensorArray* mButton;
+    /** Odometry */
+    COdometry* mOdometry;
     /** Some limit */
     CLimit mLimit;
+    /** Data logger */
+    CDataLogger* mDataLogger;
 
   private:
     /** State machine */
@@ -105,7 +109,7 @@ class CChatterboxCtrl : public ARobotCtrl
     /** Flags if motors are enabled */
     bool mFgMotor;
     /** General purpose timer */
-    int mTimer;
+    float mTimer;
 };
 
 #endif

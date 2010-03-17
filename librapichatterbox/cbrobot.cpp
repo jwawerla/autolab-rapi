@@ -161,7 +161,8 @@ void CCBRobot::run()
 
   while ( mFgRunning ) {
     // get data from ICreate
-    if ( mCBDriver->readSensorData( mUpdateInterval ) == 1 ) {
+    printf("mLastLoopDuration %f \n", mLastLoopDuration);
+    if ( mCBDriver->readSensorData( mLastLoopDuration ) == 1 ) {
 
       // update all devices
       if ( mCBDrivetrain )
@@ -602,14 +603,17 @@ void CCBRobot::synchronize( double interval )
 {
   double timeNow;
   double duration;
+  double sleepDuration = 0.0;
 
   struct timeval tv;
   gettimeofday( &tv, 0 );
   timeNow = tv.tv_sec + tv.tv_usec * 1e-6;
   duration = timeNow - mLastSynchronizeTime;
   if ( duration < interval ) {
+    sleepDuration = interval - duration;
     mSlowRunCount = (mSlowRunCount > 0 ) ? mSlowRunCount - 1 : 0;
-    usleep(( int )(( interval - duration ) * 1e6 ) );
+    usleep(( int )(( sleepDuration ) * 1e6 ) );
+    mLastLoopDuration = interval;
   }
   else {
     mSlowRunCount = (mSlowRunCount < mSlowRunThreshold) ? mSlowRunCount + 1 :
@@ -620,9 +624,12 @@ void CCBRobot::synchronize( double interval )
       PRT_WARN0( "Control loop running consistently slowly\n" );
     }
     PRT_MSG0( 8, "Control loop ran slowly\n" );
+    mLastLoopDuration = duration;
   }
-  gettimeofday( &tv, 0 );
-  mLastSynchronizeTime = tv.tv_sec + tv.tv_usec * 1e-6;
+  //gettimeofday( &tv, 0 );
+  //mLastSynchronizeTime = tv.tv_sec + tv.tv_usec * 1e-6;
+  mLastSynchronizeTime = timeNow + sleepDuration;
+  //printf("timeNow  %f\n", timeNow);
 }
 //-----------------------------------------------------------------------------
 } // namespace

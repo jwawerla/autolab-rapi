@@ -69,7 +69,7 @@ void CDataLogger::setInterval( float dt )
   mLogInterval = dt;
 }
 //-----------------------------------------------------------------------------
-void CDataLogger::write( float timestamp )
+void CDataLogger::write( const float timestamp )
 {
   tVarEntry entry;
   int intVar;
@@ -83,8 +83,10 @@ void CDataLogger::write( float timestamp )
   CWaypoint2d waypointVar;
 
 
-  if ( timestamp - mLastWriteTimestamp  < mLogInterval )
+  if ( (timestamp - mLastWriteTimestamp)  < mLogInterval ) {
+    //printf("no logging %f %f \n", timestamp, mLastWriteTimestamp);
     return; // no loging necessary
+  }
 
   mLastWriteTimestamp = timestamp;
   if ( not mFgHeader ) {

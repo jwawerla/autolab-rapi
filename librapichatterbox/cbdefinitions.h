@@ -153,7 +153,7 @@
 // distance threshold to request odometry [m]
 #define REQ_DISTANCE_ODOM_THRESHOLD 1.0
 // angular threshold to request odometry [rad]
-#define REQ_ANGLE_ODOM_THRESHOLD 0.08  // ~5 deg
+#define REQ_ANGLE_ODOM_THRESHOLD 0.16  // ~10 deg
 
 // RGB led stuff
 #define PCA98634_CHIP_A_ADDR 0x67
