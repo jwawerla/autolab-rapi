@@ -34,6 +34,9 @@ OPTION (WITH_RPC "Enable building of RPC client" ON)
 # Enable examples: use with -DWITH_EXAMPLES:BOOL=off|on
 OPTION (WITH_EXAMPLES "Enable building of examples" ON)
 
+# Enable tracker: use with -DWITH_TRACKER:BOOL=off|on
+OPTION (WITH_TRACKER "Enable building of autolab tracker" ON)
+
 INCLUDE(FindPkgConfig)
 
 PKG_SEARCH_MODULE( STAGE stage )
@@ -142,3 +145,7 @@ ENDIF (WITH_RPC)
 IF (WITH_EXAMPLES)
   ADD_SUBDIRECTORY(examples)
 ENDIF(WITH_EXAMPLES)
+
+IF (WITH_TRACKER)
+  ADD_SUBDIRECTORY(librapiautolabtracker)
+ENDIF(WITH_TRACKER)
