@@ -21,7 +21,6 @@
 #ifndef CREDISCLIENT_H
 #define CREDISCLIENT_H
 
-#include "redis/credis.h"
 #include "printerror.h"
 #include <string>
 
@@ -80,8 +79,6 @@ class CRedisClient
     CRedisClient( std::string hostname, int port );
 
   private:
-    /** Redis connection handle */
-    REDIS mRedisCon;
     /** Hostname of server */
     std::string mHostName;
     /** Port number of server */

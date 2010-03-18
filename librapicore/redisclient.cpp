@@ -19,10 +19,13 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  **************************************************************************/
 #include "redisclient.h"
+#include "redis/credis.h"
 
 namespace Rapi
 {
 
+/** Redis connection handle */
+REDIS mRedisCon = NULL;
 const int REDIS_TIMEOUT = 10000;
 
 //-----------------------------------------------------------------------------
