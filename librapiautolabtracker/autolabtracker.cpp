@@ -33,6 +33,7 @@ CAutolabTracker::CAutolabTracker(std::string devName, std::string robotName,
   mRedisClient = CRedisClient::getInstance(hostName, port);
   assert( mRedisClient );
   mFgEnabled = true;
+  mCameraId = -1;
 }
 //-----------------------------------------------------------------------------
 CAutolabTracker::~CAutolabTracker()
@@ -58,7 +59,7 @@ void CAutolabTracker::updateData( const double dt )
       PRT_WARN0("Failed to read position information from tracker");
       return;
     }
-    //printf("REDIS %s\n", value.c_str());
+    printf("REDIS %s\n", value.c_str());
     if (sscanf(value.c_str(), "x:%lf y:%lf a:%lf t:%lf c:%d\n",
       &mPose.mX, &mPose.mY, &mPose.mYaw, &mTimeStamp, &mCameraId )
        != 5) {
@@ -71,6 +72,13 @@ void CAutolabTracker::print() const
 {
   printf("AutolabTracker: camera %d, time %f (%f %f %f)\n",
     mCameraId, mTimeStamp, mPose.mX, mPose.mY, R2D(mPose.mYaw) );
+}
+//-----------------------------------------------------------------------------
+void CAutolabTracker::startLogging(std::string filename)
+{
+  mDataLogger = CDataLogger::getInstance(filename);
+  mDataLogger->addVar( &mPose, "tracker pose");
+  mDataLogger->addVar( &mCameraId, "cam id");
 }
 //-----------------------------------------------------------------------------
 } // namespace

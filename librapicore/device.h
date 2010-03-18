@@ -104,7 +104,12 @@ class ADevice
      * @param filename to log to
      */
     virtual void startLogging(std::string filename);
-    void startLogging();
+    /**
+     * Same as startLogging(std::string filename) but without the option to
+     * specify a filename. This is useful because we use a singleton pattern
+     * and therefore it is sufficient to name the file once
+     */
+    virtual void startLogging();
 
   protected:
     /**

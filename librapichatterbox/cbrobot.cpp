@@ -34,6 +34,7 @@ CCBRobot::CCBRobot()
   struct utsname un;
 
   mUpdateInterval = 0.1; // default update frequency is 10Hz
+  mLastLoopDuration = mUpdateInterval;
 
   // figure out name of robot, uname returns the full name, including
   // the domain name, which we don't need, so lets remove it
@@ -169,11 +170,12 @@ void CCBRobot::run()
 
   while ( mFgRunning ) {
     // get data from ICreate
+    printf("mLastLoopDuration %f \n",mLastLoopDuration);
     if ( mCBDriver->readSensorData( mLastLoopDuration ) == 1 ) {
 
       // update all devices
       if ( mCBDrivetrain )
-        mCBDrivetrain->updateData( mLastLoopDuration );
+        mCBDrivetrain->updateData( mUpdateInterval );
       if ( mCBPowerPack )
         mCBPowerPack->updateData( mLastLoopDuration );
       if ( mCBLaser )
@@ -633,7 +635,11 @@ void CCBRobot::synchronize( double interval )
       PRT_WARN0( "Control loop running consistently slowly\n" );
     }
     PRT_MSG0( 8, "Control loop ran slowly\n" );
-    mLastLoopDuration = duration;
+
+    // the first time we often get outragously large values
+    // which cause bad things to happen, so we limit this value
+    // to the interval [0,5]
+    mLastLoopDuration = limit(duration, 0.0, 5.0);
   }
   //gettimeofday( &tv, 0 );
   //mLastSynchronizeTime = tv.tv_sec + tv.tv_usec * 1e-6;

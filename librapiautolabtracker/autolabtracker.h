@@ -65,6 +65,13 @@ class CAutolabTracker : public ALocalizer2d
      * @param enable = true to enable, false to disable
      */
     virtual void setEnabled( bool enable );
+    /**
+     * Start logging of the devices data to a file. Note there can only be
+     * one log file for all devices, hence the first device to enable logging
+     * determines the name of the log file.
+     * @param filename to log to
+     */
+    virtual void startLogging(std::string filename);
 
   private:
     /** Redis client */
