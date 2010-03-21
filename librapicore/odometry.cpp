@@ -61,5 +61,9 @@ void COdometry::startLogging(std::string filename)
   mDataLogger->addVar( &mPose, "odometry");
 }
 //-----------------------------------------------------------------------------
-
+void COdometry::setPose(const CPose2d pose)
+{
+  mPose = pose;
+}
+//-----------------------------------------------------------------------------
 } // namespace

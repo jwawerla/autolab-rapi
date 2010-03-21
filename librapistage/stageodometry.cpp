@@ -43,9 +43,17 @@ void CStageOdometry::updateData( const double dt)
   Stg::Pose pose;
 
   pose = mStgPosition->GetPose();
-  mPose.mX = pose.x;
-  mPose.mY = pose.y;
-  mPose.mYaw = pose.a;
+  // mPose.mX = pose.x;
+  // mPose.mY = pose.y;
+  // mPose.mYaw = pose.a;
+
+  // Coordinate system tranformation
+  angle = mCoordinateSystemOffset.mYaw;
+  mPose.mX =  pose.x * cos( angle ) + pose.y * sin( angle )
+              + mCoordinateSystemOffset.mX;
+  mPose.mY = -pose.x * sin( angle ) + pose.y * cos( angle )
+              + mCoordinateSystemOffset.mY;
+  mPose.mYaw = normalizeAngle( pose.a - angle );
 
   mTimeStamp = mStgPosition->GetWorld()->SimTimeNow() / 1e6;
 }

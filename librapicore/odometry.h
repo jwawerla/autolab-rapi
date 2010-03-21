@@ -62,6 +62,12 @@ class COdometry : public ALocalizer2d
      * @param filename to log to
      */
     virtual void startLogging(std::string filename);
+    /**
+     * Sets the current pose. Note the result of this method depends on the
+     * actual localizer, e.g. a GPS might not support setting the pose.
+     * @param pose
+     */
+    virtual void setPose( const CPose2d pose );
 
   protected:
     /**

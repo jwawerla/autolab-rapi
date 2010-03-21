@@ -55,7 +55,7 @@ int main( int argc, char* argv[] )
   printf("\n");
   printf("Press PLAY to start demo programm\n");
   printf("Once demo is running, enable motors with ADVANCE button\n");
-  printf("lifting the robot up disables motors");
+  printf("lifting the robot up disables motors\n");
 
   if (signal(SIGINT, quitSig) == SIG_ERR) {
      PRT_ERR1("Error resetting signal handler %s", strerror(errno));

@@ -54,10 +54,12 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   // enable logging
   mDataLogger = CDataLogger::getInstance( "chatterbox.log", OVERWRITE );
   mDataLogger->setInterval( 0.1 );
-  mOdometry->startLogging("chatterbox.log");
+  mOdometry->setCoordinateSystemOffset( CPose2d(5.0, 2.5, PI/2.0) );
+  mOdometry->startLogging("");
 
 
   mTracker = new CAutolabTracker("Tracker", mRobot->getName(), "192.168.1.116", 6379);
+  mTracker->startLogging("");
   mRobot->addDevice(mTracker);
 
   if ( rapiError->hasError() ) {
@@ -120,9 +122,7 @@ void CChatterboxCtrl::updateData ( float dt )
     }
   }
   else {
-    // CAVE:
-    //demo();
-    mDrivetrain->setVelocityCmd(0.0, -0.2);
+    demo();
     mOdometry->print();
   }
 

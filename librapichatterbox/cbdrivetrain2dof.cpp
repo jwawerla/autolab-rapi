@@ -38,7 +38,7 @@ CCBDrivetrain2dof::CCBDrivetrain2dof( CCBDriver* driver, std::string devName )
   mMaxVelocityDelta = 0.1;
 
   // Create can drive max 0.5m/s
-  mUpperVelocityLimit = CVelocity2d( 0.5, 0.0,  D2R( 30.0 ) );
+  mUpperVelocityLimit = CVelocity2d(  0.5, 0.0,  D2R( 30.0 ) );
   mLowerVelocityLimit = CVelocity2d( -0.5, 0.0, -D2R( 30.0 ) );
 
   // acceleration limits

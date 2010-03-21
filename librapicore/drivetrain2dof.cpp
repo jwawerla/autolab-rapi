@@ -28,6 +28,7 @@ namespace Rapi
 ADrivetrain2dof::ADrivetrain2dof ( std::string devName )
     : ADevice ( devName )
 {
+  mOdometry = NULL;
   mFgStalled = false;
   mStalledTimer = 0.0;
   mVelocityUserCmd.setName ( "velocityCmd" );

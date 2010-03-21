@@ -48,21 +48,22 @@ class ALocalizer2d : public ADevice
      * Sets the offset of the coordinate system
      * @param offset
      */
-    void setCoordinateSystemOffset( CPose2d offset );
+    virtual void setCoordinateSystemOffset( CPose2d offset );
     /**
-     * Sets the current pose
+     * Sets the current pose. Note the result of this method depends on the
+     * actual localizer, e.g. a GPS might not support setting the pose.
      * @param pose
      */
-    void setPose( CPose2d pose );
+    virtual void setPose( const CPose2d pose );
     /**
      * Sets the pose to (0,0,0)
      */
-    void setToZero();
+    virtual void setToZero();
     /**
      * Gets the current pose
      * @return pose
      */
-    CPose2d getPose() const;
+    virtual CPose2d getPose() const;
     /**
      * Prints the devices main information
      */

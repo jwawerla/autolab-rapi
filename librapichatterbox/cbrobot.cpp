@@ -158,6 +158,7 @@ void CCBRobot::quit()
   if ( mCBDrivetrain )
     mCBDrivetrain->stop();
 
+  mCBDriver->setSpeed(CVelocity2d(0,0,0));
   mFgRunning = false;
 }
 //-----------------------------------------------------------------------------
@@ -170,7 +171,7 @@ void CCBRobot::run()
 
   while ( mFgRunning ) {
     // get data from ICreate
-    printf("mLastLoopDuration %f \n",mLastLoopDuration);
+    //printf("mLastLoopDuration %f \n",mLastLoopDuration);
     if ( mCBDriver->readSensorData( mLastLoopDuration ) == 1 ) {
 
       // update all devices
@@ -632,9 +633,9 @@ void CCBRobot::synchronize( double interval )
     if( mSlowRunCount >= mSlowRunThreshold ) {
       mSlowRunCount = 0;
       mFgRunningSlowly = true;
-      PRT_WARN0( "Control loop running consistently slowly\n" );
+      PRT_WARN1( "Control loop running consistently slowly (%f sec)\n", mLastLoopDuration );
     }
-    PRT_MSG0( 8, "Control loop ran slowly\n" );
+    PRT_MSG1( 8, "Control loop ran slowly (%f sec)\n", mLastLoopDuration );
 
     // the first time we often get outragously large values
     // which cause bad things to happen, so we limit this value

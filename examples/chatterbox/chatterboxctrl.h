@@ -63,7 +63,7 @@ class CChatterboxCtrl : public ARobotCtrl
     void obstacleAvoid();
     /** Drivetrain */
     CCBDrivetrain2dof* mDrivetrain;
-    /** Infrared sesnors */
+    /** Infrared sensors */
     ARangeFinder* mIr;
     /** Power pack */
     APowerPack* mPowerPack;

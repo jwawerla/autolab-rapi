@@ -29,11 +29,13 @@ namespace Rapi
 CAutolabTracker::CAutolabTracker(std::string devName, std::string robotName,
   std::string hostName, int port ) : ALocalizer2d(devName)
 {
+  mPose.setName("tracker");
   mRobotName = robotName;
   mRedisClient = CRedisClient::getInstance(hostName, port);
   assert( mRedisClient );
   mFgEnabled = true;
   mCameraId = -1;
+  mFgNewData = false;
 }
 //-----------------------------------------------------------------------------
 CAutolabTracker::~CAutolabTracker()
@@ -52,20 +54,49 @@ int CAutolabTracker::init()
 //----------------------------------------------------------------------------
 void CAutolabTracker::updateData( const double dt )
 {
+  static double lastTimeStamp;
+  double ts, x, y, a;
   std::string value;
 
   if (mFgEnabled) {
+    lastTimeStamp = mTimeStamp;
     if (mRedisClient->get( mRobotName+".pose2d" , value ) == 0) {
       PRT_WARN0("Failed to read position information from tracker");
       return;
     }
-    printf("REDIS %s\n", value.c_str());
+    //printf("REDIS %s\n", value.c_str());
     if (sscanf(value.c_str(), "x:%lf y:%lf a:%lf t:%lf c:%d\n",
-      &mPose.mX, &mPose.mY, &mPose.mYaw, &mTimeStamp, &mCameraId )
+      &x, &y, &a, &ts, &mCameraId )
        != 5) {
       PRT_WARN0("Failed to parse data from Tracker");
     }
+    if (mCameraId >= 0) {
+      mPose.mX = x;
+      mPose.mY = y;
+      mPose.mYaw = a;
+      mTimeStamp = ts;
+      if (mTimeStamp != lastTimeStamp)
+        mFgNewData = true;
+      else
+        mFgNewData = false;
+      }
+      else {
+        mFgNewData = false;
+    }
   }
+}
+//-----------------------------------------------------------------------------
+bool CAutolabTracker::isNew()
+{
+  return mFgNewData;
+}
+//-----------------------------------------------------------------------------
+bool CAutolabTracker::isValid()
+{
+  if (mCameraId < 0)
+    return false; // data not valid
+
+  return true; // data valid
 }
 //-----------------------------------------------------------------------------
 void CAutolabTracker::print() const
@@ -79,6 +110,7 @@ void CAutolabTracker::startLogging(std::string filename)
   mDataLogger = CDataLogger::getInstance(filename);
   mDataLogger->addVar( &mPose, "tracker pose");
   mDataLogger->addVar( &mCameraId, "cam id");
+  mDataLogger->addVar( &mTimeStamp, "timestamp");
 }
 //-----------------------------------------------------------------------------
 } // namespace

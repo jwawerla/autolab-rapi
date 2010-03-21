@@ -34,6 +34,9 @@ CRedisClient::CRedisClient( std::string hostname, int port )
   mHostName = hostname;
   mPort = port;
   mRedisCon = credis_connect(hostname.c_str(), port, REDIS_TIMEOUT);
+  if (mRedisCon == NULL)
+    PRT_ERR2("Failed to connect to Redis server at %s:%d", mHostName.c_str(),
+              mPort);
 }
 //-----------------------------------------------------------------------------
 CRedisClient::~CRedisClient()

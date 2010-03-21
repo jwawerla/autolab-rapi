@@ -28,8 +28,6 @@ CCBOdometry::CCBOdometry(CCBDriver* driver, std::string devName)
  : COdometry( devName )
 {
   mCBDriver = driver;
-  mAngle = 0.0;
-  mDistance = 0.0;
 }
 //-----------------------------------------------------------------------------
 CCBOdometry::~CCBOdometry()
@@ -38,6 +36,8 @@ CCBOdometry::~CCBOdometry()
 //-----------------------------------------------------------------------------
 void CCBOdometry::updateData( const double dt )
 {
+  //double angle;
+
   mAngle = D2R ( mCBDriver->mCreateSensorPackage.angle );
   mDistance = ( float ) ( mCBDriver->mCreateSensorPackage.distance / 1e3 );
 
@@ -45,6 +45,13 @@ void CCBOdometry::updateData( const double dt )
   mPose.mX += mDistance * cos ( mPose.mYaw );
   mPose.mY += mDistance * sin ( mPose.mYaw );
 
+//  // Coordinate system tranformation
+//  angle = mCoordinateSystemOffset.mYaw;
+//  mPose.mX =  mLocalPose.mX * cos( angle ) + mLocalPose.mY * sin( angle )
+//              + mCoordinateSystemOffset.mX;
+//  mPose.mY = -mLocalPose.mX * sin( angle ) + mLocalPose.mY * cos( angle )
+//              + mCoordinateSystemOffset.mY;
+//  mPose.mYaw = normalizeAngle( mLocalPose.mYaw - angle );
   // update time stamp of this measurement
   mTimeStamp = timeStamp();
 }

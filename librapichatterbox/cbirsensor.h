@@ -27,6 +27,8 @@
 namespace Rapi
 {
 
+typedef enum { CB_IR_FRONT, CB_IR_FRONT_LEFT, CB_IR_LEFT, CB_IR_BACK,
+               CB_IR_RIGHT, CB_IR_FRONT_RIGHT} tCbIrSensors;
 /**
  * This class provides excess to the IR distance sensors of chatterbox
  * @author Jens Wawerla <jwawerla@sfu.ca>
@@ -45,7 +47,7 @@ class CCBIrSensor : public ARangeFinder
     virtual ~CCBIrSensor();
     /**
      * Enables or disables the device
-     * @param enable = true to enable, false to disable 
+     * @param enable = true to enable, false to disable
      */
     virtual void setEnabled(bool enable);
     /**

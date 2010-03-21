@@ -34,7 +34,7 @@ namespace Rapi
  */
 class CCBOdometry : public COdometry
 {
-friend class CCBDrivetrain2dof;
+  friend class CCBDrivetrain2dof;
 
   public:
     /**
@@ -61,8 +61,11 @@ friend class CCBDrivetrain2dof;
   private:
     /** Hardware driver of chatterbox */
     CCBDriver* mCBDriver;
+    /** Angle as reported by ICreate [rad] */
     float mAngle;
+    /** Distance as reported by ICreate [m] */
     float mDistance;
+
 };
 
 } // namespace

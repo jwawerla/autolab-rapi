@@ -68,7 +68,7 @@ class CRgbColor : public IRapiVar
      */
     std::string toCSV() const;
     /**
-     * Gets a header for the variable 
+     * Gets a header for the variable
      * @return header
      */
     std::string getCVSHeader() const;
@@ -93,6 +93,7 @@ const CRgbColor GREEN ( 0,255,0 );
 const CRgbColor BLUE ( 0,0,255 );
 const CRgbColor WHITE ( 255,255,255 );
 const CRgbColor BLACK ( 0,0,0 );
+const CRgbColor YELLOW (255,255, 0);
 
 } // namespace
 

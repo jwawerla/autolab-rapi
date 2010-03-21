@@ -41,25 +41,29 @@ void ALocalizer2d::setCoordinateSystemOffset ( CPose2d offset )
 //-----------------------------------------------------------------------------
 CPose2d ALocalizer2d::getPose() const
 {
-  CPose2d localPose;
-  double angle = mCoordinateSystemOffset.mYaw;
-  localPose.mX = mPose.mX * cos( angle ) + mPose.mY * sin( angle );
-  localPose.mY = -mPose.mX * sin( angle ) + mPose.mY * cos( angle );
-  localPose.mYaw = normalizeAngle( mPose.mYaw - angle );
-  return localPose;
+//  CPose2d localPose;
+//  double angle = mCoordinateSystemOffset.mYaw;
+//  localPose.mX = mPose.mX * cos( angle ) + mPose.mY * sin( angle );
+//  localPose.mY = -mPose.mX * sin( angle ) + mPose.mY * cos( angle );
+//  localPose.mYaw = normalizeAngle( mPose.mYaw - angle );
+//  return localPose;
+  return mPose;
 }
 //-----------------------------------------------------------------------------
-void ALocalizer2d::setPose( CPose2d pose )
+void ALocalizer2d::setPose( const CPose2d pose )
 { // convert local pose to absolute
-  double angle = -mCoordinateSystemOffset.mYaw;
-  mPose.mX = pose.mX * cos( angle ) + pose.mY * sin( angle );
-  mPose.mY = -pose.mX * sin( angle ) + pose.mY * cos( angle );
-  mPose.mYaw = normalizeAngle( pose.mYaw - angle );
+//  double angle = -mCoordinateSystemOffset.mYaw;
+//  mPose.mX = pose.mX * cos( angle ) + pose.mY * sin( angle );
+//  mPose.mY = -pose.mX * sin( angle ) + pose.mY * cos( angle );
+//  mPose.mYaw = normalizeAngle( pose.mYaw - angle );
+//
+// printf("ALocalizer2d::setPose()\n");
+  mPose = pose;
 }
 //-----------------------------------------------------------------------------
 void ALocalizer2d::setToZero()
 {
-  setPose( CPose2d( 0.0, 0.0, 0.0) );
+  mPose = CPose2d( 0.0, 0.0, 0.0);
 }
 //-----------------------------------------------------------------------------
 void ALocalizer2d::print() const

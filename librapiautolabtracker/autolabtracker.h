@@ -72,6 +72,20 @@ class CAutolabTracker : public ALocalizer2d
      * @param filename to log to
      */
     virtual void startLogging(std::string filename);
+    /**
+     * The pose cannot be set for a tracker
+     */
+    virtual void setPose( const CPose2d pose ) {};
+    /**
+     * Checks if tracker data is valid or not
+     * @return true if valid, false otherwise
+     */
+    bool isValid();
+    /**
+     * Check if the data is new or from a previous update
+     * @return true if new, false otherwise
+     */
+    bool isNew();
 
   private:
     /** Redis client */
@@ -80,6 +94,8 @@ class CAutolabTracker : public ALocalizer2d
     std::string mRobotName;
     /** Id of camera on with the robot was last seen */
     int mCameraId;
+    /** Flags if data is new */
+    bool mFgNewData;
 };
 
 } // namespace

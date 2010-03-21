@@ -31,6 +31,12 @@ namespace Rapi
 
 /**
  * Abstract base class for all lights stuff
+ * Light ID
+ *  0 - front right
+ *  1 - front left
+ *  2 - left
+ *  3 - back
+ *  4 - right
  * @author Jens Wawerla <jwawerla@sfu.ca>
  * @version 0.1 - 01/2008
  */

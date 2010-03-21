@@ -48,8 +48,6 @@ extern "C"
 namespace Rapi
 {
 
-FILE* fpFoo = NULL;
-
 typedef enum {RED_CH, GREEN_CH, BLUE_CH} tLed;
 
 // TODO: add singleton
@@ -66,8 +64,6 @@ CCBDriver::CCBDriver()
   // ensure 'commanded velocity' is zero
   mCreateSensorPackage.rightWheelVelocity = 0;
   mCreateSensorPackage.leftWheelVelocity = 0;
-
-  fpFoo = fopen("cbdriver.log", "w");
 }
 //--------------------------------------------------------------------------
 CCBDriver::~CCBDriver()
@@ -375,7 +371,7 @@ int CCBDriver::getOdoData()
     measDistance = (double) int16_t( ntohs( value ) ); // [mm]
     mCreateSensorPackage.distance = measDistance - ( mAccDistanceCmd * 1e3 );
 
-    printf("CCBDriver: dist meas %f  acc %f \n", measDistance, mAccDistanceCmd*1e3);
+    //printf("CCBDriver: dist meas %f  acc %f \n", measDistance, mAccDistanceCmd*1e3);
     mAccDistanceCmd = 0.0;
   }
 
@@ -392,11 +388,11 @@ int CCBDriver::getOdoData()
     memcpy((char*)&value, dataBuf, 2);
     measAngle = (double) int16_t( ntohs( value ) ); // [deg]
     //mCreateSensorPackage.angle = measAngle - R2D(mAccAngleCmd);
-    printf("CCBDriver: angle meas %f  acc %f \n", measAngle, R2D(mAccAngleCmd));
+    //printf("CCBDriver: angle meas %f  acc %f \n", measAngle, R2D(mAccAngleCmd));
     mAccAngleCmd = 0.0;
   }
 
-  fprintf(fpFoo,  "%f, %f, %f, %f \n", measDistance, mAccDistanceCmd*1e3,  measAngle, R2D(mAccAngleCmd) );
+  //fprintf(fpFoo,  "%f, %f, %f, %f \n", measDistance, mAccDistanceCmd*1e3,  measAngle, R2D(mAccAngleCmd) );
   return 1; // success
 }
 //---------------------------------------------------------------------------
@@ -536,7 +532,7 @@ int CCBDriver::readSensorData( double dt )
   mAccAngleCmd = mAccAngleCmd + mVelocityCmd.mYawDot * dt; // [rad]
   mAccAngleCmd = normalizeAngle(mAccAngleCmd);
 
-  printf("Acc: dist %f angle %f (cmd %f %f) \n", mAccDistanceCmd, mAccAngleCmd, mVelocityCmd.mXDot, mVelocityCmd.mYawDot);
+  //printf("Acc: dist %f angle %f (cmd %f %f) \n", mAccDistanceCmd, mAccAngleCmd, mVelocityCmd.mXDot, mVelocityCmd.mYawDot);
 
   if( getMostData( dt ) == 0 )
     return 0; // pass up errors

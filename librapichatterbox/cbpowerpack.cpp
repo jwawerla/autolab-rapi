@@ -37,6 +37,7 @@ CCBPowerPack::CCBPowerPack ( CCBDriver* cbDriver, std::string devName )
   mMaxCurrent = 4.0;  // TODO: set this to the correct value, 4 is just a guess
   mVoltage = 0.0;
   setEnabled ( true );
+  updateData(0.1);
 }
 //-----------------------------------------------------------------------------
 CCBPowerPack::~CCBPowerPack()
