@@ -69,6 +69,20 @@ class CRedisClient
      * @return 1 if success, 0 otherwise
      */
     int get(const std::string key, std::string& value);
+    /**
+     * Increment a counter
+     * @param key name of counter
+     * @return newValue of counter
+     * @return 1 if success, 0 otherwise
+     */
+    int increment(const std::string key, int& newValue);
+    /**
+     * Increment a counter
+     * @param key name of counter
+     * @return newValue of counter
+     * @return 1 if success, 0 otherwise
+     */
+    int decrement(const std::string key, int& newValue);
 
   protected:
     /**

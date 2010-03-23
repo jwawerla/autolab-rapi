@@ -134,5 +134,26 @@ int CRedisClient::get(const std::string key, std::string& value)
   return 0; // failure
 }
 //-----------------------------------------------------------------------------
+int CRedisClient::increment(const std::string key, int& newValue)
+{
+
+
+  if (mRedisCon) {
+    if (credis_incr(mRedisCon, key.c_str(), &newValue) == 0) {
+      return 1; // success
+    }
+  }
+  return 0; // failure
+}
+//-----------------------------------------------------------------------------
+int CRedisClient::decrement(const std::string key, int& newValue)
+{
+  if (mRedisCon) {
+   if (credis_decr( mRedisCon, key.c_str(), &newValue) == 0)
+     return 1; // success
+  }
+  return 0; // failure
+}
+//-----------------------------------------------------------------------------
 
 } // namespace
