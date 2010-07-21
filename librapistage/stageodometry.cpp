@@ -48,7 +48,7 @@ void CStageOdometry::updateData( const double dt)
   // mPose.mYaw = pose.a;
 
   // Coordinate system tranformation
-  angle = mCoordinateSystemOffset.mYaw;
+  double angle = mCoordinateSystemOffset.mYaw;
   mPose.mX =  pose.x * cos( angle ) + pose.y * sin( angle )
               + mCoordinateSystemOffset.mX;
   mPose.mY = -pose.x * sin( angle ) + pose.y * cos( angle )

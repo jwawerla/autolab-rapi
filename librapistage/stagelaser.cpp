@@ -42,7 +42,7 @@ CStageLaser::CStageLaser( Stg::ModelLaser* stgLaser, std::string devName )
   assert( stgLaser );
   mStgLaser = stgLaser;
   mFgEnabled = false;
-  mStgLaser->AddUpdateCallback(( Stg::stg_model_callback_t )
+  mStgLaser->GetWorld()->AddUpdateCallback(( Stg::stg_world_callback_t )
                                laserUpdate,
                                this );
   setEnabled( true );
@@ -107,22 +107,24 @@ int CStageLaser::init()
 //-----------------------------------------------------------------------------
 void CStageLaser::updateData( const double dt )
 {
-  Stg::ModelLaser::Sample* sample;
+  //std::vector<Stg::ModelLaser::Sample>* sample;
   //tRangeData* temp;
-  uint32_t sampleCount;
+  //uint32_t sampleCount;
 
   if ( mFgEnabled ) {
     // get range data from stage, if the simulation is paused at start up
     // stage returns NULL, so we store the result in a temporal variable
     // and store is only if it is any good
-    sample = mStgLaser->GetSamples( &sampleCount );
+    Stg::ModelLaser::Config config = mStgLaser->GetConfig();
+    uint32_t sampleCount = config.sample_count;
 
     if ( sampleCount != mNumSamples ) {
       ERROR2( "Got wrong number of laser readings from Stage, "\
               "expected %d but got %d", mNumSamples, sampleCount );
     }
     else {
-      if ( sample != NULL ) {
+      const std::vector<Stg::ModelLaser::Sample> sample = mStgLaser->GetSamples();
+      if ( !sample.empty() ) {
         for ( unsigned int i = 0; i < mNumSamples; i ++ ) {
           mRangeData[i].range = sample[i].range;
           mRangeData[i].reflectance = sample[i].reflectance;

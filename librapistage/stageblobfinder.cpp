@@ -41,7 +41,7 @@ namespace Rapi
     mStgBlobFinder = stgModel;
     mFgEnabled = false;
 
-    mStgBlobFinder->AddUpdateCallback ( ( Stg::stg_model_callback_t )
+    mStgBlobFinder->GetWorld()->AddUpdateCallback ( ( Stg::stg_world_callback_t )
                                         blobUpdate,
                                         this );
     setEnabled ( true );

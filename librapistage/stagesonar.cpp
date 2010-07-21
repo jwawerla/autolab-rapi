@@ -39,7 +39,7 @@ CStageSonar::CStageSonar( Stg::ModelRanger* stgModel, std::string devName )
   assert( stgModel );
   mStgRanger = stgModel;
   mFgEnabled = false;
-  mStgRanger->AddUpdateCallback ( ( Stg::stg_model_callback_t )
+  mStgRanger->GetWorld()->AddUpdateCallback ( ( Stg::stg_world_callback_t )
                                  sonarUpdate,
                                  this );
 
@@ -60,7 +60,8 @@ int CStageSonar::init()
   mMaxRange = -INFINITY;
   mMinRange = INFINITY;
 
-  mNumSamples = mStgRanger->sensors.size();
+  const std::vector<Stg::ModelRanger::Sensor> sensors = mStgRanger->GetSensors();
+  mNumSamples = sensors.size();
   mRangeResolution = 0;
   mFov = TWO_PI;
 
@@ -69,12 +70,12 @@ int CStageSonar::init()
   mRangeData = new tRangeData[mNumSamples];
 
   for ( unsigned int i = 0; i < mNumSamples; i++ ) {
-    mRelativeBeamPose[i].mX = mStgRanger->sensors[i].pose.x;
-    mRelativeBeamPose[i].mY = mStgRanger->sensors[i].pose.y;
-    mRelativeBeamPose[i].mYaw =  mStgRanger->sensors[i].pose.a;
-    mMaxRange = max( mMaxRange, mStgRanger->sensors[i].bounds_range.max );
-    mMinRange = max( mMinRange, mStgRanger->sensors[i].bounds_range.min );
-    mBeamConeAngle =  mStgRanger->sensors[i].fov;
+    mRelativeBeamPose[i].mX = sensors[i].pose.x;
+    mRelativeBeamPose[i].mY = sensors[i].pose.y;
+    mRelativeBeamPose[i].mYaw =  sensors[i].pose.a;
+    mMaxRange = max( mMaxRange, sensors[i].bounds_range.max );
+    mMinRange = max( mMinRange, sensors[i].bounds_range.min );
+    mBeamConeAngle =  sensors[i].fov;
   }
 
   return 1; // success
@@ -96,8 +97,9 @@ void CStageSonar::setEnabled( bool enable )
 void CStageSonar::updateData( const double dt)
 {
   if ( mFgEnabled ) {
+    const std::vector<Stg::ModelRanger::Sensor> sensors = mStgRanger->GetSensors();
     for ( unsigned int i = 0; i < mNumSamples; i++ )
-      mRangeData[i].range = mStgRanger->sensors[i].range;
+      mRangeData[i].range = sensors[i].range;
     mTimeStamp = mStgRanger->GetWorld()->SimTimeNow() / 1e6;
     notifyDataUpdateObservers();
   }

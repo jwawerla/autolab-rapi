@@ -41,7 +41,7 @@ CStageDrivetrain2dof::CStageDrivetrain2dof ( Stg::ModelPosition* stgModel,
   assert ( stgModel );
   mStgPosition = stgModel;
   mFgEnabled = false;
-  mStgPosition->AddUpdateCallback ( ( Stg::stg_model_callback_t )
+  mStgPosition->GetWorld()->AddUpdateCallback ( ( Stg::stg_world_callback_t )
                                     positionUpdate,
                                     this );
   mOdometry = new CStageOdometry ( mStgPosition, devName + ":odometry" );

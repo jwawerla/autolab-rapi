@@ -41,7 +41,7 @@ CStageFiducialFinder::CStageFiducialFinder( Stg::ModelFiducial* stgModel,
   mStgFiducial = stgModel;
   mFgEnabled = false;
 
-  mStgFiducial->AddUpdateCallback(( Stg::stg_model_callback_t )
+  mStgFiducial->GetWorld()->AddUpdateCallback(( Stg::stg_world_callback_t )
                                   fiducialUpdate,
                                   this );
   setEnabled( true );
