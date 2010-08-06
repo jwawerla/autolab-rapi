@@ -19,4 +19,4 @@ SET( SOURCES
 )
 
 # build a shared library
-ADD_LIBRARY( i2c STATIC ${SOURCES} )
+ADD_LIBRARY( i2c SHARED ${SOURCES} )
