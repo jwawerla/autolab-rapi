@@ -22,3 +22,5 @@ autolab-rapi.kdev4
 Build/
 autolab-rapi.cbp
 autolab-rapi.layout
+.project
+.cproject
