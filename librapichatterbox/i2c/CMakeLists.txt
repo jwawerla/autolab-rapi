@@ -20,3 +20,5 @@ SET( SOURCES
 
 # build a shared library
 ADD_LIBRARY( i2c SHARED ${SOURCES} )
+
+INSTALL(TARGETS i2c LIBRARY DESTINATION lib )
