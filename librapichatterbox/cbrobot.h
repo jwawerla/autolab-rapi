@@ -47,23 +47,23 @@ namespace Rapi
 
 /**
  * A Rapi based implementation for a chatterbox robot. Possible devices:
- *  CB:laser            Urg laser
- *  CB:ir               IR distance sensors on base board
- *  CB:wall             ICreate wall sensor on front right side
- *  CB:drivetrain       ICreate drive train
- *  CB:powerpack        ICreate power pack
- *  CB:front_fiducial   ICreate omni IR led in front of robot
- *  CB:top_fiducial     IR fiducial led on base board
- *  CB:lights           RGB leds on base board
- *  CB:textdisplay      7seg display on top of base board
- *  CB:lowsidedriver    ICreate low side driver
- *  CB:photosensor      Photo sensor on top of base board
- *  CB:bumper           ICreate bumpers
- *  CB:virtualwall      ICreate virtual wall sensors, based on the omni ir
- *  CB:cliff            ICreate cliff sensor
- *  CB:overcurrent      ICreate overcurrent sensors
- *  CB:button           ICreate top control buttons
- *  CB:wheeldrop        ICreate wheel drop sensor
+ *  laser:0            Urg laser
+ *  ir:0               IR distance sensors on base board
+ *  wall:0             ICreate wall sensor on front right side
+ *  drivetrain:0       ICreate drive train
+ *  powerpack:0        ICreate power pack
+ *  fiducial:0         ICreate omni IR led in front of robot
+ *  fiducial:1         IR fiducial led on base board
+ *  lights:0           RGB leds on base board
+ *  textdisplay:0      7seg display on top of base board
+ *  lowsidedriver:0    ICreate low side driver
+ *  photosensor:0      Photo sensor on top of base board
+ *  bumper:0           ICreate bumpers
+ *  virtualwall:0      ICreate virtual wall sensors, based on the omni ir
+ *  cliff:0            ICreate cliff sensor
+ *  overcurrent:0      ICreate overcurrent sensors
+ *  button:0           ICreate top control buttons
+ *  wheeldrop:0        ICreate wheel drop sensor
  * @author Jens Wawerla <jwawerla@sfu.ca>
  */
 class CCBRobot : public ARobot
