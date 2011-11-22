@@ -60,7 +60,7 @@ const char* RAPI_BUILD_DATE();
 #include "blobfinder.h"
 #include "redisclient.h"
 
-//#ifdef WITH_RPC
+#ifdef WITH_RPC
 #include "robotrpcserver.h"
-//#endif
+#endif
 
