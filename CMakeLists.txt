@@ -21,7 +21,7 @@ MESSAGE(STATUS "Build " ${BUILD_NUM})
 MESSAGE(STATUS "Git version " ${GIT_VERSION})
 
 # Enable graphics: use with -DWITH_GUI:BOOL=off|on
-OPTION (WITH_GUI "Enable building of Rapi graphics stuff" ON)
+OPTION (WITH_GUI "Enable building of Rapi graphics stuff" OFF)
 
 # Enable chatterbox: use with -DWITH_CB:BOOL=off|on
 OPTION (WITH_CB "Enable building of chatterbox library" ON)
@@ -30,7 +30,7 @@ OPTION (WITH_CB "Enable building of chatterbox library" ON)
 OPTION (WITH_STAGE "Enable building of stage library" ON)
 
 # Enable rpc: use with -DWITH_RPC:BOOL=off|on
-OPTION (WITH_RPC "Enable building of RPC client" ON)
+OPTION (WITH_RPC "Enable building of RPC client" OFF)
  
 # Enable examples: use with -DWITH_EXAMPLES:BOOL=off|on
 OPTION (WITH_EXAMPLES "Enable building of examples" ON)
