@@ -73,7 +73,7 @@ IF (STAGE_FOUND)
   # give the shared library a version number
   SET_TARGET_PROPERTIES( ${TARGET} PROPERTIES
                           VERSION ${VERSION}
-								  LINK_FLAGS "${STAGE_LDFLAGS_MORE}"
+  LINK_FLAGS "${STAGE_LDFLAGS_MORE}"
   )
 
 

@@ -371,10 +371,10 @@ int CCBRobot::findDevice( AFiducialFinder* &device, std::string devName )
 
   //************************************
   // Top fiducial finder
-  if ( devName == "fiducial:0" ) {
+  if ( devName == "fiducial:1" ) {
     // check if device already exists
     if ( mCBTopFiducial == NULL ) {
-      mCBTopFiducial = new CCBTopFiducialFinder( mCBDriver, "fiducial:0" );
+      mCBTopFiducial = new CCBTopFiducialFinder( mCBDriver, "fiducial:1" );
       device = mCBTopFiducial;
       return mCBTopFiducial->init();
     }
