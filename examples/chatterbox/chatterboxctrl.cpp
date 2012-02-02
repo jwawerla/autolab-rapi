@@ -34,19 +34,19 @@ CChatterboxCtrl::CChatterboxCtrl ( ARobot* robot )
   mFgRunDemo = false;
   mFgMotor = false;
 
-  mRobot->findDevice ( mPowerPack, "CB:powerpack" );
-  mRobot->findDevice ( drivetrain, "CB:drivetrain" );
-  mRobot->findDevice ( mIr, "CB:ir" );
-  mRobot->findDevice ( mTextDisplay, "CB:textdisplay" );
-  mRobot->findDevice ( mBumper, "CB:bumper" );
-  mRobot->findDevice ( mLights, "CB:lights" );
-  mRobot->findDevice ( mWheelDrop, "CB:wheeldrop" );
-  mRobot->findDevice ( mLowSideDriver, "CB:lowsidedriver" );
-  mRobot->findDevice ( mButton, "CB:button" );
-  mRobot->findDevice ( mFrontFiducial, "CB:front_fiducial");
-  //mRobot->findDevice ( mTopFiducial, "CB:top_fiducial");
-  mRobot->findDevice ( mPhoto, "CB:photosensor" );
-  //mRobot->findDevice ( mLaser, "CB:laser" );
+  mRobot->findDevice ( mPowerPack, "powerpack:0" );
+  mRobot->findDevice ( drivetrain, "drivetrain:0" );
+  mRobot->findDevice ( mIr, "ir:0" );
+  mRobot->findDevice ( mTextDisplay, "textdisplay:0" );
+  mRobot->findDevice ( mBumper, "bumper:0" );
+  mRobot->findDevice ( mLights, "lights:0" );
+  mRobot->findDevice ( mWheelDrop, "wheeldrop:0" );
+  mRobot->findDevice ( mLowSideDriver, "lowsidedriver:0" );
+  mRobot->findDevice ( mButton, "button:0" );
+  mRobot->findDevice ( mFrontFiducial, "fiducial:0");
+  //mRobot->findDevice ( mTopFiducial, "fiducial:1");
+  mRobot->findDevice ( mPhoto, "photosensor:0" );
+  //mRobot->findDevice ( mLaser, "laser:0" );
 
   mDrivetrain = ( CCBDrivetrain2dof* ) drivetrain;
   mOdometry = mDrivetrain->getOdometry();
