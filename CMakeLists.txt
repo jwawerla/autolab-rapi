@@ -8,6 +8,7 @@ SET( V_BUGFIX 0 )
 SET( VERSION ${V_MAJOR}.${V_MINOR}.${V_BUGFIX} )
 SET( APIVERSION ${V_MAJOR}.${V_MINOR} )
 
+CMAKE_POLICY( SET CMP0015 OLD )
 
 # Generate GIT version number
 SET(GIT_VERSION_FILE GIT-VERSION-FILE)
@@ -27,7 +28,7 @@ OPTION (WITH_GUI "Enable building of Rapi graphics stuff" OFF)
 OPTION (WITH_CB "Enable building of chatterbox library" ON)
 
 # Enable stage: use with -DWITH_STAGE:BOOL=off|on
-OPTION (WITH_STAGE "Enable building of stage library" ON)
+OPTION (WITH_STAGE "Enable building of stage library" OFF)
 
 # Enable rpc: use with -DWITH_RPC:BOOL=off|on
 OPTION (WITH_RPC "Enable building of RPC client" OFF)
