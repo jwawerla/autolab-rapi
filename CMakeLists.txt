@@ -31,7 +31,7 @@ OPTION (WITH_CB "Enable building of chatterbox library" ON)
 OPTION (WITH_STAGE "Enable building of stage library" OFF)
 
 # Enable rpc: use with -DWITH_RPC:BOOL=off|on
-OPTION (WITH_RPC "Enable building of RPC client" OFF)
+OPTION (WITH_RPC "Enable building of RPC client" ON)
  
 # Enable examples: use with -DWITH_EXAMPLES:BOOL=off|on
 OPTION (WITH_EXAMPLES "Enable building of examples" ON)
