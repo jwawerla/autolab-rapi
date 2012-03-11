@@ -35,6 +35,7 @@ namespace Rapi
 {
 /**
  *  @author Ash Charles <jac27@sfu.ca>
+ *  @author Mani Monajjemi <mmmonajje@sfu.ca>
  */
 class RobotRpcServer
 {

@@ -60,6 +60,13 @@ class RobotRpcClient
      */
     bool getBumperDev( unsigned int &numSamples);
     
+    /**
+     * Get the parameters of wheeldrop device if exists
+     * @param numSamples
+     * @return 1 if successful, otherwise 0
+     */
+    bool getWheelDropDev( unsigned int &numSamples);
+    
   //---- device get/set calls --------------------------------------------------
     /** get position and velocity information */
     void getDrivetrain( bool &isStalled,
@@ -84,6 +91,13 @@ class RobotRpcClient
      * @return vector of booleans (status)
      */
     std::vector<bool> getBumpers(void);
+    
+    
+    /**
+     * Get wheeldrops status
+     * @return vector of booleans (status)
+     */
+    std::vector<bool> getWheelDrops(void);
 
   private:
     /** helper method for performing RPC calls */
