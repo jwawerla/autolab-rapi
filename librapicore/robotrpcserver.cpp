@@ -8,7 +8,8 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
                                 pthread_mutex_t * dataMutex,
                                 ADrivetrain2dof * drivetrain,
                                 APowerPack * powerpack,
-                                ARangeFinder * rangefinder , ABinarySensorArray *bumper, ABinarySensorArray *wheeldrop)
+                                ARangeFinder * rangefinder , ABinarySensorArray *bumper, ABinarySensorArray *wheeldrop,
+                                ABinarySensorArray *cliff)
     : mServer( port )
 {
   // initialize data members
@@ -19,6 +20,7 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
   mRangeFinder = rangefinder;
   mBumper = bumper;
   mWheelDrop = wheeldrop;
+  mCliff = cliff;
 
   // setup handlers as appropriate
   if ( mDrivetrain ) {
@@ -64,6 +66,16 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
       mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
                                 (this, &RobotRpcServer::getWheelDrops),
                                 "getWheelDrops");
+  }
+  
+  if (mCliff)
+  {
+       mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getCliffDev),
+                                "getCliffDev");
+      mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getCliffs),
+                                "getCliffs");
   }
   
 }
@@ -167,6 +179,16 @@ void RobotRpcServer::getWheelDropDev(jsonrpc::variant params,
     pthread_mutex_unlock(mRobotMutex);
 }
 //------------------------------------------------------------------------------
+void RobotRpcServer::getCliffDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    pthread_mutex_lock(mRobotMutex);
+    results["numSamples"] = toVariant<int> (mCliff->getNumSamples());    
+    pthread_mutex_unlock(mRobotMutex);
+}
+//------------------------------------------------------------------------------
 void RobotRpcServer::getDrivetrain( variant params,
                                     object& results,
                                     const std::string& ip,
@@ -242,6 +264,20 @@ void RobotRpcServer::getWheelDrops(jsonrpc::variant params,
         wheeldrops.push_back(toVariant<bool> (mWheelDrop->mBitData[i]) );
     }
     results["wheelDrops"] = toVariant( wheeldrops );
+    pthread_mutex_unlock(mRobotMutex);
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getCliffs(jsonrpc::variant params,
+                                        jsonrpc::object& results, 
+                                        const std::string& ip, int port)
+{
+    pthread_mutex_lock(mRobotMutex);
+    array cliffs;
+    for (unsigned int i = 0; i < mCliff->getNumSamples(); ++i)
+    {
+        cliffs.push_back(toVariant<bool> (mCliff->mBitData[i]) );
+    }
+    results["cliffs"] = toVariant( cliffs );
     pthread_mutex_unlock(mRobotMutex);
 }
 //------------------------------------------------------------------------------
