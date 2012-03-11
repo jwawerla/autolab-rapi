@@ -12,6 +12,7 @@ namespace Rapi
 {
 /**
  * @author Ash Charles <jac27@sfu.ca>
+ * @author Mani Monajjemi <mmonajje@sfu.ca>
  */
 class RobotRpcClient
 {
@@ -51,6 +52,14 @@ class RobotRpcClient
                             float &maxRange,
                             float &beamConeAngle,
                              std::vector<CPose2d> &beamPose );
+    
+    /**
+     * Get the parameters of bumper device if exists
+     * @param numSamples
+     * @return 1 if successful, otherwise 0
+     */
+    bool getBumperDev( unsigned int &numSamples);
+    
   //---- device get/set calls --------------------------------------------------
     /** get position and velocity information */
     void getDrivetrain( bool &isStalled,
@@ -69,6 +78,12 @@ class RobotRpcClient
      * @return vector of ranges
      */
     std::vector<float> getRanges ( void );
+    
+    /**
+     * Get bumpers status
+     * @return vector of booleans (status)
+     */
+    std::vector<bool> getBumpers(void);
 
   private:
     /** helper method for performing RPC calls */

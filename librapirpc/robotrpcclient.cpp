@@ -96,6 +96,14 @@ bool RobotRpcClient::getRangeFinderDev( unsigned int &numSamples,
   return true;
 }
 //------------------------------------------------------------------------------
+bool RobotRpcClient::getBumperDev(unsigned int& numSamples)
+{
+    object result = call("getBumperDev");
+    numSamples = fromVariant<int>(result["numSamples"]);
+    return true;
+}
+
+//------------------------------------------------------------------------------
 void RobotRpcClient::getDrivetrain( bool &isStalled,
                                     float &stalledSince,
                                     Rapi::CVelocity2d & measVelocity,
@@ -139,6 +147,18 @@ std::vector<float> RobotRpcClient::getRanges( void )
   }
 
   return out;
+}
+//------------------------------------------------------------------------------
+std::vector<bool> RobotRpcClient::getBumpers( void )
+{
+    std::vector<bool> out;
+    object result = call("getBumpers", object() );
+    array bumpers = fromVariant<array>(result["bumpers"]);
+    for (unsigned int i = 0; i < bumpers.size(); ++i)
+    {
+        out.push_back(fromVariant<bool> (bumpers[i]));
+    }
+    return out;
 }
 //------------------------------------------------------------------------------
 
