@@ -109,6 +109,13 @@ bool RobotRpcClient::getWheelDropDev(unsigned int& numSamples)
     numSamples = fromVariant<int>(result["numSamples"]);
     return true;
 }
+//------------------------------------------------------------------------------
+bool RobotRpcClient::getCliffDev(unsigned int& numSamples)
+{
+    object result = call("getCliffDev", object());
+    numSamples = fromVariant<int>(result["numSamples"]);
+    return true;
+}
 
 //------------------------------------------------------------------------------
 void RobotRpcClient::getDrivetrain( bool &isStalled,
@@ -176,6 +183,18 @@ std::vector<bool> RobotRpcClient::getWheelDrops( void )
     for (unsigned int i = 0; i < wheeldrops.size(); ++i)
     {
         out.push_back(fromVariant<bool> (wheeldrops[i]));
+    }
+    return out;
+}
+//------------------------------------------------------------------------------
+std::vector<bool> RobotRpcClient::getCliffs( void )
+{
+    std::vector<bool> out;
+    object result = call("getCliffs", object() );
+    array cliffs = fromVariant<array>(result["cliffs"]);
+    for (unsigned int i = 0; i < cliffs.size(); ++i)
+    {
+        out.push_back(fromVariant<bool> (cliffs[i]));
     }
     return out;
 }

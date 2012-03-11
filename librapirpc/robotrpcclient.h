@@ -67,6 +67,13 @@ class RobotRpcClient
      */
     bool getWheelDropDev( unsigned int &numSamples);
     
+    /**
+     * Get the parameters of cliff device if exists
+     * @param numSamples
+     * @return 1 if successful, otherwise 0
+     */
+    bool getCliffDev( unsigned int &numSamples);
+    
   //---- device get/set calls --------------------------------------------------
     /** get position and velocity information */
     void getDrivetrain( bool &isStalled,
@@ -99,6 +106,12 @@ class RobotRpcClient
      */
     std::vector<bool> getWheelDrops(void);
 
+    /**
+     * Get cliffs status
+     * @return 
+     */
+    std::vector<bool> getCliffs(void);
+    
   private:
     /** helper method for performing RPC calls */
     jsonrpc::object call( std::string methodName, jsonrpc::object args );

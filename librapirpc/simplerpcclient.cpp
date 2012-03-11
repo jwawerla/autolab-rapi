@@ -23,9 +23,11 @@ int main (int argc, char* argv[])
     double maxCapacity;
     unsigned int numBumpers;
     unsigned int numWheels;
+    unsigned int numCliffs;
     std::vector<float> ranges;
     std::vector<bool> bumpers;
     std::vector<bool> wheels;
+    std::vector<bool> cliffs;
     while (true)
     {
         std::cout << "Testing robot " << address << std::endl;
@@ -40,6 +42,10 @@ int main (int argc, char* argv[])
         wheels = robot->getWheelDrops();
         std::cout << "WheelDrop Count: " << numWheels << std::endl;
         std::cout << "WheelDrop Status : " << wheels[0] << " , " << wheels[1] << std::endl;
+        numWheels = robot->getWheelDropDev(numCliffs);
+        cliffs = robot->getCliffs();
+        std::cout << "Cliffs Count: " << numCliffs << std::endl;
+        std::cout << "Cliffs Status : " << cliffs[0] << " , " << cliffs[1] << std::endl;
         usleep(500000); // Please don't overload robot 
     }
     //robot->quit();
