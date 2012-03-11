@@ -98,7 +98,7 @@ bool RobotRpcClient::getRangeFinderDev( unsigned int &numSamples,
 //------------------------------------------------------------------------------
 bool RobotRpcClient::getBumperDev(unsigned int& numSamples)
 {
-    object result = call("getBumperDev");
+    object result = call("getBumperDev", object());
     numSamples = fromVariant<int>(result["numSamples"]);
     return true;
 }
