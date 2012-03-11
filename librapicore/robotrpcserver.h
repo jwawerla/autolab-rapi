@@ -53,7 +53,7 @@ class RobotRpcServer
      */
     RobotRpcServer( ARobot * robot, int port, pthread_mutex_t * dataMutex,
                     ADrivetrain2dof * drivetrain, APowerPack * powerpack,
-                    ARangeFinder * rangefinder, ABinarySensorArray* bumper );
+                    ARangeFinder * rangefinder, ABinarySensorArray* bumper, ABinarySensorArray *wheeldrop );
     /** default destructor */
     ~RobotRpcServer();
     /** start the server in its own thread */
@@ -87,6 +87,11 @@ class RobotRpcServer
                                     const std::string& ip,
                                     int port);
     
+    /** Send the current wheeldrop configuration */
+    void getWheelDropDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port);
     //---- device get/set calls ------------------------------------------------
     /** send position and velocity information */
     void getDrivetrain( jsonrpc::variant params,
@@ -108,7 +113,13 @@ class RobotRpcServer
                     jsonrpc::object& results,
                     const std::string& ip,
                     int port);
-
+    
+     /** send wheeldrop data */
+    void getWheelDrops(jsonrpc::variant params,
+                    jsonrpc::object& results,
+                    const std::string& ip,
+                    int port);
+    
     /** utility routine to pack a CVelocity2d object into a jsonrpc::variant */
     jsonrpc::variant packVelocity( CVelocity2d velocity );
     /** utility routine to pack a CPose2d object into a jsonrpc::variant */
@@ -129,6 +140,8 @@ class RobotRpcServer
     ARangeFinder * mRangeFinder;
     /** the bumper object we are serving (if it exists) */
     ABinarySensorArray *mBumper;
+    /** the wheel drop object we are serving (if it exists) */
+    ABinarySensorArray *mWheelDrop;
 };
 
 } // namespace

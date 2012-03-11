@@ -8,7 +8,7 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
                                 pthread_mutex_t * dataMutex,
                                 ADrivetrain2dof * drivetrain,
                                 APowerPack * powerpack,
-                                ARangeFinder * rangefinder , ABinarySensorArray *bumper)
+                                ARangeFinder * rangefinder , ABinarySensorArray *bumper, ABinarySensorArray *wheeldrop)
     : mServer( port )
 {
   // initialize data members
@@ -18,6 +18,7 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
   mPowerPack = powerpack;
   mRangeFinder = rangefinder;
   mBumper = bumper;
+  mWheelDrop = wheeldrop;
 
   // setup handlers as appropriate
   if ( mDrivetrain ) {
@@ -53,6 +54,16 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
       mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
                                 (this, &RobotRpcServer::getBumpers),
                                 "getBumpers");
+  }
+  
+  if (mWheelDrop)
+  {
+       mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getWheelDropDev),
+                                "getWheelDropDev");
+      mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getWheelDrops),
+                                "getWheelDrops");
   }
   
 }
@@ -136,7 +147,6 @@ void RobotRpcServer::getRangeFinderDev( variant params,
   results[ "beamPose" ] = toVariant<array> ( beamPose );
 }
 //------------------------------------------------------------------------------
-
 void RobotRpcServer::getBumperDev(jsonrpc::variant params,
                                     jsonrpc::object& results,
                                     const std::string& ip,
@@ -144,6 +154,16 @@ void RobotRpcServer::getBumperDev(jsonrpc::variant params,
 {
     pthread_mutex_lock(mRobotMutex);
     results["numSamples"] = toVariant<int> (mBumper->getNumSamples());    
+    pthread_mutex_unlock(mRobotMutex);
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getWheelDropDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    pthread_mutex_lock(mRobotMutex);
+    results["numSamples"] = toVariant<int> (mWheelDrop->getNumSamples());    
     pthread_mutex_unlock(mRobotMutex);
 }
 //------------------------------------------------------------------------------
@@ -197,7 +217,6 @@ void RobotRpcServer::getRanges( variant params,
   pthread_mutex_unlock( mRobotMutex );
 }
 //------------------------------------------------------------------------------
-
 void RobotRpcServer::getBumpers(jsonrpc::variant params,
                                         jsonrpc::object& results, 
                                         const std::string& ip, int port)
@@ -209,6 +228,20 @@ void RobotRpcServer::getBumpers(jsonrpc::variant params,
         bumpers.push_back(toVariant<bool> (mBumper->mBitData[i]) );
     }
     results["bumpers"] = toVariant( bumpers );
+    pthread_mutex_unlock(mRobotMutex);
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getWheelDrops(jsonrpc::variant params,
+                                        jsonrpc::object& results, 
+                                        const std::string& ip, int port)
+{
+    pthread_mutex_lock(mRobotMutex);
+    array wheeldrops;
+    for (unsigned int i = 0; i < mWheelDrop->getNumSamples(); ++i)
+    {
+        wheeldrops.push_back(toVariant<bool> (mWheelDrop->mBitData[i]) );
+    }
+    results["wheelDrops"] = toVariant( wheeldrops );
     pthread_mutex_unlock(mRobotMutex);
 }
 //------------------------------------------------------------------------------

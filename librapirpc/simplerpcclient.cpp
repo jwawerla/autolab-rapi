@@ -21,13 +21,20 @@ int main (int argc, char* argv[])
     std::cout << "Init Done ..." << std::endl;
     
     double maxCapacity;
+    unsigned int numBumpers;
     std::vector<float> ranges;
+    std::vector<bool> bumpers;
     while (true)
     {
         std::cout << "Testing robot " << address << std::endl;
         robot->getPowerPackDev(maxCapacity);
         ranges = robot->getRanges();
-        std::cout << "Range[0] :" << ranges.at(0) << std::endl;        
+        std::cout << "Range[0] :" << ranges.at(0) << std::endl;   
+        robot->getBumperDev(numBumpers);
+        bumpers = robot->getBumpers();
+        std::cout << "Bumpers Count: " << numBumpers << std::endl;
+        std::cout << "Bumpers Status : " << bumpers[0] << " , " << bumpers[1] << std::endl;
+        usleep(500000); // Please don't overload robot 
     }
     //robot->quit();
     
