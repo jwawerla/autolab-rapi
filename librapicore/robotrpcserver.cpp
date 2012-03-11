@@ -8,7 +8,7 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
                                 pthread_mutex_t * dataMutex,
                                 ADrivetrain2dof * drivetrain,
                                 APowerPack * powerpack,
-                                ARangeFinder * rangefinder )
+                                ARangeFinder * rangefinder , ABinarySensorArray *bumper)
     : mServer( port )
 {
   // initialize data members
@@ -17,6 +17,7 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
   mDrivetrain = drivetrain;
   mPowerPack = powerpack;
   mRangeFinder = rangefinder;
+  mBumper = bumper;
 
   // setup handlers as appropriate
   if ( mDrivetrain ) {
@@ -43,6 +44,17 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
                               ( this, &RobotRpcServer::getRanges ),
                               "getRanges" );
   }
+  
+  if (mBumper)
+  {
+      mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getBumperDev),
+                                "getBumperDev");
+      mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getBumpers),
+                                "getBumpers");
+  }
+  
 }
 //------------------------------------------------------------------------------
 RobotRpcServer::~RobotRpcServer()
@@ -124,6 +136,17 @@ void RobotRpcServer::getRangeFinderDev( variant params,
   results[ "beamPose" ] = toVariant<array> ( beamPose );
 }
 //------------------------------------------------------------------------------
+
+void RobotRpcServer::getBumperDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    pthread_mutex_lock(mRobotMutex);
+    results["numSamples"] = toVariant<int> (mBumper->getNumSamples());    
+    pthread_mutex_unlock(mRobotMutex);
+}
+//------------------------------------------------------------------------------
 void RobotRpcServer::getDrivetrain( variant params,
                                     object& results,
                                     const std::string& ip,
@@ -175,4 +198,18 @@ void RobotRpcServer::getRanges( variant params,
 }
 //------------------------------------------------------------------------------
 
+void RobotRpcServer::getBumpers(jsonrpc::variant params,
+                                        jsonrpc::object& results, 
+                                        const std::string& ip, int port)
+{
+    pthread_mutex_lock(mRobotMutex);
+    array bumpers;
+    for (unsigned int i = 0; i < mBumper->getNumSamples(); ++i)
+    {
+        bumpers.push_back(toVariant<bool> (mBumper->mBitData[i]) );
+    }
+    results["bumpers"] = toVariant( bumpers );
+    pthread_mutex_unlock(mRobotMutex);
+}
+//------------------------------------------------------------------------------
 } // namespace

@@ -24,6 +24,7 @@
 #include "rangefinder.h"
 #include "drivetrain2dof.h"
 #include "powerpack.h"
+#include "binarysensorarray.h"
 #include "pose2d.h"
 #include "velocity2d.h"
 #include "printerror.h"
@@ -40,7 +41,7 @@ class RobotRpcServer
   public:
     /**
      * Constructs a JSON RPC server to export the robot data.  At the moment,
-     * drivetrain, rangefinder, and powerpack data is exported.  Note that the
+     * drivetrain, rangefinder, powerpack and bumper data is exported.  Note that the
      * server runs in a separate thread from the robot controller so access to
      * robot data should be controller.  Typically, you create a pthread mutex
      * when you initialize your controller and lock it during your updateData()
@@ -52,7 +53,7 @@ class RobotRpcServer
      */
     RobotRpcServer( ARobot * robot, int port, pthread_mutex_t * dataMutex,
                     ADrivetrain2dof * drivetrain, APowerPack * powerpack,
-                    ARangeFinder * rangefinder );
+                    ARangeFinder * rangefinder, ABinarySensorArray* bumper );
     /** default destructor */
     ~RobotRpcServer();
     /** start the server in its own thread */
@@ -79,6 +80,13 @@ class RobotRpcServer
                             jsonrpc::object& results,
                             const std::string& ip,
                             int port );
+    
+    /** Send the current bumper configuration */
+    void getBumperDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port);
+    
     //---- device get/set calls ------------------------------------------------
     /** send position and velocity information */
     void getDrivetrain( jsonrpc::variant params,
@@ -95,6 +103,11 @@ class RobotRpcServer
                     jsonrpc::object& results,
                     const std::string& ip,
                     int port );
+    /** send bumpers data */
+    void getBumpers(jsonrpc::variant params,
+                    jsonrpc::object& results,
+                    const std::string& ip,
+                    int port);
 
     /** utility routine to pack a CVelocity2d object into a jsonrpc::variant */
     jsonrpc::variant packVelocity( CVelocity2d velocity );
@@ -114,6 +127,8 @@ class RobotRpcServer
     APowerPack * mPowerPack;
     /** the rangefinder object we are serving (if it exists) */
     ARangeFinder * mRangeFinder;
+    /** the bumper object we are serving (if it exists) */
+    ABinarySensorArray *mBumper;
 };
 
 } // namespace
