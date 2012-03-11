@@ -38,14 +38,14 @@ int main (int argc, char* argv[])
         bumpers = robot->getBumpers();
         std::cout << "Bumpers Count: " << numBumpers << std::endl;
         std::cout << "Bumpers Status : " << bumpers[0] << " , " << bumpers[1] << std::endl;
-        numWheels = robot->getWheelDropDev(numWheels);
+        robot->getWheelDropDev(numWheels);
         wheels = robot->getWheelDrops();
         std::cout << "WheelDrop Count: " << numWheels << std::endl;
-        std::cout << "WheelDrop Status : " << wheels[0] << " , " << wheels[1] << std::endl;
-        numWheels = robot->getWheelDropDev(numCliffs);
+        std::cout << "WheelDrop Status : " << wheels[0] << "," << wheels[1] << "," << wheels[2] << std::endl;
+        robot->getWheelDropDev(numCliffs);
         cliffs = robot->getCliffs();
         std::cout << "Cliffs Count: " << numCliffs << std::endl;
-        std::cout << "Cliffs Status : " << cliffs[0] << " , " << cliffs[1] << std::endl;
+        std::cout << "Cliffs Status : " << cliffs[0] << " , " << cliffs[1] << " , " << cliffs[2] << " , " << cliffs[3]<< std::endl;
         usleep(500000); // Please don't overload robot 
     }
     //robot->quit();
