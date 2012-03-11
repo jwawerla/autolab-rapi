@@ -52,7 +52,7 @@ int main (int argc, char* argv[])
         robot->getPhotoDev(numPhotos, maxRange);
         photos = robot->getPhotos();
         std::cout << "Photos Count : " << numPhotos << std::endl;
-        std::cout << "Analog Photo: " << photos[0] / maxRange << std::endl;
+        std::cout << "Analog Photo: " << photos[0] << " , max : " << maxRange << std::endl;
         usleep(500000); // Please don't overload robot 
     }
     //robot->quit();

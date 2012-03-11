@@ -122,7 +122,7 @@ bool RobotRpcClient::getPhotoDev(unsigned int& numSamples, unsigned int& maxRang
 {
     object result = call("getPhotoDev", object());
     numSamples = fromVariant<int>(result["numSamples"]);
-    numSamples = fromVariant<int>(result["maxRange"]);
+    maxRange = fromVariant<int>(result["maxRange"]);
     return true;
 }
 
@@ -215,7 +215,7 @@ std::vector<float> RobotRpcClient::getPhotos( void )
     array photos = fromVariant<array>(result["photos"]);
     for (unsigned int i = 0; i < photos.size(); ++i)
     {
-        out.push_back(fromVariant<float> (photos[i]));
+        out.push_back(fromVariant<double> (photos[i]));
     }
     return out;
 }
