@@ -35,13 +35,14 @@ namespace Rapi
 {
 /**
  *  @author Ash Charles <jac27@sfu.ca>
+ *  @author Mani Monajjemi <mmonajje@sfu.ca>
  */
 class RobotRpcServer
 {
   public:
     /**
      * Constructs a JSON RPC server to export the robot data.  At the moment,
-     * drivetrain, rangefinder, powerpack and bumper data is exported.  Note that the
+     * drivetrain, rangefinder, powerpack, wheeldrops, cliffs, photosensor and bumpers data is exported.  Note that the
      * server runs in a separate thread from the robot controller so access to
      * robot data should be controller.  Typically, you create a pthread mutex
      * when you initialize your controller and lock it during your updateData()
@@ -54,7 +55,7 @@ class RobotRpcServer
     RobotRpcServer( ARobot * robot, int port, pthread_mutex_t * dataMutex,
                     ADrivetrain2dof * drivetrain, APowerPack * powerpack,
                     ARangeFinder * rangefinder, ABinarySensorArray* bumper, ABinarySensorArray *wheeldrop,
-                    ABinarySensorArray* cliff);
+                    ABinarySensorArray* cliff, AAnalogSensorArray* photo);
     /** default destructor */
     ~RobotRpcServer();
     /** start the server in its own thread */
@@ -98,6 +99,13 @@ class RobotRpcServer
                                     jsonrpc::object& results,
                                     const std::string& ip,
                                     int port);
+    
+    /** Send the current photo sensor configuration */
+    void getPhotoDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port);
+    
     //---- device get/set calls ------------------------------------------------
     /** send position and velocity information */
     void getDrivetrain( jsonrpc::variant params,
@@ -132,6 +140,12 @@ class RobotRpcServer
                     const std::string& ip,
                     int port);
     
+    /** send photo sensor data */
+    void getPhotos(jsonrpc::variant params,
+                    jsonrpc::object& results,
+                    const std::string& ip,
+                    int port);
+    
     /** utility routine to pack a CVelocity2d object into a jsonrpc::variant */
     jsonrpc::variant packVelocity( CVelocity2d velocity );
     /** utility routine to pack a CPose2d object into a jsonrpc::variant */
@@ -156,6 +170,8 @@ class RobotRpcServer
     ABinarySensorArray *mWheelDrop;
     /** The cliff object we are serving (if it exists) */
     ABinarySensorArray *mCliff;
+    /** The photo sensor object we are serving (if it exists) */
+    AAnalogSensorArray *mPhoto;
 };
 
 } // namespace

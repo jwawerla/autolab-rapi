@@ -74,6 +74,15 @@ class RobotRpcClient
      */
     bool getCliffDev( unsigned int &numSamples);
     
+    
+    /**
+     * Get the parameters of photo device if exists 
+     * @param numSamples
+     * @param maxRange
+     * @return  1 if successful, otherwise 0
+     */
+    bool getPhotoDev(unsigned int &numSamples, unsigned int &maxRange);
+    
   //---- device get/set calls --------------------------------------------------
     /** get position and velocity information */
     void getDrivetrain( bool &isStalled,
@@ -111,6 +120,12 @@ class RobotRpcClient
      * @return 
      */
     std::vector<bool> getCliffs(void);
+    
+    /**
+     * Get the photo sensors status
+     * @return 
+     */
+    std::vector<float> getPhotos(void);
     
   private:
     /** helper method for performing RPC calls */

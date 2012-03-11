@@ -118,6 +118,15 @@ bool RobotRpcClient::getCliffDev(unsigned int& numSamples)
 }
 
 //------------------------------------------------------------------------------
+bool RobotRpcClient::getPhotoDev(unsigned int& numSamples, unsigned int& maxRange)
+{
+    object result = call("getPhotoDev", object());
+    numSamples = fromVariant<int>(result["numSamples"]);
+    numSamples = fromVariant<int>(result["maxRange"]);
+    return true;
+}
+
+//------------------------------------------------------------------------------
 void RobotRpcClient::getDrivetrain( bool &isStalled,
                                     float &stalledSince,
                                     Rapi::CVelocity2d & measVelocity,
@@ -195,6 +204,18 @@ std::vector<bool> RobotRpcClient::getCliffs( void )
     for (unsigned int i = 0; i < cliffs.size(); ++i)
     {
         out.push_back(fromVariant<bool> (cliffs[i]));
+    }
+    return out;
+}
+//------------------------------------------------------------------------------
+std::vector<float> RobotRpcClient::getPhotos( void )
+{
+    std::vector<float> out;
+    object result = call("getPhotos", object() );
+    array photos = fromVariant<array>(result["photos"]);
+    for (unsigned int i = 0; i < photos.size(); ++i)
+    {
+        out.push_back(fromVariant<float> (photos[i]));
     }
     return out;
 }

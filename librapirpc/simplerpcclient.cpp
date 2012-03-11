@@ -24,10 +24,13 @@ int main (int argc, char* argv[])
     unsigned int numBumpers;
     unsigned int numWheels;
     unsigned int numCliffs;
+    unsigned int numPhotos;
+    unsigned int maxRange;
     std::vector<float> ranges;
     std::vector<bool> bumpers;
     std::vector<bool> wheels;
     std::vector<bool> cliffs;
+    std::vector<float> photos;
     while (true)
     {
         std::cout << "Testing robot " << address << std::endl;
@@ -46,6 +49,10 @@ int main (int argc, char* argv[])
         cliffs = robot->getCliffs();
         std::cout << "Cliffs Count: " << numCliffs << std::endl;
         std::cout << "Cliffs Status : " << cliffs[0] << " , " << cliffs[1] << " , " << cliffs[2] << " , " << cliffs[3]<< std::endl;
+        robot->getPhotoDev(numPhotos, maxRange);
+        photos = robot->getPhotos();
+        std::cout << "Photos Count : " << numPhotos << std::endl;
+        std::cout << "Analog Photo: " << photos[0] / maxRange << std::endl;
         usleep(500000); // Please don't overload robot 
     }
     //robot->quit();

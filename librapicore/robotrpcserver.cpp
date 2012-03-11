@@ -9,7 +9,7 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
                                 ADrivetrain2dof * drivetrain,
                                 APowerPack * powerpack,
                                 ARangeFinder * rangefinder , ABinarySensorArray *bumper, ABinarySensorArray *wheeldrop,
-                                ABinarySensorArray *cliff)
+                                ABinarySensorArray *cliff, AAnalogSensorArray *photo)
     : mServer( port )
 {
   // initialize data members
@@ -21,6 +21,7 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
   mBumper = bumper;
   mWheelDrop = wheeldrop;
   mCliff = cliff;
+  mPhoto = photo;
 
   // setup handlers as appropriate
   if ( mDrivetrain ) {
@@ -76,6 +77,16 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
       mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
                                 (this, &RobotRpcServer::getCliffs),
                                 "getCliffs");
+  }
+  
+  if (mPhoto)
+  {
+       mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getPhotoDev),
+                                "getPhotoDev");
+      mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getPhotos),
+                                "getPhotos");
   }
   
 }
@@ -189,6 +200,18 @@ void RobotRpcServer::getCliffDev(jsonrpc::variant params,
     pthread_mutex_unlock(mRobotMutex);
 }
 //------------------------------------------------------------------------------
+void RobotRpcServer::getPhotoDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    pthread_mutex_lock(mRobotMutex);
+    results["numSamples"] = toVariant<int> (mPhoto->getNumSamples());   
+    // From Chatterbox Driver File
+    results["maxRange"] = toVariant<int> (1023); 
+    pthread_mutex_unlock(mRobotMutex);
+}
+//------------------------------------------------------------------------------
 void RobotRpcServer::getDrivetrain( variant params,
                                     object& results,
                                     const std::string& ip,
@@ -278,6 +301,20 @@ void RobotRpcServer::getCliffs(jsonrpc::variant params,
         cliffs.push_back(toVariant<bool> (mCliff->mBitData[i]) );
     }
     results["cliffs"] = toVariant( cliffs );
+    pthread_mutex_unlock(mRobotMutex);
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getPhotos(jsonrpc::variant params,
+                                        jsonrpc::object& results, 
+                                        const std::string& ip, int port)
+{
+    pthread_mutex_lock(mRobotMutex);
+    array photos;
+    for (unsigned int i = 0; i < mPhoto->getNumSamples(); ++i)
+    {
+        photos.push_back(toVariant<double> (mPhoto->mData[i]) );
+    }
+    results["photos"] = toVariant( photos );
     pthread_mutex_unlock(mRobotMutex);
 }
 //------------------------------------------------------------------------------
