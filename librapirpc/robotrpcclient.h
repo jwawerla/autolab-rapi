@@ -81,7 +81,7 @@ class RobotRpcClient
      * @param maxRange
      * @return  1 if successful, otherwise 0
      */
-    bool getPhotoDev(unsigned int &numSamples, unsigned int &maxRange);
+    bool getPhotoDev(unsigned int &numSamples, double &maxRange);
     
   //---- device get/set calls --------------------------------------------------
     /** get position and velocity information */

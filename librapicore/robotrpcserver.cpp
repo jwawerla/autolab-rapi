@@ -5,7 +5,6 @@ namespace Rapi
 using namespace jsonrpc;
 //------------------------------------------------------------------------------
 RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
-                                pthread_mutex_t * dataMutex,
                                 ADrivetrain2dof * drivetrain,
                                 APowerPack * powerpack,
                                 ARangeFinder * rangefinder , ABinarySensorArray *bumper, ABinarySensorArray *wheeldrop,
@@ -14,7 +13,6 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
 {
   // initialize data members
   mRobot = robot;
-  mRobotMutex = dataMutex;
   mDrivetrain = drivetrain;
   mPowerPack = powerpack;
   mRangeFinder = rangefinder;
@@ -22,6 +20,9 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
   mWheelDrop = wheeldrop;
   mCliff = cliff;
   mPhoto = photo;
+  
+  //initialize the lock
+  pthread_mutex_init(&mRobotMutex, NULL);
 
   // setup handlers as appropriate
   if ( mDrivetrain ) {
@@ -99,6 +100,16 @@ RobotRpcServer::~RobotRpcServer()
   }
 }
 //------------------------------------------------------------------------------
+void RobotRpcServer::lockRpcMutex()
+{
+    pthread_mutex_lock(&mRobotMutex);
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::unlockRpcMutex()
+{
+    pthread_mutex_unlock(&mRobotMutex);
+}
+//------------------------------------------------------------------------------
 void RobotRpcServer::start()
 {
   pthread_create( &mServerThread, NULL, &runThread, this );
@@ -106,6 +117,7 @@ void RobotRpcServer::start()
 //------------------------------------------------------------------------------
 void * RobotRpcServer::runServer( void )
 {
+  //TODO: Should we add a delay in the loop?
   while ( true ) { mServer.recv(); }
   return 0; // we shouldn't hit this line
 }
@@ -142,10 +154,10 @@ void RobotRpcServer::getPowerPackDev( variant params,
                                       const std::string& ip,
                                       int port )
 {
-  pthread_mutex_lock( mRobotMutex );
+    lockRpcMutex();
   double cap = ( mPowerPack->getMaxBatteryCapacity() == INFINITY ) ? 0.0 :
                mPowerPack->getMaxBatteryCapacity();
-  pthread_mutex_unlock( mRobotMutex );
+  unlockRpcMutex();
   results[ "maxBatteryCapacity" ] = toVariant<double> ( cap );
 }
 //------------------------------------------------------------------------------
@@ -154,7 +166,7 @@ void RobotRpcServer::getRangeFinderDev( variant params,
                                         const std::string& ip,
                                         int port )
 {
-  pthread_mutex_lock( mRobotMutex );
+  lockRpcMutex();
   results[ "numSamples" ] = toVariant<int> ( mRangeFinder->getNumSamples() );
   double minRange = ( mRangeFinder->getMinRange() == INFINITY ) ? 0.0 :
                     mRangeFinder->getMinRange();
@@ -166,7 +178,7 @@ void RobotRpcServer::getRangeFinderDev( variant params,
   array beamPose;
   for ( unsigned int i = 0; i < mRangeFinder->getNumSamples(); ++i )
     beamPose.push_back( packPose( mRangeFinder->mRelativeBeamPose[i] ) );
-  pthread_mutex_unlock( mRobotMutex );
+  unlockRpcMutex();
   results[ "beamPose" ] = toVariant<array> ( beamPose );
 }
 //------------------------------------------------------------------------------
@@ -175,9 +187,9 @@ void RobotRpcServer::getBumperDev(jsonrpc::variant params,
                                     const std::string& ip,
                                     int port)
 {
-    pthread_mutex_lock(mRobotMutex);
+    lockRpcMutex();
     results["numSamples"] = toVariant<int> (mBumper->getNumSamples());    
-    pthread_mutex_unlock(mRobotMutex);
+    unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getWheelDropDev(jsonrpc::variant params,
@@ -185,9 +197,9 @@ void RobotRpcServer::getWheelDropDev(jsonrpc::variant params,
                                     const std::string& ip,
                                     int port)
 {
-    pthread_mutex_lock(mRobotMutex);
+    lockRpcMutex();
     results["numSamples"] = toVariant<int> (mWheelDrop->getNumSamples());    
-    pthread_mutex_unlock(mRobotMutex);
+    unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getCliffDev(jsonrpc::variant params,
@@ -195,9 +207,9 @@ void RobotRpcServer::getCliffDev(jsonrpc::variant params,
                                     const std::string& ip,
                                     int port)
 {
-    pthread_mutex_lock(mRobotMutex);
+    lockRpcMutex();
     results["numSamples"] = toVariant<int> (mCliff->getNumSamples());    
-    pthread_mutex_unlock(mRobotMutex);
+    unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getPhotoDev(jsonrpc::variant params,
@@ -205,11 +217,11 @@ void RobotRpcServer::getPhotoDev(jsonrpc::variant params,
                                     const std::string& ip,
                                     int port)
 {
-    pthread_mutex_lock(mRobotMutex);
+    lockRpcMutex();
     results["numSamples"] = toVariant<int> (mPhoto->getNumSamples());   
     // From Chatterbox Driver File
-    results["maxRange"] = toVariant<int> (1023); 
-    pthread_mutex_unlock(mRobotMutex);
+    results["maxRange"] = toVariant<double> (1024); 
+    unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getDrivetrain( variant params,
@@ -217,13 +229,13 @@ void RobotRpcServer::getDrivetrain( variant params,
                                     const std::string& ip,
                                     int port )
 {
-  pthread_mutex_lock( mRobotMutex );
+  lockRpcMutex();
   results[ "isStalled" ] = toVariant<bool> ( mDrivetrain->isStalled() );
   results[ "stalledSince" ] = toVariant<double> ( mDrivetrain->stalledSince() );
   results[ "measVelocity" ] = packVelocity( mDrivetrain->getVelocity() );
   results[ "cmdVelocity" ] = packVelocity( mDrivetrain->getVelocityCmd() );
   results[ "odometry" ] = packPose( mDrivetrain->getOdometry()->getPose() );
-  pthread_mutex_unlock( mRobotMutex );
+  unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getPowerPack( variant params,
@@ -231,8 +243,8 @@ void RobotRpcServer::getPowerPack( variant params,
                                    const std::string& ip,
                                    int port )
 {
-  pthread_mutex_lock( mRobotMutex );
-  results[ "batteryCapacity" ] = toVariant<double>
+   lockRpcMutex();
+   results[ "batteryCapacity" ] = toVariant<double>
                                  ( mPowerPack->getBatteryCapacity() );
   results[ "current" ] = toVariant<double> ( mPowerPack->getCurrent() );
   results[ "voltage" ] = toVariant<double> ( mPowerPack->getVoltage() );
@@ -245,7 +257,7 @@ void RobotRpcServer::getPowerPack( variant params,
   results[ "chargeState" ] = toVariant<int>
                              (( int ) mPowerPack->getChargingState() );
   results[ "chargeSource" ] = toVariant<int>( mPowerPack->getChargingSource() );
-  pthread_mutex_unlock( mRobotMutex );
+  unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getRanges( variant params,
@@ -253,69 +265,69 @@ void RobotRpcServer::getRanges( variant params,
                                 const std::string& ip,
                                 int port )
 {
-  pthread_mutex_lock( mRobotMutex );
+    lockRpcMutex();
   array ranges;
   for ( unsigned int i = 0; i < mRangeFinder->getNumSamples(); ++i ) {
     ranges.push_back( toVariant<double> ( mRangeFinder->mRangeData[i].range ) );
   }
   results[ "range" ] = toVariant( ranges );
-  pthread_mutex_unlock( mRobotMutex );
+  unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getBumpers(jsonrpc::variant params,
                                         jsonrpc::object& results, 
                                         const std::string& ip, int port)
 {
-    pthread_mutex_lock(mRobotMutex);
+    lockRpcMutex();
     array bumpers;
     for (unsigned int i = 0; i < mBumper->getNumSamples(); ++i)
     {
         bumpers.push_back(toVariant<bool> (mBumper->mBitData[i]) );
     }
     results["bumpers"] = toVariant( bumpers );
-    pthread_mutex_unlock(mRobotMutex);
+    unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getWheelDrops(jsonrpc::variant params,
                                         jsonrpc::object& results, 
                                         const std::string& ip, int port)
 {
-    pthread_mutex_lock(mRobotMutex);
+    lockRpcMutex();
     array wheeldrops;
     for (unsigned int i = 0; i < mWheelDrop->getNumSamples(); ++i)
     {
         wheeldrops.push_back(toVariant<bool> (mWheelDrop->mBitData[i]) );
     }
     results["wheelDrops"] = toVariant( wheeldrops );
-    pthread_mutex_unlock(mRobotMutex);
+    unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getCliffs(jsonrpc::variant params,
                                         jsonrpc::object& results, 
                                         const std::string& ip, int port)
 {
-    pthread_mutex_lock(mRobotMutex);
+    lockRpcMutex();
     array cliffs;
     for (unsigned int i = 0; i < mCliff->getNumSamples(); ++i)
     {
         cliffs.push_back(toVariant<bool> (mCliff->mBitData[i]) );
     }
     results["cliffs"] = toVariant( cliffs );
-    pthread_mutex_unlock(mRobotMutex);
+    unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getPhotos(jsonrpc::variant params,
                                         jsonrpc::object& results, 
                                         const std::string& ip, int port)
 {
-    pthread_mutex_lock(mRobotMutex);
+    lockRpcMutex();
     array photos;
     for (unsigned int i = 0; i < mPhoto->getNumSamples(); ++i)
     {
         photos.push_back(toVariant<double> (mPhoto->mData[i]) );
     }
     results["photos"] = toVariant( photos );
-    pthread_mutex_unlock(mRobotMutex);
+    unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 } // namespace

@@ -49,10 +49,9 @@ class RobotRpcServer
      * function.
      * @param robot pointer to the robot to be served
      * @param port server launched a host ip on specified port
-     * @param dataMutex a mutex that protects access to robot data
      * @param
      */
-    RobotRpcServer( ARobot * robot, int port, pthread_mutex_t * dataMutex,
+    RobotRpcServer( ARobot * robot, int port,
                     ADrivetrain2dof * drivetrain, APowerPack * powerpack,
                     ARangeFinder * rangefinder, ABinarySensorArray* bumper, ABinarySensorArray *wheeldrop,
                     ABinarySensorArray* cliff, AAnalogSensorArray* photo);
@@ -63,6 +62,18 @@ class RobotRpcServer
     /** A little thunk to allow pthread to run within the class */
     static void * runThread( void * arg )
     { return (( RobotRpcServer * ) arg )->runServer(); }
+    
+    /**
+     * The mutual exclusion function that have to be run by robot controller when in control loop
+     * to avoid robot data access conflicts. Basically the lockRpCMutex() should be called in robot
+     * controller's update function when manipulating robot's data.
+     */
+    void lockRpcMutex();
+    
+    /**
+     * The unlock function to release the protection lock in robot's controller.
+     */
+    void unlockRpcMutex();
   private:
     /** pthread function: listen for incoming requests */
     void * runServer( void );
@@ -155,7 +166,7 @@ class RobotRpcServer
     /** thread for server */
     pthread_t mServerThread;
     /** mutex to access the robot's data */
-    pthread_mutex_t * mRobotMutex;
+    pthread_mutex_t  mRobotMutex;
     /** a pointer to the robot object we are serving */
     ARobot * mRobot;
     /** the drivetrain object we are serving (if it exists) */

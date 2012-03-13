@@ -25,7 +25,7 @@ int main (int argc, char* argv[])
     unsigned int numWheels;
     unsigned int numCliffs;
     unsigned int numPhotos;
-    unsigned int maxRange;
+    double maxRange;
     std::vector<float> ranges;
     std::vector<bool> bumpers;
     std::vector<bool> wheels;

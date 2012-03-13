@@ -118,11 +118,11 @@ bool RobotRpcClient::getCliffDev(unsigned int& numSamples)
 }
 
 //------------------------------------------------------------------------------
-bool RobotRpcClient::getPhotoDev(unsigned int& numSamples, unsigned int& maxRange)
+bool RobotRpcClient::getPhotoDev(unsigned int& numSamples, double& maxRange)
 {
     object result = call("getPhotoDev", object());
     numSamples = fromVariant<int>(result["numSamples"]);
-    maxRange = fromVariant<int>(result["maxRange"]);
+    maxRange = fromVariant<double>(result["maxRange"]);
     return true;
 }
 
