@@ -31,6 +31,7 @@ int main (int argc, char* argv[])
     std::vector<bool> wheels;
     std::vector<bool> cliffs;
     std::vector<float> photos;
+    Rapi::CVelocity2d vel(0.2, 0.0, 0.0);
     while (true)
     {
         std::cout << "Testing robot " << address << std::endl;
@@ -53,6 +54,7 @@ int main (int argc, char* argv[])
         photos = robot->getPhotos();
         std::cout << "Photos Count : " << numPhotos << std::endl;
         std::cout << "Analog Photo: " << photos[0] << " , max : " << maxRange << std::endl;
+        robot->setDrivetrain(vel);
         usleep(500000); // Please don't overload robot 
     }
     //robot->quit();

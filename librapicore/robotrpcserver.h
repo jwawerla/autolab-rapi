@@ -123,6 +123,13 @@ class RobotRpcServer
                         jsonrpc::object& results,
                         const std::string& ip,
                         int port );
+    
+    /** Send commands to drivetrain */
+    void setDrivetrain( jsonrpc::variant params,
+                        jsonrpc::object& results,
+                        const std::string& ip,
+                        int port );
+    
     /** send voltage and power information */
     void getPowerPack( jsonrpc::variant params,
                        jsonrpc::object& results,
@@ -161,6 +168,8 @@ class RobotRpcServer
     jsonrpc::variant packVelocity( CVelocity2d velocity );
     /** utility routine to pack a CPose2d object into a jsonrpc::variant */
     jsonrpc::variant packPose( CPose2d pose );
+    /** utility routine to unpack a CVelocity2d object from a variant */
+    CVelocity2d unpackVelocity( jsonrpc::variant velocityObj );
     /** json server */
     jsonrpc::TCPServer mServer;
     /** thread for server */

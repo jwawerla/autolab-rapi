@@ -32,6 +32,9 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
     mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
                               ( this, &RobotRpcServer::getDrivetrain ),
                               "getDrivetrain" );
+    mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
+                              ( this, &RobotRpcServer::setDrivetrain ),
+                              "setDrivetrain" );
   }
   if ( mPowerPack ) {
     mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
@@ -140,6 +143,16 @@ variant RobotRpcServer::packPose( CPose2d pose )
   return toVariant( poseObj );
 }
 //------------------------------------------------------------------------------
+CVelocity2d RobotRpcServer::unpackVelocity( variant velocityVar )
+{
+  Rapi::CVelocity2d velocity;
+  object velocityObj = fromVariant<object>( velocityVar );
+  velocity.mXDot = fromVariant<double>( velocityObj [ "xDot" ] );
+  velocity.mYDot = fromVariant<double>( velocityObj[ "yDot" ] );
+  velocity.mYawDot = fromVariant<double>( velocityObj[ "yawDot" ] );
+  return velocity;
+}
+//------------------------------------------------------------------------------
 void RobotRpcServer::getDrivetrainDev( variant params,
                                        object& results,
                                        const std::string& ip,
@@ -154,7 +167,7 @@ void RobotRpcServer::getPowerPackDev( variant params,
                                       const std::string& ip,
                                       int port )
 {
-    lockRpcMutex();
+  lockRpcMutex();
   double cap = ( mPowerPack->getMaxBatteryCapacity() == INFINITY ) ? 0.0 :
                mPowerPack->getMaxBatteryCapacity();
   unlockRpcMutex();
@@ -236,6 +249,18 @@ void RobotRpcServer::getDrivetrain( variant params,
   results[ "cmdVelocity" ] = packVelocity( mDrivetrain->getVelocityCmd() );
   results[ "odometry" ] = packPose( mDrivetrain->getOdometry()->getPose() );
   unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::setDrivetrain(jsonrpc::variant params, 
+                                        jsonrpc::object& results, 
+                                        const std::string& ip, int port)
+{
+    object commands = fromVariant<object>(params);
+    CVelocity2d velCmd = unpackVelocity(commands["cmdVelocity"]);
+    
+    lockRpcMutex();
+    mDrivetrain->setVelocityCmd(velCmd);
+    unlockRpcMutex();    
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getPowerPack( variant params,

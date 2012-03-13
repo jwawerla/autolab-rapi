@@ -61,6 +61,15 @@ Rapi::CPose2d RobotRpcClient::unpackPose( variant poseVar )
   return pose;
 }
 //------------------------------------------------------------------------------
+variant RobotRpcClient::packVelocity( CVelocity2d velocity )
+{
+  object velocityObj;
+  velocityObj[ "xDot" ] = toVariant<double> ( velocity.mXDot );
+  velocityObj[ "yDot" ] = toVariant<double> ( velocity.mYDot );
+  velocityObj[ "yawDot" ] = toVariant<double> ( velocity.mYawDot );
+  return toVariant( velocityObj );
+}
+//------------------------------------------------------------------------------
 bool RobotRpcClient::getDrivetrainDev()
 {
   object result = call( "getDrivetrainDev", object() );
@@ -139,6 +148,14 @@ void RobotRpcClient::getDrivetrain( bool &isStalled,
   measVelocity = unpackVelocity( result[ "measVelocity" ] );
   cmdVelocity = unpackVelocity( result[ "cmdVelocity" ] );
   odometry = unpackPose( result[ "odometry" ] );
+}
+//------------------------------------------------------------------------------
+void RobotRpcClient::setDrivetrain(CVelocity2d cmdVelocity)
+{
+    object params;
+    params["cmdVelocity"] = packVelocity(cmdVelocity);
+    object result = call("setDrivetrain", params );
+    
 }
 //------------------------------------------------------------------------------
 void RobotRpcClient::getPowerPack( double &batteryCapacity, double &current,

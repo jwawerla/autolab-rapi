@@ -108,6 +108,12 @@ class RobotRpcClient
      */
     std::vector<bool> getBumpers(void);
     
+    /**
+     * Sends a velocity command over RPC 
+     * TODO: More commands for drivetrain
+     * @return 
+     */
+    void setDrivetrain(CVelocity2d cmdVelocity);
     
     /**
      * Get wheeldrops status
@@ -134,6 +140,8 @@ class RobotRpcClient
     CPose2d unpackPose( jsonrpc::variant poseObj );
     /** utility routine to unpack a CVelocity2d object from a variant */
     CVelocity2d unpackVelocity( jsonrpc::variant velocityObj );
+     /** utility routine to pack a CVelocity2d object into a jsonrpc::variant */
+    jsonrpc::variant packVelocity( CVelocity2d velocity );
     /** the json server to which we make calls */
     jsonrpc::TCPClient mServer;
 };
