@@ -269,10 +269,11 @@ void RobotRpcServer::setLights(jsonrpc::variant params,
     bool isBlinkingCommand = fromVariant<bool>(commands["isBlinkingCommand"]);
     if (isBlinkingCommand == false)
     {
-        unsigned char colorRed = fromVariant<unsigned char>(commands["colorRed"]);
-        unsigned char colorGreen = fromVariant<unsigned char>(commands["colorGreen"]);
-        unsigned char colorBlue = fromVariant<unsigned char>(commands["colorBlue"]);
+        int colorRed = fromVariant<int>(commands["colorRed"]);
+        int colorGreen = fromVariant<int>(commands["colorGreen"]);
+        int colorBlue = fromVariant<int>(commands["colorBlue"]);
         lockRpcMutex();
+        //TODO: Unsigned char cast
         mLights->setLight(id, colorRed, colorGreen, colorBlue);
         unlockRpcMutex();
     }

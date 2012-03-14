@@ -32,7 +32,7 @@ int main (int argc, char* argv[])
     std::vector<bool> wheels;
     std::vector<bool> cliffs;
     std::vector<float> photos;
-    Rapi::CVelocity2d vel(0.0, 0.0, -0.5);
+    Rapi::CVelocity2d vel(0.0, 0.0, 0.0);
     unsigned int numLights;
     
     while (true)
@@ -58,7 +58,6 @@ int main (int argc, char* argv[])
         std::cout << "Photos Count : " << numPhotos << std::endl;
         std::cout << "Analog Photo: " << photos[0] << " , max : " << maxRange << std::endl;
         std::cout << "Setting velcoity over RPC to : ";
-        vel.print();
         std::cout << std::endl;
         
         robot->setDrivetrain(vel);
