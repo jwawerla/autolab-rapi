@@ -136,6 +136,13 @@ bool RobotRpcClient::getPhotoDev(unsigned int& numSamples, double& maxRange)
 }
 
 //------------------------------------------------------------------------------
+bool RobotRpcClient::getLightsDev(unsigned int& numLights)
+{
+    object result = call("getLightsDev", object());
+    numLights = fromVariant<int>(result["numLights"]);
+    return true;
+}
+//------------------------------------------------------------------------------
 void RobotRpcClient::getDrivetrain( bool &isStalled,
                                     float &stalledSince,
                                     Rapi::CVelocity2d & measVelocity,
@@ -235,6 +242,25 @@ std::vector<float> RobotRpcClient::getPhotos( void )
         out.push_back(fromVariant<double> (photos[i]));
     }
     return out;
+}
+//------------------------------------------------------------------------------
+void RobotRpcClient::setLights(int id, bool isBlinkingCommand, CRgbColor color, bool isEnabled, float freq)
+{
+    object params;
+    params["id"] = toVariant<int> (id);
+    params["isBlinkingCommand"] = toVariant<bool> (isBlinkingCommand);
+    if (isBlinkingCommand == false)
+    {
+        params["colorRed"] = toVariant<unsigned char> (color.mRed);
+        params["colorGreen"] = toVariant<unsigned char> (color.mGreen);
+        params["colorBlue"] = toVariant<unsigned char> (color.mBlue);
+    }
+    else
+    {
+        params["isEnabled"]  = toVariant<bool> (isEnabled);
+        params["freq"] = toVariant<double> (freq);
+    }
+    object result = call("setLights", params);
 }
 //------------------------------------------------------------------------------
 

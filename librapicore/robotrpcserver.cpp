@@ -8,7 +8,7 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
                                 ADrivetrain2dof * drivetrain,
                                 APowerPack * powerpack,
                                 ARangeFinder * rangefinder , ABinarySensorArray *bumper, ABinarySensorArray *wheeldrop,
-                                ABinarySensorArray *cliff, AAnalogSensorArray *photo)
+                                ABinarySensorArray *cliff, AAnalogSensorArray *photo, ALights *lights)
     : mServer( port )
 {
   // initialize data members
@@ -20,6 +20,7 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
   mWheelDrop = wheeldrop;
   mCliff = cliff;
   mPhoto = photo;
+  mLights = lights;
   
   //initialize the lock
   pthread_mutex_init(&mRobotMutex, NULL);
@@ -91,6 +92,16 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
       mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
                                 (this, &RobotRpcServer::getPhotos),
                                 "getPhotos");
+  }
+  
+  if (mLights)
+  {
+      mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
+                              ( this, &RobotRpcServer::getLightsDev ),
+                              "getLightsDev" );
+    mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
+                              ( this, &RobotRpcServer::setLights),
+                              "setLights" );
   }
   
 }
@@ -235,6 +246,44 @@ void RobotRpcServer::getPhotoDev(jsonrpc::variant params,
     // From Chatterbox Driver File
     results["maxRange"] = toVariant<double> (1024); 
     unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getLightsDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    lockRpcMutex();
+    results["numLights"] = toVariant<int>(mLights->getNumLights());
+    unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::setLights(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    object commands = fromVariant<object>(params);
+    
+    int id = fromVariant<int>(commands["id"]);
+    bool isBlinkingCommand = fromVariant<bool>(commands["isBlinkingCommand"]);
+    if (isBlinkingCommand == false)
+    {
+        unsigned char colorRed = fromVariant<unsigned char>(commands["colorRed"]);
+        unsigned char colorGreen = fromVariant<unsigned char>(commands["colorGreen"]);
+        unsigned char colorBlue = fromVariant<unsigned char>(commands["colorBlue"]);
+        lockRpcMutex();
+        mLights->setLight(id, colorRed, colorGreen, colorBlue);
+        unlockRpcMutex();
+    }
+    else
+    {
+        bool isEnabled = fromVariant<bool>(commands["isEnabled"]);
+        double freq = fromVariant<double>(commands["freq"]);
+        lockRpcMutex();
+        mLights->setBlink(id, isEnabled, freq);
+        unlockRpcMutex();
+    }
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getDrivetrain( variant params,

@@ -1,6 +1,7 @@
 #include <string.h>
 #include "RapiRpc"
 #include "cbrobot.h"
+#include "i2c/robostix_drv.h"
 
 
 int main (int argc, char* argv[])
@@ -31,7 +32,9 @@ int main (int argc, char* argv[])
     std::vector<bool> wheels;
     std::vector<bool> cliffs;
     std::vector<float> photos;
-    Rapi::CVelocity2d vel(0.2, 0.0, 0.0);
+    Rapi::CVelocity2d vel(0.0, 0.0, -0.5);
+    unsigned int numLights;
+    
     while (true)
     {
         std::cout << "Testing robot " << address << std::endl;
@@ -54,7 +57,18 @@ int main (int argc, char* argv[])
         photos = robot->getPhotos();
         std::cout << "Photos Count : " << numPhotos << std::endl;
         std::cout << "Analog Photo: " << photos[0] << " , max : " << maxRange << std::endl;
+        std::cout << "Setting velcoity over RPC to : ";
+        vel.print();
+        std::cout << std::endl;
+        
         robot->setDrivetrain(vel);
+        robot->getLightsDev(numLights);
+        std::cout << "Number of lights : " << numLights << std::endl;
+        robot->setLights(0, false, Rapi::CRgbColor(255,0,0), false, 0);
+        robot->setLights(1, false, Rapi::CRgbColor(0,255,0), false, 0);
+        robot->setLights(2, false, Rapi::CRgbColor(0,0,255), false, 0);
+        robot->setLights(3, true, Rapi::CRgbColor(0,0,0), true, 100); 
+        
         usleep(500000); // Please don't overload robot 
     }
     //robot->quit();

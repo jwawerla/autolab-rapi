@@ -44,9 +44,9 @@ class RobotRpcServer
      * Constructs a JSON RPC server to export the robot data.  At the moment,
      * drivetrain, rangefinder, powerpack, wheeldrops, cliffs, photosensor and bumpers data is exported.  Note that the
      * server runs in a separate thread from the robot controller so access to
-     * robot data should be controller.  Typically, you create a pthread mutex
-     * when you initialize your controller and lock it during your updateData()
-     * function.
+     * robot data should be controller.  Typically, you have to use the lock/unlock method provided 
+     * by this class whenever you want to use the objects you shared with this class. 
+     * The easy way to that is to protect whole you controller's updateData with these lock/unlock methods.
      * @param robot pointer to the robot to be served
      * @param port server launched a host ip on specified port
      * @param
@@ -54,7 +54,7 @@ class RobotRpcServer
     RobotRpcServer( ARobot * robot, int port,
                     ADrivetrain2dof * drivetrain, APowerPack * powerpack,
                     ARangeFinder * rangefinder, ABinarySensorArray* bumper, ABinarySensorArray *wheeldrop,
-                    ABinarySensorArray* cliff, AAnalogSensorArray* photo);
+                    ABinarySensorArray* cliff, AAnalogSensorArray* photo, ALights* lights);
     /** default destructor */
     ~RobotRpcServer();
     /** start the server in its own thread */
@@ -117,6 +117,11 @@ class RobotRpcServer
                                     const std::string& ip,
                                     int port);
     
+    /** Send the current lights configurations*/
+    void getLightsDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port);
     //---- device get/set calls ------------------------------------------------
     /** send position and velocity information */
     void getDrivetrain( jsonrpc::variant params,
@@ -164,6 +169,15 @@ class RobotRpcServer
                     const std::string& ip,
                     int port);
     
+    /** Turn specific light to on with specific color or blinking with specific frequency
+     * TODO: Is it a good practice to handle all request types  in one handler? */
+    void setLights(jsonrpc::variant params,
+                    jsonrpc::object& results,
+                    const std::string& ip,
+                    int port);
+    
+    
+    
     /** utility routine to pack a CVelocity2d object into a jsonrpc::variant */
     jsonrpc::variant packVelocity( CVelocity2d velocity );
     /** utility routine to pack a CPose2d object into a jsonrpc::variant */
@@ -192,6 +206,8 @@ class RobotRpcServer
     ABinarySensorArray *mCliff;
     /** The photo sensor object we are serving (if it exists) */
     AAnalogSensorArray *mPhoto;
+    /** The lights object we are serving (if it exists) */
+    ALights *mLights;
 };
 
 } // namespace

@@ -83,6 +83,12 @@ class RobotRpcClient
      */
     bool getPhotoDev(unsigned int &numSamples, double &maxRange);
     
+    /**
+     * Get the parameters of the lights device if exists
+     * @param numLights
+     * @return 1 if successful, otherwise 0
+     */
+    bool getLightsDev(unsigned int &numLights);
   //---- device get/set calls --------------------------------------------------
     /** get position and velocity information */
     void getDrivetrain( bool &isStalled,
@@ -132,6 +138,19 @@ class RobotRpcClient
      * @return 
      */
     std::vector<float> getPhotos(void);
+    
+    /**
+     * Set the robot's specific photo sensor to specific color, 
+     * or make it blink via RPC calls.
+     * If the lights is mono-color, only the red channel will be used.
+     * @param id of light, -1 all
+     * @param isBlinkingCommand determines to set the blinking behaviour or the color
+     * @param color (color mode only) The CRgbColor
+     * @param isEnabled (blinking mode only) enable/disable blinking
+     * @param freq (blinking mode only) The blinking frequency rate (hz)
+     */
+    void setLights(int id, bool isBlinkingCommand, CRgbColor color, bool isEnabled, float freq);
+    
     
   private:
     /** helper method for performing RPC calls */
