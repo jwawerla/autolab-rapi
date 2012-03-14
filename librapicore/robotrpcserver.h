@@ -42,7 +42,7 @@ class RobotRpcServer
   public:
     /**
      * Constructs a JSON RPC server to export the robot data.  At the moment,
-     * drivetrain, rangefinder, powerpack, wheeldrops, cliffs, photosensor and bumpers data is exported.  Note that the
+     * drivetrain, rangefinder, powerpack, wheeldrops, cliffs, photosensor,lights, textdisplay and bumpers data is exported.  Note that the
      * server runs in a separate thread from the robot controller so access to
      * robot data should be controller.  Typically, you have to use the lock/unlock method provided 
      * by this class whenever you want to use the objects you shared with this class. 
@@ -54,7 +54,7 @@ class RobotRpcServer
     RobotRpcServer( ARobot * robot, int port,
                     ADrivetrain2dof * drivetrain, APowerPack * powerpack,
                     ARangeFinder * rangefinder, ABinarySensorArray* bumper, ABinarySensorArray *wheeldrop,
-                    ABinarySensorArray* cliff, AAnalogSensorArray* photo, ALights* lights);
+                    ABinarySensorArray* cliff, AAnalogSensorArray* photo, ALights* lights, ATextDisplay* textdisplay);
     /** default destructor */
     ~RobotRpcServer();
     /** start the server in its own thread */
@@ -122,6 +122,13 @@ class RobotRpcServer
                                     jsonrpc::object& results,
                                     const std::string& ip,
                                     int port);
+    
+    /** Send the current text display configuration */
+    void getTextDisplayDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+    ;
     //---- device get/set calls ------------------------------------------------
     /** send position and velocity information */
     void getDrivetrain( jsonrpc::variant params,
@@ -176,6 +183,11 @@ class RobotRpcServer
                     const std::string& ip,
                     int port);
     
+    /** Print text on text display */
+    void setTextDisplay(jsonrpc::variant params,
+                    jsonrpc::object& results,
+                    const std::string& ip,
+                    int port);
     
     
     /** utility routine to pack a CVelocity2d object into a jsonrpc::variant */
@@ -208,6 +220,8 @@ class RobotRpcServer
     AAnalogSensorArray *mPhoto;
     /** The lights object we are serving (if it exists) */
     ALights *mLights;
+    /** The text display we are serving (if it exists) */
+    ATextDisplay* mTextDisplay;
 };
 
 } // namespace

@@ -89,6 +89,14 @@ class RobotRpcClient
      * @return 1 if successful, otherwise 0
      */
     bool getLightsDev(unsigned int &numLights);
+    
+    
+    /**
+     * Get the parameters of the text display device if exists
+     * @param size
+     * @return 1 if successful, otherwise 0
+     */
+    bool getTextDisplayDev(unsigned int &size);
   //---- device get/set calls --------------------------------------------------
     /** get position and velocity information */
     void getDrivetrain( bool &isStalled,
@@ -151,7 +159,11 @@ class RobotRpcClient
      */
     void setLights(int id, bool isBlinkingCommand, CRgbColor color, bool isEnabled, float freq);
     
-    
+    /**
+     * Set the text on text display device
+     * @param text
+     */
+    void setTextDisplay(std::string text);
   private:
     /** helper method for performing RPC calls */
     jsonrpc::object call( std::string methodName, jsonrpc::object args );

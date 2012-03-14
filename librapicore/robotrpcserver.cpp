@@ -8,7 +8,7 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
                                 ADrivetrain2dof * drivetrain,
                                 APowerPack * powerpack,
                                 ARangeFinder * rangefinder , ABinarySensorArray *bumper, ABinarySensorArray *wheeldrop,
-                                ABinarySensorArray *cliff, AAnalogSensorArray *photo, ALights *lights)
+                                ABinarySensorArray *cliff, AAnalogSensorArray *photo, ALights *lights, ATextDisplay* textdisplay)
     : mServer( port )
 {
   // initialize data members
@@ -21,6 +21,7 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
   mCliff = cliff;
   mPhoto = photo;
   mLights = lights;
+  mTextDisplay = textdisplay;
   
   //initialize the lock
   pthread_mutex_init(&mRobotMutex, NULL);
@@ -99,9 +100,19 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
       mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
                               ( this, &RobotRpcServer::getLightsDev ),
                               "getLightsDev" );
-    mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
+      mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
                               ( this, &RobotRpcServer::setLights),
                               "setLights" );
+  }
+  
+  if (mTextDisplay)
+  {
+      mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
+                              ( this, &RobotRpcServer::getTextDisplayDev ),
+                              "getTextDisplayDev" );
+      mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
+                              ( this, &RobotRpcServer::setTextDisplay),
+                              "setTextDisplay" );
   }
   
 }
@@ -257,6 +268,17 @@ void RobotRpcServer::getLightsDev(jsonrpc::variant params,
     results["numLights"] = toVariant<int>(mLights->getNumLights());
     unlockRpcMutex();
 }
+
+//------------------------------------------------------------------------------
+void RobotRpcServer::getTextDisplayDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    lockRpcMutex();
+    results["size"] = toVariant<int>(mTextDisplay->getSize());
+    unlockRpcMutex();
+}
 //------------------------------------------------------------------------------
 void RobotRpcServer::setLights(jsonrpc::variant params,
                                     jsonrpc::object& results,
@@ -285,6 +307,18 @@ void RobotRpcServer::setLights(jsonrpc::variant params,
         mLights->setBlink(id, isEnabled, freq);
         unlockRpcMutex();
     }
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::setTextDisplay(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    object commands = fromVariant<object>(params);
+    std::string text = fromVariant<std::string>(commands["text"]);
+    lockRpcMutex();
+    mTextDisplay->setText(text);
+    unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getDrivetrain( variant params,

@@ -143,6 +143,19 @@ bool RobotRpcClient::getLightsDev(unsigned int& numLights)
     return true;
 }
 //------------------------------------------------------------------------------
+bool RobotRpcClient::getTextDisplayDev(unsigned int& size)
+{
+    object result = call("getTextDisplayDev", object());
+    size = fromVariant<int>(result["size"]);
+}
+//------------------------------------------------------------------------------
+void RobotRpcClient::setTextDisplay(std::string text)
+{
+    object params;
+    params["text"]=toVariant<std::string> (text);
+    object result = call("setTextDisplay", params);
+}
+//------------------------------------------------------------------------------
 void RobotRpcClient::getDrivetrain( bool &isStalled,
                                     float &stalledSince,
                                     Rapi::CVelocity2d & measVelocity,

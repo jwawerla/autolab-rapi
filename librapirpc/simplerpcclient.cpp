@@ -18,6 +18,7 @@ void quitSig(int signum)
      robot->setLights(ALL_LIGHTS, false, Rapi::BLACK, false, 0.0); 
      //robot->setLights(ALL_LIGHTS, true, Rapi::BLACK, false, 1.0); 
      
+     robot->setTextDisplay("");
      usleep(1000000);
      //delete robot;
      exit(0);
@@ -56,7 +57,9 @@ int main (int argc, char* argv[])
     std::vector<float> photos;
     Rapi::CVelocity2d vel(0.0, 0.0, 1.0);
     unsigned int numLights;
-    
+    unsigned int sizeTD;
+    unsigned int ascii = 48;
+    std::string text;
     while (true)
     {
         std::cout << "Testing robot " << address << std::endl;
@@ -85,6 +88,14 @@ int main (int argc, char* argv[])
         robot->setDrivetrain(vel);
         robot->getLightsDev(numLights);
         std::cout << "Number of lights : " << numLights << std::endl;
+        
+        robot->getTextDisplayDev(sizeTD);
+        std::cout << "Number of digits : " << sizeTD << std::endl;
+        text = (char) ascii;
+        std::cout << "Writing to text display : " << text << std::endl;
+        robot->setTextDisplay(text);
+        if (ascii++ > 126) ascii = 48;
+        
         robot->setLights(-1, false, Rapi::CRgbColor(rand() % 255,rand() % 255, rand() % 255), false, 0);
         //robot->setLights(1, false, Rapi::CRgbColor(0,255,0), false, 0);
         //robot->setLights(2, false, Rapi::CRgbColor(0,0,255), false, 0);
