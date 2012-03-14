@@ -61,6 +61,15 @@ Rapi::CPose2d RobotRpcClient::unpackPose( variant poseVar )
   return pose;
 }
 //------------------------------------------------------------------------------
+variant RobotRpcClient::packVelocity( CVelocity2d velocity )
+{
+  object velocityObj;
+  velocityObj[ "xDot" ] = toVariant<double> ( velocity.mXDot );
+  velocityObj[ "yDot" ] = toVariant<double> ( velocity.mYDot );
+  velocityObj[ "yawDot" ] = toVariant<double> ( velocity.mYawDot );
+  return toVariant( velocityObj );
+}
+//------------------------------------------------------------------------------
 bool RobotRpcClient::getDrivetrainDev()
 {
   object result = call( "getDrivetrainDev", object() );
@@ -96,6 +105,57 @@ bool RobotRpcClient::getRangeFinderDev( unsigned int &numSamples,
   return true;
 }
 //------------------------------------------------------------------------------
+bool RobotRpcClient::getBumperDev(unsigned int& numSamples)
+{
+    object result = call("getBumperDev", object());
+    numSamples = fromVariant<int>(result["numSamples"]);
+    return true;
+}
+//------------------------------------------------------------------------------
+bool RobotRpcClient::getWheelDropDev(unsigned int& numSamples)
+{
+    object result = call("getWheelDropDev", object());
+    numSamples = fromVariant<int>(result["numSamples"]);
+    return true;
+}
+//------------------------------------------------------------------------------
+bool RobotRpcClient::getCliffDev(unsigned int& numSamples)
+{
+    object result = call("getCliffDev", object());
+    numSamples = fromVariant<int>(result["numSamples"]);
+    return true;
+}
+
+//------------------------------------------------------------------------------
+bool RobotRpcClient::getPhotoDev(unsigned int& numSamples, double& maxRange)
+{
+    object result = call("getPhotoDev", object());
+    numSamples = fromVariant<int>(result["numSamples"]);
+    maxRange = fromVariant<double>(result["maxRange"]);
+    return true;
+}
+
+//------------------------------------------------------------------------------
+bool RobotRpcClient::getLightsDev(unsigned int& numLights)
+{
+    object result = call("getLightsDev", object());
+    numLights = fromVariant<int>(result["numLights"]);
+    return true;
+}
+//------------------------------------------------------------------------------
+bool RobotRpcClient::getTextDisplayDev(unsigned int& size)
+{
+    object result = call("getTextDisplayDev", object());
+    size = fromVariant<int>(result["size"]);
+}
+//------------------------------------------------------------------------------
+void RobotRpcClient::setTextDisplay(std::string text)
+{
+    object params;
+    params["text"]=toVariant<std::string> (text);
+    object result = call("setTextDisplay", params);
+}
+//------------------------------------------------------------------------------
 void RobotRpcClient::getDrivetrain( bool &isStalled,
                                     float &stalledSince,
                                     Rapi::CVelocity2d & measVelocity,
@@ -108,6 +168,14 @@ void RobotRpcClient::getDrivetrain( bool &isStalled,
   measVelocity = unpackVelocity( result[ "measVelocity" ] );
   cmdVelocity = unpackVelocity( result[ "cmdVelocity" ] );
   odometry = unpackPose( result[ "odometry" ] );
+}
+//------------------------------------------------------------------------------
+void RobotRpcClient::setDrivetrain(CVelocity2d cmdVelocity)
+{
+    object params;
+    params["cmdVelocity"] = packVelocity(cmdVelocity);
+    object result = call("setDrivetrain", params );
+    
 }
 //------------------------------------------------------------------------------
 void RobotRpcClient::getPowerPack( double &batteryCapacity, double &current,
@@ -139,6 +207,73 @@ std::vector<float> RobotRpcClient::getRanges( void )
   }
 
   return out;
+}
+//------------------------------------------------------------------------------
+std::vector<bool> RobotRpcClient::getBumpers( void )
+{
+    std::vector<bool> out;
+    object result = call("getBumpers", object() );
+    array bumpers = fromVariant<array>(result["bumpers"]);
+    for (unsigned int i = 0; i < bumpers.size(); ++i)
+    {
+        out.push_back(fromVariant<bool> (bumpers[i]));
+    }
+    return out;
+}
+//------------------------------------------------------------------------------
+std::vector<bool> RobotRpcClient::getWheelDrops( void )
+{
+    std::vector<bool> out;
+    object result = call("getWheelDrops", object() );
+    array wheeldrops = fromVariant<array>(result["wheelDrops"]);
+    for (unsigned int i = 0; i < wheeldrops.size(); ++i)
+    {
+        out.push_back(fromVariant<bool> (wheeldrops[i]));
+    }
+    return out;
+}
+//------------------------------------------------------------------------------
+std::vector<bool> RobotRpcClient::getCliffs( void )
+{
+    std::vector<bool> out;
+    object result = call("getCliffs", object() );
+    array cliffs = fromVariant<array>(result["cliffs"]);
+    for (unsigned int i = 0; i < cliffs.size(); ++i)
+    {
+        out.push_back(fromVariant<bool> (cliffs[i]));
+    }
+    return out;
+}
+//------------------------------------------------------------------------------
+std::vector<float> RobotRpcClient::getPhotos( void )
+{
+    std::vector<float> out;
+    object result = call("getPhotos", object() );
+    array photos = fromVariant<array>(result["photos"]);
+    for (unsigned int i = 0; i < photos.size(); ++i)
+    {
+        out.push_back(fromVariant<double> (photos[i]));
+    }
+    return out;
+}
+//------------------------------------------------------------------------------
+void RobotRpcClient::setLights(int id, bool isBlinkingCommand, CRgbColor color, bool isEnabled, float freq)
+{
+    object params;
+    params["id"] = toVariant<int> (id);
+    params["isBlinkingCommand"] = toVariant<bool> (isBlinkingCommand);
+    if (isBlinkingCommand == false)
+    {
+        params["colorRed"] = toVariant<int> (color.mRed);
+        params["colorGreen"] = toVariant<int> (color.mGreen);
+        params["colorBlue"] = toVariant<int> (color.mBlue);
+    }
+    else
+    {
+        params["isEnabled"]  = toVariant<bool> (isEnabled);
+        params["freq"] = toVariant<double> (freq);
+    }
+    object result = call("setLights", params);
 }
 //------------------------------------------------------------------------------
 

@@ -5,18 +5,26 @@ namespace Rapi
 using namespace jsonrpc;
 //------------------------------------------------------------------------------
 RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
-                                pthread_mutex_t * dataMutex,
                                 ADrivetrain2dof * drivetrain,
                                 APowerPack * powerpack,
-                                ARangeFinder * rangefinder )
+                                ARangeFinder * rangefinder , ABinarySensorArray *bumper, ABinarySensorArray *wheeldrop,
+                                ABinarySensorArray *cliff, AAnalogSensorArray *photo, ALights *lights, ATextDisplay* textdisplay)
     : mServer( port )
 {
   // initialize data members
   mRobot = robot;
-  mRobotMutex = dataMutex;
   mDrivetrain = drivetrain;
   mPowerPack = powerpack;
   mRangeFinder = rangefinder;
+  mBumper = bumper;
+  mWheelDrop = wheeldrop;
+  mCliff = cliff;
+  mPhoto = photo;
+  mLights = lights;
+  mTextDisplay = textdisplay;
+  
+  //initialize the lock
+  pthread_mutex_init(&mRobotMutex, NULL);
 
   // setup handlers as appropriate
   if ( mDrivetrain ) {
@@ -26,6 +34,9 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
     mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
                               ( this, &RobotRpcServer::getDrivetrain ),
                               "getDrivetrain" );
+    mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
+                              ( this, &RobotRpcServer::setDrivetrain ),
+                              "setDrivetrain" );
   }
   if ( mPowerPack ) {
     mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
@@ -43,6 +54,67 @@ RobotRpcServer::RobotRpcServer( ARobot * robot, int port,
                               ( this, &RobotRpcServer::getRanges ),
                               "getRanges" );
   }
+  
+  if (mBumper)
+  {
+      mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getBumperDev),
+                                "getBumperDev");
+      mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getBumpers),
+                                "getBumpers");
+  }
+  
+  if (mWheelDrop)
+  {
+       mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getWheelDropDev),
+                                "getWheelDropDev");
+      mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getWheelDrops),
+                                "getWheelDrops");
+  }
+  
+  if (mCliff)
+  {
+       mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getCliffDev),
+                                "getCliffDev");
+      mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getCliffs),
+                                "getCliffs");
+  }
+  
+  if (mPhoto)
+  {
+       mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getPhotoDev),
+                                "getPhotoDev");
+      mServer.addMethodHandler(new Server::RPCMethod<RobotRpcServer>
+                                (this, &RobotRpcServer::getPhotos),
+                                "getPhotos");
+  }
+  
+  if (mLights)
+  {
+      mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
+                              ( this, &RobotRpcServer::getLightsDev ),
+                              "getLightsDev" );
+      mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
+                              ( this, &RobotRpcServer::setLights),
+                              "setLights" );
+  }
+  
+  if (mTextDisplay)
+  {
+      mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
+                              ( this, &RobotRpcServer::getTextDisplayDev ),
+                              "getTextDisplayDev" );
+      mServer.addMethodHandler( new Server::RPCMethod< RobotRpcServer >
+                              ( this, &RobotRpcServer::setTextDisplay),
+                              "setTextDisplay" );
+  }
+  
 }
 //------------------------------------------------------------------------------
 RobotRpcServer::~RobotRpcServer()
@@ -53,6 +125,16 @@ RobotRpcServer::~RobotRpcServer()
   }
 }
 //------------------------------------------------------------------------------
+void RobotRpcServer::lockRpcMutex()
+{
+    pthread_mutex_lock(&mRobotMutex);
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::unlockRpcMutex()
+{
+    pthread_mutex_unlock(&mRobotMutex);
+}
+//------------------------------------------------------------------------------
 void RobotRpcServer::start()
 {
   pthread_create( &mServerThread, NULL, &runThread, this );
@@ -60,6 +142,7 @@ void RobotRpcServer::start()
 //------------------------------------------------------------------------------
 void * RobotRpcServer::runServer( void )
 {
+  //TODO: Should we add a delay in the loop?
   while ( true ) { mServer.recv(); }
   return 0; // we shouldn't hit this line
 }
@@ -82,6 +165,16 @@ variant RobotRpcServer::packPose( CPose2d pose )
   return toVariant( poseObj );
 }
 //------------------------------------------------------------------------------
+CVelocity2d RobotRpcServer::unpackVelocity( variant velocityVar )
+{
+  Rapi::CVelocity2d velocity;
+  object velocityObj = fromVariant<object>( velocityVar );
+  velocity.mXDot = fromVariant<double>( velocityObj [ "xDot" ] );
+  velocity.mYDot = fromVariant<double>( velocityObj[ "yDot" ] );
+  velocity.mYawDot = fromVariant<double>( velocityObj[ "yawDot" ] );
+  return velocity;
+}
+//------------------------------------------------------------------------------
 void RobotRpcServer::getDrivetrainDev( variant params,
                                        object& results,
                                        const std::string& ip,
@@ -96,10 +189,10 @@ void RobotRpcServer::getPowerPackDev( variant params,
                                       const std::string& ip,
                                       int port )
 {
-  pthread_mutex_lock( mRobotMutex );
+  lockRpcMutex();
   double cap = ( mPowerPack->getMaxBatteryCapacity() == INFINITY ) ? 0.0 :
                mPowerPack->getMaxBatteryCapacity();
-  pthread_mutex_unlock( mRobotMutex );
+  unlockRpcMutex();
   results[ "maxBatteryCapacity" ] = toVariant<double> ( cap );
 }
 //------------------------------------------------------------------------------
@@ -108,7 +201,7 @@ void RobotRpcServer::getRangeFinderDev( variant params,
                                         const std::string& ip,
                                         int port )
 {
-  pthread_mutex_lock( mRobotMutex );
+  lockRpcMutex();
   results[ "numSamples" ] = toVariant<int> ( mRangeFinder->getNumSamples() );
   double minRange = ( mRangeFinder->getMinRange() == INFINITY ) ? 0.0 :
                     mRangeFinder->getMinRange();
@@ -120,8 +213,112 @@ void RobotRpcServer::getRangeFinderDev( variant params,
   array beamPose;
   for ( unsigned int i = 0; i < mRangeFinder->getNumSamples(); ++i )
     beamPose.push_back( packPose( mRangeFinder->mRelativeBeamPose[i] ) );
-  pthread_mutex_unlock( mRobotMutex );
+  unlockRpcMutex();
   results[ "beamPose" ] = toVariant<array> ( beamPose );
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getBumperDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    lockRpcMutex();
+    results["numSamples"] = toVariant<int> (mBumper->getNumSamples());    
+    unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getWheelDropDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    lockRpcMutex();
+    results["numSamples"] = toVariant<int> (mWheelDrop->getNumSamples());    
+    unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getCliffDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    lockRpcMutex();
+    results["numSamples"] = toVariant<int> (mCliff->getNumSamples());    
+    unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getPhotoDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    lockRpcMutex();
+    results["numSamples"] = toVariant<int> (mPhoto->getNumSamples());   
+    // From Chatterbox Driver File
+    results["maxRange"] = toVariant<double> (1024); 
+    unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getLightsDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    lockRpcMutex();
+    results["numLights"] = toVariant<int>(mLights->getNumLights());
+    unlockRpcMutex();
+}
+
+//------------------------------------------------------------------------------
+void RobotRpcServer::getTextDisplayDev(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    lockRpcMutex();
+    results["size"] = toVariant<int>(mTextDisplay->getSize());
+    unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::setLights(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    object commands = fromVariant<object>(params);
+    
+    int id = fromVariant<int>(commands["id"]);
+    bool isBlinkingCommand = fromVariant<bool>(commands["isBlinkingCommand"]);
+    if (isBlinkingCommand == false)
+    {
+        int colorRed = fromVariant<int>(commands["colorRed"]);
+        int colorGreen = fromVariant<int>(commands["colorGreen"]);
+        int colorBlue = fromVariant<int>(commands["colorBlue"]);
+        lockRpcMutex();
+        //TODO: Unsigned char cast
+        mLights->setLight(id, colorRed, colorGreen, colorBlue);
+        unlockRpcMutex();
+    }
+    else
+    {
+        bool isEnabled = fromVariant<bool>(commands["isEnabled"]);
+        double freq = fromVariant<double>(commands["freq"]);
+        lockRpcMutex();
+        mLights->setBlink(id, isEnabled, freq);
+        unlockRpcMutex();
+    }
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::setTextDisplay(jsonrpc::variant params,
+                                    jsonrpc::object& results,
+                                    const std::string& ip,
+                                    int port)
+{
+    object commands = fromVariant<object>(params);
+    std::string text = fromVariant<std::string>(commands["text"]);
+    lockRpcMutex();
+    mTextDisplay->setText(text);
+    unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getDrivetrain( variant params,
@@ -129,13 +326,25 @@ void RobotRpcServer::getDrivetrain( variant params,
                                     const std::string& ip,
                                     int port )
 {
-  pthread_mutex_lock( mRobotMutex );
+  lockRpcMutex();
   results[ "isStalled" ] = toVariant<bool> ( mDrivetrain->isStalled() );
   results[ "stalledSince" ] = toVariant<double> ( mDrivetrain->stalledSince() );
   results[ "measVelocity" ] = packVelocity( mDrivetrain->getVelocity() );
   results[ "cmdVelocity" ] = packVelocity( mDrivetrain->getVelocityCmd() );
   results[ "odometry" ] = packPose( mDrivetrain->getOdometry()->getPose() );
-  pthread_mutex_unlock( mRobotMutex );
+  unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::setDrivetrain(jsonrpc::variant params, 
+                                        jsonrpc::object& results, 
+                                        const std::string& ip, int port)
+{
+    object commands = fromVariant<object>(params);
+    CVelocity2d velCmd = unpackVelocity(commands["cmdVelocity"]);
+    
+    lockRpcMutex();
+    mDrivetrain->setVelocityCmd(velCmd);
+    unlockRpcMutex();    
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getPowerPack( variant params,
@@ -143,8 +352,8 @@ void RobotRpcServer::getPowerPack( variant params,
                                    const std::string& ip,
                                    int port )
 {
-  pthread_mutex_lock( mRobotMutex );
-  results[ "batteryCapacity" ] = toVariant<double>
+   lockRpcMutex();
+   results[ "batteryCapacity" ] = toVariant<double>
                                  ( mPowerPack->getBatteryCapacity() );
   results[ "current" ] = toVariant<double> ( mPowerPack->getCurrent() );
   results[ "voltage" ] = toVariant<double> ( mPowerPack->getVoltage() );
@@ -157,7 +366,7 @@ void RobotRpcServer::getPowerPack( variant params,
   results[ "chargeState" ] = toVariant<int>
                              (( int ) mPowerPack->getChargingState() );
   results[ "chargeSource" ] = toVariant<int>( mPowerPack->getChargingSource() );
-  pthread_mutex_unlock( mRobotMutex );
+  unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
 void RobotRpcServer::getRanges( variant params,
@@ -165,14 +374,69 @@ void RobotRpcServer::getRanges( variant params,
                                 const std::string& ip,
                                 int port )
 {
-  pthread_mutex_lock( mRobotMutex );
+    lockRpcMutex();
   array ranges;
   for ( unsigned int i = 0; i < mRangeFinder->getNumSamples(); ++i ) {
     ranges.push_back( toVariant<double> ( mRangeFinder->mRangeData[i].range ) );
   }
   results[ "range" ] = toVariant( ranges );
-  pthread_mutex_unlock( mRobotMutex );
+  unlockRpcMutex();
 }
 //------------------------------------------------------------------------------
-
+void RobotRpcServer::getBumpers(jsonrpc::variant params,
+                                        jsonrpc::object& results, 
+                                        const std::string& ip, int port)
+{
+    lockRpcMutex();
+    array bumpers;
+    for (unsigned int i = 0; i < mBumper->getNumSamples(); ++i)
+    {
+        bumpers.push_back(toVariant<bool> (mBumper->mBitData[i]) );
+    }
+    results["bumpers"] = toVariant( bumpers );
+    unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getWheelDrops(jsonrpc::variant params,
+                                        jsonrpc::object& results, 
+                                        const std::string& ip, int port)
+{
+    lockRpcMutex();
+    array wheeldrops;
+    for (unsigned int i = 0; i < mWheelDrop->getNumSamples(); ++i)
+    {
+        wheeldrops.push_back(toVariant<bool> (mWheelDrop->mBitData[i]) );
+    }
+    results["wheelDrops"] = toVariant( wheeldrops );
+    unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getCliffs(jsonrpc::variant params,
+                                        jsonrpc::object& results, 
+                                        const std::string& ip, int port)
+{
+    lockRpcMutex();
+    array cliffs;
+    for (unsigned int i = 0; i < mCliff->getNumSamples(); ++i)
+    {
+        cliffs.push_back(toVariant<bool> (mCliff->mBitData[i]) );
+    }
+    results["cliffs"] = toVariant( cliffs );
+    unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
+void RobotRpcServer::getPhotos(jsonrpc::variant params,
+                                        jsonrpc::object& results, 
+                                        const std::string& ip, int port)
+{
+    lockRpcMutex();
+    array photos;
+    for (unsigned int i = 0; i < mPhoto->getNumSamples(); ++i)
+    {
+        photos.push_back(toVariant<double> (mPhoto->mData[i]) );
+    }
+    results["photos"] = toVariant( photos );
+    unlockRpcMutex();
+}
+//------------------------------------------------------------------------------
 } // namespace

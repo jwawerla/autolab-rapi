@@ -31,7 +31,7 @@ OPTION (WITH_CB "Enable building of chatterbox library" ON)
 OPTION (WITH_STAGE "Enable building of stage library" OFF)
 
 # Enable rpc: use with -DWITH_RPC:BOOL=off|on
-OPTION (WITH_RPC "Enable building of RPC client" OFF)
+OPTION (WITH_RPC "Enable building of RPC client" ON)
  
 # Enable examples: use with -DWITH_EXAMPLES:BOOL=off|on
 OPTION (WITH_EXAMPLES "Enable building of examples" ON)
@@ -62,6 +62,7 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
 IF( WITH_RPC )
   find_package( Boost 1.36.0 )
   IF( Boost_FOUND )
+    MESSAGE(STATUS "Boost Include:"  ${Boost_INCLUDE_DIRS})
     include_directories( ${Boost_INCLUDE_DIRS} )
   ELSE( Boost_FOUND )
     MESSAGE( "Can't find Boost! Building without RPC support" )
@@ -73,6 +74,9 @@ ENDIF( WITH_RPC )
 # we'll also need pthread
 IF( WITH_RPC )
   find_package(Threads)
+  IF ( Threads_FOUND )
+     MESSAGE(STATUS "Threads Include:"  ${Threads_INCLUDE_DIRS})
+  ENDIF (Threads_FOUND)
   IF( NOT CMAKE_USE_PTHREADS_INIT )
     MESSAGE( "You are lacking the pthreads library!  Building without RPC support" )
     SET( WITH_RPC OFF )

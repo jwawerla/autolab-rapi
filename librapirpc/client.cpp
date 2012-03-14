@@ -2,7 +2,8 @@
 #include <string>
 #include <pthread.h>
 #include "RapiGui"
-#include "rpcrobot.h"
+//#include "rpcrobot.h"
+#include "RapiRpc"
 
 /** a robot thread container */
 struct robot_t {

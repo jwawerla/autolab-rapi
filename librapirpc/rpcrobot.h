@@ -84,6 +84,8 @@ class RpcRobot : public ARobot
     RpcDrivetrain2dof* mDrivetrain;
     /** power pack */
     RpcPowerPack* mPowerPack;
+    /** Bumper*/
+    
     /** Last time synchronize was called */
     double mLastSynchronizeTime;
 };

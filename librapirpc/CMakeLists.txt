@@ -39,6 +39,9 @@ SET_TARGET_PROPERTIES( ${TARGET} PROPERTIES
                         VERSION ${VERSION}
 )
 
+
+
+
 INSTALL(TARGETS ${TARGET}
   LIBRARY DESTINATION lib )
 
@@ -76,3 +79,12 @@ IF( QT_FOUND )
   #  RUNTIME DESTINATION bin )
 ENDIF( QT_FOUND )
 ENDIF( WITH_GUI )
+
+# Simple Client
+ADD_EXECUTABLE( simpleclient
+    simplerpcclient.cpp
+)
+
+TARGET_LINK_LIBRARIES( simpleclient
+    autolab-rapi-rpc
+  )
