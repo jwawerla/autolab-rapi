@@ -94,7 +94,7 @@ int main (int argc, char* argv[])
         text = (char) ascii;
         std::cout << "Writing to text display : " << text << std::endl;
         robot->setTextDisplay(text);
-        if (ascii++ > 126) ascii = 48;
+        if (ascii++ > 57) ascii = 48;
         
         robot->setLights(-1, false, Rapi::CRgbColor(rand() % 255,rand() % 255, rand() % 255), false, 0);
         //robot->setLights(1, false, Rapi::CRgbColor(0,255,0), false, 0);
