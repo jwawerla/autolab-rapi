@@ -260,7 +260,6 @@ void RobotRpcClient::setLights(int id, bool isBlinkingCommand, CRgbColor color, 
         params["isEnabled"]  = toVariant<bool> (isEnabled);
         params["freq"] = toVariant<double> (freq);
     }
-    std::cout << "Ok!" << std::endl;
     object result = call("setLights", params);
 }
 //------------------------------------------------------------------------------
